@@ -1,7 +1,8 @@
-# vir2spread model simulation
+# vir2spread virus distribution model-simulation
 Here arises the attempt to test DR Clare Craig's hypothesis of airborne virus contagion - book expired.
 And to examine annually recurring waves from the momentum of a chaotic system.
-Maybe it can answer some questions, since the outdated linear SIR model, used in science, not seem to mach reality.
+
+To study the dynamics, since the used linear SIR model, not seem to mach reality.
 
 
 This Project is still in work, still a long way to go.
