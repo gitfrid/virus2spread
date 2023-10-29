@@ -1,0 +1,41 @@
+         private List<AgeGroupTranslation> _ageGroupList = new()
+         {
+             //new(PersAgeGroupsYear._1_9, 0.5 ),
+             //new(PersAgeGroupsYear._10_19, 0.5 )
+         };
+ public class AgeGroupTranslation
+ {
+     public AgeGroupTranslation(PersAgeGroupsYear ageGroup, double deathRateByAgeGroup)
+     {
+         //AgeGroupsYear = ageGroup;
+         //DeathRateByAgeGroup = deathRateByAgeGroup;
+         //_ageGroupList.Add(ageGroup, deathRateByAgeGroup);
+     }
+     private PersAgeGroupsYear AgeGroupsYear { get; set; }
+     private double DeathRateByAgeGroup { get; set; }
+ }
+
+
+________________
+
+
+    private static List<AgeGroupTranslation> _ageGroupList = new()
+    {
+        //new(PersAgeGroupsYear._1_9, 0.5 ),
+    };
+    public class AgeGroupTranslation
+    {
+        private AgeGroupTranslation(PersAgeGroupsYear ageGroup, double deathRateByAgeGroup)
+        {
+        }    
+    }
+    public void AddAgeGroupValue(AgeGroupTranslation AgeGroupValue)
+    {
+        _ageGroupList.Add(AgeGroupValue);
+    }
+
+____________________________
+
+propertie description:
+https://stackoverflow.com/questions/6220193/my-settings-and-descriptions-and-getting-them-into-a-propertygrid
+[Description("Your custom description here")]
