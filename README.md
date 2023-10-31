@@ -14,6 +14,7 @@ C# : Net 6.0 WindowsForms,
 Nuget Package : 
 PDFsharp-gdi 1.50.5147
 System.Runtime.CompilerServices.Unsafe 6.0
+Serilog Console
 
 
 License: open source - MIT License
