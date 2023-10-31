@@ -1,4 +1,4 @@
-# vir2spread virus distribution model-simulation
+# virus2spread virus distribution model-simulation
 
 Here arises an attempt to test DR Clare Craig's hypothesis about airborne virus contagion - Book Expired.
 
