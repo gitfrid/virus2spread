@@ -34,18 +34,18 @@
             // 
             // ConfigurationPropertyGrid
             // 
-            ConfigurationPropertyGrid.Location = new Point(74, 54);
-            ConfigurationPropertyGrid.Margin = new Padding(2);
+            ConfigurationPropertyGrid.Location = new Point(120, 86);
             ConfigurationPropertyGrid.Name = "ConfigurationPropertyGrid";
-            ConfigurationPropertyGrid.Size = new Size(792, 536);
+            ConfigurationPropertyGrid.Size = new Size(1287, 858);
             ConfigurationPropertyGrid.TabIndex = 0;
             ConfigurationPropertyGrid.PropertyValueChanged += ConfigurationPropertyGrid_PropertyValueChanged;
             // 
             // StartSimulation_button1
             // 
-            StartSimulation_button1.Location = new Point(1031, 89);
+            StartSimulation_button1.Location = new Point(1459, 136);
+            StartSimulation_button1.Margin = new Padding(5, 5, 5, 5);
             StartSimulation_button1.Name = "StartSimulation_button1";
-            StartSimulation_button1.Size = new Size(94, 29);
+            StartSimulation_button1.Size = new Size(153, 46);
             StartSimulation_button1.TabIndex = 1;
             StartSimulation_button1.Text = "Simulation";
             StartSimulation_button1.UseVisualStyleBackColor = true;
@@ -53,13 +53,12 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1478, 622);
+            ClientSize = new Size(2402, 995);
             Controls.Add(StartSimulation_button1);
             Controls.Add(ConfigurationPropertyGrid);
-            Margin = new Padding(2);
             Name = "MainForm";
             Text = "MainForm";
             FormClosing += MainForm_FormClosing;

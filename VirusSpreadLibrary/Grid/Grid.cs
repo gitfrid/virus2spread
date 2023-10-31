@@ -1,28 +1,41 @@
 ﻿
+using VirusSpreadLibrary.Enum;
+
 namespace VirusSpreadLibrary.Grid;
 
 class Grid
 {
-    private int MaxX { get; set; }
-    private int MaxY { get; set; }
-    private PixelColor[,] Cell { get; set; }
-
-    public Grid(int x, int y)
+    private int maxX { get; set; }
+    private int maxY { get; set; }
+    private PixelColor[,] Cells { get; set; }
+    public Grid(int MaxX, int MaxY)
     {
-        MaxX = x;
-        MaxY = y;
-        Cell = new PixelColor[x, y];
+        maxX = MaxX;
+        maxY = MaxY;        
+        Cells = new PixelColor[MaxX, MaxY];
+        CreateEmptyGrid();
     }
-    public void SetCellColor(int x, int y, Color PixelColor)
+    private void CreateEmptyGrid()
     {
-        Cell[x, y] = new PixelColor(x, y, PixelColor);
+        Color col = ColorList.GetCellColor(CellState.EmptyCell);
+        for (int y = 0; y < maxY; y++)
+        {
+            for (int x = 0; x < maxX; x++)
+            {
+                SetCellColor(x, y, col);
+            }
+        }
+    }
+    public void SetCellColor(int X, int Y, Color CellPixelColor)
+    {
+        Cells[X, Y] = new PixelColor(X, Y, CellPixelColor);
     }
     public int ReturnMaxX()
     {
-        return MaxX;
+        return maxX;
     }
     public int ReturnMaxY()
     {
-        return MaxY;
+        return maxY;
     }
 }

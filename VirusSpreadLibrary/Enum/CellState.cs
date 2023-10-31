@@ -3,7 +3,7 @@
 public enum CellState
 {
     Virus,
-    PersonHelaty,
+    PersonHealthy,
     PersonInfected,
-    EmtyCell,
+    EmptyCell,
 }

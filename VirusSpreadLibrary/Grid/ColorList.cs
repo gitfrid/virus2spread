@@ -2,41 +2,27 @@
 
 namespace VirusSpreadLibrary.Grid;
 
-public class ColorList
+public static class ColorList
 {
-    private List<ColorTranlation> _colorList = new()
+    private static List<ColorTranlation> colorList = new()
     {
         new(CellState.Virus, Color.Red),
-        new(CellState.PersonHelaty, Color.Green),
+        new(CellState.PersonHealthy, Color.Green),
         new(CellState.PersonInfected, Color.LightBlue),
-        new(CellState.EmtyCell, Color.Black)
+        new(CellState.EmptyCell, Color.Black)
     };
-    public class ColorTranlation
+    public static Color GetCellColor(CellState CellState)
     {
-        public ColorTranlation(CellState cellState, Color cellColor)
-        {
-            CellState = cellState;
-            CellColor = cellColor;
-        }
-        public CellState CellState { get; set; }
-        public Color CellColor { get; set; }
-    }
-    public ColorList()
-    {
-    }
+        Color cellColor = Color.Black;
 
-    public Color GetColor(CellState cellState)
-    {
-        Color CellColor = Color.Black;
-        foreach (ColorTranlation ColModel in _colorList)
+        foreach (ColorTranlation ColModel in colorList)
         {
-            if (ColModel.CellState == cellState)
+            if (ColModel.cellState == CellState)
             {
-                CellColor = ColModel.CellColor;
+                cellColor = ColModel.cellColor;
             }
         }
-        return CellColor;
+        return cellColor;
     }
-
 }
 

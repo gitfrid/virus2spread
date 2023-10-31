@@ -1,27 +1,33 @@
-﻿namespace VirusSpreadLibrary.SpreadModel;
+﻿using Serilog;
+
+
+namespace VirusSpreadLibrary.SpreadModel;
 
 public class Simulation
 {
-    int _gridX ;
-    int _gridY ;
-    int _maxIterations ;
+    int gridX;
+    int gridY;
+    long maxIterations;
+    
 
-    public Simulation(int GridMaxX, int GridMaxY, int MaxIterations)
+    public Simulation(int GridMaxX, int GridMaxY, long MaxIterations)
     {
-        _gridX = GridMaxX;
-        _gridY = GridMaxY;
-        _maxIterations = MaxIterations;
+        gridX = GridMaxX;
+        gridY = GridMaxY;
+        maxIterations = MaxIterations;
     }
     public void StartIterate()
     {
-               
+
+        Log.Logger = Logging.getinstance();
         int iteration = 0;
+        
+        Grid.Grid GridField = new Grid.Grid(gridX, gridY);
 
-        Grid.Grid GridField = new Grid.Grid(_gridX, _gridY);
-
-        while (iteration < _maxIterations)
+        while (iteration < maxIterations)
         {
-            Console.WriteLine(iteration);
+            Log.Logger.Information("Nr: {A} iteration" , iteration);
+
             iteration++;
         }
     }

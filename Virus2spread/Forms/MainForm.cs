@@ -2,12 +2,13 @@
 using System.ComponentModel;
 using System.Configuration;
 using VirusSpreadLibrary.Properties;
+using VirusSpreadLibrary.SpreadModel;
 
 namespace Virus2spread
 {
     public partial class MainForm : Form
     {
-
+        private Simulation _modelSimulation = new Simulation(Settings.Default.GridMaxX, Settings.Default.GridMaxY, Settings.Default.maxIterations);
         public MainForm()
         {
             InitializeComponent();
@@ -22,14 +23,14 @@ namespace Virus2spread
             this.Size = Settings.Default.Form_Config_WindowSize;
         }
 
+        private void StartSimulation_button1_Click(object sender, EventArgs e)
+        {
+            _modelSimulation.StartIterate();
+        }
+
         private void ConfigurationPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             VirusSpreadLibrary.Properties.Settings.Default.Save();
-        }
-
-        private void StartSimulation_button1_Click(object sender, EventArgs e)
-        {
-            //
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -47,5 +48,6 @@ namespace Virus2spread
             // Save Config settings
             Settings.Default.Save();
         }
+
     }
 }

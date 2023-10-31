@@ -2,14 +2,15 @@
 
 class PixelColor
 {
-    private int XPos;
-    private int YPos;
-    private Color PixelCol;
-    public PixelColor(int x, int y, Color pixelColor) // Construct pixel with x,y and color of creature type
+    private int xPos { get; set;}
+    private int yPos { get; set; }
+    private Color pixcelColor { get; set; } // the color of virus or a person or a person's status
+
+    public PixelColor(int X, int Y, Color PixcelColor) // Construct grid pixel with x,y and a color
     {
-        XPos = x;
-        YPos = y;
-        PixelCol = pixelColor;
+        xPos = X;
+        yPos = Y;
+        pixcelColor = PixcelColor;
     }
 }
 

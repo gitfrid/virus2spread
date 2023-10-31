@@ -28,7 +28,7 @@ namespace VirusSpreadLibrary.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        [Description("With of the Habitat-Grid in Pixel")]
+        [Description("With of the Grid Filed - pixel")]
         public int GridMaxX {
             get {
                 return ((int)(this["GridMaxX"]));
@@ -41,7 +41,7 @@ namespace VirusSpreadLibrary.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        [Description("High of the Habitat-Grid in Pixcel")]
+        [Description("High of the Grid Filed - pixel")]
         public int GridMaxY {
             get {
                 return ((int)(this["GridMaxY"]));
@@ -54,7 +54,7 @@ namespace VirusSpreadLibrary.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        [Description("Start poulation for Persons")]
+        [Description("Start poulation for Persons - long")]
         public long InitialPersonPopulation {
             get {
                 return ((long)(this["InitialPersonPopulation"]));
@@ -67,7 +67,7 @@ namespace VirusSpreadLibrary.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        [Description("Start poulation for Viruses")]
+        [Description("Start poulation for Viruses - long")]
         public long InitialVirusPopulation {
             get {
                 return ((long)(this["InitialVirusPopulation"]));
@@ -80,7 +80,7 @@ namespace VirusSpreadLibrary.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        [Description("Number of iterations for the Simulation")]
+        [Description("Number of iterations for the Simulation - long")]
         public long maxIterations {
             get {
                 return ((long)(this["maxIterations"]));

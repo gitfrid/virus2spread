@@ -3,7 +3,7 @@ namespace VirusSpreadLibrary.Creature;
 
 public class VirusState
 {
-    public bool reproducing {  get; set; } = false;
-    public bool moving { get; set;} = false;
+    public bool Reproducing {  get; set; } = false;
+    public bool Moving { get; set;} = false;
 
 }
