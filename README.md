@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 vir2spread virus distribution model-simulation
 
 Here arises an attempt to test DR Clare Craig's hypothesis about airborne virus contagion - Book Expired.
 To investigate annually recurring waves from the momentum of a chaotic system, and study its dynamics.
 
+=======
+# virus2spread virus distribution model-simulation
+
+Here arises an attempt to test DR Clare Craig's hypothesis about airborne virus contagion - Book Expired.
+
+To investigate annually recurring waves from the momentum of a chaotic system, and study its dynamics.
+>>>>>>> 501c147fceff9e8c803159c282efd1ee1acb6fb7
 Since the linear sientific SIR model used, seems to differ from reality.
 
 This Project is still in work - a long way to go. 
