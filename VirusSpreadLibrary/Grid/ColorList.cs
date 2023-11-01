@@ -4,7 +4,7 @@ namespace VirusSpreadLibrary.Grid;
 
 public static class ColorList
 {
-    private static List<ColorTranlation> colorList = new()
+    private static List<ColorTranslation> colorList = new()
     {
         new(CellState.Virus, Color.Red),
         new(CellState.PersonHealthy, Color.Green),
@@ -15,7 +15,7 @@ public static class ColorList
     {
         Color cellColor = Color.Black;
 
-        foreach (ColorTranlation ColModel in colorList)
+        foreach (ColorTranslation ColModel in colorList)
         {
             if (ColModel.cellState == CellState)
             {

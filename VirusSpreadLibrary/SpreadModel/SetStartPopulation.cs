@@ -5,11 +5,12 @@ namespace VirusSpreadLibrary.SpreadModel;
 
 public class SetStartPopulation
 {
-    private int maxX { get; set; }
-    private int maxY { get; set; }
-    private PixelColor[,] Cells { get; set; }
+    private int maxX = 0;
+    private int maxY = 0;
+    //private PixelColor[,] Cells { get; set; }
+
     public SetStartPopulation(int MaxX, int MaxY)
-    {
+    {        
         maxX = MaxX;
         maxY = MaxY;
         PopulateCreatures();

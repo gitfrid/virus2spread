@@ -1,20 +1,30 @@
-﻿using VirusSpreadLibrary.Enum;
+﻿
+using VirusSpreadLibrary.Enum;
+using VirusSpreadLibrary.Grid;
 
 namespace VirusSpreadLibrary.Creature;
 
 public class Person
 {
-    public Guid ID { get; set; }
-    public CreatureType CreatureType { get; set; }
-    public int Age { get; set; }
-    public double PersonReproduceRateByAge { get; set; }
-    public double PersonBrokenRateByAge { get; set; }
-    public PersonState PersonState { get; set; }
-    public Person(PersonState personState)        
+    public Person(PersonState personState, CellPopulation gridCellPopulation)
     {
         PersonState = personState;
+        GridCellPopulation = gridCellPopulation;
     }
-    public int PositionX { get; set; }
-    public int PositionY { get; set; }
+    
+    public PersonState PersonState;
+    public CellPopulation GridCellPopulation { get; set; }
+    public CreatureType CreatureType { get; set; }
+    public int Age { get; set; }
+    public double PersonBirthRateByAge { get; set; }
+    public double PersonDeathProbabilityByAge { get; set; }
     public bool IsDead { get; set; }
+    public Point Coordinate { get; set; }
+    public Point HomeCoordinate { get; set; }
+    public double MoveActivityRnd { get; set; }
+ 
+    public int ReinfectionCounter { get; set; }
+
+
+
 }

@@ -3,7 +3,7 @@ using VirusSpreadLibrary.Enum;
 
 namespace VirusSpreadLibrary.Grid;
 
-class Grid
+public class Grid
 {
     private int maxX { get; set; }
     private int maxY { get; set; }

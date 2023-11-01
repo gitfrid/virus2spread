@@ -8,7 +8,7 @@ namespace Virus2spread
 {
     public partial class MainForm : Form
     {
-        private Simulation _modelSimulation = new Simulation(Settings.Default.GridMaxX, Settings.Default.GridMaxY, Settings.Default.maxIterations);
+        private Simulation modelSimulation = new Simulation(Settings.Default.GridMaxX, Settings.Default.GridMaxY, Settings.Default.maxIterations);
         public MainForm()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace Virus2spread
 
         private void StartSimulation_button1_Click(object sender, EventArgs e)
         {
-            _modelSimulation.StartIterate();
+            modelSimulation.StartIterate();
         }
 
         private void ConfigurationPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
