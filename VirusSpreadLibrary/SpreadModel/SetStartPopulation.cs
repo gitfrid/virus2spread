@@ -17,8 +17,8 @@ public class SetStartPopulation
     }
     private void PopulateCreatures()
     {
-        Color colPerson = ColorList.GetCellColor(CellState.PersonHealthy);
-        Color colVirus = ColorList.GetCellColor(CellState.Virus);
+        //Color colPerson = ColorList.GetCellColor(CellState.PersonHealthy);
+        //Color colVirus = ColorList.GetCellColor(CellState.Virus);
         for (int y = 0; y < maxY; y++)
         {
             for (int x = 0; x < maxX; x++)

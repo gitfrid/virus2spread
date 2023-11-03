@@ -2,6 +2,6 @@
 
 public enum CreatureType
 {
-    virus = 0,
-    person = 1
+    Virus = 0,
+    Person = 1
 }

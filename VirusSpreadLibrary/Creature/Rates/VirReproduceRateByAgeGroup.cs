@@ -1,6 +1,6 @@
 ﻿namespace VirusSpreadLibrary.Creature.Rates;
 
-class VirReproduceRateByAgeGrp
+class VirReproduceRateByAgeGroup
 {
     public static double GetReproduceRateByAgeGroup(int Age)
     {

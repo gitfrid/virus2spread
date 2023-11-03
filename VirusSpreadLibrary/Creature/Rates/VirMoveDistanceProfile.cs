@@ -5,8 +5,8 @@ namespace VirusSpreadLibrary.Creature.Rates;
 public class VirMoveDistanceProfile
 {
     private Random rnd = new Random();
-    public double HomeMoveActivity { get; set; }
-    private Point GetVirusMoveDistanceByIndex(int Index)
+    public double MoveActivityRnd { get; set; }
+    private Point GetMoveDistanceByIndex(int Index)
     {
         Point[] MoveDistance = new Point[10];
         MoveDistance[0] = new Point(1, 1);
@@ -23,10 +23,10 @@ public class VirMoveDistanceProfile
         return MoveDistance[Index];
     }
 
-    public Point MoveTo(Point Pnt)
+    public Point GetNewCoordinateMoveTo(Point Pnt)
     {
         int beta = rnd.Next(0, 91); // get X Y coordinate by the random distance and a random move angel between 0-90
-        Point pnt = GetVirusMoveDistanceByIndex(rnd.Next(0, 11));
+        Point pnt = GetMoveDistanceByIndex(rnd.Next(0, 11));
         int a = rnd.Next(pnt.X, pnt.X);
         var b = a / Math.Tan(90 - beta);
         var c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));

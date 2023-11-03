@@ -1,6 +1,4 @@
-﻿using VirusSpreadLibrary.Enum;
-using static VirusSpreadLibrary.Grid.ColorList;
-
+﻿
 namespace VirusSpreadLibrary.Creature.Rates;
 
 public class PersDeathRateByAgeGroup

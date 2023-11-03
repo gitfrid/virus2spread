@@ -1,4 +1,4 @@
-﻿
+﻿using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.Enum;
 
 namespace VirusSpreadLibrary.Grid;
@@ -7,33 +7,41 @@ public class Grid
 {
     private int maxX { get; set; }
     private int maxY { get; set; }
-    private PixelColor[,] Cells { get; set; }
+
+    private GridCell[,] gridField;
+
+    
     public Grid(int MaxX, int MaxY)
-    {
+    {        
         maxX = MaxX;
-        maxY = MaxY;        
-        Cells = new PixelColor[MaxX, MaxY];
-        CreateEmptyGrid();
+        maxY = MaxY;
+        gridField = new GridCell[maxX,maxY];
+        SetNewEmptyGrid();
     }
-    private void CreateEmptyGrid()
+    private void SetNewEmptyGrid()
     {
-        Color col = ColorList.GetCellColor(CellState.EmptyCell);
+        CellPopulation Population = new CellPopulation();
+        Color Color = ColorList.GetCellColor(CellState.EmptyCell, Population);
         for (int y = 0; y < maxY; y++)
         {
             for (int x = 0; x < maxX; x++)
             {
-                SetCellColor(x, y, col);
+                gridField[x, y] = new GridCell(Color,Population);
             }
         }
     }
-    public void SetCellColor(int X, int Y, Color CellPixelColor)
+    private void RemoveCreature(MoveData MoveToData, CreatureType Creature)
     {
-        Cells[X, Y] = new PixelColor(X, Y, CellPixelColor);
-    }
+        //
+    } 
+    public void AddCreature(MoveData MoveToData, CreatureType Creature )
+    {
+        //
+    }    
     public int ReturnMaxX()
     {
         return maxX;
-    }
+    }    
     public int ReturnMaxY()
     {
         return maxY;
