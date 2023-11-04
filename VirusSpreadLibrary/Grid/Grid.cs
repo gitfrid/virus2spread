@@ -7,15 +7,16 @@ public class Grid
 {
     private int maxX { get; set; }
     private int maxY { get; set; }
+    public ColorList ColorList { get; set; }
 
-    private GridCell[,] gridField;
+    public GridCell[,] GridField;
 
-    
     public Grid(int MaxX, int MaxY)
     {        
         maxX = MaxX;
         maxY = MaxY;
-        gridField = new GridCell[maxX,maxY];
+        ColorList = new ColorList();
+        GridField = new GridCell[maxX,maxY];
         SetNewEmptyGrid();
     }
     private void SetNewEmptyGrid()
@@ -26,7 +27,7 @@ public class Grid
         {
             for (int x = 0; x < maxX; x++)
             {
-                gridField[x, y] = new GridCell(Color,Population);
+                GridField[x, y] = new GridCell(Color,Population);
             }
         }
     }
@@ -36,9 +37,12 @@ public class Grid
     } 
     public CellPopulation CelAddCreature(MoveData MoveToData)
     {
-        CellPopulation Population = new CellPopulation();
+        SetNewCellState setNewCellState = new SetNewCellState();
+        CellPopulation Population = setNewCellState.SetNewState(MoveToData, this);
         return Population;        
     }    
+
+
     public int ReturnMaxX()
     {
         return maxX;

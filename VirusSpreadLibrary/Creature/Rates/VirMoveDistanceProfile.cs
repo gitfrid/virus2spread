@@ -13,8 +13,17 @@ namespace VirusSpreadLibrary.Creature.Rates;
 
 public class VirMoveDistanceProfile
 {
+    private int maxX = 0;
+    private int maxY = 0;
+   
     private Random rnd = new Random();
     public double MoveActivityRnd { get; set; }
+    public VirMoveDistanceProfile()
+    {
+        maxX = Settings.Default.GridMaxX;
+        maxY = Settings.Default.GridMaxY;
+    }
+
     private Point GetMoveDistanceByIndex(int Index)
     {
         Point[] MoveDistance = new Point[10];
@@ -47,11 +56,11 @@ public class VirMoveDistanceProfile
         X = OldCoordiante.X + (rnd.Next(0, 2) * 2 - 1) * X;
         Y = OldCoordiante.Y + (rnd.Next(0, 2) * 2 - 1) * Y;
         // check for grid boundarys 
-        if (Y > Settings.Default.GridMaxY | Y < 0)
+        if (Y >= maxY | Y < 0)
         {
             Y = OldCoordiante.Y;
         };
-        if (X > Settings.Default.GridMaxX | X < 0)
+        if (X >= maxX | X < 0)
         {
             X = OldCoordiante.X;
         };

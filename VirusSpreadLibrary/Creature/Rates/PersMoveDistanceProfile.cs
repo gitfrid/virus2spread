@@ -14,14 +14,16 @@ public class PersMoveDistanceProfile
 {
     private int maxX = 0;
     private int maxY = 0;
+    
+    private Random rnd = new Random();
+    public double HomeMoveActivity { get; set; }
+
     public PersMoveDistanceProfile()
     {
         maxX = Settings.Default.GridMaxX;
         maxY = Settings.Default.GridMaxY;
     }
 
-    private Random rnd = new Random();
-    public double HomeMoveActivity { get; set; }
     private Point GetMoveDistanceByIndex(int Index)
     {
         Point[] MoveDistance = new Point[10];
@@ -43,7 +45,7 @@ public class PersMoveDistanceProfile
     {
         int beta = rnd.Next(0, 91); // get X Y coordinate by the random distance and a random move angel between 0-90
         Point pnt = GetMoveDistanceByIndex(rnd.Next(0, 10));
-        int a = rnd.Next(pnt.X, pnt.X);
+        int a = rnd.Next(pnt.X, pnt.Y);
         double b = a / Math.Tan(90 - beta);
         double c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
         double q = Math.Pow(a, 2) / c;
@@ -54,16 +56,16 @@ public class PersMoveDistanceProfile
         X = OldCoordiante.X + (rnd.Next(0, 2) * 2 - 1) * X;
         Y = OldCoordiante.Y + (rnd.Next(0, 2) * 2 - 1) * Y;
         // check for grid boundaries 
-        if (Y > maxY | Y < 0)
+        if (Y >= maxY | Y < 0)
         {
             Y = OldCoordiante.Y;
         };
-        if (X > maxX | X < 0)
+        if (X >= maxX | X < 0)
         {
             X = OldCoordiante.X;
         };
 
-        return new Point(Y, X); ;
+        return new Point(X, Y); ;
     }
 
 }

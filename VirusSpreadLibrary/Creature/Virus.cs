@@ -17,6 +17,7 @@ public class Virus
     {
         VirMoveData = new MoveData();
         GridCellPopulation = new CellPopulation();
+        VirMoveData.CreatureType = Enum.CreatureType.Virus;
         VirusState = new VirusState();
      }
     public void Reproduce()

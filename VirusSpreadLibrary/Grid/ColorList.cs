@@ -2,18 +2,18 @@
 
 namespace VirusSpreadLibrary.Grid;
 
-public static class ColorList
+public class ColorList
 {
-    private static Color cellColor = Color.Black;
+    private Color cellColor = Color.Black;
 
-    private static List<ColorTranslation> colorList = new()
+    private List<ColorTranslation> colorList = new()
     {
         new(CellState.Virus, Color.Red),
         new(CellState.PersonHealthy, Color.Green),
         new(CellState.PersonInfected, Color.Blue),
         new(CellState.EmptyCell, Color.Black)
     };
-    public static Color GetCellColor(CellState CellState, CellPopulation Population)
+    public Color GetCellColor(CellState CellState, CellPopulation Population)
     {
     
         foreach (ColorTranslation ColModel in colorList)
@@ -28,7 +28,8 @@ public static class ColorList
             {
                 if (Population.NumPersons > 0) 
                 {
-                    ColorExtensions.Lighten(cellColor,(1/Population.NumPersons)); 
+                    
+                    ColorExtensions.Lighten(cellColor,(1/10)); 
                 }
                 else if (Population.NumViruses > 0)
                 {

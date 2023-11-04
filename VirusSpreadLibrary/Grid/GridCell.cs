@@ -4,11 +4,11 @@ namespace VirusSpreadLibrary.Grid;
 public class GridCell
 {
     public Color PixelColor { get; set; }
-    public CellPopulation? Population { get; set; }
-
-    public GridCell(Color Color, CellPopulation Population)
+    public CellPopulation Population { get; set; }
+    public GridCell(Color CellColor, CellPopulation CellPopulation)
     {
-        this.PixelColor = Color;
-        this.Population = Population;
+        Population = new CellPopulation();
+        PixelColor = new Color();
     }
+
 }

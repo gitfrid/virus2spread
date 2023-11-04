@@ -20,6 +20,7 @@ public class Person
     public Person()
     {
         PersMoveData = new MoveData();
+        PersMoveData.CreatureType = Enum.CreatureType.Person;
         GridCellPopulation = new CellPopulation();
         PersonState = new PersonState();
     }
@@ -31,15 +32,17 @@ public class Person
     {
         //
     }
-    public void MoveToNewCoordinate(Grid.Grid GridField)
+    public CellPopulation MoveToNewCoordinate(Grid.Grid GridField)
     {
         PersMoveDistanceProfile NewCoordinate = new PersMoveDistanceProfile();
         PersMoveData.NewGridCoordinate = NewCoordinate.GetNewCoordinateMoveTo(PersMoveData.OldGridCoordinate);
         GridCellPopulation = GridField.CelAddCreature(PersMoveData);
+        return GridCellPopulation;
     }
-    public void MoveToHomeCoordinate(Grid.Grid GridField)
+    public CellPopulation MoveToHomeCoordinate(Grid.Grid GridField)
     {
         PersMoveData.NewGridCoordinate = HomeCoordinate;
         GridCellPopulation = GridField.CelAddCreature(PersMoveData);
+        return GridCellPopulation;
     }
 }
