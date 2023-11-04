@@ -2,6 +2,7 @@
 
 public enum PersAgeGroupsYear
 {
+    // not used yet
     _1_9,
     _10_19,
     _20_29,

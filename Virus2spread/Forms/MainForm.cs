@@ -8,7 +8,7 @@ namespace Virus2spread
 {
     public partial class MainForm : Form
     {
-        private Simulation modelSimulation = new Simulation(Settings.Default.GridMaxX, Settings.Default.GridMaxY, Settings.Default.maxIterations);
+        private Simulation modelSimulation = new Simulation();
         public MainForm()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace Virus2spread
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // get window size 
+            // save current window size 
             Settings.Default.Form_Config_WindowLocation = this.Location;
             if (this.WindowState == FormWindowState.Normal)
             {

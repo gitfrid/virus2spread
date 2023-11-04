@@ -6,6 +6,7 @@ public class PersDeathRateByAgeGroup
 
     public static double GetDeathRateByAgeGroup(int Age)
     {
+        
         var AgeDeathRate = new List<(Func<int, bool> Key, double Value)>
         {
             (Key: x => x > 0  & x < 10 , Value: 0.70),

@@ -1,6 +1,7 @@
 ﻿
-using VirusSpreadLibrary.Enum;
+using VirusSpreadLibrary.Creature.Rates;
 using VirusSpreadLibrary.Grid;
+using Point = System.Drawing.Point;
 
 namespace VirusSpreadLibrary.Creature;
 
@@ -9,13 +10,20 @@ public class Person
     public int Age { get; set; }
     public double PersonBirthRateByAge { get; set; }
     public double PersonDeathProbabilityByAge { get; set; }
-    public PersonState? PersonState { get; set; }   
+    public PersonState PersonState { get; set; }
     public bool IsDead { get; set; }
     public Point HomeCoordinate { get; set; }
-    public CellPopulation? GridCellPopulation { get; set; }
-    public MoveData? MoveToData { get; set; }
+    public MoveData PersMoveData { get; set; }
+    public CellPopulation GridCellPopulation { get; set; }
 
-    public void Childbirth()
+
+    public Person()
+    {
+        PersMoveData = new MoveData();
+        GridCellPopulation = new CellPopulation();
+        PersonState = new PersonState();
+    }
+    public void ChildBirth()
     {
      //    
     }
@@ -23,14 +31,15 @@ public class Person
     {
         //
     }
-    public void MoveToNewCoordinate(out MoveData? MoveData, Grid.CellPopulation Population)
+    public void MoveToNewCoordinate(Grid.Grid GridField)
     {
-        MoveData = MoveToData;
+        PersMoveDistanceProfile NewCoordinate = new PersMoveDistanceProfile();
+        PersMoveData.NewGridCoordinate = NewCoordinate.GetNewCoordinateMoveTo(PersMoveData.OldGridCoordinate);
+        GridCellPopulation = GridField.CelAddCreature(PersMoveData);
     }
-    public void MoveToHomeCoordinate(out MoveData? MoveData, Grid.CellPopulation Population)
+    public void MoveToHomeCoordinate(Grid.Grid GridField)
     {
-        MoveData = MoveToData;
+        PersMoveData.NewGridCoordinate = HomeCoordinate;
+        GridCellPopulation = GridField.CelAddCreature(PersMoveData);
     }
-
-
 }

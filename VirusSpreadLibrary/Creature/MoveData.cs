@@ -1,4 +1,7 @@
-﻿namespace VirusSpreadLibrary.Creature;
+﻿
+using Point = System.Drawing.Point;
+
+namespace VirusSpreadLibrary.Creature;
 
 public class MoveData
 {

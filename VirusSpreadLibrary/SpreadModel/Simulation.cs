@@ -1,35 +1,41 @@
 ﻿using Serilog;
-
-
+using VirusSpreadLibrary.Creature;
+using VirusSpreadLibrary.Properties;
 namespace VirusSpreadLibrary.SpreadModel;
 
 public class Simulation
-{
-    int gridX;
-    int gridY;
-    long maxIterations;
-    
-
-    public Simulation(int GridMaxX, int GridMaxY, long MaxIterations)
-    {
-        gridX = GridMaxX;
-        gridY = GridMaxY;
-        maxIterations = MaxIterations;
-    }
+{   
     public void StartIterate()
     {
-
+        
         Log.Logger = Logging.getinstance();
         int iteration = 0;
+
+        Grid.Grid GridField = new(Settings.Default.GridMaxX, Settings.Default.GridMaxY);
+
+        VirusList virs = new VirusList();
+        List<Virus> viruses = virs.SetInitialPopulation(Settings.Default.InitialPersonPopulation, GridField);
         
-        Grid.Grid GridField = new Grid.Grid(gridX, gridY);
 
-        while (iteration < maxIterations)
+        while (iteration < Settings.Default.maxIterations)
         {
-            Log.Logger.Information("Nr: {A} iteration" , iteration);
-
+            Log.Logger.Information("Nr: {A} iteration", iteration);
             iteration++;
+
+            //Parallel.ForEach(Persons, person =>
+            //{
+            //    person.MoveToNewCoordinate(GridField);
+            //});
+            //Parallel.ForEach(viruses, virus =>
+            //{
+            //    virus.MoveToNewCoordinate(GridField);
+            //});
+
+            foreach (var virus in viruses) 
+            {
+                virus.MoveToNewCoordinate(GridField);
+            }
+
         }
     }
-
 }

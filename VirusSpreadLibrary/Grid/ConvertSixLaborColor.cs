@@ -5,7 +5,7 @@ public static class ColorExtensions
 {
     public static System.Drawing.Color ToSystemDrawingColor(this SixLabors.ImageSharp.Color c)
     {
-        var converted = c.ToPixel<Argb32>();
+        Argb32 converted = c.ToPixel<Argb32>();
         return System.Drawing.Color.FromArgb((int)converted.Argb);
     }
     public static SixLabors.ImageSharp.Color ToImageSharpColor(this System.Drawing.Color c)

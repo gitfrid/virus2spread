@@ -34,9 +34,10 @@ public class Grid
     {
         //
     } 
-    public void AddCreature(MoveData MoveToData, CreatureType Creature )
+    public CellPopulation CelAddCreature(MoveData MoveToData)
     {
-        //
+        CellPopulation Population = new CellPopulation();
+        return Population;        
     }    
     public int ReturnMaxX()
     {

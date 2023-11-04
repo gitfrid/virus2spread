@@ -28,7 +28,7 @@ namespace VirusSpreadLibrary.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        [Description("With of the Grid Filed - pixel")]
+        [Description("Width of the Grid Filed - pixel")]
         public int GridMaxX {
             get {
                 return ((int)(this["GridMaxX"]));
@@ -41,7 +41,7 @@ namespace VirusSpreadLibrary.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        [Description("High of the Grid Filed - pixel")]
+        [Description("Higth of the Grid Filed - pixel")]
         public int GridMaxY {
             get {
                 return ((int)(this["GridMaxY"]));
