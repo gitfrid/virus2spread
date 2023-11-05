@@ -3,8 +3,12 @@ namespace VirusSpreadLibrary.Creature;
 
 public class PersonList
 {
-    public List<Person> Persons = new List<Person>();
-    public List<Person> SetInitialPopulation(long InitialPersonPopulation, Grid.Grid GridField)
+    public  List<Person> Persons { get; set; }
+    public PersonList()
+    {
+        Persons = new List<Person>();
+    }
+    public void SetInitialPopulation(long InitialPersonPopulation, Grid.Grid GridField)
     {
         Random rnd = new Random();
         int maxX = GridField.ReturnMaxX();
@@ -16,9 +20,8 @@ public class PersonList
             Person person = new Person {};
             person.PersMoveData.OldGridCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
             person.HomeCoordinate = person.PersMoveData.OldGridCoordinate;
-
             Persons.Add(person);
         }
-        return Persons;
     }
+
 }

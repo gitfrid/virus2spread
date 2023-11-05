@@ -11,18 +11,18 @@ public class Grid
 
     public GridCell[,] GridField;
 
-    public Grid(int MaxX, int MaxY)
+    public Grid()
     {        
+        ColorList = new ColorList();
+    }
+    public void SetNewEmptyGrid(int MaxX, int MaxY)
+    {
         maxX = MaxX;
         maxY = MaxY;
-        ColorList = new ColorList();
-        GridField = new GridCell[maxX,maxY];
-        SetNewEmptyGrid();
-    }
-    private void SetNewEmptyGrid()
-    {
+        GridField = new GridCell[maxX, maxY];
         CellPopulation Population = new CellPopulation();
         Color Color = ColorList.GetCellColor(CellState.EmptyCell, Population);
+
         for (int y = 0; y < maxY; y++)
         {
             for (int x = 0; x < maxX; x++)
@@ -41,7 +41,6 @@ public class Grid
         CellPopulation Population = setNewCellState.SetNewState(MoveToData, this);
         return Population;        
     }    
-
 
     public int ReturnMaxX()
     {

@@ -3,8 +3,12 @@ namespace VirusSpreadLibrary.Creature;
 
 public class VirusList
 {
-    public List<Virus> Viruses = new List<Virus>();
-    public List<Virus> SetInitialPopulation(long InitialVirusPopulation, Grid.Grid GridField)
+    public List<Virus> Viruses { get; set; }
+    public VirusList()
+    {
+        Viruses = new List<Virus>();
+    }
+    public void SetInitialPopulation(long InitialVirusPopulation, Grid.Grid GridField)
     {
         Random rnd = new Random();
         int maxX = GridField.ReturnMaxX();
@@ -17,6 +21,5 @@ public class VirusList
             virus.VirMoveData.OldGridCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
             Viruses.Add(virus);
         }
-        return Viruses;
     }
 }
