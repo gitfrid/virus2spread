@@ -3,6 +3,13 @@
 namespace VirusSpreadLibrary.Grid;
 public static class ColorExtensions
 {
+
+    public static Microsoft.Maui.Graphics.Color ToMauiColor(this SixLabors.ImageSharp.Color c)
+    {
+        Argb32 converted = c.ToPixel<Argb32>();
+        return Microsoft.Maui.Graphics.Color.FromInt((int)converted.Argb);
+    }
+
     public static System.Drawing.Color ToSystemDrawingColor(this SixLabors.ImageSharp.Color c)
     {
         Argb32 converted = c.ToPixel<Argb32>();

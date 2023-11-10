@@ -31,12 +31,12 @@ public class PersMoveDistanceProfile
         MoveDistance[1] = new Point(1, 10);
         MoveDistance[2] = new Point(1, 10);
         MoveDistance[3] = new Point(1, 10);
-        MoveDistance[4] = new Point(1, 10);
-        MoveDistance[5] = new Point(1, 10);
-        MoveDistance[6] = new Point(1, 10);
-        MoveDistance[7] = new Point(1, 10);
-        MoveDistance[8] = new Point(1, 10);
-        MoveDistance[9] = new Point(1, 10);
+        MoveDistance[4] = new Point(1, 20);
+        MoveDistance[5] = new Point(1, 20);
+        MoveDistance[6] = new Point(1, 2000);
+        MoveDistance[7] = new Point(1, 2000);
+        MoveDistance[8] = new Point(1, 5000);
+        MoveDistance[9] = new Point(1, 5000);
 
         return MoveDistance[Index];
     }

@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.Enum;
+using VirusSpreadLibrary.SpreadModel;
 
 namespace VirusSpreadLibrary.Grid;
 
@@ -50,6 +51,7 @@ public class SetNewCellState
         cell.Population.NumViruses = numViruses;
         cell.PixelColor = colorList.GetCellColor(cellState, cell.Population);
 
+        //Render.DrawPixel()
         return cell.Population;
     }
 

@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel;
 using System.Configuration;
+using Virus2spread.Forms;
 using VirusSpreadLibrary.Properties;
 using VirusSpreadLibrary.SpreadModel;
 
@@ -25,7 +26,10 @@ namespace Virus2spread
 
         private void StartSimulation_button1_Click(object sender, EventArgs e)
         {
-            modelSimulation.StartIterate();
+            GridForm myGridForm = new GridForm();
+            myGridForm.Show();
+            this.Focus();
+            modelSimulation.StartIterate();           
         }
 
         private void ConfigurationPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)

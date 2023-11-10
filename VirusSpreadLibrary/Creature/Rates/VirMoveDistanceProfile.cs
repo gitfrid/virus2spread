@@ -33,10 +33,10 @@ public class VirMoveDistanceProfile
         MoveDistance[3] = new Point(1, 10);
         MoveDistance[4] = new Point(1, 10);
         MoveDistance[5] = new Point(1, 10);
-        MoveDistance[6] = new Point(1, 10);
-        MoveDistance[7] = new Point(1, 10);
-        MoveDistance[8] = new Point(1, 10);
-        MoveDistance[9] = new Point(1, 10);
+        MoveDistance[6] = new Point(1, 200);
+        MoveDistance[7] = new Point(1, 200);
+        MoveDistance[8] = new Point(1, 1000);
+        MoveDistance[9] = new Point(1, 1000);
 
         return MoveDistance[Index];
     }

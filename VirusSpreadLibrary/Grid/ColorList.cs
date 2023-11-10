@@ -8,9 +8,9 @@ public class ColorList
 
     private List<ColorTranslation> colorList = new()
     {
-        new(CellState.Virus, Color.Red),
-        new(CellState.PersonHealthy, Color.Green),
-        new(CellState.PersonInfected, Color.Blue),
+        new(CellState.Virus, Color.WhiteSmoke),
+        new(CellState.PersonHealthy, Color.Blue),
+        new(CellState.PersonInfected, Color.DarkSalmon),
         new(CellState.EmptyCell, Color.Black)
     };
     public Color GetCellColor(CellState CellState, CellPopulation Population)
