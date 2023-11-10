@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Github\\virus2spread\\Virus2spread\\Virus2spread.csproj": {}
+    "C:\\virus2spread\\Virus2spread\\Virus2spread.csproj": {}
   },
   "projects": {
-    "C:\\Github\\virus2spread\\Virus2spread\\Virus2spread.csproj": {
+    "C:\\virus2spread\\Virus2spread\\Virus2spread.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Github\\virus2spread\\Virus2spread\\Virus2spread.csproj",
+        "projectUniqueName": "C:\\virus2spread\\Virus2spread\\Virus2spread.csproj",
         "projectName": "Virus2spread",
-        "projectPath": "C:\\Github\\virus2spread\\Virus2spread\\Virus2spread.csproj",
+        "projectPath": "C:\\virus2spread\\Virus2spread\\Virus2spread.csproj",
         "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
-        "outputPath": "C:\\Github\\virus2spread\\Virus2spread\\obj\\",
+        "outputPath": "C:\\virus2spread\\Virus2spread\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {
-                "projectPath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj"
+              "C:\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {
+                "projectPath": "C:\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj"
               }
             }
           }
@@ -96,14 +96,14 @@
         }
       }
     },
-    "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {
+    "C:\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
+        "projectUniqueName": "C:\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
         "projectName": "VirusSpreadLibrary",
-        "projectPath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
+        "projectPath": "C:\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
         "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
-        "outputPath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\obj\\",
+        "outputPath": "C:\\virus2spread\\VirusSpreadLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",

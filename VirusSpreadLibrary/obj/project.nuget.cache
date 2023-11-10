@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zojAJbrjHlWzaZB53fYR0hG/OOAhsjnNJx7nadAmy8BmWH83Vsrl0NKgmhtbkh0DuTyB4t+4ZYhBdZ1SkruWIQ==",
+  "dgSpecHash": "ZInBGR0cZZiIqoDWDwr7vG8LxDv81Q8CqCr00WtueqqAbyT9v8Vg57xPYj1b/oQ0rko/fDs3RpuPhLM3yPuhfw==",
   "success": true,
-  "projectFilePath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
+  "projectFilePath": "C:\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.maui.graphics\\7.0.100\\microsoft.maui.graphics.7.0.100.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.maui.graphics.skia\\7.0.100\\microsoft.maui.graphics.skia.7.0.100.nupkg.sha512",
