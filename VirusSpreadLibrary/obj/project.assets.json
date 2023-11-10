@@ -924,11 +924,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
+      "projectUniqueName": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
       "projectName": "VirusSpreadLibrary",
-      "projectPath": "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
+      "projectPath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
       "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
-      "outputPath": "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\obj\\",
+      "outputPath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
