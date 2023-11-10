@@ -1,0 +1,13 @@
+C:\Github\virus2spread\VirusSpreadLibrary\bin\Release\net6.0\VirusSpreadLibrary.dll.config
+C:\Github\virus2spread\VirusSpreadLibrary\bin\Release\net6.0\VirusSpreadLibrary.deps.json
+C:\Github\virus2spread\VirusSpreadLibrary\bin\Release\net6.0\VirusSpreadLibrary.dll
+C:\Github\virus2spread\VirusSpreadLibrary\bin\Release\net6.0\VirusSpreadLibrary.pdb
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Release\net6.0\VirusSpreadLibrary.csproj.AssemblyReference.cache
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Release\net6.0\VirusSpreadLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Release\net6.0\VirusSpreadLibrary.AssemblyInfoInputs.cache
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Release\net6.0\VirusSpreadLibrary.AssemblyInfo.cs
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Release\net6.0\VirusSpreadLibrary.csproj.CoreCompileInputs.cache
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Release\net6.0\VirusSpreadLibrary.dll
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Release\net6.0\refint\VirusSpreadLibrary.dll
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Release\net6.0\VirusSpreadLibrary.pdb
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Release\net6.0\ref\VirusSpreadLibrary.dll
