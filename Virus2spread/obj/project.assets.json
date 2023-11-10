@@ -1922,11 +1922,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Github\\virus2spread\\Virus2spread\\Virus2spread.csproj",
+      "projectUniqueName": "C:\\bak\\virus2spread_24\\Virus2spread\\Virus2spread.csproj",
       "projectName": "Virus2spread",
-      "projectPath": "C:\\Github\\virus2spread\\Virus2spread\\Virus2spread.csproj",
+      "projectPath": "C:\\bak\\virus2spread_24\\Virus2spread\\Virus2spread.csproj",
       "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
-      "outputPath": "C:\\Github\\virus2spread\\Virus2spread\\obj\\",
+      "outputPath": "C:\\bak\\virus2spread_24\\Virus2spread\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1943,8 +1943,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {
-              "projectPath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj"
+            "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {
+              "projectPath": "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj"
             }
           }
         }

@@ -37,3 +37,16 @@ C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net6.0\VirusSpreadLibrary.dl
 C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net6.0\refint\VirusSpreadLibrary.dll
 C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net6.0\VirusSpreadLibrary.pdb
 C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net6.0\ref\VirusSpreadLibrary.dll
+C:\bak\virus2spread_24\VirusSpreadLibrary\bin\Debug\net6.0\VirusSpreadLibrary.dll.config
+C:\bak\virus2spread_24\VirusSpreadLibrary\bin\Debug\net6.0\VirusSpreadLibrary.deps.json
+C:\bak\virus2spread_24\VirusSpreadLibrary\bin\Debug\net6.0\VirusSpreadLibrary.dll
+C:\bak\virus2spread_24\VirusSpreadLibrary\bin\Debug\net6.0\VirusSpreadLibrary.pdb
+C:\bak\virus2spread_24\VirusSpreadLibrary\obj\Debug\net6.0\VirusSpreadLibrary.csproj.AssemblyReference.cache
+C:\bak\virus2spread_24\VirusSpreadLibrary\obj\Debug\net6.0\VirusSpreadLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\bak\virus2spread_24\VirusSpreadLibrary\obj\Debug\net6.0\VirusSpreadLibrary.AssemblyInfoInputs.cache
+C:\bak\virus2spread_24\VirusSpreadLibrary\obj\Debug\net6.0\VirusSpreadLibrary.AssemblyInfo.cs
+C:\bak\virus2spread_24\VirusSpreadLibrary\obj\Debug\net6.0\VirusSpreadLibrary.csproj.CoreCompileInputs.cache
+C:\bak\virus2spread_24\VirusSpreadLibrary\obj\Debug\net6.0\VirusSpreadLibrary.dll
+C:\bak\virus2spread_24\VirusSpreadLibrary\obj\Debug\net6.0\refint\VirusSpreadLibrary.dll
+C:\bak\virus2spread_24\VirusSpreadLibrary\obj\Debug\net6.0\VirusSpreadLibrary.pdb
+C:\bak\virus2spread_24\VirusSpreadLibrary\obj\Debug\net6.0\ref\VirusSpreadLibrary.dll

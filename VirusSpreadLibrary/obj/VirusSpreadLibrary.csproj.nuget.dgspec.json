@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {}
+    "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {
+    "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
+        "projectUniqueName": "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
         "projectName": "VirusSpreadLibrary",
-        "projectPath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
+        "projectPath": "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
         "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
-        "outputPath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\obj\\",
+        "outputPath": "C:\\bak\\virus2spread_24\\VirusSpreadLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
