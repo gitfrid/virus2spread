@@ -26,7 +26,7 @@ namespace Virus2spread
             this.Size = Settings.Default.Form_Config_WindowSize;
         }
 
-        private void StartSimulation_button1_Click(object sender, EventArgs e)
+        private void StartSimulation_button1_Click_1(object sender, EventArgs e)
         {
             Form fc = Application.OpenForms["GridForm"];
             if (fc is not null)
@@ -60,5 +60,7 @@ namespace Virus2spread
             // Save Config settings
             Settings.Default.Save();
         }
+
+        
     }
 }

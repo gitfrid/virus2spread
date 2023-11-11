@@ -37,7 +37,7 @@ public class Grid
     {
         //
     }
-    public CellPopulation CelAddCreature(MoveData MoveToData)
+    public CellPopulation AddCreatureToCell(MoveData MoveToData)
     {
         SetNewCellState setNewCellState = new SetNewCellState();
         CellPopulation Population = setNewCellState.SetNewState(MoveToData, this);

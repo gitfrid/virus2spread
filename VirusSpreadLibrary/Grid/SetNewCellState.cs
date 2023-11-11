@@ -1,7 +1,5 @@
-﻿using Serilog;
-using VirusSpreadLibrary.Creature;
+﻿using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.Enum;
-using VirusSpreadLibrary.SpreadModel;
 
 namespace VirusSpreadLibrary.Grid;
 

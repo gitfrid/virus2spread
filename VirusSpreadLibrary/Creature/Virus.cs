@@ -28,7 +28,7 @@ public class Virus
     {
         VirMoveDistanceProfile VirMoveProfile = new VirMoveDistanceProfile();
         VirMoveData.NewGridCoordinate = VirMoveProfile.GetNewCoordinateToMove(VirMoveData.OldGridCoordinate);
-        GridCellPopulation = GridField.CelAddCreature(VirMoveData);
+        GridCellPopulation = GridField.AddCreatureToCell(VirMoveData);
     }
 
 }

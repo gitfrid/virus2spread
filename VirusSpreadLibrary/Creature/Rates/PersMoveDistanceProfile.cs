@@ -5,8 +5,8 @@ namespace VirusSpreadLibrary.Creature.Rates;
 
 // Movement profile
 // simulates travel behavior of frequent short and long distance movements of a person
-// random selection of one of 10 distance ranges
-// Determine random distance within the selected distance range
+// random select one of the 10 distance ranges
+// Determine a random distance within the selected distance range
 // Determines a random direction of 365° 
 // returns the NewGridCoordinate for the movement
 
@@ -41,7 +41,7 @@ public class PersMoveDistanceProfile
         return MoveDistance[Index];
     }
 
-    public Point GetNewCoordinateMoveTo(Point OldCoordiante)
+    public Point GetNewCoordinateToMove(Point OldCoordiante)
     {
         int beta = rnd.Next(0, 91); // get X Y coordinate by the random distance and a random move angel between 0-90
         Point pnt = GetMoveDistanceByIndex(rnd.Next(0, 10));

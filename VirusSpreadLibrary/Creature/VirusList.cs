@@ -15,7 +15,7 @@ public class VirusList
         int maxX = GridField.ReturnMaxX();
         int maxY = GridField.ReturnMaxY();
 
-        // create initial person list at random grid coordinates
+        // create initial virus list at random grid coordinates
         for (int i = 0; i < InitialVirusPopulation; i++)
         {
             Virus virus = new Virus { };

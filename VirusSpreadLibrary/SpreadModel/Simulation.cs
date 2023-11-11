@@ -3,7 +3,7 @@ using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.Properties;
 using VirusSpreadLibrary.Grid;
 using Microsoft.Maui.Graphics;
-using SkiaSharp.Views.Desktop;
+
 
 namespace VirusSpreadLibrary.SpreadModel;
 
@@ -43,8 +43,7 @@ public class Simulation
         stopIteration = true;
     }
 
-
-    public void NextIteration()
+        public void NextIteration()
     {
         if (stopIteration == true) { return; }
 
@@ -78,10 +77,6 @@ public class Simulation
         }                
     }
 
-    public static void InitGridCanvas(ICanvas canvas, int width, int height)
-    {
-        canvas.FillRectangle(0, 0, (float)width, (float)height);
-    }
 
 
 }

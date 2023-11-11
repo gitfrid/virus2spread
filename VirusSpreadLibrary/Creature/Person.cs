@@ -34,15 +34,15 @@ public class Person
     }
     public CellPopulation MoveToNewCoordinate(Grid.Grid GridField)
     {
-        PersMoveDistanceProfile NewCoordinate = new PersMoveDistanceProfile();
-        PersMoveData.NewGridCoordinate = NewCoordinate.GetNewCoordinateMoveTo(PersMoveData.OldGridCoordinate);
-        GridCellPopulation = GridField.CelAddCreature(PersMoveData);
+        PersMoveDistanceProfile PersMoveProfile = new PersMoveDistanceProfile();
+        PersMoveData.NewGridCoordinate = PersMoveProfile.GetNewCoordinateToMove(PersMoveData.OldGridCoordinate);
+        GridCellPopulation = GridField.AddCreatureToCell(PersMoveData);
         return GridCellPopulation;
     }
     public CellPopulation MoveToHomeCoordinate(Grid.Grid GridField)
     {
         PersMoveData.NewGridCoordinate = HomeCoordinate;
-        GridCellPopulation = GridField.CelAddCreature(PersMoveData);
+        GridCellPopulation = GridField.AddCreatureToCell(PersMoveData);
         return GridCellPopulation;
     }
 }
