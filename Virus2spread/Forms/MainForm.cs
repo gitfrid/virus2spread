@@ -9,7 +9,7 @@ namespace Virus2spread
 {
     public partial class MainForm : Form
     {
-        private Simulation modelSimulation = new Simulation();
+        public Simulation modelSimulation = new Simulation();
         public MainForm()
         {
             InitializeComponent();
@@ -19,22 +19,30 @@ namespace Virus2spread
         {
             ConfigurationPropertyGrid.SelectedObject = Settings.Default;
             ConfigurationPropertyGrid.BrowsableAttributes = new AttributeCollection(new UserScopedSettingAttribute());
+
             // set window size
+            this.MinimumSize = new Size(1600, 900);
             this.Location = Settings.Default.Form_Config_WindowLocation;
             this.Size = Settings.Default.Form_Config_WindowSize;
         }
 
         private void StartSimulation_button1_Click(object sender, EventArgs e)
         {
-            GridForm myGridForm = new GridForm();
+            Form fc = Application.OpenForms["GridForm"];
+            if (fc is not null) 
+            {
+                fc.Close();
+            }
+            GridForm myGridForm = new GridForm(modelSimulation,Settings.Default.GridMaxX, Settings.Default.GridMaxY);
             myGridForm.Show();
             this.Focus();
-            modelSimulation.StartIterate();           
+            modelSimulation.StartIteration();
         }
 
         private void ConfigurationPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            VirusSpreadLibrary.Properties.Settings.Default.Save();
+            modelSimulation.StopIteration();
+            Settings.Default.Save();            
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -52,6 +60,5 @@ namespace Virus2spread
             // Save Config settings
             Settings.Default.Save();
         }
-
     }
 }

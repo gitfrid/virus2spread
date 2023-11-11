@@ -35,8 +35,6 @@
             // 
             // skglControl1
             // 
-            skglControl1.AutoSize = true;
-            skglControl1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             skglControl1.BackColor = Color.Black;
             skglControl1.Dock = DockStyle.Fill;
             skglControl1.Location = new Point(0, 0);
@@ -46,6 +44,7 @@
             skglControl1.TabIndex = 0;
             skglControl1.VSync = true;
             skglControl1.PaintSurface += skglControl1_PaintSurface;
+            skglControl1.SizeChanged += skglControl1_SizeChanged;
             // 
             // timer1
             // 
@@ -63,7 +62,6 @@
             Name = "GridForm";
             Text = "GridForm";
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion

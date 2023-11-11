@@ -18,7 +18,6 @@ public class Grid
 
     public void SetNewEmptyGrid(int MaxX, int MaxY)
     {
-
         maxX = MaxX;
         maxY = MaxY;
         GridField = new GridCell[maxX, maxY];

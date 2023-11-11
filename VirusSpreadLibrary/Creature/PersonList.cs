@@ -10,6 +10,7 @@ public class PersonList
     }
     public void SetInitialPopulation(long InitialPersonPopulation, Grid.Grid GridField)
     {
+        Persons = new List<Person>();
         Random rnd = new Random();
         int maxX = GridField.ReturnMaxX();
         int maxY = GridField.ReturnMaxY();

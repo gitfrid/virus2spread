@@ -10,6 +10,7 @@ public class VirusList
     }
     public void SetInitialPopulation(long InitialVirusPopulation, Grid.Grid GridField)
     {
+        Viruses = new List<Virus>();
         Random rnd = new Random();
         int maxX = GridField.ReturnMaxX();
         int maxY = GridField.ReturnMaxY();

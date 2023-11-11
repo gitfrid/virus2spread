@@ -3,108 +3,77 @@ using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.Properties;
 using VirusSpreadLibrary.Grid;
 using Microsoft.Maui.Graphics;
-using OpenTK;
+using SkiaSharp.Views.Desktop;
 
 namespace VirusSpreadLibrary.SpreadModel;
 
 public class Simulation
 {
 
-    public  static Grid.Grid GridField = new Grid.Grid();
-    public static PersonList PersonList = new PersonList();
-    public static VirusList VirusList = new VirusList();
-    public static int maxX;
-    public static int maxY;
-    public static int iteration = 0;
-    //private static Random rand = new Random();
-    public void StartIterate()
+    public Grid.Grid GridField;
+    public PersonList PersonList = new PersonList();
+    public VirusList VirusList = new VirusList();
+    public int iteration;
+
+    public bool stopIteration ;
+    public int MaxX { get; set; }
+    public int MaxY { get; set; }
+
+    public Simulation()
     {
-        Log.Logger = Logging.getinstance();
-        //int iteration = 0;
+        MaxX = Settings.Default.GridMaxX;
+        MaxY = Settings.Default.GridMaxY;
+        GridField = new Grid.Grid();
+    }
+    public void StartIteration()
+    {
+        stopIteration = false;
+        MaxX = Settings.Default.GridMaxX;
+        MaxY = Settings.Default.GridMaxY;
 
-        maxX = Settings.Default.GridMaxX;
-        maxY = Settings.Default.GridMaxY;
-
-
-        GridField.SetNewEmptyGrid(maxX,maxY);
+        GridField = new Grid.Grid();
+        GridField.SetNewEmptyGrid(MaxX,MaxY);
         PersonList.SetInitialPopulation(Settings.Default.InitialPersonPopulation, GridField);
         VirusList.SetInitialPopulation(Settings.Default.InitialVirusPopulation, GridField);
 
-        //while (iteration < Settings.Default.maxIterations)
-        //{
-            Log.Logger.Information("Nr: {A} iteration", iteration);
-            iteration++;
-            
-            foreach (Person person in PersonList.Persons)
-            {
-                person.MoveToNewCoordinate(GridField);
-            };
-
-            // Parallel.ForEach(VirusList.Viruses, virus =>}); -> takes longer
-            foreach (Virus virus in VirusList.Viruses)
-            {
-                virus.MoveToNewCoordinate(GridField);
-            };
-        
-
-        //}
-
     }
 
-    public static void NextIterate()
+    public void StopIteration()
     {
-        Log.Logger = Logging.getinstance();
-        
-            Log.Logger.Information("Nr: {A} iteration", iteration);
-            iteration++;
-
-            foreach (Person person in PersonList.Persons)
-            {
-                person.MoveToNewCoordinate(GridField);
-            };
-
-            // Parallel.ForEach(VirusList.Viruses, virus =>}); -> takes longer
-            foreach (Virus virus in VirusList.Viruses)
-            {
-                virus.MoveToNewCoordinate(GridField);
-            };
+        stopIteration = true;
     }
 
 
-    public static void DrawGrid(ICanvas canvas, float width, float height)
+    public void NextIteration()
     {
-        //canvas.FillColor = Col.WithHue(0.6f);
-        
-        float cellWidthPx = width / GridField.ReturnMaxX();
-        float cellHeightPx = height / GridField.ReturnMaxY();
+        if (stopIteration == true) { return; }
 
-        float borderFrac = .1f;
-        float xPad = borderFrac * cellWidthPx;
-        float yPad = borderFrac * cellHeightPx;
+        Log.Logger = Logging.getinstance();        
+        Log.Logger.Information("Nr: {A} iteration", iteration);
+        iteration++;
 
-        //int a = rand.Next(254);
-        //byte r = (byte)a;
-        //a = rand.Next(254);
-        //byte b = (byte)a;
-        //a = rand.Next(254);
-        //byte g = (byte)a;
-
-        //Microsoft.Maui.Graphics.Color dColor = new Microsoft.Maui.Graphics.Color();
-        //dColor = Microsoft.Maui.Graphics.Color.FromRgb(r, b, g);
-        //canvas.FillColor = dColor.WithHue(0.6f);
-
-
-        for (int y = 0; y < maxY; y++)
+        foreach (Person person in PersonList.Persons)
         {
-            for (int x = 0; x < maxX; x++)
+            person.MoveToNewCoordinate(GridField);
+        };
+
+        // Parallel.ForEach(VirusList.Viruses, virus =>}); -> takes longer
+        foreach (Virus virus in VirusList.Viruses)
+        {
+            virus.MoveToNewCoordinate(GridField);
+        };
+    }
+
+
+    public void DrawGrid(ICanvas canvas,float coordinateFactX, float coordinateFactY, float rectangleX, float rectangleY)
+    {
+        for (int y = 0; y < MaxY; y++)
+        {
+            for (int x = 0; x < MaxX; x++)
             {                
                 GridCell Cell = GridField.GridField[x,y];
                 canvas.FillColor = ColorExtensions.ToMauiColor(Cell.PixelColor);
-                var vx = x * cellWidthPx + xPad;
-                var vy = y * cellHeightPx + yPad;
-                var vw = cellWidthPx - xPad * 2;
-                var vh =cellHeightPx - yPad * 2;
-                canvas.FillRectangle(vx, vy, vw, vh);   
+                canvas.FillRectangle(x * coordinateFactX , y * coordinateFactY , rectangleX, rectangleY);   
             }
         }                
     }
