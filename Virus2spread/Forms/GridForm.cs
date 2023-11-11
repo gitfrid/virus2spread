@@ -45,11 +45,11 @@ namespace Virus2spread.Forms
             UpdateBenchmarkMessage();
         }
 
-        
+
         private void RecalcFormSize(float WidthX, float HeigthY, out float coordinateFactX, out float coordinateFactY, out float rectangleX, out float rectangleY)
         {
             // get relative factor of xy coordinate and the pixel size ( skglControl1 / GridField )
-            
+
             float cellWidthPx = WidthX / maxX;
             float cellHeightPx = HeigthY / maxY;
 

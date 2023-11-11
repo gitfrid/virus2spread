@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             ConfigurationPropertyGrid = new PropertyGrid();
             StartSimulation_button1 = new Button();
             SuspendLayout();
@@ -59,8 +60,9 @@
             ClientSize = new Size(2016, 919);
             Controls.Add(StartSimulation_button1);
             Controls.Add(ConfigurationPropertyGrid);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
-            Text = "MainForm";
+            Text = "virus2spread MainForm";
             FormClosing += MainForm_FormClosing;
             Load += MainForm_Load;
             ResumeLayout(false);

@@ -29,11 +29,11 @@ namespace Virus2spread
         private void StartSimulation_button1_Click(object sender, EventArgs e)
         {
             Form fc = Application.OpenForms["GridForm"];
-            if (fc is not null) 
+            if (fc is not null)
             {
                 fc.Close();
             }
-            GridForm myGridForm = new GridForm(modelSimulation,Settings.Default.GridMaxX, Settings.Default.GridMaxY);
+            GridForm myGridForm = new GridForm(modelSimulation, Settings.Default.GridMaxX, Settings.Default.GridMaxY);
             myGridForm.Show();
             this.Focus();
             modelSimulation.StartIteration();
@@ -42,7 +42,7 @@ namespace Virus2spread
         private void ConfigurationPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             modelSimulation.StopIteration();
-            Settings.Default.Save();            
+            Settings.Default.Save();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

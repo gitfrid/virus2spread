@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GridForm));
             skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl();
             timer1 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
@@ -58,6 +59,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1334, 781);
             Controls.Add(skglControl1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(5);
             Name = "GridForm";
             Text = "GridForm";
