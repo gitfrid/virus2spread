@@ -14,11 +14,8 @@ C# : Net 6.0 WindowsForms,
 Nuget Package : 
 
 System.Runtime.CompilerServices.Unsafe 6.0
-
 Serilog Console
-
 Maui Graphics Skia skglControl
-
 SixLabors.ImageSharp
 
 
