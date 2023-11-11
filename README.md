@@ -9,12 +9,16 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br> 
 <br> 
 This Project is still in work - a long way to go. Programming support is welcome.
+<br> 
 C# : Net 6.0 WindowsForms, Nuget Packages : 
-
+<br> 
 System.Runtime.CompilerServices.Unsafe 6.0
+<br> 
 Serilog Console
+<br> 
 Maui Graphics Skia skglControl
+<br> 
 SixLabors.ImageSharp
-
-
+<br> 
 License: open source - MIT License
+
