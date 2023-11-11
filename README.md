@@ -7,9 +7,8 @@ Since the linear sientific SIR model used, seems to differ from reality.
 
 This Project is still in work - a long way to go. 
 Programming support is welcome.
-.
-.
-.
+
+
 C# : Net 6.0 WindowsForms, Nuget Packages : 
 
 System.Runtime.CompilerServices.Unsafe 6.0
