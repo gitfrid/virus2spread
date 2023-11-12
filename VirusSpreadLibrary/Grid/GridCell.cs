@@ -1,4 +1,5 @@
-﻿
+﻿using Microsoft.Maui.Graphics;
+
 namespace VirusSpreadLibrary.Grid;
 
 public class GridCell

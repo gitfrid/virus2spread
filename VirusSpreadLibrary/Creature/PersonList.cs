@@ -16,11 +16,15 @@ public class PersonList
         int maxY = GridField.ReturnMaxY();
 
         // create initial person list at random grid coordinates
+
         for (int i = 0; i < InitialPersonPopulation; i++)
         {
             Person person = new Person {};
-            person.PersMoveData.OldGridCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
-            person.HomeCoordinate = person.PersMoveData.OldGridCoordinate;
+            // use as new startpoit - if PersonMoveGlobal is true
+            person.PersMoveData.StartGidCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
+
+            // otherwise use always the home coordinate as same startpoit
+            person.PersMoveData.HomeGridCoordinate = person.PersMoveData.StartGidCoordinate;
             Persons.Add(person);
         }
     }

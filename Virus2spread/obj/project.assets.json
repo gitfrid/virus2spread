@@ -380,22 +380,6 @@
           }
         }
       },
-      "SixLabors.ImageSharp/3.0.2": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/SixLabors.ImageSharp.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/SixLabors.ImageSharp.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "build/_._": {}
-        }
-      },
       "SkiaSharp/2.88.6": {
         "type": "package",
         "dependencies": {
@@ -715,7 +699,6 @@
         "dependencies": {
           "Microsoft.Maui.Graphics.Skia": "7.0.100",
           "Serilog.Sinks.Console": "4.1.0",
-          "SixLabors.ImageSharp": "3.0.2",
           "SkiaSharp": "2.88.6",
           "SkiaSharp.Views.WindowsForms": "2.88.6",
           "System.Configuration.ConfigurationManager": "7.0.0"
@@ -1320,22 +1303,6 @@
         "lib/netstandard2.0/Serilog.Sinks.Console.xml",
         "serilog.sinks.console.4.1.0.nupkg.sha512",
         "serilog.sinks.console.nuspec"
-      ]
-    },
-    "SixLabors.ImageSharp/3.0.2": {
-      "sha512": "PlwUHnLZ67G1i0xXDYQJYbFiJsvXiEFWtKdV0QvY9j+dFasYbl+vWXXY42/asTsNjchsH5BLuoRzlf8Fa8lzpg==",
-      "type": "package",
-      "path": "sixlabors.imagesharp/3.0.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "build/SixLabors.ImageSharp.props",
-        "lib/net6.0/SixLabors.ImageSharp.dll",
-        "lib/net6.0/SixLabors.ImageSharp.xml",
-        "sixlabors.imagesharp.128.png",
-        "sixlabors.imagesharp.3.0.2.nupkg.sha512",
-        "sixlabors.imagesharp.nuspec"
       ]
     },
     "SkiaSharp/2.88.6": {

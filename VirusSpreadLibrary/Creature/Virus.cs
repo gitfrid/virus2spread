@@ -27,8 +27,24 @@ public class Virus
     public void MoveToNewCoordinate(Grid.Grid GridField)
     {
         VirMoveDistanceProfile VirMoveProfile = new VirMoveDistanceProfile();
-        VirMoveData.NewGridCoordinate = VirMoveProfile.GetNewCoordinateToMove(VirMoveData.OldGridCoordinate);
+
+        // get new random endpoint to move to
+        // depending on VirMoveProfile settings and VirusMoveGlobal var 
+        if (Properties.Settings.Default.VirusMoveGlobal)
+        {
+            VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.StartGidCoordinate);
+        }
+        else
+        {
+            VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.HomeGridCoordinate);
+        }
+
+        // move to endpoint
         GridCellPopulation = GridField.AddCreatureToCell(VirMoveData);
+
+        // save current endpoint as the new startpoint
+        // to use in next iteration if VirusMoveGlobal is true
+        VirMoveData.StartGidCoordinate = VirMoveData.EndGridCoordinate;      
     }
 
 }

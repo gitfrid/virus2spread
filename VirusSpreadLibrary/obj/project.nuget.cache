@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zojAJbrjHlWzaZB53fYR0hG/OOAhsjnNJx7nadAmy8BmWH83Vsrl0NKgmhtbkh0DuTyB4t+4ZYhBdZ1SkruWIQ==",
+  "dgSpecHash": "k6MZDfPMfgYLmIv/P3vEiMcFnDQ2fLgxNjxSxzYzptneejbNsONkxNOImdpFWDi/cSaJvGT4cbBGKZI89X1FlQ==",
   "success": true,
   "projectFilePath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
   "expectedPackageFiles": [
@@ -11,7 +11,6 @@
     "C:\\Users\\adm\\.nuget\\packages\\opentk.glcontrol\\3.1.0\\opentk.glcontrol.3.1.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\serilog.sinks.console\\4.1.0\\serilog.sinks.console.4.1.0.nupkg.sha512",
-    "C:\\Users\\adm\\.nuget\\packages\\sixlabors.imagesharp\\3.0.2\\sixlabors.imagesharp.3.0.2.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\skiasharp\\2.88.6\\skiasharp.2.88.6.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.6\\skiasharp.nativeassets.macos.2.88.6.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.6\\skiasharp.nativeassets.win32.2.88.6.nupkg.sha512",

@@ -8,7 +8,7 @@ namespace VirusSpreadLibrary.Creature.Rates;
 // random select one of the 10 distance ranges
 // Determine a random distance within the selected distance range
 // Determines a random direction of 365° 
-// returns the NewGridCoordinate for the movement
+// returns the EndGridCoordinate for the movement
 
 public class PersMoveDistanceProfile
 {
@@ -27,21 +27,21 @@ public class PersMoveDistanceProfile
     private Point GetMoveDistanceByIndex(int Index)
     {
         Point[] MoveDistance = new Point[10];
-        MoveDistance[0] = new Point(1, 10);
-        MoveDistance[1] = new Point(1, 10);
-        MoveDistance[2] = new Point(1, 10);
-        MoveDistance[3] = new Point(1, 10);
-        MoveDistance[4] = new Point(1, 20);
-        MoveDistance[5] = new Point(1, 20);
-        MoveDistance[6] = new Point(1, 2000);
-        MoveDistance[7] = new Point(1, 2000);
-        MoveDistance[8] = new Point(1, 5000);
-        MoveDistance[9] = new Point(1, 5000);
+        MoveDistance[0] = new Point(1, 1);
+        MoveDistance[1] = new Point(1, 1);
+        MoveDistance[2] = new Point(1, 1);
+        MoveDistance[3] = new Point(1, 1);
+        MoveDistance[4] = new Point(1, 1);
+        MoveDistance[5] = new Point(1, 1);
+        MoveDistance[6] = new Point(1, 1);
+        MoveDistance[7] = new Point(1, 1);
+        MoveDistance[8] = new Point(1, 1);
+        MoveDistance[9] = new Point(1, 1);
 
         return MoveDistance[Index];
     }
 
-    public Point GetNewCoordinateToMove(Point OldCoordiante)
+    public Point GetEndCoordinateToMove(Point StartCoordiante)
     {
         int beta = rnd.Next(0, 91); // get X Y coordinate by the random distance and a random move angel between 0-90
         Point pnt = GetMoveDistanceByIndex(rnd.Next(0, 10));
@@ -53,16 +53,16 @@ public class PersMoveDistanceProfile
         int Y = (int)Math.Round(Math.Sqrt(p * q));
         int X = (int)Math.Round(q);
         // choose a random quadrant (direction) in coordinate system -> multiply X,Y random with 1 or -1 to  
-        X = OldCoordiante.X + (rnd.Next(0, 2) * 2 - 1) * X;
-        Y = OldCoordiante.Y + (rnd.Next(0, 2) * 2 - 1) * Y;
+        X = StartCoordiante.X + (rnd.Next(0, 2) * 2 - 1) * X;
+        Y = StartCoordiante.Y + (rnd.Next(0, 2) * 2 - 1) * Y;
         // check for grid boundaries 
         if (Y >= maxY | Y < 0)
         {
-            Y = OldCoordiante.Y;
+            Y = StartCoordiante.Y;
         };
         if (X >= maxX | X < 0)
         {
-            X = OldCoordiante.X;
+            X = StartCoordiante.X;
         };
 
         return new Point(X, Y); ;

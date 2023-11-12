@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace VirusSpreadLibrary.Creature;
 
 public class VirusList
@@ -19,8 +21,14 @@ public class VirusList
         for (int i = 0; i < InitialVirusPopulation; i++)
         {
             Virus virus = new Virus { };
-            virus.VirMoveData.OldGridCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
+            // use as new startpoit - if VirusMoveGlobal is true
+            virus.VirMoveData.StartGidCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
             Viruses.Add(virus);
+
+            // otherwise use always the home coordinate as same startpoit
+            virus.VirMoveData.HomeGridCoordinate = virus.VirMoveData.StartGidCoordinate;
+            Viruses.Add(virus);
+
         }
     }
 }

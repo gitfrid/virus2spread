@@ -190,7 +190,6 @@ C:\Github\virus2spread\Virus2spread\bin\Debug\net6.0-windows\OpenTK.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net6.0-windows\OpenTK.GLControl.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net6.0-windows\Serilog.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net6.0-windows\Serilog.Sinks.Console.dll
-C:\Github\virus2spread\Virus2spread\bin\Debug\net6.0-windows\SixLabors.ImageSharp.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net6.0-windows\SkiaSharp.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net6.0-windows\SkiaSharp.Views.Desktop.Common.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net6.0-windows\SkiaSharp.Views.WindowsForms.dll

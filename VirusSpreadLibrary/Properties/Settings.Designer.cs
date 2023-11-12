@@ -80,7 +80,7 @@ namespace VirusSpreadLibrary.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        [Description("Number of iterations for the Simulation - long")]
+        [Description("Number of maximal iterations for the Simulation - long")]
         public long maxIterations {
             get {
                 return ((long)(this["maxIterations"]));
@@ -126,6 +126,65 @@ namespace VirusSpreadLibrary.Properties {
             }
             set {
                 this["ColorList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [Description("allow virus global moovment - true : movement within the distance limit only from the home coordinate. false: movement within the distance limit from the new current coordinate, therefore over the entire grid field possible")]
+        public bool VirusMoveGlobal {
+            get {
+                return ((bool)(this["VirusMoveGlobal"]));
+            }
+            set {
+                this["VirusMoveGlobal"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [Description("allow person global moovment - true : movement within the distance limit only from the home coordinate. false: movement within the distance limit from the new current coordinate, therefore over the entire grid field possible")]
+        public bool PersonMoveGlobal {
+            get {
+                return ((bool)(this["PersonMoveGlobal"]));
+            }
+            set {
+                this["PersonMoveGlobal"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [Description("Timer in milli seconds : standard 1 ms - bigger values slows down the iterations and the redraw of grid field form")]
+        public int GridFormTimer
+        {
+            get
+            {
+                return ((int)(this["GridFormTimer"]));
+            }
+            set
+            {
+                this["GridFormTimer"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [Description("default false: If true allows movement tracking over the whole time - all iterations, as the person or virus at the old grid coordinate are not deleted after movment")]
+
+        public bool TrackMovment
+        {
+            get
+            {
+                return ((bool)(this["TrackMovment"]));
+            }
+            set
+            {
+                this["TrackMovment"] = value;
             }
         }
     }

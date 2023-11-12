@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
-using System.Windows.Forms;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Skia;
 using VirusSpreadLibrary.SpreadModel;
-using Size = System.Drawing.Size;
+using VirusSpreadLibrary.Properties;
+
 
 namespace Virus2spread.Forms
 {
@@ -28,6 +28,14 @@ namespace Virus2spread.Forms
             maxX = MaxX;
             maxY = MaxY;
             RecalcFormSize(skglControl1.Width, skglControl1.Height, out CoordinateFactX, out CoordinateFactY, out RectangleX, out RectangleY);
+            if (Settings.Default.GridFormTimer < 1)
+            {
+                timer1.Interval = 1;
+            }
+            else 
+            {
+                timer1.Interval = Settings.Default.GridFormTimer;
+            }            
         }
 
         private void UpdateBenchmarkMessage()
@@ -40,15 +48,15 @@ namespace Virus2spread.Forms
 
         private void skglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs e)
         {
-            ICanvas canvas = new SkiaCanvas() { Canvas = e.Surface.Canvas };
+            ICanvas canvas = new SkiaCanvas() { Canvas = e.Surface.Canvas };            
             simulation.DrawGrid(canvas, CoordinateFactX, CoordinateFactY, RectangleX, RectangleY);
             UpdateBenchmarkMessage();
         }
 
-
         private void RecalcFormSize(float WidthX, float HeigthY, out float coordinateFactX, out float coordinateFactY, out float rectangleX, out float rectangleY)
         {
-            // get relative factor of xy coordinate and the pixel size ( skglControl1 / GridField )
+            // get relative factor of xy coordinate
+            // and the pixel size ( skglControl1 / GridField )
 
             float cellWidthPx = WidthX / maxX;
             float cellHeightPx = HeigthY / maxY;
@@ -64,7 +72,7 @@ namespace Virus2spread.Forms
         }
 
         private void timer1_Tick_1(object sender, EventArgs e)
-        {
+        {                        
             simulation.NextIteration();
             skglControl1.Invalidate();
         }

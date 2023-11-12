@@ -1,5 +1,6 @@
 ﻿using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.Enum;
+using Microsoft.Maui.Graphics;
 
 namespace VirusSpreadLibrary.Grid;
 
@@ -33,13 +34,11 @@ public class Grid
             }
         }
     }
-    private void RemoveCreature(MoveData MoveToData, CreatureType Creature)
-    {
-        //
-    }
+    
     public CellPopulation AddCreatureToCell(MoveData MoveToData)
     {
-        SetNewCellState setNewCellState = new SetNewCellState();
+        // move to new grid xy end coordinate
+        SetCellState setNewCellState = new SetCellState();
         CellPopulation Population = setNewCellState.SetNewState(MoveToData, this);
         return Population;
     }

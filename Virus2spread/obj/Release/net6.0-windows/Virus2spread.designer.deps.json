@@ -244,14 +244,6 @@
           }
         }
       },
-      "SixLabors.ImageSharp/3.0.2": {
-        "runtime": {
-          "lib/net6.0/SixLabors.ImageSharp.dll": {
-            "assemblyVersion": "3.0.0.0",
-            "fileVersion": "3.0.2.0"
-          }
-        }
-      },
       "SkiaSharp/2.88.6": {
         "dependencies": {
           "SkiaSharp.NativeAssets.Win32": "2.88.6",
@@ -608,13 +600,6 @@
       "sha512": "sha512-K6N5q+5fetjnJPvCmkWOpJ/V8IEIoMIB1s86OzBrbxwTyHxdx3pmz4H+8+O/Dc/ftUX12DM1aynx/dDowkwzqg==",
       "path": "serilog.sinks.console/4.1.0",
       "hashPath": "serilog.sinks.console.4.1.0.nupkg.sha512"
-    },
-    "SixLabors.ImageSharp/3.0.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-PlwUHnLZ67G1i0xXDYQJYbFiJsvXiEFWtKdV0QvY9j+dFasYbl+vWXXY42/asTsNjchsH5BLuoRzlf8Fa8lzpg==",
-      "path": "sixlabors.imagesharp/3.0.2",
-      "hashPath": "sixlabors.imagesharp.3.0.2.nupkg.sha512"
     },
     "SkiaSharp/2.88.6": {
       "type": "package",

@@ -9,7 +9,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="7.0.100" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
     <PackageReference Include="SkiaSharp" Version="2.88.6" />
     <PackageReference Include="SkiaSharp.Views.WindowsForms" Version="2.88.6" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />

@@ -43,7 +43,7 @@ public class Simulation
         stopIteration = true;
     }
 
-        public void NextIteration()
+    public void NextIteration()
     {
         if (stopIteration == true) { return; }
 
@@ -71,7 +71,7 @@ public class Simulation
             for (int x = 0; x < MaxX; x++)
             {                
                 GridCell Cell = GridField.GridField[x,y];
-                canvas.FillColor = ColorExtensions.ToMauiColor(Cell.PixelColor);
+                canvas.FillColor = Cell.PixelColor;                
                 canvas.FillRectangle(x * coordinateFactX , y * coordinateFactY , rectangleX, rectangleY);   
             }
         }                
