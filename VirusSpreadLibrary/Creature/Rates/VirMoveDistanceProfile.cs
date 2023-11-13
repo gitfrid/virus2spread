@@ -27,16 +27,16 @@ public class VirMoveDistanceProfile
     private Point GetMoveDistanceByIndex(int Index)
     {
         Point[] MoveDistance = new Point[10];
-        MoveDistance[0] = new Point(1, 1);
-        MoveDistance[1] = new Point(1, 1);
-        MoveDistance[2] = new Point(1, 1);
-        MoveDistance[3] = new Point(1, 1);
-        MoveDistance[4] = new Point(1, 1);
-        MoveDistance[5] = new Point(1, 1);
-        MoveDistance[6] = new Point(1, 1);
-        MoveDistance[7] = new Point(1, 1);
-        MoveDistance[8] = new Point(1, 1);
-        MoveDistance[9] = new Point(1, 1);
+        MoveDistance[0] = new Point(1, 10);
+        MoveDistance[1] = new Point(1, 10);
+        MoveDistance[2] = new Point(1, 10);
+        MoveDistance[3] = new Point(1, 10);
+        MoveDistance[4] = new Point(1, 10);
+        MoveDistance[5] = new Point(1, 10);
+        MoveDistance[6] = new Point(1, 10);
+        MoveDistance[7] = new Point(1, 10);
+        MoveDistance[8] = new Point(1, 10);
+        MoveDistance[9] = new Point(1, 10);
 
         return MoveDistance[Index];
     }

@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "Virus2spread/1.0.0": {
         "dependencies": {
+          "AnimatedGif": "1.0.5",
           "Microsoft.Extensions.Logging.Console": "7.0.0",
           "Microsoft.Extensions.Logging.Debug": "7.0.0",
           "Microsoft.Maui.Graphics.Skia": "7.0.100",
@@ -19,6 +20,17 @@
         },
         "runtime": {
           "Virus2spread.dll": {}
+        }
+      },
+      "AnimatedGif/1.0.5": {
+        "dependencies": {
+          "System.Drawing.Common": "7.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AnimatedGif.dll": {
+            "assemblyVersion": "1.0.5.0",
+            "fileVersion": "1.0.5.0"
+          }
         }
       },
       "Microsoft.Extensions.Configuration/7.0.0": {
@@ -485,6 +497,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AnimatedGif/1.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ai5Q7E702HnYhuhx6zSTiLYVN+v2hhB2gYrQn2jjAgEO1ANmd8TFwWZPrleRERa3y31AvJFUOdblf+Sj40L/Aw==",
+      "path": "animatedgif/1.0.5",
+      "hashPath": "animatedgif.1.0.5.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/7.0.0": {
       "type": "package",

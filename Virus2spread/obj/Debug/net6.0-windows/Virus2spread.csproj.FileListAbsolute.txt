@@ -230,3 +230,5 @@ C:\Github\virus2spread\Virus2spread\obj\Debug\net6.0-windows\refint\Virus2spread
 C:\Github\virus2spread\Virus2spread\obj\Debug\net6.0-windows\Virus2spread.pdb
 C:\Github\virus2spread\Virus2spread\obj\Debug\net6.0-windows\Virus2spread.genruntimeconfig.cache
 C:\Github\virus2spread\Virus2spread\obj\Debug\net6.0-windows\ref\Virus2spread.dll
+C:\Github\virus2spread\Virus2spread\obj\Debug\net6.0-windows\Virus2spread.Properties.Resources.resources
+C:\Github\virus2spread\Virus2spread\bin\Debug\net6.0-windows\AnimatedGif.dll

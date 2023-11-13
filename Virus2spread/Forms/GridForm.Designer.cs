@@ -36,6 +36,7 @@
             // 
             // skglControl1
             // 
+            skglControl1.AllowDrop = true;
             skglControl1.BackColor = Color.Black;
             skglControl1.Dock = DockStyle.Fill;
             skglControl1.Location = new Point(0, 0);

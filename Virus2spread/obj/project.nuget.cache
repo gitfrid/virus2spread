@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "bmaOdrHMGLq460qsLOLEomoRulKF8hu4LKNAzcN1K1X0iiKIErFKaTES8Ze1UFFR4qpJko1bWfEqSiYSRbtsuw==",
+  "dgSpecHash": "5KmUI9zvI15TmRs/yu5iNO7F+pX+zRo8aS5vmnohiWaQim1Nq5YRG9I1IhpXwYPC4r5Ssa0NP7zVN1YMzhwnvA==",
   "success": true,
   "projectFilePath": "C:\\Github\\virus2spread\\Virus2spread\\Virus2spread.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\adm\\.nuget\\packages\\animatedgif\\1.0.5\\animatedgif.1.0.5.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.extensions.configuration.binder\\7.0.0\\microsoft.extensions.configuration.binder.7.0.0.nupkg.sha512",

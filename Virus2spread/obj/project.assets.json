@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "AnimatedGif/1.0.5": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AnimatedGif.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AnimatedGif.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -713,6 +725,18 @@
     }
   },
   "libraries": {
+    "AnimatedGif/1.0.5": {
+      "sha512": "Ai5Q7E702HnYhuhx6zSTiLYVN+v2hhB2gYrQn2jjAgEO1ANmd8TFwWZPrleRERa3y31AvJFUOdblf+Sj40L/Aw==",
+      "type": "package",
+      "path": "animatedgif/1.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "animatedgif.1.0.5.nupkg.sha512",
+        "animatedgif.nuspec",
+        "lib/netstandard2.0/AnimatedGif.dll"
+      ]
+    },
     "Microsoft.Extensions.Configuration/7.0.0": {
       "sha512": "tldQUBWt/xeH2K7/hMPPo5g8zuLc3Ro9I5d4o/XrxvxOCA2EZBtW7bCHHTc49fcBtvB8tLAb/Qsmfrq+2SJ4vA==",
       "type": "package",
@@ -1873,6 +1897,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "AnimatedGif >= 1.0.5",
       "Microsoft.Extensions.Logging.Console >= 7.0.0",
       "Microsoft.Extensions.Logging.Debug >= 7.0.0",
       "Microsoft.Maui.Graphics.Skia >= 7.0.100",
@@ -1926,6 +1951,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "AnimatedGif": {
+            "target": "Package",
+            "version": "[1.0.5, )"
+          },
           "Microsoft.Extensions.Logging.Console": {
             "target": "Package",
             "version": "[7.0.0, )"
