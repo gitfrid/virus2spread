@@ -21,5 +21,8 @@ Maui Graphics Skia skglControl
 <br> 
 SixLabors.ImageSharp
 <br> 
+<br> 
+SharpSerializer.Core
+<br> 
 License: open source - MIT License
 
