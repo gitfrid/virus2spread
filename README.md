@@ -11,7 +11,7 @@ Since the linear sientific SIR model used, seems to differ from reality.
 This Project is still in work - a long way to go. Programming support is welcome.
 <br>
 <br>
-C# : Net 6.0 WindowsForms, Nuget Packages : 
+C# : Net 8.0 WindowsForms, Nuget Packages : 
 <br> 
 System.Runtime.CompilerServices.Unsafe 6.0
 <br> 
@@ -20,6 +20,8 @@ Serilog Console
 Maui Graphics Skia skglControl
 <br> 
 SixLabors.ImageSharp
+<br> 
+SharpSerializer.Core
 <br> 
 License: open source - MIT License
 
