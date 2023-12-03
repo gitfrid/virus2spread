@@ -23,5 +23,11 @@ SixLabors.ImageSharp
 <br> 
 SharpSerializer.Net Core
 <br> 
+Microsoft.Windows.Compatibility
+<br> 
+System.Text.Encoding.CodePages
+<br> 
+WinForms.DataVisualization
+<br> 
 License: open source - MIT License
 
