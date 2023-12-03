@@ -1,6 +1,6 @@
 ﻿using Serilog;
 using VirusSpreadLibrary.Creature;
-using VirusSpreadLibrary.Properties;
+using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.Grid;
 using Microsoft.Maui.Graphics;
 
@@ -11,8 +11,8 @@ public class Simulation
 {
 
     public Grid.Grid GridField;
-    public PersonList PersonList = new PersonList();
-    public VirusList VirusList = new VirusList();
+    public PersonList PersonList = new ();
+    public VirusList VirusList = new ();
     public int iteration;
 
     public bool stopIteration ;
@@ -21,20 +21,20 @@ public class Simulation
 
     public Simulation()
     {
-        MaxX = Settings.Default.GridMaxX;
-        MaxY = Settings.Default.GridMaxY;
+        MaxX = AppSettings.Config.GridMaxX;
+        MaxY = AppSettings.Config.GridMaxY;
         GridField = new Grid.Grid();
     }
     public void StartIteration()
     {
         stopIteration = false;
-        MaxX = Settings.Default.GridMaxX;
-        MaxY = Settings.Default.GridMaxY;
+        MaxX = AppSettings.Config.GridMaxX;
+        MaxY = AppSettings.Config.GridMaxY;
 
         GridField = new Grid.Grid();
         GridField.SetNewEmptyGrid(MaxX,MaxY);
-        PersonList.SetInitialPopulation(Settings.Default.InitialPersonPopulation, GridField);
-        VirusList.SetInitialPopulation(Settings.Default.InitialVirusPopulation, GridField);
+        PersonList.SetInitialPopulation(AppSettings.Config.InitialPersonPopulation, GridField);
+        VirusList.SetInitialPopulation(AppSettings.Config.InitialVirusPopulation, GridField);
 
     }
 

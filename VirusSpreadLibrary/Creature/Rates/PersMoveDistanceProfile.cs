@@ -1,4 +1,4 @@
-﻿using VirusSpreadLibrary.Properties;
+﻿using VirusSpreadLibrary.AppProperties;
 using Point = System.Drawing.Point;
 
 namespace VirusSpreadLibrary.Creature.Rates;
@@ -20,8 +20,8 @@ public class PersMoveDistanceProfile
 
     public PersMoveDistanceProfile()
     {
-        maxX = Settings.Default.GridMaxX;
-        maxY = Settings.Default.GridMaxY;
+        maxX = AppSettings.Config.GridMaxX;
+        maxY = AppSettings.Config.GridMaxY;
     }
 
     private Point GetMoveDistanceByIndex(int Index)

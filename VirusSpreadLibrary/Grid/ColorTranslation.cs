@@ -6,8 +6,8 @@ namespace VirusSpreadLibrary.Grid;
 public class ColorTranslation
 {
     public CellState cellState { get; set; }
-    public Color cellColor { get; set; }
-    public ColorTranslation(CellState CellState, Color CellColor)
+    public Microsoft.Maui.Graphics.Color cellColor { get; set; }
+    public ColorTranslation(CellState CellState, Microsoft.Maui.Graphics.Color CellColor)
     {
         cellState = CellState;
         cellColor = CellColor;

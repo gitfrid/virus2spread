@@ -1,0 +1,9 @@
+C:\Github\virus2spread\Virus2spread\obj\Debug\net7.0-windows\Virus2spread.csproj.AssemblyReference.cache
+C:\Github\virus2spread\Virus2spread\obj\Debug\net7.0-windows\Virus2spread.Forms.GridForm.resources
+C:\Github\virus2spread\Virus2spread\obj\Debug\net7.0-windows\Virus2spread.MainForm.resources
+C:\Github\virus2spread\Virus2spread\obj\Debug\net7.0-windows\Virus2spread.Properties.Resources.resources
+C:\Github\virus2spread\Virus2spread\obj\Debug\net7.0-windows\Virus2spread.csproj.GenerateResource.cache
+C:\Github\virus2spread\Virus2spread\obj\Debug\net7.0-windows\Virus2spread.GeneratedMSBuildEditorConfig.editorconfig
+C:\Github\virus2spread\Virus2spread\obj\Debug\net7.0-windows\Virus2spread.AssemblyInfoInputs.cache
+C:\Github\virus2spread\Virus2spread\obj\Debug\net7.0-windows\Virus2spread.AssemblyInfo.cs
+C:\Github\virus2spread\Virus2spread\obj\Debug\net7.0-windows\Virus2spread.csproj.CoreCompileInputs.cache

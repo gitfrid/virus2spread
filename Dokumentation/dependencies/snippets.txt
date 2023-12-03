@@ -1,0 +1,110 @@
+____________________________
+
+App Settings Property Grid Demo
+
+https://github.com/muhammadawais95/property-grid-demo
+https://www.codeproject.com/Articles/27302/Custom-C-NET-Settings-Class
+_____________________
+
+
+private string GetCurrentPropertyDescription(string sPropertyName)
+    {
+      PropertyDescriptor oPropDescriptor = TypeDescriptor.GetProperties(m_da.Config.GetType())[sPropertyName];
+      if (oPropDescriptor != null)
+      {
+        DescriptionAttribute oDescriptionAttr = (DescriptionAttribute)oPropDescriptor.Attributes[typeof(DescriptionAttribute)];
+        if (oDescriptionAttr != null)
+          return oDescriptionAttr.Description;
+      }
+      return null;
+    }
+
+
+private void pgConfig_SelectedGridItemChanged(object sender, SelectedGridItemChangedEventArgs e)
+    {
+      GridItem giSelected = e.NewSelection;
+      if ((giSelected != null) && (giSelected.PropertyDescriptor != null))
+      {
+        string sDescription = GetCurrentPropertyDescription(giSelected.PropertyDescriptor.Name);
+        if ((sDescription != null) && (sDescription != giSelected.PropertyDescriptor.Description))
+        {
+          MethodInfo miSetStatusBox = pgConfig.GetType().GetMethod("SetStatusBox", BindingFlags.NonPublic | BindingFlags.Instance);
+          if (miSetStatusBox != null)
+            miSetStatusBox.Invoke(pgConfig, new object[] { giSelected.PropertyDescriptor.DisplayName, sDescription });
+        }
+      }
+}
+
+
+
+
+
+
+
+https://github.com/MatthewKing/DynamicDescriptors
+
+
+
+         private List<AgeGroupTranslation> _ageGroupList = new()
+         {
+             //new(PersAgeGroupsYear._1_9, 0.5 ),
+             //new(PersAgeGroupsYear._10_19, 0.5 )
+         };
+ public class AgeGroupTranslation
+ {
+     public AgeGroupTranslation(PersAgeGroupsYear ageGroup, double deathRateByAgeGroup)
+     {
+         //AgeGroupsYear = ageGroup;
+         //DeathRateByAgeGroup = deathRateByAgeGroup;
+         //_ageGroupList.Add(ageGroup, deathRateByAgeGroup);
+     }
+     private PersAgeGroupsYear AgeGroupsYear { get; set; }
+     private double DeathRateByAgeGroup { get; set; }
+ }
+
+
+________________
+
+
+    private static List<AgeGroupTranslation> _ageGroupList = new()
+    {
+        //new(PersAgeGroupsYear._1_9, 0.5 ),
+    };
+    public class AgeGroupTranslation
+    {
+        private AgeGroupTranslation(PersAgeGroupsYear ageGroup, double deathRateByAgeGroup)
+        {
+        }    
+    }
+    public void AddAgeGroupValue(AgeGroupTranslation AgeGroupValue)
+    {
+        _ageGroupList.Add(AgeGroupValue);
+    }
+
+____________________________
+
+propertie description:
+https://stackoverflow.com/questions/6220193/my-settings-and-descriptions-and-getting-them-into-a-propertygrid
+[Description("Your custom description here")]
+
+
+
+https://stackoverflow.com/questions/10079912/c-sharp-probability-and-random-numbers
+
+int rand = random.Next(0,100)
+
+if (rand < 25) //25%
+{
+    // Some event...
+}
+
+//other code
+if (rand < 23) //23%
+{
+    // Some event...
+}
+
+double rand = random.NextDouble();
+if(rand < .25)
+{
+...

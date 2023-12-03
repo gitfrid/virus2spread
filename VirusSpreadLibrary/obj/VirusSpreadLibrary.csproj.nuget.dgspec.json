@@ -18,15 +18,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
             "projectReferences": {}
           }
         },
@@ -37,16 +37,24 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
           "dependencies": {
             "Microsoft.Maui.Graphics.Skia": {
               "target": "Package",
               "version": "[7.0.100, )"
             },
+            "Microsoft.Windows.Compatibility": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Serilog.Sinks.Console": {
               "target": "Package",
               "version": "[4.1.0, )"
+            },
+            "SharpSerializer.Core": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             },
             "SkiaSharp": {
               "target": "Package",
@@ -58,7 +66,11 @@
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.0, )"
+            },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -75,9 +87,12 @@
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,0 +1,5 @@
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net7.0\VirusSpreadLibrary.csproj.AssemblyReference.cache
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net7.0\VirusSpreadLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net7.0\VirusSpreadLibrary.AssemblyInfoInputs.cache
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net7.0\VirusSpreadLibrary.AssemblyInfo.cs
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net7.0\VirusSpreadLibrary.csproj.CoreCompileInputs.cache

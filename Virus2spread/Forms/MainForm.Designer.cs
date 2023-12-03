@@ -33,6 +33,8 @@
             tabPage1 = new TabPage();
             splitContainer1 = new SplitContainer();
             ConfigurationPropertyGrid = new PropertyGrid();
+            LoadConfig_button2 = new Button();
+            eventsListBox = new VirusSpreadLibrary.AppProperties.EventsListBox();
             StartSimulation_button1 = new Button();
             tabPage2 = new TabPage();
             tabControl.SuspendLayout();
@@ -77,6 +79,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(LoadConfig_button2);
+            splitContainer1.Panel2.Controls.Add(eventsListBox);
             splitContainer1.Panel2.Controls.Add(StartSimulation_button1);
             splitContainer1.Size = new Size(1592, 772);
             splitContainer1.SplitterDistance = 1280;
@@ -89,6 +93,26 @@
             ConfigurationPropertyGrid.Name = "ConfigurationPropertyGrid";
             ConfigurationPropertyGrid.Size = new Size(1280, 772);
             ConfigurationPropertyGrid.TabIndex = 2;
+            ConfigurationPropertyGrid.PropertyValueChanged += ConfigurationPropertyGrid_PropertyValueChanged;
+            // 
+            // LoadConfig_button2
+            // 
+            LoadConfig_button2.Location = new Point(28, 102);
+            LoadConfig_button2.Name = "LoadConfig_button2";
+            LoadConfig_button2.Size = new Size(150, 46);
+            LoadConfig_button2.TabIndex = 5;
+            LoadConfig_button2.Text = "Load config";
+            LoadConfig_button2.UseVisualStyleBackColor = true;
+            LoadConfig_button2.Click += LoadConfig_button2_Click;
+            // 
+            // eventsListBox
+            // 
+            eventsListBox.Dock = DockStyle.Bottom;
+            eventsListBox.FormattingEnabled = true;
+            eventsListBox.Location = new Point(0, 649);
+            eventsListBox.Name = "eventsListBox";
+            eventsListBox.Size = new Size(308, 123);
+            eventsListBox.TabIndex = 4;
             // 
             // StartSimulation_button1
             // 
@@ -140,5 +164,7 @@
         private SplitContainer splitContainer1;
         private PropertyGrid ConfigurationPropertyGrid;
         private Button StartSimulation_button1;
+        private VirusSpreadLibrary.AppProperties.EventsListBox eventsListBox;
+        private Button LoadConfig_button2;
     }
 }

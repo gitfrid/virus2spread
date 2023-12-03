@@ -1,4 +1,5 @@
-﻿using VirusSpreadLibrary.Creature.Rates;
+﻿using VirusSpreadLibrary.AppProperties;
+using VirusSpreadLibrary.Creature.Rates;
 using VirusSpreadLibrary.Grid;
 
 namespace VirusSpreadLibrary.Creature;
@@ -30,7 +31,7 @@ public class Virus
 
         // get new random endpoint to move to
         // depending on VirMoveProfile settings and VirusMoveGlobal var 
-        if (Properties.Settings.Default.VirusMoveGlobal)
+        if (AppSettings.Config.VirusMoveGlobal)
         {
             VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.StartGidCoordinate);
         }

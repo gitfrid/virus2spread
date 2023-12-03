@@ -2,7 +2,7 @@
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Skia;
 using VirusSpreadLibrary.SpreadModel;
-using VirusSpreadLibrary.Properties;
+using VirusSpreadLibrary.AppProperties;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using AnimatedGif;
@@ -33,13 +33,13 @@ namespace Virus2spread.Forms
             maxX = MaxX;
             maxY = MaxY;
             RecalcFormSize(skglControl1.Width, skglControl1.Height, out CoordinateFactX, out CoordinateFactY, out RectangleX, out RectangleY);
-            if (Settings.Default.GridFormTimer < 1)
+            if (AppSettings.Config.GridFormTimer < 1)
             {
                 timer1.Interval = 1;
             }
             else
             {
-                timer1.Interval = Settings.Default.GridFormTimer;
+                timer1.Interval = AppSettings.Config.GridFormTimer;
             }
         }
 

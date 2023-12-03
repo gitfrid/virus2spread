@@ -22,9 +22,9 @@ public class Grid
         maxX = MaxX;
         maxY = MaxY;
         GridField = new GridCell[maxX, maxY];
-        CellPopulation Population = new CellPopulation();
+        CellPopulation Population = new ();
 
-        Color Color = ColorList.GetCellColor(CellState.EmptyCell, Population);
+        Microsoft.Maui.Graphics.Color Color = ColorList.GetCellColor(CellState.EmptyCell, Population);
 
         for (int y = 0; y < maxY; y++)
         {
@@ -38,7 +38,7 @@ public class Grid
     public CellPopulation AddCreatureToCell(MoveData MoveToData)
     {
         // move to new grid xy end coordinate
-        SetCellState setNewCellState = new SetCellState();
+        SetCellState setNewCellState = new ();
         CellPopulation Population = setNewCellState.SetNewState(MoveToData, this);
         return Population;
     }

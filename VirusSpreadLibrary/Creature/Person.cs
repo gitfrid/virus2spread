@@ -1,4 +1,5 @@
 ﻿
+using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.Creature.Rates;
 using VirusSpreadLibrary.Grid;
 using Point = System.Drawing.Point;
@@ -37,7 +38,7 @@ public class Person
 
         // get new random endpoint to move to
         // depending on PersMoveProfile settings and PersonMoveGlobal var
-        if (Properties.Settings.Default.PersonMoveGlobal)
+        if (AppSettings.Config.PersonMoveGlobal)
         {
             PersMoveData.EndGridCoordinate = PersMoveProfile.GetEndCoordinateToMove(PersMoveData.StartGidCoordinate);
         } 

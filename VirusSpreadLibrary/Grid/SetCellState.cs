@@ -1,6 +1,6 @@
 ﻿using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.Enum;
-using VirusSpreadLibrary.Properties;
+using VirusSpreadLibrary.AppProperties;
 
 namespace VirusSpreadLibrary.Grid;
 
@@ -103,7 +103,7 @@ public class SetCellState
         cellStart.Population.NumViruses = numVirusesStart;       
 
         // leave old start pixel color, if TrackMovment true          
-        if ( Settings.Default.TrackMovment == false)
+        if ( AppSettings.Config.TrackMovment == false)
         {
             cellStart.PixelColor = colorList.GetCellColor(cellState, cell.Population);
         }

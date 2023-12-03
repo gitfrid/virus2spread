@@ -1,15 +1,14 @@
-﻿using Microsoft.Maui.Graphics;
-
+﻿
 namespace VirusSpreadLibrary.Grid;
 
 public class GridCell
 {
-    public Color PixelColor { get; set; }
+    public Microsoft.Maui.Graphics.Color PixelColor { get; set; }
     public CellPopulation Population { get; set; }
-    public GridCell(Color CellColor, CellPopulation CellPopulation)
+    public GridCell(Microsoft.Maui.Graphics.Color CellColor, CellPopulation CellPopulation)
     {
         Population = new CellPopulation();
-        PixelColor = new Color();
+        PixelColor = new Microsoft.Maui.Graphics.Color();
     }
 
 }

@@ -5,16 +5,16 @@ namespace VirusSpreadLibrary.Grid;
 
 public class ColorList
 {
-    private Color cellColor = Colors.Black;
+    private Microsoft.Maui.Graphics.Color cellColor = Colors.Black;
 
-    private List<ColorTranslation> colorList = new()
-    {
+    private List<ColorTranslation> colorList =
+    [
         new(CellState.Virus, Colors.WhiteSmoke),
         new(CellState.PersonHealthy,Colors.Blue),
         new(CellState.PersonInfected,Colors.DeepSkyBlue),
         new(CellState.EmptyCell, Colors.Black)
-    };
-    public Color GetCellColor(CellState CellState, CellPopulation Population)
+    ];
+    public Microsoft.Maui.Graphics.Color GetCellColor(CellState CellState, CellPopulation Population)
     {
     
         foreach (ColorTranslation ColModel in colorList)
