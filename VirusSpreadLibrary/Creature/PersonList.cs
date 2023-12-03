@@ -11,7 +11,7 @@ public class PersonList
     public void SetInitialPopulation(long InitialPersonPopulation, Grid.Grid GridField)
     {
         Persons = new List<Person>();
-        Random rnd = new Random();
+        Random rnd = new();
         int maxX = GridField.ReturnMaxX();
         int maxY = GridField.ReturnMaxY();
 
@@ -19,7 +19,7 @@ public class PersonList
 
         for (int i = 0; i < InitialPersonPopulation; i++)
         {
-            Person person = new Person {};
+            Person person = new() { };
             // use as new startpoit - if PersonMoveGlobal is true
             person.PersMoveData.StartGidCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
 

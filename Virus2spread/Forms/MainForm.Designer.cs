@@ -33,6 +33,7 @@
             tabPage1 = new TabPage();
             splitContainer1 = new SplitContainer();
             ConfigurationPropertyGrid = new PropertyGrid();
+            SaveConfig_button3 = new Button();
             LoadConfig_button2 = new Button();
             eventsListBox = new VirusSpreadLibrary.AppProperties.EventsListBox();
             StartSimulation_button1 = new Button();
@@ -79,6 +80,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(SaveConfig_button3);
             splitContainer1.Panel2.Controls.Add(LoadConfig_button2);
             splitContainer1.Panel2.Controls.Add(eventsListBox);
             splitContainer1.Panel2.Controls.Add(StartSimulation_button1);
@@ -95,11 +97,21 @@
             ConfigurationPropertyGrid.TabIndex = 2;
             ConfigurationPropertyGrid.PropertyValueChanged += ConfigurationPropertyGrid_PropertyValueChanged;
             // 
+            // SaveConfig_button3
+            // 
+            SaveConfig_button3.Location = new Point(44, 190);
+            SaveConfig_button3.Name = "SaveConfig_button3";
+            SaveConfig_button3.Size = new Size(162, 46);
+            SaveConfig_button3.TabIndex = 6;
+            SaveConfig_button3.Text = "Save config";
+            SaveConfig_button3.UseVisualStyleBackColor = true;
+            SaveConfig_button3.Click += SaveConfig_button3_Click;
+            // 
             // LoadConfig_button2
             // 
-            LoadConfig_button2.Location = new Point(28, 102);
+            LoadConfig_button2.Location = new Point(44, 117);
             LoadConfig_button2.Name = "LoadConfig_button2";
-            LoadConfig_button2.Size = new Size(150, 46);
+            LoadConfig_button2.Size = new Size(162, 46);
             LoadConfig_button2.TabIndex = 5;
             LoadConfig_button2.Text = "Load config";
             LoadConfig_button2.UseVisualStyleBackColor = true;
@@ -107,6 +119,7 @@
             // 
             // eventsListBox
             // 
+            eventsListBox.BackColor = SystemColors.Control;
             eventsListBox.Dock = DockStyle.Bottom;
             eventsListBox.FormattingEnabled = true;
             eventsListBox.Location = new Point(0, 649);
@@ -116,10 +129,10 @@
             // 
             // StartSimulation_button1
             // 
-            StartSimulation_button1.Location = new Point(25, 27);
+            StartSimulation_button1.Location = new Point(44, 32);
             StartSimulation_button1.Margin = new Padding(5);
             StartSimulation_button1.Name = "StartSimulation_button1";
-            StartSimulation_button1.Size = new Size(153, 46);
+            StartSimulation_button1.Size = new Size(162, 46);
             StartSimulation_button1.TabIndex = 3;
             StartSimulation_button1.Text = "Simulation";
             StartSimulation_button1.UseVisualStyleBackColor = true;
@@ -166,5 +179,6 @@
         private Button StartSimulation_button1;
         private VirusSpreadLibrary.AppProperties.EventsListBox eventsListBox;
         private Button LoadConfig_button2;
+        private Button SaveConfig_button3;
     }
 }

@@ -27,7 +27,7 @@ public class Virus
     }
     public void MoveToNewCoordinate(Grid.Grid GridField)
     {
-        VirMoveDistanceProfile VirMoveProfile = new VirMoveDistanceProfile();
+        VirMoveDistanceProfile VirMoveProfile = new();
 
         // get new random endpoint to move to
         // depending on VirMoveProfile settings and VirusMoveGlobal var 

@@ -1,4 +1,3 @@
-using VirusSpreadLibrary.AppProperties;
 
 namespace Virus2spread
 {

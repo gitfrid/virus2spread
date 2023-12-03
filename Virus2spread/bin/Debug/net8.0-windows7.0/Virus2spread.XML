@@ -4,8 +4,8 @@
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="1394" />
-        <Simple name="Y" value="559" />
+        <Simple name="X" value="1395" />
+        <Simple name="Y" value="16" />
       </Properties>
     </Complex>
     <Complex name="Form_Config_WindowSize">
@@ -14,14 +14,14 @@
         <Simple name="Height" value="1010" />
       </Properties>
     </Complex>
-    <Simple name="AppVersion" value="1.0.0+6d5b67df2dd8f620f05726d1e3387bd73c8d0585" />
+    <Simple name="AppVersion" value="1.0.0+a29d6b68e9dba09b6e052e2d3e6c570622139f55" />
     <Simple name="GridMaxX" value="100" />
     <Simple name="GridMaxY" value="100" />
     <Simple name="GridFormTimer" value="1" />
-    <Simple name="TrackMovment" value="True" />
-    <Simple name="InitialPersonPopulation" value="2000" />
+    <Simple name="TrackMovment" value="False" />
+    <Simple name="InitialPersonPopulation" value="20" />
     <Simple name="PersonMoveGlobal" value="True" />
-    <Simple name="InitialVirusPopulation" value="1000" />
+    <Simple name="InitialVirusPopulation" value="10" />
     <Simple name="VirusMoveGlobal" value="True" />
     <Simple name="MaxIterations" value="1000" />
     <Simple name="PersonMoveRateFrom" value="1;1;1;1;1;1;1;1;1;1" />
@@ -29,9 +29,9 @@
     <Simple name="VirusMoveRateFrom" value="1;1;1;1;1;1;1;1;1;1" />
     <Simple name="VirusMoveRateTo" value="2;2;2;2;2;2;2;2;2;2" />
     <Simple name="ConfigFilePath" value="C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.XML" />
-    <Simple name="XmlColorSelection" value="ARGBColor:255:255:192:128" />
+    <Simple name="XmlColorSelection" value="ARGBColor:0:0:0:0" />
     <Complex name="ToolbarColor" id="5" />
-    <Simple name="XmlToolbarColor" value="NamedColor:ActiveCaption" />
+    <Simple name="XmlToolbarColor" value="NamedColor:Control" />
     <Collection name="ColorList">
       <Properties>
         <Simple name="Capacity" value="4" />

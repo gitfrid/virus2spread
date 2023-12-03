@@ -13,14 +13,14 @@ public class VirusList
     public void SetInitialPopulation(long InitialVirusPopulation, Grid.Grid GridField)
     {
         Viruses = new List<Virus>();
-        Random rnd = new Random();
+        Random rnd = new();
         int maxX = GridField.ReturnMaxX();
         int maxY = GridField.ReturnMaxY();
 
         // create initial virus list at random grid coordinates
         for (int i = 0; i < InitialVirusPopulation; i++)
         {
-            Virus virus = new Virus { };
+            Virus virus = new() { };
             // use as new startpoit - if VirusMoveGlobal is true
             virus.VirMoveData.StartGidCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
             Viruses.Add(virus);

@@ -9,7 +9,7 @@ namespace Virus2spread
 {
     public partial class MainForm : Form
     {
-        public Simulation modelSimulation = new ();
+        public Simulation modelSimulation = new();
         public MainForm()
         {
             InitializeComponent();
@@ -102,8 +102,14 @@ namespace Virus2spread
         }
         private void LoadConfig_button2_Click(object sender, EventArgs e)
         {
-            AppSettings.Config.Setting.Load();
+            AppSettings.Config.Setting.Load(true);
             PropertyGridSelectConfig();
+        }
+
+        private void SaveConfig_button3_Click(object sender, EventArgs e)
+        {
+            AppSettings.Config.Setting.Save(true);
+            ConfigurationPropertyGrid.Refresh();
         }
     }
 }

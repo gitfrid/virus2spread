@@ -1,4 +1,5 @@
-﻿using Polenter.Serialization;
+﻿
+using Polenter.Serialization;
 
 namespace VirusSpreadLibrary.AppProperties;
 
@@ -38,18 +39,28 @@ public class Setting
         return (T)serializer.Deserialize(stream);
     }
 
-    private void Deserialize(bool openFromFile)
+    private void Deserialize(bool openFromFile = false)
     {
         var serializer = new SharpSerializer(SerializerXmlSettings());
         string fileName = string.Empty;
-        
-        // remove default ExcludeFromSerializationAttribute for perfo
+                
         if (openFromFile)
         {
+            string ConfigFilePath = AppSettings.Config.ConfigFilePath.ToString();
+            if (File.Exists(ConfigFilePath))
+            {
+                openFileDialog.FileName = Path.GetFileName(ConfigFilePath);
+                openFileDialog.InitialDirectory = Path.GetDirectoryName(ConfigFilePath);
+                openFileDialog.DefaultExt = Path.GetExtension(openFileDialog.FileName.ToString());
+                openFileDialog.Filter = openFileDialog.DefaultExt + "|*"
+                    + Path.GetExtension(openFileDialog.FileName.ToString());
+            }
             if (DialogResult.OK != openFileDialog.ShowDialog()) return;
             fileName = openFileDialog.FileName;
+            AppSettings.Config.ConfigFilePath = fileName;
         }
 
+        // remove default ExcludeFromSerializationAttribute for performance
         try
         {
             if (openFromFile)
@@ -59,8 +70,15 @@ public class Setting
             else
             {
                 string ConfigFile = AppSettings.Config.ConfigFilePath.ToString();
-                AppSettings Conf = (AppSettings)serializer.Deserialize(ConfigFile);
-                AppSettings.Config = Conf;
+                if (File.Exists(ConfigFile))
+                {
+                    AppSettings Conf = (AppSettings)serializer.Deserialize(ConfigFile);
+                    AppSettings.Config = Conf;
+                }
+                else 
+                {
+                    MessageBox.Show(string.Format("Config file not found: {0}", ConfigFile));
+                }                
             }
         }
         catch (Exception ex)
@@ -71,16 +89,26 @@ public class Setting
         }
     }
 
-    private void Serialize(bool saveToFile)
+    private void Serialize(bool saveToFile = false)
     {
         var serializer = new SharpSerializer(SerializerXmlSettings());
         string fileName = string.Empty;
 
         if (saveToFile)
         {
+            string ConfigFilePath = AppSettings.Config.ConfigFilePath.ToString();
+            if (File.Exists(ConfigFilePath))
+            {
+                saveFileDialog.FileName = Path.GetFileName(ConfigFilePath);
+                saveFileDialog.InitialDirectory = Path.GetDirectoryName(ConfigFilePath);
+                saveFileDialog.DefaultExt = Path.GetExtension(saveFileDialog.FileName.ToString());
+                saveFileDialog.Filter = saveFileDialog.DefaultExt + "|*" 
+                    + Path.GetExtension(saveFileDialog.FileName.ToString());
+            }
             if (DialogResult.OK != saveFileDialog.ShowDialog())
                 return;
             fileName = saveFileDialog.FileName;
+            AppSettings.Config.ConfigFilePath = fileName;
         }
 
         try
@@ -101,16 +129,56 @@ public class Setting
         }
     }
 
-    // load appconfig form xml
-    public void Load()
+    // get file in %appdata%AppName\LastConfigFileLocation.XML
+    // which stores the path to the last used Application Config xmlFile
+    private string LastConfigPathXmlFile()
     {
-        Deserialize(false);
+        string appName = Path.GetFileNameWithoutExtension(System.AppDomain.CurrentDomain.FriendlyName);
+        return new(string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"\", appName, @"\LastConfigFileLocation.XML"));
+    }
+    public void SetLastConfigFilePath(string ConfigFilePath)
+    {
+        GetSetLastConfigFilePath objLastConfigFilePath = new();
+        string lastConfigPathXmlFile = LastConfigPathXmlFile();
+
+        if (File.Exists(lastConfigPathXmlFile) == false)
+        {
+            //create directory
+            string lastConfigPathXmlFilepath = Path.GetDirectoryName(lastConfigPathXmlFile) ?? "";
+            Directory.CreateDirectory(lastConfigPathXmlFilepath);
+        }
+        objLastConfigFilePath.ConfigFilePath = ConfigFilePath;
+        new SharpSerializer().Serialize(objLastConfigFilePath, lastConfigPathXmlFile);
+    }
+
+    public string GetLastConfigFilePath(string DefaultConfigFilePath)
+    {
+        string lastConfigPathXmlFile = LastConfigPathXmlFile();
+        
+        if (File.Exists(lastConfigPathXmlFile) == false)
+        {
+            // return default ConfigFilePath location
+            SetLastConfigFilePath(DefaultConfigFilePath);            
+            return DefaultConfigFilePath; 
+        }
+        else
+        {
+            // return last ConfigFilePath from %appdata%AppName\LastConfigFileLocation.XML 
+            GetSetLastConfigFilePath objLastConfigFilePath = (GetSetLastConfigFilePath)(new SharpSerializer().Deserialize(lastConfigPathXmlFile));
+            return objLastConfigFilePath.ConfigFilePath;             
+        }
+    }
+
+    // load appconfig form xml
+    public void Load(bool openFromFile = false)
+    {
+        Deserialize(openFromFile);
     }
 
     // save appconfig to xml
-    public void Save()
+    public void Save(bool saveToFile = false)
     {
-        Serialize(false);
+        Serialize(saveToFile);
     }
 
     // reloads appconfig settings
@@ -120,18 +188,25 @@ public class Setting
         Load();
     }
 
-    private void SerializeClass(ClassSerializer ObjCase, SharpSerializer serializer)
+    private void SerializeClass(ClassSerializer ObjCase, SharpSerializer serializer, string XmlFileName = "")
     {
+
+        if (XmlFileName == "") 
+        {
+            XmlFileName = string.Concat(Path.GetTempPath(), @"\", 
+                            Path.GetFileNameWithoutExtension(System.AppDomain.CurrentDomain.FriendlyName), "_Class.XML");
+        }
+
         // using var stream = new MemoryStream();
         // serializer.Serialize(testCase.Source, stream);
-        serializer.Serialize(ObjCase.Source, @"C:\temp\test.xml");
+        serializer.Serialize(ObjCase.Source, XmlFileName);
 
         // reset stream
         // stream.Position = 0;
 
         // deserialize
         //var result = serializer.Deserialize(stream);
-        var result = serializer.Deserialize(@"C:\temp\test.xml");
+        var result = serializer.Deserialize(XmlFileName);
 
         // reset stream to test if it is not closed 
         // the stream will be closed by the user
@@ -197,6 +272,21 @@ public class Setting
 
 
 #region Helper classes/structs
+
+
+//Class to write-read the ConfigFile location
+//from %appdata%AppName\LastConfigFileLocation.XML 
+public class GetSetLastConfigFilePath 
+{
+    private string configFilePath = "";
+    public string ConfigFilePath
+    {
+        get => configFilePath;
+        set => configFilePath = value;
+    }
+}
+
+
 //public class XmlFont
 //{
 //    public System.Drawing.Font font;

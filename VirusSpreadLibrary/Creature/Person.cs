@@ -34,7 +34,7 @@ public class Person
     }
     public CellPopulation MoveToNewCoordinate(Grid.Grid GridField)
     {
-        PersMoveDistanceProfile PersMoveProfile = new PersMoveDistanceProfile();
+        PersMoveDistanceProfile PersMoveProfile = new();
 
         // get new random endpoint to move to
         // depending on PersMoveProfile settings and PersonMoveGlobal var

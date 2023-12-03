@@ -3,7 +3,7 @@ using System.Drawing.Design;
 using System.Xml.Serialization;
 using Polenter.Serialization;
 using VirusSpreadLibrary.AppProperties.PropertyGridExt;
-using static VirusSpreadLibrary.AppProperties.PropertyGridExt.UIFilenameEditor;
+
 
 namespace VirusSpreadLibrary.AppProperties;
 
@@ -311,14 +311,15 @@ public  class AppSettings
     [UIFilenameEditor.SaveFileAttribute] // -> default is openFile
     public string ConfigFilePath
     {
-        get => configFilePath;
-        set
-        {
-            if (File.Exists(value))
-            {
-                configFilePath = value;
-            }
+        get 
+        {            
+            return Setting.GetLastConfigFilePath(configFilePath);
         }
+        set 
+        {
+            Setting.SetLastConfigFilePath(value);
+            configFilePath = Setting.GetLastConfigFilePath(configFilePath);
+        } 
     }
 
     [Browsable(true)]
@@ -367,7 +368,6 @@ public  class AppSettings
     [Browsable(false)]
     [XmlElement("ColorSelection")]
     public string XmlToolbarColor
-
     {
         get
         {
@@ -424,11 +424,6 @@ public  class AppSettings
 } // APP Settings
 
 #endregion  properties settings
-
-
-
-
-
 
 
 // for debug tests -> serialize and deserializes only this class 
