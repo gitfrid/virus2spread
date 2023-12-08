@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Virus2spread")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a29d6b68e9dba09b6e052e2d3e6c570622139f55")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+09c8f9adbc6c392bdfec4f1c34ebf9c681bdb0c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Virus2spread")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Virus2spread")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

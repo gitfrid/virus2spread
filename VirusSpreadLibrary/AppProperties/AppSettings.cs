@@ -39,7 +39,8 @@ namespace VirusSpreadLibrary.AppProperties;
 public  class AppSettings
 {
 
-    private string appVersion = Application.ProductVersion.ToString();    
+    private string dummy;
+    private string appVersion = Application.ProductVersion[..Application.ProductVersion.ToString().IndexOf('+')];
     private int gridMaxX = 100;
     private int gridMaxY = 100;
     private long initialPersonPopulation = 20;
@@ -53,16 +54,17 @@ public  class AppSettings
     private bool trackMovment = false;
     private bool showHelperSettings = false;
 
-    //private XmlFont xmlWindowFont = new();
-    private Color colorSelection = new();
-    private string xmlColorSelection = "";
+    private Color virusColor = Color.WhiteSmoke;
+    private string xmlVirusColor = "WhiteSmoke";
+    private Color  personHealthyColor = Color.Blue;
+    private string xmlPersonHealthyColor = "Blue";
+    private Color personInfectedColor = Color.DeepSkyBlue;
+    private string xmlPersonInfectedColor = "DeepSkyBlue";
+    private Color emptyCellColor = Color.Black;
+    private string xmlEmptyCellColor = "Black";
+
     private String configFilePath = string.Concat(Path.GetDirectoryName(Application.ExecutablePath),
                                     "\\", Path.GetFileNameWithoutExtension(Application.ExecutablePath), ".XML");
-
-    private Color toolbarColor = SystemColors.Control;
-    private string xmlToolbarColor = "";
-
-    private readonly List<Color> colorList = [];
 
     private DoubleSeriesClass personMoveRate = new();
     private string personMoveRateFrom = "";
@@ -83,6 +85,7 @@ public  class AppSettings
     #pragma warning restore CA2211
     public AppSettings()
     {
+        
         PersonMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
         PersonMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,2,2,2]);
         VirusMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
@@ -91,6 +94,9 @@ public  class AppSettings
         // AppSettings.Config.VirusMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
         // AppSettings.Config.VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,2,2,2]);
     }
+
+    [ExcludeFromSerialization]  // -> XmlSerializer will not serialize the object
+    [Browsable(false)]
     public Setting Setting
     {
         get => setting;
@@ -102,9 +108,7 @@ public  class AppSettings
 
 
     //-> category in grid
-    [CategoryAttribute("Internal Settings")] 
-    // -> hide in grid if showHelperSettings is flase
-    [Browsable(false)]
+    [CategoryAttribute("Internal Settings")]     
     // -> grid value is editable
     [ReadOnlyAttribute(false)]
     // -> show description in grid  
@@ -117,7 +121,7 @@ public  class AppSettings
 
     [CategoryAttribute("Internal Settings")]
     [Description("Internal use - to save actual MainForm size and position")] 
-    [Browsable(false)]
+    [Browsable(false)] //-> hide from Grid if Property showHelperSettings is false
     public Point Form_Config_WindowLocation
     {
         get => form_Config_WindowLocation;
@@ -137,7 +141,7 @@ public  class AppSettings
     public string AppVersion
     {
         get => appVersion;
-        set => appVersion = Application.ProductVersion.ToString();
+        set => dummy = value;  // don't overrwrite with version from xml
     }
 
     [CategoryAttribute("Grid Settings")]
@@ -216,6 +220,7 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Move Rate"), ReadOnlyAttribute(false)]
+    [DescriptionAttribute()]  
     [ExcludeFromSerialization]
     [Browsable(false)]
     public DoubleSeriesClass PersonMoveRate
@@ -225,7 +230,10 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Move Rate Person"), ReadOnlyAttribute(false)]
-    [DescriptionAttribute("The description")]
+    [DescriptionAttribute("motion profile - see below:\r\n\r\nused to simulate frequent short and rare long distance moves of people\r\nrandom chooses one range from the distance range serie\r\n"+
+                           "then get a random distance within the selected distance range\r\nget a random direction 365° \r\nreturn the NewGridCoordinate to move to" +
+                          "\r\n\r\nPersonMoveRateFrom \r\nholds a series of the upper maximum ranges a person can move \r\nif the person moves a random range from the range serie is choosen\r\n"+
+                           "this can be used to simulate tavel behavior for example rear far and frequent low distance movment of persons\r\n")]
     public string PersonMoveRateFrom
     {
         get
@@ -245,6 +253,7 @@ public  class AppSettings
     }
     
     [CategoryAttribute("Move Rate Person"), ReadOnlyAttribute(false)]
+    [DescriptionAttribute("series for the lower minimum range a person can move")]
     public string? PersonMoveRateTo
     {
         get
@@ -270,7 +279,10 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Move Rate Virus"), ReadOnlyAttribute(false)]
-    [DescriptionAttribute("The description")]
+    [DescriptionAttribute("motion profile - see below:\r\n\r\nused to simulate moving behavior\r\nrandom chooses one range from the distance range serie\r\n"+
+                         "then get a random distance within the selected choosed range\r\nget a random direction 365° \r\nreturn the NewGridCoordinate for to move to" +
+                         "\r\n\r\nVirusMoveRateFrom \r\nholds a series of the lower limit ranges a virus can move \r\nrandom a range from the range serie will be chosen\r\n" +
+                          "this can be used to simulate spread behavior of a virus for example in a airborn scenario\r\n")]
     public string VirusMoveRateFrom
     {
         get
@@ -291,6 +303,7 @@ public  class AppSettings
 
     
     [CategoryAttribute("Move Rate Virus"), ReadOnlyAttribute(false)]
+    [DescriptionAttribute("series of the uper limit maximum ranges a person can move")]
     public string? VirusMoveRateTo
     {
         get
@@ -324,102 +337,135 @@ public  class AppSettings
 
     [Browsable(true)]
     [CategoryAttribute("Color Settings")]
-    [DefaultValue(typeof(Color), "Black")]
-    // -> exclude from serialize
-    // because XmlSerializer can't handle Color objects
+    [DescriptionAttribute("Default: WhiteSmoke")]
     [ExcludeFromSerialization]
-    public Color ColorSelection
+    public Color VirusColor
     {
         get
         {
-            return (Color)colorSelection;
+            return (Color)virusColor;
         }
         set
         {
-            colorSelection = value;
+            virusColor = value;
         }
     }
 
     [CategoryAttribute("Color Settings")]
     [Browsable(false)]
-    [XmlElement("ColorSelection")]
-    public string XmlColorSelection
+    [XmlElement("VirusColor")]
+    public string XmlVirusColor
     {
         get
         {
-            xmlColorSelection = setting.ToXmlColor(ColorSelection);
-            return xmlColorSelection;
+            xmlVirusColor = setting.ToXmlColor(virusColor);
+            return xmlVirusColor;
         }
         set
         {
-            xmlColorSelection = value;
-            ColorSelection = setting.FromXmlColor(value);
+            xmlVirusColor = value;
+            virusColor = setting.FromXmlColor(value);
         }
     }
 
-    [CategoryAttribute("Color Toolbar Settings")]
-    public Color ToolbarColor
+    [Browsable(true)]
+    [CategoryAttribute("Color Settings")]
+    [DescriptionAttribute("Default: Blue")]
+    [ExcludeFromSerialization]
+    public Color PersonHealthyColor
     {
-        get => toolbarColor;
-        set => toolbarColor = value;
+        get
+        {
+            return (Color)personHealthyColor;
+        }
+        set
+        {
+            personHealthyColor = value;
+        }
     }
 
-    [CategoryAttribute("Color Toolbar Settings")]
+    [CategoryAttribute("Color Settings")]
     [Browsable(false)]
-    [XmlElement("ColorSelection")]
-    public string XmlToolbarColor
+    [XmlElement("PersonHealthyColor")]
+    public string XmlPersonHealthyColor
     {
         get
         {
-            xmlToolbarColor = setting.ToXmlColor(ToolbarColor);
-            return xmlToolbarColor;
+            xmlPersonHealthyColor = setting.ToXmlColor(personHealthyColor);
+            return xmlPersonHealthyColor;
         }
         set
         {
-            xmlToolbarColor = value;
-            ToolbarColor = setting.FromXmlColor(value);
+            xmlPersonHealthyColor = value;
+            personHealthyColor = setting.FromXmlColor(value);
         }
     }
 
-    [CategoryAttribute("Color List Settings")]
-    [Description("Not implemented yet - choose Grid Cell Colors")]
-    public List<Color> ColorList
+    [Browsable(true)]
+    [CategoryAttribute("Color Settings")]
+    [DescriptionAttribute("Default: DeepSkyBlue")]
+    [ExcludeFromSerialization]
+    public Color PersonInfected
     {
         get
         {
-            return colorList;
+            return (Color)personInfectedColor;
         }
         set
         {
-            colorList.Add(ToolbarColor);
+            personInfectedColor = value;
         }
     }
 
-    //[CategoryAttribute("Font Settings")]
-    //[ExcludeFromSerialization]
-    //public Font WindowFont
-    //{
-    //    get => windowFont;
-    //    set => windowFont = value;
-    //}
+    [CategoryAttribute("Color Settings")]
+    [Browsable(false)]
+    [XmlElement("PersonInfectedColor")]
+    public string XmlPersonInfectedColor
+    {
+        get
+        {
+            xmlPersonInfectedColor = setting.ToXmlColor(personInfectedColor);
+            return xmlPersonInfectedColor;
+        }
+        set
+        {
+            xmlPersonInfectedColor = value;
+            personInfectedColor = setting.FromXmlColor(value);
+        }
+    }
 
-    ////[XmlElement("WindowFont")]
-    //[Browsable(false)]
-    //[CategoryAttribute("Font Settings")]
-    //public XmlFont XmlWindowFont
-    //{
-    //    get
-    //    {                
-    //        xmlWindowFont = xmlWindowFont.ToXmlFont(WindowFont);
-    //        return xmlWindowFont;
-    //    }
-    //    set
-    //    {
-    //        xmlWindowFont = value;
-    //        WindowFont = xmlWindowFont.FromXmlFont(xmlWindowFont);
-    //    }
-    //}
+    [Browsable(true)]
+    [CategoryAttribute("Color Settings")]
+    [DescriptionAttribute("Default: Black")]
+    [ExcludeFromSerialization]
+    public Color EmptyCellColor
+    {
+        get
+        {
+            return (Color)emptyCellColor;
+        }
+        set
+        {
+            emptyCellColor = value;
+        }
+    }
 
+    [CategoryAttribute("Color Settings")]
+    [Browsable(false)]
+    [XmlElement("EmptyCellColor")]
+    public string XmlEmptyCellColor
+    {
+        get
+        {
+            xmlEmptyCellColor = setting.ToXmlColor(emptyCellColor);
+            return xmlEmptyCellColor;
+        }
+        set
+        {
+            xmlEmptyCellColor = value;
+            emptyCellColor = setting.FromXmlColor(value);
+        }
+    }
 
 } // APP Settings
 

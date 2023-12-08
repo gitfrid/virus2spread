@@ -30,35 +30,35 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GridForm));
-            skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl();
+            SkglControl = new SkiaSharp.Views.Desktop.SKGLControl();
             timer1 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
-            // skglControl1
+            // SkglControl
             // 
-            skglControl1.AllowDrop = true;
-            skglControl1.BackColor = Color.Black;
-            skglControl1.Dock = DockStyle.Fill;
-            skglControl1.Location = new Point(0, 0);
-            skglControl1.Margin = new Padding(6, 8, 6, 8);
-            skglControl1.Name = "skglControl1";
-            skglControl1.Size = new Size(1334, 781);
-            skglControl1.TabIndex = 0;
-            skglControl1.VSync = true;
-            skglControl1.PaintSurface += skglControl1_PaintSurface;
-            skglControl1.SizeChanged += skglControl1_SizeChanged;
+            SkglControl.AllowDrop = true;
+            SkglControl.BackColor = Color.Black;
+            SkglControl.Dock = DockStyle.Fill;
+            SkglControl.Location = new Point(0, 0);
+            SkglControl.Margin = new Padding(6, 8, 6, 8);
+            SkglControl.Name = "SkglControl";
+            SkglControl.Size = new Size(1334, 781);
+            SkglControl.TabIndex = 0;
+            SkglControl.VSync = true;
+            SkglControl.PaintSurface += SkglControl1_PaintSurface;
+            SkglControl.SizeChanged += SkglControl1_SizeChanged;
             // 
             // timer1
             // 
             timer1.Enabled = true;
-            timer1.Tick += timer1_Tick_1;
+            timer1.Tick += Timer1_Tick_1;
             // 
             // GridForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1334, 781);
-            Controls.Add(skglControl1);
+            Controls.Add(SkglControl);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(5);
             Name = "GridForm";
@@ -68,7 +68,7 @@
 
         #endregion
 
-        private SkiaSharp.Views.Desktop.SKGLControl skglControl1;
+        private SkiaSharp.Views.Desktop.SKGLControl SkglControl;
         private System.Windows.Forms.Timer timer1;
     }
 }

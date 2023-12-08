@@ -1,5 +1,6 @@
 ﻿using VirusSpreadLibrary.Enum;
 using Microsoft.Maui.Graphics;
+using VirusSpreadLibrary.AppProperties;
 
 namespace VirusSpreadLibrary.Grid;
 
@@ -9,10 +10,10 @@ public class ColorList
 
     private List<ColorTranslation> colorList =
     [
-        new(CellState.Virus, Colors.WhiteSmoke),
-        new(CellState.PersonHealthy,Colors.Blue),
-        new(CellState.PersonInfected,Colors.DeepSkyBlue),
-        new(CellState.EmptyCell, Colors.Black)
+        new(CellState.Virus, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.VirusColor.ToArgb().ToString("X"))),
+        new(CellState.PersonHealthy, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonHealthyColor.ToArgb().ToString("X"))),
+        new(CellState.PersonInfected, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonInfected.ToArgb().ToString("X"))),
+        new(CellState.EmptyCell, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.EmptyCellColor.ToArgb().ToString()))
     ];
     public Microsoft.Maui.Graphics.Color GetCellColor(CellState CellState, CellPopulation Population)
     {

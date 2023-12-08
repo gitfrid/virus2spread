@@ -1,5 +1,6 @@
 ﻿
 using VirusSpreadLibrary.AppProperties;
+using VirusSpreadLibrary.AppProperties.PropertyGridExt;
 using Point = System.Drawing.Point;
 
 namespace VirusSpreadLibrary.Creature.Rates;
@@ -11,40 +12,58 @@ namespace VirusSpreadLibrary.Creature.Rates;
 // get a random direction 365° 
 // returns the EndGridCoordinate for the move.
 
+public class VirusInvalidIndexException : Exception
+{
+    public VirusInvalidIndexException()
+    {
+    }
+    public VirusInvalidIndexException(string StringToPass) : base(
+        (String.Format("VirusMoveRateFrom and VirusMoveRateTo must have the same number of entries.\r\n" +
+        "VirusMoveRateFrom values must be smaller as the related VirusMoveRateTo value!\r\n\r\n" +
+        "VirusMoveRates will be reset to the default values!\r\n\r\n" +
+        "Please enter the desired correct values in APP-Settings: Category -> Move Rate Virus\r\n{0}", StringToPass)))
+    { }
+    public VirusInvalidIndexException(string message, Exception inner) : base(message, inner) { }
+}
+
 public class VirMoveDistanceProfile
 {
     private int maxX = 0;
     private int maxY = 0;
    
     private Random rnd = new Random();
+
+    private readonly Point[] moveDistance = [];
     public double MoveActivityRnd { get; set; }
     public VirMoveDistanceProfile()
     {
         maxX = AppSettings.Config.GridMaxX;
         maxY = AppSettings.Config.GridMaxY;
+        DoubleSeries seriesFrom = AppSettings.Config.VirusMoveRate.DoubleSeriesFrom;
+        DoubleSeries seriesTo = AppSettings.Config.VirusMoveRate.DoubleSeriesTo;
+        if (seriesFrom.DoubleArray.Length == seriesTo.DoubleArray.Length)
+        {
+            moveDistance = new Point[seriesFrom.DoubleArray.Length];
+            for (int i = 0; i < seriesFrom.DoubleArray.Length; i++)
+            {
+                moveDistance[i] = new Point(((int)seriesFrom.DoubleArray[i]), ((int)seriesTo.DoubleArray[i]));
+            }
+        }
+        else
+        {
+            AppSettings.Config.VirusMoveRate.DoubleSeriesFrom = new DoubleSeries([1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+            AppSettings.Config.VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2, 2, 2, 2, 2, 2, 2, 2, 2, 2]);
+            throw new VirusInvalidIndexException("");
+        }
     }
-
     private Point GetMoveDistanceByIndex(int Index)
     {
-        Point[] MoveDistance = new Point[10];
-        MoveDistance[0] = new Point(1, 10);
-        MoveDistance[1] = new Point(1, 10);
-        MoveDistance[2] = new Point(1, 10);
-        MoveDistance[3] = new Point(1, 10);
-        MoveDistance[4] = new Point(1, 10);
-        MoveDistance[5] = new Point(1, 10);
-        MoveDistance[6] = new Point(1, 10);
-        MoveDistance[7] = new Point(1, 10);
-        MoveDistance[8] = new Point(1, 10);
-        MoveDistance[9] = new Point(1, 10);
-
-        return MoveDistance[Index];
+        return moveDistance[Index];
     }
-
     public Point GetEndCoordinateToMove(Point StartCoordiante)
     {
         int beta = rnd.Next(0, 91); // get X Y coordinate by the random distance and a random move angel between 0-90
-        Point pnt = GetMoveDistanceByIndex(rnd.Next(0, 10));
+        Point pnt = GetMoveDistanceByIndex(rnd.Next(0,moveDistance.Length));
         int a = rnd.Next(pnt.X, pnt.Y); 
         double b = a / Math.Tan(90 - beta);
         double c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));

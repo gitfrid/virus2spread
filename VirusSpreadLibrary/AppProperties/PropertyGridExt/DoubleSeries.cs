@@ -35,7 +35,7 @@ public class DoubleSeries
   
       if (parts.Length != 4)
       {
-        //throw new ArgumentException("Value is not a tuple.", nameof(s));
+        //throw new ArgumentException("Value is not a doubleSeries.", nameof(s));
       }
   
       for (int i = 0 ; i < parts.Length; i++)

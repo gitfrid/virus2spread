@@ -1,11 +1,10 @@
 ﻿<Complex name="Root" type="VirusSpreadLibrary.AppProperties.AppSettings, VirusSpreadLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
   <Properties>
-    <Complex name="Setting" />
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="1395" />
-        <Simple name="Y" value="16" />
+        <Simple name="X" value="691" />
+        <Simple name="Y" value="427" />
       </Properties>
     </Complex>
     <Complex name="Form_Config_WindowSize">
@@ -14,7 +13,7 @@
         <Simple name="Height" value="1010" />
       </Properties>
     </Complex>
-    <Simple name="AppVersion" value="1.0.0+a29d6b68e9dba09b6e052e2d3e6c570622139f55" />
+    <Simple name="AppVersion" value="1.0.0" />
     <Simple name="GridMaxX" value="100" />
     <Simple name="GridMaxY" value="100" />
     <Simple name="GridFormTimer" value="1" />
@@ -29,16 +28,9 @@
     <Simple name="VirusMoveRateFrom" value="1;1;1;1;1;1;1;1;1;1" />
     <Simple name="VirusMoveRateTo" value="2;2;2;2;2;2;2;2;2;2" />
     <Simple name="ConfigFilePath" value="C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.XML" />
-    <Simple name="XmlColorSelection" value="ARGBColor:0:0:0:0" />
-    <Complex name="ToolbarColor" id="5" />
-    <Simple name="XmlToolbarColor" value="NamedColor:Control" />
-    <Collection name="ColorList">
-      <Properties>
-        <Simple name="Capacity" value="4" />
-      </Properties>
-      <Items>
-        <Reference id="5" />
-      </Items>
-    </Collection>
+    <Simple name="XmlVirusColor" value="NamedColor:WhiteSmoke" />
+    <Simple name="XmlPersonHealthyColor" value="NamedColor:Blue" />
+    <Simple name="XmlPersonInfectedColor" value="NamedColor:DeepSkyBlue" />
+    <Simple name="XmlEmptyCellColor" value="NamedColor:Black" />
   </Properties>
 </Complex>

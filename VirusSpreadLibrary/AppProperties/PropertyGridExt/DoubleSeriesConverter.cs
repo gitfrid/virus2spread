@@ -31,10 +31,10 @@ public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo
 public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
 {
    
-    if (value is DoubleSeries tuple && destinationType == typeof(string) )
+    if (value is DoubleSeries doubleSeries && destinationType == typeof(string) )
     {
        // explode dynArray to string for property gird editing
-       return  string.Format("{0}", tuple.DoubleArray.ToString());
+       return  string.Format("{0}", doubleSeries.DoubleArray.ToString());
     }
     else
     {
