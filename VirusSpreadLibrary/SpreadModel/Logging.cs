@@ -7,10 +7,12 @@ namespace VirusSpreadLibrary.SpreadModel
     {
         public static Logger getinstance()
         {
+            string customTemplate = "{Timestamp:dd/MM/yy HH:mm:ss.fff}\t[{Level:u3}]\t{Message}{NewLine}{Exception}";
             return new LoggerConfiguration()
                              .MinimumLevel.Verbose()
                              .Enrich.FromLogContext()
-                             .WriteTo.Console()
+                             .WriteTo.Console(outputTemplate: customTemplate)
+                             .WriteTo.Console()                             
                              .CreateLogger();
         }
     }

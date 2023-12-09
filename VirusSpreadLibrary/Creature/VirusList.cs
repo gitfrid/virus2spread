@@ -11,12 +11,12 @@ public class VirusList
     {
         Viruses = new List<Virus>();
     }
-    public void SetInitialPopulation(long InitialVirusPopulation, Grid.Grid GridField)
+    public void SetInitialPopulation(long InitialVirusPopulation, Grid.Grid Grid)
     {
         Viruses = new List<Virus>();
         Random rnd = new();
-        int maxX = GridField.ReturnMaxX();
-        int maxY = GridField.ReturnMaxY();
+        int maxX = Grid.ReturnMaxX();
+        int maxY = Grid.ReturnMaxY();
         
         // to initialize population always move
         double tempVirusMoveActivityRnd = AppSettings.Config.VirusMoveActivityRnd;

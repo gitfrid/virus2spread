@@ -47,6 +47,7 @@ namespace Virus2spread
 
         private void StartSimulation_button1_Click_1(object sender, EventArgs e)
         {
+            modelSimulation.Initialize();
             Form? fc = Application.OpenForms["GridForm"];
             fc?.Close();
             GridForm myGridForm = new(modelSimulation, AppSettings.Config.GridMaxX, AppSettings.Config.GridMaxY);

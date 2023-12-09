@@ -7,13 +7,8 @@ namespace VirusSpreadLibrary.Creature;
 public class Virus
 {
     private readonly Random rnd = new ();
-    public int Age { get; set; }
-    public double VirusReproduceRateByAge { get; set; }
-    public double VirusBrokenRateByAge { get; set; }
-    public VirusState VirusState { get; set; }
-    public bool IsBroken { get; set; }
-    public MoveData VirMoveData { get; set; }
-    public CellPopulation GridCellPopulation { get; set; }
+ 
+    private readonly VirMoveDistanceProfile VirMoveProfile = new();
     
     public Virus()
     {
@@ -22,6 +17,14 @@ public class Virus
         VirMoveData.CreatureType = Enum.CreatureType.Virus;
         VirusState = new VirusState();
      }
+    public int Age { get; set; }
+    public double VirusReproduceRateByAge { get; set; }
+    public double VirusBrokenRateByAge { get; set; }
+    public VirusState VirusState { get; set; }
+    public bool IsBroken { get; set; }
+    public MoveData VirMoveData { get; set; }
+    public CellPopulation GridCellPopulation { get; set; }
+
     private bool DoMove()
     {
         return (AppSettings.Config.VirusMoveActivityRnd != 0) &&
@@ -37,9 +40,8 @@ public class Virus
     {
         //
     }
-    public void MoveToNewCoordinate(Grid.Grid GridField)
+    public void MoveToNewCoordinate(Grid.Grid Grid)
     {
-        VirMoveDistanceProfile VirMoveProfile = new();
 
         // get new random endpoint to move to
         // depending on VirMoveProfile settings and VirusMoveGlobal var 
@@ -57,7 +59,7 @@ public class Virus
         }
 
         // move to endpoint
-        GridCellPopulation = GridField.AddCreatureToCell(VirMoveData);
+        GridCellPopulation = Grid.AddCreatureToCell(VirMoveData);
 
         // save current endpoint as the new startpoint
         // to use in next iteration if VirusMoveGlobal is true

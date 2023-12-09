@@ -2,11 +2,16 @@
 using VirusSpreadLibrary.Enum;
 using VirusSpreadLibrary.AppProperties;
 
+
 namespace VirusSpreadLibrary.Grid;
 
-public class SetCellState
+public static class SetCellState
 {
-    public CellPopulation SetNewState(MoveData CreatureData, Grid GridField) 
+    private static GridCell cell = new();
+    private static ColorList colorList = new();
+    private static CellState cellState = new();
+
+    public static CellPopulation SetNewState(MoveData CreatureData, Grid Grid) 
     {
         
         // add, moving virus or person to the end grid coordiante
@@ -17,8 +22,8 @@ public class SetCellState
         // after it has moved to end coordinate
         int xStart = CreatureData.StartGidCoordinate.X;
         int yStart = CreatureData.StartGidCoordinate.Y;
-       
-        GridCell cell = GridField.GridField[xEnd, yEnd];
+        
+        cell = Grid.Cells[xEnd, yEnd];
 
         // exit if not moved
         if ((xStart == xEnd) & (yStart == yEnd))
@@ -29,8 +34,6 @@ public class SetCellState
         CreatureType creatureType = CreatureData.CreatureType;
         int numPersons = cell.Population.NumPersons;
         int numViruses = cell.Population.NumViruses;
-        ColorList colorList = new();
-        CellState cellState = new();
 
         if (creatureType == CreatureType.Person)   
         {
@@ -62,10 +65,10 @@ public class SetCellState
         // depending on cell state
         cell.Population.NumPersons = numPersons; 
         cell.Population.NumViruses = numViruses;
-        cell.PixelColor = colorList.GetCellColor(cellState, cell.Population);
+        cell.CellColor = colorList.GetCellColor(cellState, cell.Population);
 
         // delete virus or person from start grid coordinate
-        GridCell cellStart = GridField.GridField[xStart, yStart];
+        GridCell cellStart = Grid.Cells[xStart, yStart];
         int numPersonsStart = cellStart.Population.NumPersons;
         int numVirusesStart = cellStart.Population.NumViruses;
 
@@ -105,11 +108,9 @@ public class SetCellState
         // leave old start pixel color, if TrackMovment true          
         if ( AppSettings.Config.TrackMovment == false)
         {
-            cellStart.PixelColor = colorList.GetCellColor(cellState, cell.Population);
+            cellStart.CellColor = colorList.GetCellColor(cellState, cell.Population);
         }
-
         return cell.Population;
     }
-
 
 }

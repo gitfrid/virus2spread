@@ -1,15 +1,20 @@
 ﻿using VirusSpreadLibrary.Enum;
-using Microsoft.Maui.Graphics;
+
 
 namespace VirusSpreadLibrary.Grid;
 
 public class ColorTranslation
 {
-    public CellState cellState { get; set; }
-    public Microsoft.Maui.Graphics.Color cellColor { get; set; }
-    public ColorTranslation(CellState CellState, Microsoft.Maui.Graphics.Color CellColor)
+    public CellState CellState { get; set; }
+    public Microsoft.Maui.Graphics.Color CellColor { get; set; }
+    public ColorTranslation()
     {
-        cellState = CellState;
-        cellColor = CellColor;
+        CellState = new CellState();
+        CellColor = new Microsoft.Maui.Graphics.Color();
+    }
+    public ColorTranslation(CellState StateOfCell, Microsoft.Maui.Graphics.Color ColorOfCell)
+    {
+        CellState = StateOfCell;
+        CellColor = ColorOfCell;
     }
 }

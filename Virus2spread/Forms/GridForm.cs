@@ -45,7 +45,7 @@ namespace Virus2spread.Forms
 
         private void UpdateBenchmarkMessage()
         {
-            Text = $"virus2spread Iteration: {simulation.iteration.ToString()} [{SkglControl.Width}x{SkglControl.Height}] " +
+            Text = $"virus2spread Iteration: {simulation.Iteration} [{SkglControl.Width}x{SkglControl.Height}] " +
                 $"in {watch.Elapsed.TotalMilliseconds} ms " +
                 $"({1 / watch.Elapsed.TotalSeconds:N1} Hz)";
             watch.Restart();

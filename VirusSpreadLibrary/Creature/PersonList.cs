@@ -10,12 +10,12 @@ public class PersonList
     {
         Persons = new List<Person>();
     }
-    public void SetInitialPopulation(long InitialPersonPopulation, Grid.Grid GridField)
+    public void SetInitialPopulation(long InitialPersonPopulation, Grid.Grid Grid)
     {
         Persons = new List<Person>();
         Random rnd = new();
-        int maxX = GridField.ReturnMaxX();
-        int maxY = GridField.ReturnMaxY();
+        int maxX = Grid.ReturnMaxX();
+        int maxY = Grid.ReturnMaxY();
 
         // to initialize population always move
         double tempPersonMoveActivityRnd = AppSettings.Config.PersonMoveActivityRnd;

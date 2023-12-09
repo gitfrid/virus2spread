@@ -8,7 +8,7 @@ public class ColorList
 {
     private Microsoft.Maui.Graphics.Color cellColor = Colors.Black;
 
-    private List<ColorTranslation> colorList =
+    private readonly List<ColorTranslation> colorList =
     [
         new(CellState.Virus, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.VirusColor.ToArgb().ToString("X"))),
         new(CellState.PersonHealthy, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonHealthyColor.ToArgb().ToString("X"))),
@@ -20,9 +20,9 @@ public class ColorList
     
         foreach (ColorTranslation ColModel in colorList)
         {
-            if (ColModel.cellState == CellState)
+            if (ColModel.CellState == CellState)
             {
-                cellColor = ColModel.cellColor;
+                cellColor = ColModel.CellColor;
             }
 
             //// use diffrent color shades for population density

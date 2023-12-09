@@ -1,36 +1,33 @@
 ﻿using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.Enum;
 using Microsoft.Maui.Graphics;
-
 namespace VirusSpreadLibrary.Grid;
 
 public class Grid
 {
-    private int maxX { get; set; }
-    private int maxY { get; set; }
-    public ColorList ColorList { get; set; }
-    public GridCell[,] GridField { get; set; }
-
+    private int maxX;
+    private int maxY;
     public Grid()
     {
         ColorList = new ColorList();
-        GridField = new GridCell[,] { };
+        Cells = new GridCell[,] { };
     }
-
+    public GridCell[,] Cells { get; set; }
+    public ColorList ColorList { get; set; }
+    
     public void SetNewEmptyGrid(int MaxX, int MaxY)
     {
         maxX = MaxX;
         maxY = MaxY;
-        GridField = new GridCell[maxX, maxY];
+        Cells = new GridCell[maxX, maxY];
         CellPopulation Population = new ();
-
         Microsoft.Maui.Graphics.Color Color = ColorList.GetCellColor(CellState.EmptyCell, Population);
 
         for (int y = 0; y < maxY; y++)
         {
             for (int x = 0; x < maxX; x++)
             {
-                GridField[x, y] = new GridCell(Color, Population);
+                this.Cells[x, y] = new GridCell(Color, Population);
             }
         }
     }
@@ -38,8 +35,8 @@ public class Grid
     public CellPopulation AddCreatureToCell(MoveData MoveToData)
     {
         // move to new grid xy end coordinate
-        SetCellState setNewCellState = new ();
-        CellPopulation Population = setNewCellState.SetNewState(MoveToData, this);
+        //SetCellState setNewCellState = new ();
+        CellPopulation Population = SetCellState.SetNewState(MoveToData,this);
         return Population;
     }
 
