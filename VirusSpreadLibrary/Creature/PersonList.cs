@@ -1,4 +1,6 @@
 ﻿
+using VirusSpreadLibrary.AppProperties;
+
 namespace VirusSpreadLibrary.Creature;
 
 public class PersonList
@@ -15,18 +17,27 @@ public class PersonList
         int maxX = GridField.ReturnMaxX();
         int maxY = GridField.ReturnMaxY();
 
-        // create initial person list at random grid coordinates
+        // to initialize population always move
+        double tempPersonMoveActivityRnd = AppSettings.Config.PersonMoveActivityRnd;
+        double tempPersonMoveHomeActivityRnd = AppSettings.Config.PersonMoveHomeActivityRnd;
+        AppSettings.Config.PersonMoveActivityRnd = 1;
+        AppSettings.Config.PersonMoveHomeActivityRnd = 0;
 
+        // create initial person list at random grid coordinates
         for (int i = 0; i < InitialPersonPopulation; i++)
         {
             Person person = new() { };
-            // use as new startpoit - if PersonMoveGlobal is true
+            // random initial startpoit 
             person.PersMoveData.StartGidCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
 
-            // otherwise use always the home coordinate as same startpoit
+            // if PersonMoveGlobal is false always use the home coordinate as same startpoit
             person.PersMoveData.HomeGridCoordinate = person.PersMoveData.StartGidCoordinate;
             Persons.Add(person);
         }
+
+        // after initialize restore old MoveActivity values 
+        AppSettings.Config.PersonMoveActivityRnd = tempPersonMoveActivityRnd;
+        AppSettings.Config.PersonMoveHomeActivityRnd = tempPersonMoveHomeActivityRnd;
     }
 
 }

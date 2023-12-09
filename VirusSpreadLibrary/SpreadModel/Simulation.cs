@@ -18,6 +18,7 @@ public class Simulation
     public bool stopIteration ;
     public int MaxX { get; set; }
     public int MaxY { get; set; }
+    public int Iteration { get => iteration; }
 
     public Simulation()
     {

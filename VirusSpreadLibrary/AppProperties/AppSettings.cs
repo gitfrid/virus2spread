@@ -39,8 +39,9 @@ namespace VirusSpreadLibrary.AppProperties;
 public  class AppSettings
 {
 
-    private string dummy;
-    private string appVersion = Application.ProductVersion[..Application.ProductVersion.ToString().IndexOf('+')];
+
+    private string about = "";
+    private readonly string appVersion = Application.ProductVersion[..Application.ProductVersion.ToString().IndexOf('+')];
     private int gridMaxX = 100;
     private int gridMaxY = 100;
     private long initialPersonPopulation = 20;
@@ -69,10 +70,17 @@ public  class AppSettings
     private DoubleSeriesClass personMoveRate = new();
     private string personMoveRateFrom = "";
     private string personMoveRateTo = "";
+    private double personMoveActivityRnd = 1;
+    private double personMoveHomeActivityRnd = 1;
 
     private DoubleSeriesClass virusMoveRate = new();
     private string virusMoveRateFrom = "";
     private string virusMoveRateTo = "";
+    private double virusMoveActivityRnd = 1;
+    private double virusMoveHomeActivityRnd = 1;
+
+
+    private string? dummy;
 
     // setting helper for de/serializing the AppSettings
     // and to save and load from xml file
@@ -95,7 +103,7 @@ public  class AppSettings
         // AppSettings.Config.VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,2,2,2]);
     }
 
-    [ExcludeFromSerialization]  // -> XmlSerializer will not serialize the object
+    [ExcludeFromSerialization]
     [Browsable(false)]
     public Setting Setting
     {
@@ -138,10 +146,19 @@ public  class AppSettings
     }
 
     [CategoryAttribute("App Info"), ReadOnlyAttribute(true)]
+    [Description("Dedicated to a lighthouse in stormy seas \r\nMIT License")]
+    [ExcludeFromSerialization]  // -> XmlSerializer will not serialize the object
+    public string About
+    {
+        get => about;
+        set => about = value;
+    }
+
+    [CategoryAttribute("App Info"), ReadOnlyAttribute(true)]
     public string AppVersion
     {
         get => appVersion;
-        set => dummy = value;  // don't overrwrite with version from xml
+        set => dummy = value;  // don't overrwrite with value from xml
     }
 
     [CategoryAttribute("Grid Settings")]
@@ -195,6 +212,31 @@ public  class AppSettings
         set => personMoveGlobal = value;
     }
 
+    [CategoryAttribute("Person Settings")]
+    [Description("0 to 100 % \r\n100% = move average every Iteration (day) 50% = move averag every 2nd Iteration (day) 0% don’t move")]
+    public double PersonMoveActivityRnd
+    {
+        get => personMoveActivityRnd;
+        set 
+        {
+            if (value >= 0 && value <= 1)personMoveActivityRnd = value;
+            else personMoveActivityRnd = 1;
+        } 
+    }
+
+    [CategoryAttribute("Person Settings")]
+    [Description("0 to 100 % \r\n100% = move back home average every iteration (day) 50% = move back home averag evry 2nd iteration (day) 0% don’t move back home")]
+    public double PersonMoveHomeActivityRnd
+    {
+        get => personMoveHomeActivityRnd;
+        set
+        {
+            if (value >= 0 && value <= 1) personMoveHomeActivityRnd = value;
+            else personMoveHomeActivityRnd = 1;
+        }
+    }
+
+
     [CategoryAttribute("Virus Settings")]
     [Description("Start poulation for Viruses - long")]
     public long InitialVirusPopulation
@@ -209,6 +251,30 @@ public  class AppSettings
     {
         get => virusMoveGlobal;
         set => virusMoveGlobal = value;
+    }
+
+    [CategoryAttribute("Virus Settings")]
+    [Description("0 to 100 % \r\n100% = move average every Iteration (day) 50% = move averag every 2nd Iteration (day) 0% don’t move")]
+    public double VirusMoveActivityRnd
+    {
+        get => virusMoveActivityRnd;
+        set
+        {
+            if (value >= 0 && value <= 1) virusMoveActivityRnd = value;
+            else virusMoveActivityRnd = 1;
+        }
+    }
+
+    [CategoryAttribute("Virus Settings")]
+    [Description("0 to 100 % \r\n100% = move back home average every iteration (day) 50% = move back home averag evry 2nd iteration (day) 0% don’t move back home")]
+    public double VirusMoveHomeActivityRnd
+    {
+        get => virusMoveHomeActivityRnd;
+        set
+        {
+            if (value >= 0 && value <= 1) virusMoveHomeActivityRnd = value;
+            else virusMoveHomeActivityRnd = 1;
+        }
     }
 
     [CategoryAttribute("App Settings")]

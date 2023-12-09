@@ -8,6 +8,7 @@ namespace VirusSpreadLibrary.Creature;
 
 public class Person
 {
+    private Random rnd = new Random();
     public int Age { get; set; }
     public double PersonBirthRateByAge { get; set; }
     public double PersonDeathProbabilityByAge { get; set; }
@@ -16,13 +17,22 @@ public class Person
     public MoveData PersMoveData { get; set; }
     public CellPopulation GridCellPopulation { get; set; }
 
-
     public Person()
     {
         PersMoveData = new MoveData();
         PersMoveData.CreatureType = Enum.CreatureType.Person;
         GridCellPopulation = new CellPopulation();
         PersonState = new PersonState();
+    }
+    private bool DoMove()
+    {
+        return (AppSettings.Config.PersonMoveActivityRnd != 0) &&
+                (1 == rnd.Next(1, (int)(1 / AppSettings.Config.PersonMoveActivityRnd)));
+    }
+    private bool DoMoveHome()
+    {
+        return (AppSettings.Config.PersonMoveHomeActivityRnd != 0) &&
+                (1 == rnd.Next(1, (int)(1 / AppSettings.Config.PersonMoveHomeActivityRnd)));
     }
     public void ChildBirth()
     {
@@ -40,11 +50,15 @@ public class Person
         // depending on PersMoveProfile settings and PersonMoveGlobal var
         if (AppSettings.Config.PersonMoveGlobal)
         {
-            PersMoveData.EndGridCoordinate = PersMoveProfile.GetEndCoordinateToMove(PersMoveData.StartGidCoordinate);
+            if (DoMove()) 
+                PersMoveData.EndGridCoordinate = PersMoveProfile.GetEndCoordinateToMove(PersMoveData.StartGidCoordinate);
+            if(DoMoveHome())
+                PersMoveData.EndGridCoordinate = PersMoveProfile.GetEndCoordinateToMove(PersMoveData.HomeGridCoordinate);
         } 
         else 
         {
-            PersMoveData.EndGridCoordinate = PersMoveProfile.GetEndCoordinateToMove(PersMoveData.HomeGridCoordinate);
+            if (DoMoveHome()) 
+                PersMoveData.EndGridCoordinate = PersMoveProfile.GetEndCoordinateToMove(PersMoveData.HomeGridCoordinate);
         }
 
         // move to endpoint
@@ -62,4 +76,5 @@ public class Person
         GridCellPopulation = GridField.AddCreatureToCell(PersMoveData);
         return GridCellPopulation;
     }
+    
 }

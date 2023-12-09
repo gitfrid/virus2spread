@@ -1,5 +1,6 @@
 ﻿
 using System;
+using VirusSpreadLibrary.AppProperties;
 
 namespace VirusSpreadLibrary.Creature;
 
@@ -16,19 +17,28 @@ public class VirusList
         Random rnd = new();
         int maxX = GridField.ReturnMaxX();
         int maxY = GridField.ReturnMaxY();
+        
+        // to initialize population always move
+        double tempVirusMoveActivityRnd = AppSettings.Config.VirusMoveActivityRnd;
+        double tempVirusMoveHomeActivityRnd = AppSettings.Config.VirusMoveHomeActivityRnd;
+        AppSettings.Config.VirusMoveActivityRnd = 1;
+        AppSettings.Config.VirusMoveHomeActivityRnd = 0;
 
         // create initial virus list at random grid coordinates
         for (int i = 0; i < InitialVirusPopulation; i++)
         {
             Virus virus = new() { };
-            // use as new startpoit - if VirusMoveGlobal is true
+            // rand initial startpoit 
             virus.VirMoveData.StartGidCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
             Viruses.Add(virus);
 
-            // otherwise use always the home coordinate as same startpoit
+            // if VirusMoveGlobal is false always use the home coordinate as same startpoit
             virus.VirMoveData.HomeGridCoordinate = virus.VirMoveData.StartGidCoordinate;
             Viruses.Add(virus);
-
         }
+
+        // after initialize restore old MoveActivity values 
+        AppSettings.Config.VirusMoveActivityRnd = tempVirusMoveActivityRnd;
+        AppSettings.Config.VirusMoveHomeActivityRnd = tempVirusMoveHomeActivityRnd; ;
     }
 }

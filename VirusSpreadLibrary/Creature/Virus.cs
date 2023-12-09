@@ -6,6 +6,7 @@ namespace VirusSpreadLibrary.Creature;
 
 public class Virus
 {
+    private readonly Random rnd = new ();
     public int Age { get; set; }
     public double VirusReproduceRateByAge { get; set; }
     public double VirusBrokenRateByAge { get; set; }
@@ -13,7 +14,7 @@ public class Virus
     public bool IsBroken { get; set; }
     public MoveData VirMoveData { get; set; }
     public CellPopulation GridCellPopulation { get; set; }
-
+    
     public Virus()
     {
         VirMoveData = new MoveData();
@@ -21,6 +22,17 @@ public class Virus
         VirMoveData.CreatureType = Enum.CreatureType.Virus;
         VirusState = new VirusState();
      }
+    private bool DoMove()
+    {
+        return (AppSettings.Config.VirusMoveActivityRnd != 0) &&
+                (1 == rnd.Next(1, (int)(1 / AppSettings.Config.VirusMoveActivityRnd)));
+    }
+    private bool DoMoveHome()
+    {
+        return (AppSettings.Config.VirusMoveHomeActivityRnd != 0) &&
+                (1 == rnd.Next(1, (int)(1 / AppSettings.Config.VirusMoveHomeActivityRnd)));
+    }
+
     public void Reproduce()
     {
         //
@@ -33,11 +45,15 @@ public class Virus
         // depending on VirMoveProfile settings and VirusMoveGlobal var 
         if (AppSettings.Config.VirusMoveGlobal)
         {
-            VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.StartGidCoordinate);
+            if (DoMove()) 
+                VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.StartGidCoordinate);
+            if (DoMoveHome())
+                VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.HomeGridCoordinate);
         }
         else
         {
-            VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.HomeGridCoordinate);
+            if (DoMoveHome())
+                VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.HomeGridCoordinate);
         }
 
         // move to endpoint
