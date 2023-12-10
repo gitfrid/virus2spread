@@ -70,14 +70,14 @@ public  class AppSettings
     private DoubleSeriesClass personMoveRate = new();
     private string personMoveRateFrom = "";
     private string personMoveRateTo = "";
-    private double personMoveActivityRnd = 1;
-    private double personMoveHomeActivityRnd = 1;
+    private int personMoveActivityRnd = 1;
+    private int personMoveHomeActivityRnd = 2;
 
     private DoubleSeriesClass virusMoveRate = new();
     private string virusMoveRateFrom = "";
     private string virusMoveRateTo = "";
     private double virusMoveActivityRnd = 1;
-    private double virusMoveHomeActivityRnd = 1;
+    private double virusMoveHomeActivityRnd = 0;
 
 
     private string? dummy;
@@ -213,29 +213,29 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Person Settings")]
-    [Description("0 to 100 % \r\n100% = move average every Iteration (day) 50% = move averag every 2nd Iteration (day) 0% don’t move")]
-    public double PersonMoveActivityRnd
+    [Description("integer 0 to X % \r\n0 = don't move, 1 = move every iteration, 2 = move random average every 2nd iteration, X = move back home random average every Xd iteration")]
+    public int PersonMoveActivityRnd
     {
         get => personMoveActivityRnd;
         set 
         {
-            if (value >= 0 && value <= 1)personMoveActivityRnd = value;
+            if (value >= 0 )personMoveActivityRnd = value;
             else personMoveActivityRnd = 1;
         } 
     }
 
     [CategoryAttribute("Person Settings")]
-    [Description("0 to 100 % \r\n100% = move back home average every iteration (day) 50% = move back home averag evry 2nd iteration (day) 0% don’t move back home")]
-    public double PersonMoveHomeActivityRnd
+    [Description("integer 0 to X % \r\n0 = don't move back home, 1 = move back home every iteration, 2 = move back home random average every 2nd iteration, X = move back home random average every Xd iteration")]
+    public int PersonMoveHomeActivityRnd
     {
         get => personMoveHomeActivityRnd;
         set
         {
-            if (value >= 0 && value <= 1) personMoveHomeActivityRnd = value;
+            //(value >= 0 && value <= 1) -> use for doubles between 0-1
+            if (value >= 0 ) personMoveHomeActivityRnd = value; 
             else personMoveHomeActivityRnd = 1;
         }
     }
-
 
     [CategoryAttribute("Virus Settings")]
     [Description("Start poulation for Viruses - long")]
@@ -254,25 +254,25 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Virus Settings")]
-    [Description("0 to 100 % \r\n100% = move average every Iteration (day) 50% = move averag every 2nd Iteration (day) 0% don’t move")]
+    [Description("integer 0 to X % \r\n0 = don't move, 1 = move every iteration, 2 = move random average every 2nd iteration, X = move back home random average every Xd iteration")]
     public double VirusMoveActivityRnd
     {
         get => virusMoveActivityRnd;
         set
         {
-            if (value >= 0 && value <= 1) virusMoveActivityRnd = value;
+            if (value >= 0 ) virusMoveActivityRnd = value;
             else virusMoveActivityRnd = 1;
         }
     }
 
     [CategoryAttribute("Virus Settings")]
-    [Description("0 to 100 % \r\n100% = move back home average every iteration (day) 50% = move back home averag evry 2nd iteration (day) 0% don’t move back home")]
+    [Description("integer 0 to X % \r\n0 = don't move back home, 1 = move back home every iteration, 2 = move back home random average every 2nd iteration, X = move back home random average every Xd iteration")]
     public double VirusMoveHomeActivityRnd
     {
         get => virusMoveHomeActivityRnd;
         set
         {
-            if (value >= 0 && value <= 1) virusMoveHomeActivityRnd = value;
+            if (value >= 0 ) virusMoveHomeActivityRnd = value;
             else virusMoveHomeActivityRnd = 1;
         }
     }

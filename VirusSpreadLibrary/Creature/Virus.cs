@@ -8,7 +8,7 @@ public class Virus
 {
     private readonly Random rnd = new ();
  
-    private readonly VirMoveDistanceProfile VirMoveProfile = new();
+    private readonly VirMoveDistanceProfile virMoveProfile = new();
     
     public Virus()
     {
@@ -25,15 +25,15 @@ public class Virus
     public MoveData VirMoveData { get; set; }
     public CellPopulation GridCellPopulation { get; set; }
 
-    private bool DoMove()
+    public bool DoMove()
     {
         return (AppSettings.Config.VirusMoveActivityRnd != 0) &&
-                (1 == rnd.Next(1, (int)(1 / AppSettings.Config.VirusMoveActivityRnd)));
+                (1 == rnd.Next(1, 1+(int)(AppSettings.Config.VirusMoveActivityRnd)));
     }
-    private bool DoMoveHome()
+    public bool DoMoveHome()
     {
         return (AppSettings.Config.VirusMoveHomeActivityRnd != 0) &&
-                (1 == rnd.Next(1, (int)(1 / AppSettings.Config.VirusMoveHomeActivityRnd)));
+                (1 == rnd.Next(1, 1+(int)(AppSettings.Config.VirusMoveHomeActivityRnd)));
     }
 
     public void Reproduce()
@@ -42,28 +42,32 @@ public class Virus
     }
     public void MoveToNewCoordinate(Grid.Grid Grid)
     {
-
         // get new random endpoint to move to
-        // depending on VirMoveProfile settings and VirusMoveGlobal var 
+        // depending on the spcified range in settings of persMoveProfile and PersonMoveGlobal var
         if (AppSettings.Config.VirusMoveGlobal)
         {
-            if (DoMove()) 
-                VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.StartGidCoordinate);
-            if (DoMoveHome())
-                VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.HomeGridCoordinate);
+            // calculate next move from EndCoordinate of the last iteration, in the spcified range - moves over whole grid
+            VirMoveData.EndGridCoordinate = virMoveProfile.GetEndCoordinateToMove(VirMoveData.StartGidCoordinate);
         }
         else
         {
-            if (DoMoveHome())
-                VirMoveData.EndGridCoordinate = VirMoveProfile.GetEndCoordinateToMove(VirMoveData.HomeGridCoordinate);
+            // calculate next move always from the Home Coordinate in the specified range - moves only within the range
+            VirMoveData.EndGridCoordinate = virMoveProfile.GetEndCoordinateToMove(VirMoveData.HomeGridCoordinate);
         }
 
-        // move to endpoint
-        GridCellPopulation = Grid.AddCreatureToCell(VirMoveData);
+        // do move to endpoint
+        Grid.AddCreatureToCell(VirMoveData);
 
         // save current endpoint as the new startpoint
         // to use in next iteration if VirusMoveGlobal is true
-        VirMoveData.StartGidCoordinate = VirMoveData.EndGridCoordinate;      
+        VirMoveData.StartGidCoordinate = VirMoveData.EndGridCoordinate;
+    }
+    public void MoveToHomeCoordinate(Grid.Grid Grid)
+    {
+        VirMoveData.EndGridCoordinate = VirMoveData.HomeGridCoordinate;
+        Grid.AddCreatureToCell(VirMoveData);
+        // save current endpoint as the new startpoint
+        VirMoveData.StartGidCoordinate = VirMoveData.EndGridCoordinate;
     }
 
 }

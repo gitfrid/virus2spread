@@ -18,8 +18,8 @@ public class PersonList
         int maxY = Grid.ReturnMaxY();
 
         // to initialize population always move
-        double tempPersonMoveActivityRnd = AppSettings.Config.PersonMoveActivityRnd;
-        double tempPersonMoveHomeActivityRnd = AppSettings.Config.PersonMoveHomeActivityRnd;
+        int tempPersonMoveActivityRnd = AppSettings.Config.PersonMoveActivityRnd;
+        int tempPersonMoveHomeActivityRnd = AppSettings.Config.PersonMoveHomeActivityRnd;
         AppSettings.Config.PersonMoveActivityRnd = 1;
         AppSettings.Config.PersonMoveHomeActivityRnd = 0;
 

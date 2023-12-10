@@ -8,10 +8,10 @@ namespace VirusSpreadLibrary.Grid;
 public static class SetCellState
 {
     private static GridCell cell = new();
-    private static ColorList colorList = new();
+    private readonly static ColorList colorList = new();
     private static CellState cellState = new();
 
-    public static CellPopulation SetNewState(MoveData CreatureData, Grid Grid) 
+    public static void SetNewState(MoveData CreatureData, Grid Grid) 
     {
         
         // add, moving virus or person to the end grid coordiante
@@ -28,7 +28,7 @@ public static class SetCellState
         // exit if not moved
         if ((xStart == xEnd) & (yStart == yEnd))
         {
-            return cell.Population;
+           return;
         }
 
         CreatureType creatureType = CreatureData.CreatureType;
@@ -105,12 +105,11 @@ public static class SetCellState
         cellStart.Population.NumPersons = numPersonsStart;
         cellStart.Population.NumViruses = numVirusesStart;       
 
-        // leave old start pixel color, if TrackMovment true          
+        // leave old start cel color, if TrackMovment true          
         if ( AppSettings.Config.TrackMovment == false)
         {
             cellStart.CellColor = colorList.GetCellColor(cellState, cell.Population);
         }
-        return cell.Population;
     }
 
 }

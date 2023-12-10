@@ -32,12 +32,10 @@ public class Grid
         }
     }
     
-    public CellPopulation AddCreatureToCell(MoveData MoveToData)
+    public void AddCreatureToCell(MoveData MoveToData)
     {
         // move to new grid xy end coordinate
-        //SetCellState setNewCellState = new ();
-        CellPopulation Population = SetCellState.SetNewState(MoveToData,this);
-        return Population;
+        SetCellState.SetNewState(MoveToData,this);
     }
 
     public int ReturnMaxX()

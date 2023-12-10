@@ -52,13 +52,34 @@ public class Simulation
 
         foreach (Person person in personList.Persons)
         {
-            person.MoveToNewCoordinate(grid);
+            if (person.DoMove())
+            {
+                if (person.DoMoveHome())
+                {
+                    person.MoveToHomeCoordinate(grid);
+                }
+                else 
+                {
+                    person.MoveToNewCoordinate(grid);
+                }                
+            }                
         };
 
         // Parallel.ForEach(VirusList.Viruses, virus =>}); -> takes longer
         foreach (Virus virus in virusList.Viruses)
         {
-            virus.MoveToNewCoordinate(grid);
+            if (virus.DoMove())
+            {
+                if (virus.DoMoveHome())
+                {
+                    virus.MoveToHomeCoordinate(grid);
+                }
+                else
+                {
+                    virus.MoveToNewCoordinate(grid);
+                }
+            }
+
         };
     }
 

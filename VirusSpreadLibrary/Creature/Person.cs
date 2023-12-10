@@ -9,7 +9,7 @@ public class Person
 {
     private readonly Random rnd = new ();
     
-    private readonly PersMoveDistanceProfile PersMoveProfile = new();   
+    private readonly PersMoveDistanceProfile persMoveProfile = new();   
     public Person()
     {
         PersMoveData = new()
@@ -27,15 +27,15 @@ public class Person
     public MoveData PersMoveData { get; set; }
     public CellPopulation GridCellPopulation { get; set; }
 
-    private bool DoMove()
+    public bool DoMove()
     {
         return (AppSettings.Config.PersonMoveActivityRnd != 0) &&
-                (1 == rnd.Next(1, (int)(1 / AppSettings.Config.PersonMoveActivityRnd)));
+                (1 == rnd.Next(1, 1+(int)(AppSettings.Config.PersonMoveActivityRnd)));
     }
-    private bool DoMoveHome()
+    public bool DoMoveHome()
     {
         return (AppSettings.Config.PersonMoveHomeActivityRnd != 0) &&
-                (1 == rnd.Next(1, (int)(1 / AppSettings.Config.PersonMoveHomeActivityRnd)));
+                (1 == rnd.Next(1, 1+(int)(AppSettings.Config.PersonMoveHomeActivityRnd)));
     }
     public void ChildBirth()
     {
@@ -45,35 +45,34 @@ public class Person
     {
         //
     }
-    public CellPopulation MoveToNewCoordinate(Grid.Grid Grid)
+    public void MoveToNewCoordinate(Grid.Grid Grid)
     {
         // get new random endpoint to move to
-        // depending on PersMoveProfile settings and PersonMoveGlobal var
+        // depending on the spcified range in settings of persMoveProfile and PersonMoveGlobal var
         if (AppSettings.Config.PersonMoveGlobal)
-        {
-            if (DoMove())          
-                PersMoveData.EndGridCoordinate = PersMoveProfile.GetEndCoordinateToMove(PersMoveData.StartGidCoordinate);
-            if(DoMoveHome())
-                PersMoveData.EndGridCoordinate = PersMoveProfile.GetEndCoordinateToMove(PersMoveData.HomeGridCoordinate);
+        {   
+            // calculate next move from EndCoordinate of the last iteration, in the spcified range - moves over whole grid
+            PersMoveData.EndGridCoordinate = persMoveProfile.GetEndCoordinateToMove(PersMoveData.StartGidCoordinate);
         } 
-        else 
-        {
-            if (DoMoveHome()) 
-                PersMoveData.EndGridCoordinate = PersMoveProfile.GetEndCoordinateToMove(PersMoveData.HomeGridCoordinate);
+        else
+        {   
+            // calculate next move always from the Home Coordinate in the specified range - moves only within the range
+            PersMoveData.EndGridCoordinate = persMoveProfile.GetEndCoordinateToMove(PersMoveData.HomeGridCoordinate);
         }
-        // move to endpoint
-        GridCellPopulation = Grid.AddCreatureToCell(PersMoveData);
+
+        // do move to endpoint
+        Grid.AddCreatureToCell(PersMoveData);
+        
         // save current endpoint as the new startpoint
         // to use in next iteration if VirusMoveGlobal is true
         PersMoveData.StartGidCoordinate = PersMoveData.EndGridCoordinate;
-
-        return GridCellPopulation;
     }
-    public CellPopulation MoveToHomeCoordinate(Grid.Grid Grid)
+    public void MoveToHomeCoordinate(Grid.Grid Grid)
     {
         PersMoveData.EndGridCoordinate = PersMoveData.HomeGridCoordinate;
-        GridCellPopulation = Grid.AddCreatureToCell(PersMoveData);
-        return GridCellPopulation;
+        Grid.AddCreatureToCell(PersMoveData);
+        // save current endpoint as the new startpoint
+        PersMoveData.StartGidCoordinate = PersMoveData.EndGridCoordinate;
     }
     
 }
