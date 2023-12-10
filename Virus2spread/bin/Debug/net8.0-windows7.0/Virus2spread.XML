@@ -3,29 +3,30 @@
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="1019" />
-        <Simple name="Y" value="193" />
+        <Simple name="X" value="1266" />
+        <Simple name="Y" value="166" />
       </Properties>
     </Complex>
     <Complex name="Form_Config_WindowSize">
       <Properties>
         <Simple name="Width" value="2014" />
-        <Simple name="Height" value="1566" />
+        <Simple name="Height" value="1633" />
       </Properties>
     </Complex>
     <Simple name="AppVersion" value="1.0.0" />
-    <Simple name="GridMaxX" value="800" />
-    <Simple name="GridMaxY" value="400" />
+    <Simple name="GridMaxX" value="600" />
+    <Simple name="GridMaxY" value="200" />
     <Simple name="GridFormTimer" value="1" />
-    <Simple name="TrackMovment" value="False" />
-    <Simple name="InitialPersonPopulation" value="10000" />
-    <Simple name="PersonMoveGlobal" value="False" />
+    <Simple name="TrackMovment" value="True" />
+    <Simple name="PopulationDensityColoring" value="True" />
+    <Simple name="InitialPersonPopulation" value="5000" />
+    <Simple name="PersonMoveGlobal" value="True" />
     <Simple name="PersonMoveActivityRnd" value="1" />
-    <Simple name="PersonMoveHomeActivityRnd" value="1" />
-    <Simple name="InitialVirusPopulation" value="10000" />
-    <Simple name="VirusMoveGlobal" value="False" />
+    <Simple name="PersonMoveHomeActivityRnd" value="2" />
+    <Simple name="InitialVirusPopulation" value="5000" />
+    <Simple name="VirusMoveGlobal" value="True" />
     <Simple name="VirusMoveActivityRnd" value="1" />
-    <Simple name="VirusMoveHomeActivityRnd" value="1" />
+    <Simple name="VirusMoveHomeActivityRnd" value="0" />
     <Simple name="MaxIterations" value="1000" />
     <Simple name="PersonMoveRateFrom" value="1;1;1;1;1;1;1;1;1;1" />
     <Simple name="PersonMoveRateTo" value="1;1;1;1;1;1;1;10;10;100" />

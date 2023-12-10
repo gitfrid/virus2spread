@@ -1,6 +1,7 @@
 ﻿using VirusSpreadLibrary.Enum;
 using Microsoft.Maui.Graphics;
 using VirusSpreadLibrary.AppProperties;
+using Microsoft.Maui.Graphics.Skia;
 
 namespace VirusSpreadLibrary.Grid;
 
@@ -22,62 +23,72 @@ public class ColorList
         {
             if (ColModel.CellState == CellState)
             {
-                cellColor = ColModel.CellColor;
+                cellColor = ColModel.CellColor;    
             }
-
-            //// use diffrent color shades for population density
-            //if ( CellState==CellState.PersonInfected | CellState == CellState.PersonHealthy | CellState == CellState.Virus)
-            //{
-            //    if (Population.NumPersons > 0) 
-            //    {
-                    
-            //        Lighten(cellColor,(1/10)); 
-            //    }
-            //    else if (Population.NumViruses > 0)
-            //    {
-            //        Lighten(cellColor, (1/Population.NumViruses));
-            //    }                    
-            //}
-
         }
+
+        if (AppSettings.Config.PopulationDensityColoring) 
+        {
+            // use diffrent color shades for population density
+            if (CellState == CellState.PersonInfected | CellState == CellState.PersonHealthy | CellState == CellState.Virus)
+                {
+                    if (Population.NumPersons > 1)
+                    {
+                        cellColor = Lighten(cellColor, (double)1 / (double)Population.NumPersons);
+                    }
+                    else if (Population.NumViruses > 1)
+                    {
+                        cellColor = Lighten(cellColor, ((double)1 / (double)Population.NumViruses));
+                    }
+                }
+        }        
         return cellColor;
     }
 
-    //public static Color Lighten(Color origColor, int percent = 80)
-    //{
+    public static Microsoft.Maui.Graphics.Color Lighten(Microsoft.Maui.Graphics.Color origColor, double percent)
+    {
 
-    //    Color rgbCol = rgbColToRgb(origColor);
+        var newColor = origColor.WithLuminosity(origColor.GetLuminosity()*(float)(percent));
+        return newColor;
 
-    //    // get remainders
-    //    int rr = 255 - rgbCol.R;
-    //    int gr = 255 - rgbCol.G;
-    //    int br = 255 - rgbCol.B;
+        //origColor.AddLuminosity((float)percent*(float)0.6);
 
-    //    // add a percentage of the remainder, plus original value
-    //    int r = System.Convert.ToInt32(percent / (double)100 * rr) + rgbCol.R;
-    //    int g = System.Convert.ToInt32(percent / (double)100 * gr) + rgbCol.G;
-    //    int b = System.Convert.ToInt32(percent / (double)100 * br) + rgbCol.B;
+        //System.Drawing.Color rgbCol = MauiToSystemDrawingColor(origColor);
 
-    //    return ToImageSharpColor(System.Drawing.Color.FromArgb(r, g, b));
-    //}
+        //// get remainders
+        //int rr = 255 - rgbCol.R;
+        //int gr = 255 - rgbCol.G;
+        //int br = 255 - rgbCol.B;
 
-    //public static Color Darken(Color origColor, int percent = 80)
-    //{
-    //    System.Drawing.Color rgbCol = ToSystemDrawingColor(origColor);
+        //// add a percentage of the remainder, plus original value
+        //int r = System.Convert.ToInt32(percent * rr) + rgbCol.R;
+        //int g = System.Convert.ToInt32(percent * gr) + rgbCol.G;
+        //int b = System.Convert.ToInt32(percent * br) + rgbCol.B;
 
-    //    // subtract the percentage of the original value from the original value
-    //    int r = rgbCol.R - System.Convert.ToInt32(percent / (double)100 * rgbCol.R);
-    //    int g = rgbCol.G - System.Convert.ToInt32(percent / (double)100 * rgbCol.G);
-    //    int b = rgbCol.B - System.Convert.ToInt32(percent / (double)100 * rgbCol.B);
+        //return Microsoft.Maui.Graphics.Color.FromRgb(r, g, b);
+    }
 
-    //    return ToImageSharpColor(System.Drawing.Color.FromArgb(r, g, b));
-    //}
+    public static Microsoft.Maui.Graphics.Color Darken(Microsoft.Maui.Graphics.Color origColor, double percent )
+    {
+        System.Drawing.Color rgbCol = MauiToSystemDrawingColor(origColor);
 
-    //public static System.Drawing.Color MauiToSystemDrawingColor(this Color c)
-    //{
-    //    Argb32 converted = c.ToPixel<Argb32>();
-    //    return System.Drawing.Color.FromArgb((int)converted.Argb);
-    //}
+        // subtract the percentage of the original value from the original value
+        int r = rgbCol.R - System.Convert.ToInt32(percent * rgbCol.R);
+        int g = rgbCol.G - System.Convert.ToInt32(percent * rgbCol.G);
+        int b = rgbCol.B - System.Convert.ToInt32(percent * rgbCol.B);
+
+        return Microsoft.Maui.Graphics.Color.FromRgb(r, g, b);
+    }
+
+    public static System.Drawing.Color MauiToSystemDrawingColor(Microsoft.Maui.Graphics.Color Col)
+    {
+        return System.Drawing.Color.FromArgb(Col.ToArgb());
+    }
+    public static Microsoft.Maui.Graphics.Color SystemDrawingColorToMaui(System.Drawing.Color Col)
+    {
+        return Microsoft.Maui.Graphics.Color.FromInt(Col.ToArgb());
+    }
+
 
 }
 

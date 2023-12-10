@@ -1,3 +1,7 @@
+maui color
+https://albi005.github.io/MaterialColorUtilities/
+https://www.nuget.org/packages/MaterialColorUtilities.Maui/0.1.0
+
 ____________________________
 
 App Settings Property Grid Demo

@@ -53,6 +53,7 @@ public  class AppSettings
     private bool personMoveGlobal = true;
     private int gridFormTimer = 1;
     private bool trackMovment = false;
+    private bool populationDensityColoring = false;
     private bool showHelperSettings = false;
 
     private Color virusColor = Color.WhiteSmoke;
@@ -195,6 +196,13 @@ public  class AppSettings
         set => trackMovment = value;
     }
 
+    [CategoryAttribute("Grid Settings")]
+    [Description("default false: slows down iterations. True -> shading cell color depending on population count. Higher population numbers are shown in darker color")]
+    public bool PopulationDensityColoring
+    {
+        get => populationDensityColoring;
+        set => populationDensityColoring = value;
+    }
 
     [CategoryAttribute("Person Settings")]
     [Description("Start poulation for Persons - long")]
