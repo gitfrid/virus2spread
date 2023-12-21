@@ -30,7 +30,6 @@ public class VirusList
             Virus virus = new() { };
             // rand initial startpoit 
             virus.VirMoveData.StartGidCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
-            Viruses.Add(virus);
 
             // if VirusMoveGlobal is false always use the home coordinate as same startpoit
             virus.VirMoveData.HomeGridCoordinate = virus.VirMoveData.StartGidCoordinate;

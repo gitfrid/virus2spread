@@ -1,6 +1,7 @@
 ﻿using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.Enum;
 using Microsoft.Maui.Graphics;
+using VirusSpreadLibrary.SpreadModel;
 namespace VirusSpreadLibrary.Grid;
 
 public class Grid
@@ -20,23 +21,22 @@ public class Grid
         maxX = MaxX;
         maxY = MaxY;
         Cells = new GridCell[maxX, maxY];
-        CellPopulation Population = new ();
-        Microsoft.Maui.Graphics.Color Color = ColorList.GetCellColor(CellState.EmptyCell, Population);
+        Microsoft.Maui.Graphics.Color Color = ColorList.GetCellColor(CellState.EmptyCell, 0,0);
 
         for (int y = 0; y < maxY; y++)
         {
             for (int x = 0; x < maxX; x++)
             {
-                this.Cells[x, y] = new GridCell(Color, Population);
+                this.Cells[x, y] = new GridCell(Color, 0,0);
             }
         }
     }
     
-    public void AddCreatureToCell(MoveData MoveToData)
-    {
-        // move to new grid xy end coordinate
-        SetCellState.SetNewState(MoveToData,this);
-    }
+    //public CellPopulation AddCreatureToCell(MoveData MoveToData)
+    //{
+    //    // move to new grid xy end coordinate
+    //    SetGridCellState.SetNewState(MoveToData,this);
+    //}
 
     public int ReturnMaxX()
     {

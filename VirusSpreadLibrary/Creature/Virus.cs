@@ -1,6 +1,5 @@
 ﻿using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.Creature.Rates;
-using VirusSpreadLibrary.Grid;
 
 namespace VirusSpreadLibrary.Creature;
 
@@ -13,7 +12,6 @@ public class Virus
     public Virus()
     {
         VirMoveData = new MoveData();
-        GridCellPopulation = new CellPopulation();
         VirMoveData.CreatureType = Enum.CreatureType.Virus;
         VirusState = new VirusState();
      }
@@ -23,7 +21,6 @@ public class Virus
     public VirusState VirusState { get; set; }
     public bool IsBroken { get; set; }
     public MoveData VirMoveData { get; set; }
-    public CellPopulation GridCellPopulation { get; set; }
 
     public bool DoMove()
     {
@@ -40,6 +37,7 @@ public class Virus
     {
         //
     }
+
     public void MoveToNewCoordinate(Grid.Grid Grid)
     {
         // get new random endpoint to move to
@@ -56,7 +54,8 @@ public class Virus
         }
 
         // do move to endpoint
-        Grid.AddCreatureToCell(VirMoveData);
+        SpreadModel.SetGridCellState.VirusMoveState(this, Grid);
+
 
         // save current endpoint as the new startpoint
         // to use in next iteration if VirusMoveGlobal is true
@@ -65,7 +64,9 @@ public class Virus
     public void MoveToHomeCoordinate(Grid.Grid Grid)
     {
         VirMoveData.EndGridCoordinate = VirMoveData.HomeGridCoordinate;
-        Grid.AddCreatureToCell(VirMoveData);
+        // do move to endpoint
+        SpreadModel.SetGridCellState.VirusMoveState(this, Grid);
+
         // save current endpoint as the new startpoint
         VirMoveData.StartGidCoordinate = VirMoveData.EndGridCoordinate;
     }

@@ -56,14 +56,20 @@ public  class AppSettings
     private bool populationDensityColoring = false;
     private bool showHelperSettings = false;
 
+
     private Color virusColor = Color.WhiteSmoke;
     private string xmlVirusColor = "WhiteSmoke";
-    private Color  personHealthyColor = Color.Blue;
-    private string xmlPersonHealthyColor = "Blue";
-    private Color personInfectedColor = Color.DeepSkyBlue;
-    private string xmlPersonInfectedColor = "DeepSkyBlue";
-    private Color emptyCellColor = Color.Black;
-    private string xmlEmptyCellColor = "Black";
+    private Color personsHealthyOrRecoverdColor = Color.Blue;
+    private string xmlPersonsHealthyOrRecoverdColor = "Blue";
+    private Color personsInfectedColor = Color.DeepSkyBlue;
+    private string xmlPersonsInfectedColor = "DeepSkyBlue";
+    private Color emptyCellColor = Color.White;
+    private string xmlEmptyCellColor = "White";
+    private Color personsInfectiousColor = Color.Violet;
+    private string xmlPersonsInfectiousColor = "Violet";
+    private Color personsRecoverdImmuneNotInfectiousColor = Color.Plum;
+    private string xmlPersonsRecoverdImmuneNotInfectiousColor = "Plum";
+
 
     private String configFilePath = string.Concat(Path.GetDirectoryName(Application.ExecutablePath),
                                     "\\", Path.GetFileNameWithoutExtension(Application.ExecutablePath), ".XML");
@@ -73,6 +79,10 @@ public  class AppSettings
     private string personMoveRateTo = "";
     private int personMoveActivityRnd = 1;
     private int personMoveHomeActivityRnd = 2;
+    private int personLatencyPeriod = 2;
+    private int personInfectiousPeriod = 9;
+    private int personReinfectionImmunityPeriod = 155;
+    private int personReinfectionRate = 11;
 
     private DoubleSeriesClass virusMoveRate = new();
     private string virusMoveRateFrom = "";
@@ -245,6 +255,38 @@ public  class AppSettings
         }
     }
 
+    [CategoryAttribute("Person Settings")]
+    [Description("Period from infection until a person is contagious.\r\nDefault 2 days (iterations)")]
+    public int PersonLatencyPeriod
+    {
+        get => personLatencyPeriod;
+        set => personLatencyPeriod = value;
+    }
+
+    [CategoryAttribute("Person Settings")]
+    [Description("Period during which a person is infectious.\r\nDefault 9 days (iterations)")]
+    public int PersonInfectiousPeriod
+    {
+        get => personInfectiousPeriod;
+        set => personInfectiousPeriod = value;
+    }
+
+    [CategoryAttribute("Person Settings")]
+    [Description("Period during which a person is immune after after the recovery. \r\nDefault  5 Month = 155 day (Iterations)")]
+    public int PersonReinfectionImmunityPeriod
+    {
+        get => personReinfectionImmunityPeriod;
+        set => personReinfectionImmunityPeriod = value;
+    }
+
+    [CategoryAttribute("Person Settings")]
+    [Description("Percentage of reinfections after the immunity phase following an illness \r\nDefault = 11 %")]
+    public int PersonReinfectionRate
+    {
+        get => personReinfectionRate;
+        set => personReinfectionRate = value;
+    }
+    
     [CategoryAttribute("Virus Settings")]
     [Description("Start poulation for Viruses - long")]
     public long InitialVirusPopulation
@@ -446,32 +488,32 @@ public  class AppSettings
     [CategoryAttribute("Color Settings")]
     [DescriptionAttribute("Default: Blue")]
     [ExcludeFromSerialization]
-    public Color PersonHealthyColor
+    public Color PersonsHealthyOrRecoverdColor
     {
         get
         {
-            return (Color)personHealthyColor;
+            return (Color)personsHealthyOrRecoverdColor;
         }
         set
         {
-            personHealthyColor = value;
+            personsHealthyOrRecoverdColor = value;
         }
     }
 
     [CategoryAttribute("Color Settings")]
     [Browsable(false)]
-    [XmlElement("PersonHealthyColor")]
-    public string XmlPersonHealthyColor
+    [XmlElement("PersonsHealthyOrRecoverdColor")]
+    public string XmlPersonsHealthyOrRecoverdColor
     {
         get
         {
-            xmlPersonHealthyColor = setting.ToXmlColor(personHealthyColor);
-            return xmlPersonHealthyColor;
+            xmlPersonsHealthyOrRecoverdColor = setting.ToXmlColor(personsHealthyOrRecoverdColor);
+            return xmlPersonsHealthyOrRecoverdColor;
         }
         set
         {
-            xmlPersonHealthyColor = value;
-            personHealthyColor = setting.FromXmlColor(value);
+            xmlPersonsHealthyOrRecoverdColor = value;
+            personsHealthyOrRecoverdColor = setting.FromXmlColor(value);
         }
     }
 
@@ -479,38 +521,105 @@ public  class AppSettings
     [CategoryAttribute("Color Settings")]
     [DescriptionAttribute("Default: DeepSkyBlue")]
     [ExcludeFromSerialization]
-    public Color PersonInfected
+    public Color PersonInfectedColor
     {
         get
         {
-            return (Color)personInfectedColor;
+            return (Color)personsInfectedColor;
         }
         set
         {
-            personInfectedColor = value;
+            personsInfectedColor = value;
         }
     }
 
     [CategoryAttribute("Color Settings")]
     [Browsable(false)]
-    [XmlElement("PersonInfectedColor")]
-    public string XmlPersonInfectedColor
+    [XmlElement("PersonsInfectedColor")]
+    public string XmlPersonsInfectedColor
     {
         get
         {
-            xmlPersonInfectedColor = setting.ToXmlColor(personInfectedColor);
-            return xmlPersonInfectedColor;
+            xmlPersonsInfectedColor = setting.ToXmlColor(personsInfectedColor);
+            return xmlPersonsInfectedColor;
         }
         set
         {
-            xmlPersonInfectedColor = value;
-            personInfectedColor = setting.FromXmlColor(value);
+            xmlPersonsInfectedColor = value;
+            personsInfectedColor = setting.FromXmlColor(value);
+        }
+    }       
+
+    [Browsable(true)]
+    [CategoryAttribute("Color Settings")]
+    [DescriptionAttribute("Default: ")]
+    [ExcludeFromSerialization]
+    public Color PersonInfectiousColor
+    {
+        get
+        {
+            return (Color)personsInfectiousColor;
+        }
+        set
+        {
+            personsInfectiousColor = value;
+        }
+    }
+
+    [CategoryAttribute("Color Settings")]
+    [Browsable(false)]
+    [XmlElement("PersonsInfectiousColor")]
+    public string XmlPersonsInfectiousColor
+    {
+        get
+        {
+            xmlPersonsInfectiousColor = setting.ToXmlColor(personsInfectiousColor);
+            return xmlPersonsInfectiousColor;
+        }
+        set
+        {
+            xmlPersonsInfectiousColor = value;
+            personsInfectiousColor = setting.FromXmlColor(value);
         }
     }
 
     [Browsable(true)]
     [CategoryAttribute("Color Settings")]
-    [DescriptionAttribute("Default: Black")]
+    [DescriptionAttribute("Default: ")]
+    [ExcludeFromSerialization]
+    public Color PersonsRecoverdImmuneNotInfectiousColor
+    {
+        get
+        {
+            return (Color)personsRecoverdImmuneNotInfectiousColor;
+        }
+        set
+        {
+            personsRecoverdImmuneNotInfectiousColor = value;
+        }
+    }
+
+    [CategoryAttribute("Color Settings")]
+    [Browsable(false)]
+    [XmlElement("PersonsRecoverdImmuneNotInfectiousColor")]
+    public string XmlPersonsRecoverdImmuneNotInfectiousColor
+    {
+        get
+        {
+            xmlPersonsRecoverdImmuneNotInfectiousColor = setting.ToXmlColor(personsRecoverdImmuneNotInfectiousColor);
+            return xmlPersonsRecoverdImmuneNotInfectiousColor;
+        }
+        set
+        {
+            xmlPersonsRecoverdImmuneNotInfectiousColor = value;
+            personsRecoverdImmuneNotInfectiousColor = setting.FromXmlColor(value);
+        }
+    }
+
+
+    [Browsable(true)]
+    [CategoryAttribute("Color Settings")]
+    [DescriptionAttribute("Default: Black: chang does not work yet, because skglControl has transparent (black) background")]
     [ExcludeFromSerialization]
     public Color EmptyCellColor
     {

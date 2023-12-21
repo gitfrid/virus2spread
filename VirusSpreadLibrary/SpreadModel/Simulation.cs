@@ -3,6 +3,7 @@ using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.Grid;
 using Microsoft.Maui.Graphics;
+using System;
 
 
 namespace VirusSpreadLibrary.SpreadModel;
@@ -52,6 +53,13 @@ public class Simulation
 
         foreach (Person person in personList.Persons)
         {
+            person.Age++;
+            if (person.PersonState.HealthStateCounter != 0)
+            {
+                person.PersonState.HealthStateCounter++;
+            }
+
+            person.SetPersonHealthState();
             if (person.DoMove())
             {
                 if (person.DoMoveHome())
@@ -68,6 +76,8 @@ public class Simulation
         // Parallel.ForEach(VirusList.Viruses, virus =>}); -> takes longer
         foreach (Virus virus in virusList.Viruses)
         {
+            virus.Age++;
+
             if (virus.DoMove())
             {
                 if (virus.DoMoveHome())
@@ -79,7 +89,6 @@ public class Simulation
                     virus.MoveToNewCoordinate(grid);
                 }
             }
-
         };
     }
 

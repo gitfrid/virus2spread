@@ -3,12 +3,35 @@ namespace VirusSpreadLibrary.Creature;
 
 public class PersonState
 {
-    public bool Healthy { get; set; } = false;
-    public bool Infected { get; set; } = false;
-    public int ReinfectionNumber { get; set; } = 0;
-    public bool Contagious { get; set; } = false;
-    public bool Recoverd { get; set; } = false;
-    public bool Moving { get; set; } = false;
-    public bool GiveBirth { get; set; }    
+    private int healthStateCounter = 0;
+    public const int PersonHealthy = 0;
+    public const int PersonRecoverd = 1;
+    public const int PersonInfected = 2;
+    public const int PersonReinfected = 3;
+    public const int PersonInfectious = 4;
+    public const int PersonRecoverdImmuneNotinfectious = 5; // -> does this apply to reality?
 
+    public int HealthStateCounter
+    {
+        get
+        {
+            return healthStateCounter;
+        }
+        set
+        {
+            if (healthStateCounter != 0) 
+            {
+                healthStateCounter = value;
+            }            
+        }
+    }
+    public void SetInfected() 
+    {
+        if (healthStateCounter == 0)
+        { 
+            healthStateCounter++; 
+        }
+    }
+    public int HealthState { get; set; } = 0; 
+    public int InfectionCounter { get; set; } = 0;
 }

@@ -3,10 +3,9 @@ using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Skia;
 using VirusSpreadLibrary.SpreadModel;
 using VirusSpreadLibrary.AppProperties;
-using SkiaSharp;
-using SkiaSharp.Views.Desktop;
 using AnimatedGif;
 using System.Text;
+using SkiaSharp.Views.Desktop;
 
 
 namespace Virus2spread.Forms
@@ -59,7 +58,7 @@ namespace Virus2spread.Forms
             float cellWidthPx = WidthX / maxX;
             float cellHeightPx = HeigthY / maxY;
 
-            float borderFrac = 0.1f;
+            float borderFrac = 0.01f;
             float xPad = borderFrac * cellWidthPx;
             float yPad = borderFrac * cellHeightPx;
 
@@ -86,9 +85,11 @@ namespace Virus2spread.Forms
             SkglControl.Invalidate();
         }
 
-        private void SkglControl1_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
+        private void SkglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs  e)
         {
             ICanvas canvas = new SkiaCanvas() { Canvas = e.Surface.Canvas };
+            canvas.FillColor = Colors.Navy;
+            canvas.FillRectangle(0, 0, SkglControl.Width, SkglControl.Height);
             simulation.DrawGrid(canvas, coordinateFactX, coordinateFactY, rectangleX, rectangleY);
             UpdateBenchmarkMessage();
             // to create animated gif, but slows down iterations
@@ -108,7 +109,7 @@ namespace Virus2spread.Forms
 
         #pragma warning disable IDE0051
         // to create animated gifs if needed, will slow down iterations
-        private void SaveGif(SKSurface GifSurface)
+        private void SaveGif(SkiaSharp.SKSurface GifSurface)
         {
             indx++;
             StringBuilder sb = new();
@@ -117,7 +118,8 @@ namespace Virus2spread.Forms
             sb.Append(".gif");
             using var gif = AnimatedGif.AnimatedGif.Create(sb.ToString(), 33);
             Bitmap img = GetBitmap(GifSurface.Snapshot());
-            gif.AddFrame(img, delay: -1, quality: GifQuality.Bit8); // animation does not work yet
+            // save as gif animation does not work yet - only as normal gif
+            gif.AddFrame(img, delay: -1, quality: GifQuality.Bit8); 
         }
         #pragma warning restore IDE0051
 

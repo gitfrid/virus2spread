@@ -1,3 +1,54 @@
+fastgraphics KarlPage FastGraphics c#
+https://www.linkedin.com/pulse/fast-pixel-manipulation-c-forms-karl-page
+
+https://github.com/accord-net/framework/wiki/Mathematics
+
+
+https://github.com/Abc-Arbitrage/ZeroLoghttps://github.com/Tyrrrz/Onova
+
+CSV Parser
+https://www.joelverhagen.com/blog/2020/12/fastest-net-csv-parsers
+https://github.com/leandromoh?tab=repositories
+https://github.com/leandromoh/awesome-dotnet
+
+AutoDiff
+https://github.com/alexshtf/autodiff
+
+GDI 
+https://www.prasannavl.com/2016/10/introducing-winapi-graphics-with-direct3d-d2d1-gdi-opengl-and-skia/
+
+This is not done in the traditional sense. To do this you would create a new surface, clear it to white and then draw the other bitmap on top (assuming the "blank" is transparent).
+
+Some pseudo code:
+
+// the bitmap to resize and fill
+SKBitmap sourceBitmap = …;
+
+// the desired image size
+SKImageInfo info = new SKImageInfo(200, 200);
+
+// create the surface
+SKSurface surface = SKSurface.Create(info);
+
+// get the canvas for drawing
+SKCanvas canvas = surface.Canvas;
+
+// draw the white background
+canvas.Clear(SKColors.White);
+
+// create a paint object so that drawing can happen at a higher resolution
+SKPaint paint = new SKPaint {
+    IsAntialias = true,
+    FilterQuality = SKFilterQuality.High
+};
+
+// draw the source bitmap over the white
+canvas.DrawBitmap(sourceBitmap, info.Rect, paint);
+
+// create an image for saving/drawing
+canvas.Flush();
+SKImage finalImage = surface.Snapshot();
+
 maui color
 https://albi005.github.io/MaterialColorUtilities/
 https://www.nuget.org/packages/MaterialColorUtilities.Maui/0.1.0
@@ -38,11 +89,6 @@ private void pgConfig_SelectedGridItemChanged(object sender, SelectedGridItemCha
         }
       }
 }
-
-
-
-
-
 
 
 https://github.com/MatthewKing/DynamicDescriptors

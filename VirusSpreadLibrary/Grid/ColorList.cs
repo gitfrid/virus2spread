@@ -11,34 +11,36 @@ public class ColorList
 
     private readonly List<ColorTranslation> colorList =
     [
+        new(CellState.PersonsHealthyOrRecoverd, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonsHealthyOrRecoverdColor.ToArgb().ToString("X"))),
+        new(CellState.PersonsInfected, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonInfectedColor.ToArgb().ToString("X"))),
+        new(CellState.PersonsInfectious, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonInfectiousColor.ToArgb().ToString("X"))),
+        new(CellState.PersonsRecoverdImmuneNotInfectious, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonsRecoverdImmuneNotInfectiousColor.ToArgb().ToString("X"))),
         new(CellState.Virus, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.VirusColor.ToArgb().ToString("X"))),
-        new(CellState.PersonHealthy, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonHealthyColor.ToArgb().ToString("X"))),
-        new(CellState.PersonInfected, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonInfected.ToArgb().ToString("X"))),
-        new(CellState.EmptyCell, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.EmptyCellColor.ToArgb().ToString()))
+        new(CellState.EmptyCell, Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.EmptyCellColor.ToArgb().ToString("X")))
     ];
-    public Microsoft.Maui.Graphics.Color GetCellColor(CellState CellState, CellPopulation Population)
+    public Microsoft.Maui.Graphics.Color GetCellColor(int CellState, int PersonPopulation, int VirusPopulation)
     {
-    
+
         foreach (ColorTranslation ColModel in colorList)
         {
             if (ColModel.CellState == CellState)
             {
-                cellColor = ColModel.CellColor;    
+                cellColor = ColModel.CellColor;               
             }
         }
 
         if (AppSettings.Config.PopulationDensityColoring) 
         {
             // use diffrent color shades for population density
-            if (CellState == CellState.PersonInfected | CellState == CellState.PersonHealthy | CellState == CellState.Virus)
+            if (CellState != Enum.CellState.EmptyCell)
                 {
-                    if (Population.NumPersons > 1)
+                    if (PersonPopulation > 1)
                     {
-                        cellColor = Lighten(cellColor, (double)1 / (double)Population.NumPersons);
+                        cellColor = Lighten(cellColor, (double)1 / (double)PersonPopulation);
                     }
-                    else if (Population.NumViruses > 1)
+                    else if (VirusPopulation > 1)
                     {
-                        cellColor = Lighten(cellColor, ((double)1 / (double)Population.NumViruses));
+                        cellColor = Lighten(cellColor, ((double)1 / (double)VirusPopulation));
                     }
                 }
         }        
