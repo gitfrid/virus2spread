@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "b4t17CH+Gqh8nFStCzSZiqPUvsXgntFmuPW6kJ3IVhpDN+3iUIVL72RRc9+KqUPA9BxjOYuZVUhNbFU28BLVDg==",
+  "success": true,
+  "projectFilePath": "C:\\Github\\plotter_datalogger\\Plotter\\Plotter.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\adm\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.4\\microsoft.netcore.platforms.3.1.4.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\scottplot\\4.1.69\\scottplot.4.1.69.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\scottplot.winforms\\4.1.69\\scottplot.winforms.4.1.69.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\system.drawing.common\\4.7.2\\system.drawing.common.4.7.2.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
