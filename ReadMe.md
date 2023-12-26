@@ -14,3 +14,7 @@ There are probably better ways to solve this, but should be sufficient for my pu
 
 Uses NuGet Package ScottPlot.WinForms 4.1.69 (MIT Licence)
 source : https://scottplot.net
+
+Plotter App Screenshot:
+![ScotPlotDataLogger](https://github.com/gitfrid/Plotter/assets/148685307/240022f4-7392-4b11-b98b-a7c54722bfa3)
+
