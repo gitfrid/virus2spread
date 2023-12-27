@@ -15,6 +15,8 @@ public class Simulation
     private readonly PersonList personList = new ();
     private readonly VirusList virusList = new ();
     private int iteration;
+    private PlotDataCsv plotData;
+
     private bool stopIteration ;
     public Simulation()
     {
@@ -27,6 +29,7 @@ public class Simulation
     public int MaxY { get; set; }
     public int Iteration { get => iteration; }
 
+
     public void Initialize()
     {
         MaxX = AppSettings.Config.GridMaxX;
@@ -34,6 +37,7 @@ public class Simulation
         grid.SetNewEmptyGrid(MaxX, MaxY);
         personList.SetInitialPopulation(AppSettings.Config.InitialPersonPopulation, grid);
         virusList.SetInitialPopulation(AppSettings.Config.InitialVirusPopulation, grid);
+        plotData = new();
     }
     public void StartIteration()
     {
@@ -54,14 +58,19 @@ public class Simulation
         foreach (Person person in personList.Persons)
         {
             person.Age++;
+            
+            // get health state if is infected
             if (person.PersonState.HealthStateCounter != 0)
             {
                 person.PersonState.HealthStateCounter++;
+                person.SetPersonHealthState();
             }
 
-            person.SetPersonHealthState();
+            
+            // move person and change health state if get infected
             if (person.DoMove())
             {
+                System.Drawing.Point startPoint = person.PersMoveData.StartGidCoordinate;
                 if (person.DoMoveHome())
                 {
                     person.MoveToHomeCoordinate(grid);
@@ -69,8 +78,23 @@ public class Simulation
                 else 
                 {
                     person.MoveToNewCoordinate(grid);
-                }                
-            }                
+                }
+                System.Drawing.Point endPoint = person.PersMoveData.EndGridCoordinate;
+
+                plotData.IterationNumber = iteration;
+                ++plotData.PersonPopulation;
+                plotData.PersonsAge += person.Age;
+                plotData.SetPersonHealthState(person.PersonState);
+
+                int dx = endPoint.X - startPoint.X;
+                int dy = endPoint.Y - startPoint.Y;
+                double SE = Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
+                plotData.PersonsMoveDistance += Convert.ToInt64(SE);
+            }
+            plotData.IterationNumber = iteration;
+            ++plotData.PersonPopulation;
+            plotData.PersonsAge += person.Age;
+            plotData.SetPersonHealthState(person.PersonState);
         };
 
         // Parallel.ForEach(VirusList.Viruses, virus =>}); -> takes longer
@@ -80,6 +104,8 @@ public class Simulation
 
             if (virus.DoMove())
             {
+                System.Drawing.Point startPoint = virus.VirMoveData.StartGidCoordinate;
+
                 if (virus.DoMoveHome())
                 {
                     virus.MoveToHomeCoordinate(grid);
@@ -88,8 +114,16 @@ public class Simulation
                 {
                     virus.MoveToNewCoordinate(grid);
                 }
+                System.Drawing.Point endPoint = virus.VirMoveData.EndGridCoordinate;
+                int dx = endPoint.X - startPoint.X;
+                int dy = endPoint.Y - startPoint.Y;
+                double SE = Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
+                plotData.VirusesMoveDistance += Convert.ToInt64(SE);
             }
+            ++plotData.VirusPopulation;
+            plotData.VirusesAge += virus.Age;
         };
+        plotData.WriteToCsv();
     }
 
     // first initialize grid!

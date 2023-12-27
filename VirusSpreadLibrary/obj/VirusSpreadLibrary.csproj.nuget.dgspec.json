@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "RecordParser": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
             "Serilog.Sinks.Console": {
               "target": "Package",
               "version": "[4.1.0, )"

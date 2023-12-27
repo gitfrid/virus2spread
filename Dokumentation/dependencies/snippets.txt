@@ -1,10 +1,575 @@
+// Erstelle eine C#-Bibliotheksklasse, die eine threadsichere Warteschlange enthält
+public class QueueManager
+{
+    // Erstelle eine private ConcurrentQueue<List<double>>
+    private ConcurrentQueue<List<double>> queue = new ConcurrentQueue<List<double>> ();
+
+    // Erstelle eine öffentliche Methode, um Listen in die Warteschlange einzureihen
+    public void EnqueueList (List<double> values)
+    {
+        // Füge die Liste in die Warteschlange ein
+        queue.Enqueue (values);
+    }
+
+    // Erstelle eine öffentliche Methode, um Listen aus der Warteschlange zu entnehmen
+    public bool DequeueList (out List<double> values)
+    {
+        // Versuche, eine Liste aus der Warteschlange zu entnehmen
+        return queue.TryDequeue (out values);
+    }
+}
+
+// Erstelle eine C#-Bibliotheksklasse, die eine Instanz der QueueManager-Klasse enthält
+public class LibraryClass
+{
+    // Erstelle eine öffentliche Eigenschaft, um die Instanz der QueueManager-Klasse zu speichern
+    public QueueManager QueueManager { get; private set; }
+
+    // Erstelle einen Konstruktor, der die Instanz der QueueManager-Klasse initialisiert
+    public LibraryClass ()
+    {
+        QueueManager = new QueueManager ();
+    }
+}
+
+// Erstelle ein Formular, das Werte in die Warteschlange einreiht
+Form1 form1 = new Form1 ();
+// Erstelle eine Instanz der LibraryClass
+LibraryClass libraryClass = new LibraryClass ();
+form1.button1.Click += (sender, e) =>
+{
+    // Erzeuge eine Liste von zufälligen Werten
+    Random random = new Random ();
+    List<double> values = new List<double> ();
+    for (int i = 0; i < 10; i++)
+    {
+        double value = random.NextDouble () * 100;
+        values.Add (value);
+    }
+
+    // Rufe die EnqueueList-Methode auf, um die Liste in die Warteschlange einzureihen
+    libraryClass.QueueManager.EnqueueList (values);
+
+    // Zeige die Werte im Formular an
+    form1.label1.Text = "Enqueued: " + string.Join (", ", values);
+};
+
+// Erstelle ein Formular, das Werte aus der Warteschlange entnimmt
+Form2 form2 = new Form2 ();
+// Erstelle eine öffentliche Eigenschaft, um die Instanz der LibraryClass zu speichern
+public LibraryClass LibraryClass { get; set; }
+// Setze die LibraryClass-Eigenschaft von Form2 auf die Instanz der LibraryClass
+form2.LibraryClass = libraryClass;
+// Erstelle einen Timer, der alle 500 ms ausgelöst wird
+Timer timer = new Timer () { Interval = 500 };
+timer.Tick += (sender, e) =>
+{
+    // Entnehme einen Wert aus der Warteschlange
+    List<double> values;
+    bool success = form2.LibraryClass.QueueManager.DequeueList (out values); // Greife auf die Instanz der LibraryClass über eine Eigenschaft von Form2 zu
+
+    // Zeige den Wert oder eine Fehlermeldung im Formular an
+    if (success)
+        form2.label1.Text = "Dequeued: " + string.Join (", ", values);
+    else
+        form2.label1.Text = "Queue is empty";
+};
+// Starte den Timer
+timer.Start ();
+
+// Zeige beide Formulare an
+form1.Show ();
+form2.Show ();
+
+
+
+
+
+
+
+____________________________________________________________________________________
+
+
+// Erstelle eine C#-Bibliotheksklasse, die eine threadsichere Warteschlange enthält
+public class QueueManager
+{
+    // Erstelle eine private ConcurrentQueue<List<double>>
+    private ConcurrentQueue<List<double>> queue = new ConcurrentQueue<List<double>> ();
+
+    // Erstelle eine öffentliche Methode, um Listen in die Warteschlange einzureihen
+    public void EnqueueList (List<double> values)
+    {
+        // Füge die Liste in die Warteschlange ein
+        queue.Enqueue (values);
+    }
+
+    // Erstelle eine öffentliche Methode, um Listen aus der Warteschlange zu entnehmen
+    public bool DequeueList (out List<double> values)
+    {
+        // Versuche, eine Liste aus der Warteschlange zu entnehmen
+        return queue.TryDequeue (out values);
+    }
+}
+
+// Erstelle eine C#-Bibliotheksklasse, die eine Instanz der QueueManager-Klasse enthält
+public class LibraryClass
+{
+    // Erstelle eine öffentliche Eigenschaft, um die Instanz der QueueManager-Klasse zu speichern
+    public QueueManager QueueManager { get; private set; }
+
+    // Erstelle einen Konstruktor, der die Instanz der QueueManager-Klasse initialisiert
+    public LibraryClass ()
+    {
+        QueueManager = new QueueManager ();
+    }
+}
+
+// Erstelle ein Formular, das Werte in die Warteschlange einreiht
+Form1 form1 = new Form1 ();
+// Erstelle eine Instanz der LibraryClass
+LibraryClass libraryClass = new LibraryClass ();
+form1.button1.Click += (sender, e) =>
+{
+    // Erzeuge eine Liste von zufälligen Werten
+    Random random = new Random ();
+    List<double> values = new List<double> ();
+    for (int i = 0; i < 10; i++)
+    {
+        double value = random.NextDouble () * 100;
+        values.Add (value);
+    }
+
+    // Rufe die EnqueueList-Methode auf, um die Liste in die Warteschlange einzureihen
+    libraryClass.QueueManager.EnqueueList (values);
+
+    // Zeige die Werte im Formular an
+    form1.label1.Text = "Enqueued: " + string.Join (", ", values);
+};
+
+// Erstelle ein Formular, das Werte aus der Warteschlange entnimmt
+Form2 form2 = new Form2 ();
+// Erstelle eine öffentliche Eigenschaft, um die Instanz der LibraryClass zu speichern
+public LibraryClass LibraryClass { get; set; }
+// Erstelle einen Task, der Werte aus der Warteschlange entnimmt
+Task consumer = Task.Run (() =>
+{
+    // Entnehme alle Werte aus der Warteschlange
+    List<double> values;
+    bool success = form2.LibraryClass.QueueManager.DequeueList (out values); // Greife auf die Instanz der LibraryClass über eine Eigenschaft von Form2 zu
+
+    // Zeige die Werte oder eine Fehlermeldung im Formular an
+    if (success)
+        form2.label1.Text = "Dequeued: " + string.Join (", ", values);
+    else
+        form2.label1.Text = "Queue is empty";
+});
+
+// Setze die LibraryClass-Eigenschaft von Form2 auf die Instanz der LibraryClass
+form2.LibraryClass = libraryClass;
+
+// Zeige beide Formulare an
+form1.Show ();
+form2.Show ();
+
+
+___________________________________________________________________________________________________
+
+
+
+
+_________________________________________________________________________________________
+
+
+
+
+
+// Erstelle eine C#-Bibliotheksklasse, die eine threadsichere Warteschlange enthält
+public class QueueManager
+{
+    // Erstelle eine private ConcurrentQueue<List<double>>
+    private ConcurrentQueue<List<double>> queue = new ConcurrentQueue<List<double>> ();
+
+    // Erstelle eine öffentliche Methode, um Listen in die Warteschlange einzureihen
+    public void EnqueueList (List<double> values)
+    {
+        // Füge die Liste in die Warteschlange ein
+        queue.Enqueue (values);
+    }
+
+    // Erstelle eine öffentliche Methode, um Listen aus der Warteschlange zu entnehmen
+    public bool DequeueList (out List<double> values)
+    {
+        // Versuche, eine Liste aus der Warteschlange zu entnehmen
+        return queue.TryDequeue (out values);
+    }
+}
+
+// Erstelle eine C#-Bibliotheksklasse, die eine Instanz der QueueManager-Klasse enthält
+public class LibraryClass
+{
+    // Erstelle eine öffentliche Eigenschaft, um die Instanz der QueueManager-Klasse zu speichern
+    public QueueManager QueueManager { get; private set; }
+
+    // Erstelle einen Konstruktor, der die Instanz der QueueManager-Klasse initialisiert
+    public LibraryClass ()
+    {
+        QueueManager = new QueueManager ();
+    }
+}
+
+// Erstelle ein Formular, das Werte in die Warteschlange einreiht
+Form1 form1 = new Form1 ();
+// Erstelle eine Instanz der LibraryClass
+LibraryClass libraryClass = new LibraryClass ();
+form1.button1.Click += (sender, e) =>
+{
+    // Erzeuge eine Liste von zufälligen Werten
+    Random random = new Random ();
+    List<double> values = new List<double> ();
+    for (int i = 0; i < 10; i++)
+    {
+        double value = random.NextDouble () * 100;
+        values.Add (value);
+    }
+
+    // Rufe die EnqueueList-Methode auf, um die Liste in die Warteschlange einzureihen
+    libraryClass.QueueManager.EnqueueList (values);
+
+    // Zeige die Werte im Formular an
+    form1.label1.Text = "Enqueued: " + string.Join (", ", values);
+};
+
+// Erstelle ein Formular, das Werte aus der Warteschlange entnimmt
+Form2 form2 = new Form2 ();
+// Erstelle eine öffentliche Eigenschaft, um die Instanz der LibraryClass zu speichern
+public LibraryClass LibraryClass { get; set; }
+// Erstelle einen Task, der Werte aus der Warteschlange entnimmt
+Task consumer = Task.Run (() =>
+{
+    // Entnehme alle Werte aus der Warteschlange
+    List<double> values;
+    bool success = form2.LibraryClass.QueueManager.DequeueList (out values); // Greife auf die Instanz der LibraryClass über eine Eigenschaft von Form2 zu
+
+    // Zeige die Werte oder eine Fehlermeldung im Formular an
+    if (success)
+        form2.label1.Text = "Dequeued: " + string.Join (", ", values);
+    else
+        form2.label1.Text = "Queue is empty";
+});
+
+// Setze die LibraryClass-Eigenschaft von Form2 auf die Instanz der LibraryClass
+form2.LibraryClass = libraryClass;
+
+// Zeige beide Formulare an
+form1.Show ();
+form2.Show ();
+
+
+______________________________________________
+
+
+
+
+// Erstelle eine C#-Bibliotheksklasse, die eine threadsichere Warteschlange enthält
+public class QueueManager
+{
+    // Erstelle eine private ConcurrentQueue<List<double>>
+    private ConcurrentQueue<List<double>> queue = new ConcurrentQueue<List<double>> ();
+
+    // Erstelle eine öffentliche Methode, um Listen in die Warteschlange einzureihen
+    public void EnqueueList (List<double> values)
+    {
+        // Füge die Liste in die Warteschlange ein
+        queue.Enqueue (values);
+    }
+
+    // Erstelle eine öffentliche Methode, um Listen aus der Warteschlange zu entnehmen
+    public bool DequeueList (out List<double> values)
+    {
+        // Versuche, eine Liste aus der Warteschlange zu entnehmen
+        return queue.TryDequeue (out values);
+    }
+}
+
+// Erstelle eine C#-Bibliotheksklasse, die eine Instanz der QueueManager-Klasse enthält
+public class LibraryClass
+{
+    // Erstelle eine öffentliche Eigenschaft, um die Instanz der QueueManager-Klasse zu speichern
+    public QueueManager QueueManager { get; private set; }
+
+    // Erstelle einen Konstruktor, der die Instanz der QueueManager-Klasse initialisiert
+    public LibraryClass ()
+    {
+        QueueManager = new QueueManager ();
+    }
+}
+
+// Erstelle ein Formular, das Werte in die Warteschlange einreiht
+Form1 form1 = new Form1 ();
+// Erstelle eine Instanz der LibraryClass
+LibraryClass libraryClass = new LibraryClass ();
+form1.button1.Click += (sender, e) =>
+{
+    // Erzeuge eine Liste von zufälligen Werten
+    Random random = new Random ();
+    List<double> values = new List<double> ();
+    for (int i = 0; i < 10; i++)
+    {
+        double value = random.NextDouble () * 100;
+        values.Add (value);
+    }
+
+    // Rufe die EnqueueList-Methode auf, um die Liste in die Warteschlange einzureihen
+    libraryClass.QueueManager.EnqueueList (values);
+
+    // Zeige die Werte im Formular an
+    form1.label1.Text = "Enqueued: " + string.Join (", ", values);
+};
+
+// Erstelle ein Formular, das Werte aus der Warteschlange entnimmt
+Form2 form2 = new Form2 ();
+// Erstelle eine öffentliche Eigenschaft, um die Instanz der LibraryClass zu speichern
+public LibraryClass LibraryClass { get; set; }
+form2.button1.Click += (sender, e) =>
+{
+    // Rufe die DequeueList-Methode auf, um eine Liste aus der Warteschlange zu entnehmen
+    List<double> values;
+    bool success = form2.LibraryClass.QueueManager.DequeueList (out values); // Greife auf die Instanz der LibraryClass über eine Eigenschaft von Form2 zu
+
+    // Zeige die Werte oder eine Fehlermeldung im Formular an
+    if (success)
+        form2.label1.Text = "Dequeued: " + string.Join (", ", values);
+    else
+        form2.label1.Text = "Queue is empty";
+};
+
+// Setze die LibraryClass-Eigenschaft von Form2 auf die Instanz der LibraryClass
+form2.LibraryClass = libraryClass;
+
+// Zeige beide Formulare an
+form1.Show ();
+form2.Show ();
+
+
+
+__________________________________________
+
+
+
+
+
+// Erstelle eine threadsichere Warteschlange
+ConcurrentQueue<List<double>> queue = new ConcurrentQueue<List<double>> ();
+
+// Erstelle einen Task, der zwei Listen mit 10 Werten in die Warteschlange einreiht
+Task producer = Task.Run (() =>
+{
+    // Erzeuge zwei Listen von zufälligen Werten
+    Random random = new Random ();
+    List<double> values1 = new List<double> ();
+    List<double> values2 = new List<double> ();
+    for (int i = 0; i < 10; i++)
+    {
+        double value1 = random.NextDouble () * 100;
+        double value2 = random.NextDouble () * 100;
+        values1.Add (value1);
+        values2.Add (value2);
+    }
+
+    // Füge die Listen in die Warteschlange ein
+    queue.Enqueue (values1);
+    queue.Enqueue (values2);
+
+    // Zeige die Listen an
+    Console.WriteLine ($"Enqueued: {string.Join (", ", values1)}");
+    Console.WriteLine ($"Enqueued: {string.Join (", ", values2)}");
+});
+
+// Erstelle einen Task, der zwei Listen mit 10 Werten aus der Warteschlange entnimmt
+Task consumer = Task.Run (() =>
+{
+    // Warte, bis der Producer fertig ist
+    producer.Wait ();
+    // Entnehme die Listen aus der Warteschlange
+    List<double> values1;
+    List<double> values2;
+    bool success1 = queue.TryDequeue (out values1);
+    bool success2 = queue.TryDequeue (out values2);
+
+    // Zeige die Listen oder eine Fehlermeldung an
+    if (success1 && success2)
+    {
+        Console.WriteLine ($"Dequeued: {string.Join (", ", values1)}");
+        Console.WriteLine ($"Dequeued: {string.Join (", ", values2)}");
+    }
+    else
+    {
+        Console.WriteLine ("Queue is empty");
+    }
+});
+
+// Warte, bis beide Tasks fertig sind
+Task.WaitAll (producer, consumer);
+
+
+
+
+
+// Erstelle eine threadsichere Warteschlange
+ConcurrentQueue<double> queue = new ConcurrentQueue<double> ();
+
+// Erstelle ein Formular, das Werte in die Warteschlange einreiht
+Form1 form1 = new Form1 ();
+form1.button1.Click += (sender, e) =>
+{
+    // Erzeuge eine Liste von zufälligen Werten
+    Random random = new Random ();
+    List<double> values = new List<double> ();
+    for (int i = 0; i < 10; i++)
+    {
+        double value = random.NextDouble () * 100;
+        values.Add (value);
+    }
+
+    // Füge die Werte in die Warteschlange ein
+    queue.EnqueueRange (values);
+
+    // Zeige die Werte im Formular an
+    form1.label1.Text = "Enqueued: " + string.Join (", ", values);
+};
+
+// Erstelle ein Formular, das Werte aus der Warteschlange entnimmt
+Form2 form2 = new Form2 ();
+form2.button1.Click += (sender, e) =>
+{
+    // Entnehme alle Werte aus der Warteschlange
+    IEnumerable<double> values;
+    bool success = queue.TryDequeueAll (out values);
+
+    // Zeige die Werte oder eine Fehlermeldung im Formular an
+    if (success)
+        form2.label1.Text = "Dequeued: " + string.Join (", ", values);
+    else
+        form2.label1.Text = "Queue is empty";
+};
+
+// Zeige beide Formulare an
+form1.Show ();
+form2.Show ();
+
+
+
+
+
+
+
+Queue mit double liste
+// Erstelle eine threadsichere Warteschlange
+ConcurrentQueue<double> queue = new ConcurrentQueue<double> ();
+
+// Erstelle einen Task, der mehrere Werte in die Warteschlange einreiht
+Task producer = Task.Run (() =>
+{
+    // Erzeuge eine Liste von zufälligen Werten
+    Random random = new Random ();
+    List<double> values = new List<double> ();
+    for (int i = 0; i < 10; i++)
+    {
+        double value = random.NextDouble () * 100;
+        values.Add (value);
+    }
+
+    // Füge die Werte in die Warteschlange ein
+    queue.EnqueueRange (values);
+
+    // Zeige die Werte an
+    Console.WriteLine ($"Enqueued: {string.Join (", ", values)}");
+});
+
+// Erstelle einen Task, der mehrere Werte aus der Warteschlange entnimmt
+Task consumer = Task.Run (() =>
+{
+    // Warte, bis der Producer fertig ist
+    producer.Wait ();
+    // Entnehme alle Werte aus der Warteschlange
+    IEnumerable<double> values;
+    bool success = queue.TryDequeueAll (out values);
+
+    // Zeige die Werte oder eine Fehlermeldung an
+    if (success)
+        Console.WriteLine ($"Dequeued: {string.Join (", ", values)}");
+    else
+        Console.WriteLine ("Queue is empty");
+});
+
+// Warte, bis beide Tasks fertig sind
+Task.WaitAll (producer, consumer);
+
+
+
+
+
+// Erstelle einen neuen Plot
+var plt = new ScottPlot.Plot (600, 400);
+
+// Füge vier Signale mit unterschiedlichen Daten hinzu
+var sig1 = plt.AddSignal (ScottPlot.DataGen.Sin (51, mult: 1));
+var sig2 = plt.AddSignal (ScottPlot.DataGen.Cos (51, mult: 10));
+var sig3 = plt.AddSignal (ScottPlot.DataGen.Sin (51, mult: 100));
+var sig4 = plt.AddSignal (ScottPlot.DataGen.Cos (51, mult: 1000));
+
+// Weise jedem Signal eine andere Achse zu
+sig1.YAxisIndex = 0; // linke Achse
+sig2.YAxisIndex = 1; // rechte Achse
+sig3.YAxisIndex = 2; // zweite linke Achse
+sig4.YAxisIndex = 3; // zweite rechte Achse
+
+// Füge zwei zusätzliche Achsen hinzu
+var yAxis2 = plt.AddAxis (ScottPlot.Renderable.Edge.Left, axisIndex: 2);
+var yAxis3 = plt.AddAxis (ScottPlot.Renderable.Edge.Right, axisIndex: 3);
+
+// Aktiviere die Ticks für alle Achsen
+plt.YAxis.Ticks (true);
+plt.YAxis2.Ticks (true);
+yAxis2.Ticks (true);
+yAxis3.Ticks (true);
+
+// Setze die Achsenlimits für jede Achse individuell
+plt.SetAxisLimits (yMin: -2, yMax: 2, yAxisIndex: 0);
+plt.SetAxisLimits (yMin: -20, yMax: 20, yAxisIndex: 1);
+plt.SetAxisLimits (yMin: -200, yMax: 200, yAxisIndex: 2);
+plt.SetAxisLimits (yMin: -2000, yMax: 2000, yAxisIndex: 3);
+
+// Speichere den Plot als Bild
+plt.SaveFig ("multiAxis_example.png");
+
+
+
+
+
+https://theoryofprogramming.wordpress.com/adjacency-list-in-c-sharp/
+
+https://www.desultoryquest.com/blog/real-time-plotting-on-windows-using-opengl/
+https://github.com/swharden/ADC-10-F103C
+
+https://github.com/swharden/FtdiSharp
+https://github.com/ScottPlot/ScottPlot/issues/2377
+https://scottplot.net/demo/
+https://github.com/prime167/DotNetStatics
+
+https://github.com/gabrielgcma/InteractiveScottPlot
+
+
 fastgraphics KarlPage FastGraphics c#
 https://www.linkedin.com/pulse/fast-pixel-manipulation-c-forms-karl-page
 
 https://github.com/accord-net/framework/wiki/Mathematics
 
 
-https://github.com/Abc-Arbitrage/ZeroLoghttps://github.com/Tyrrrz/Onova
+https://github.com/Abc-Arbitrage/ZeroLog
+-> no grabage collectipn
+
+https://github.com/Tyrrrz/Onova
 
 CSV Parser
 https://www.joelverhagen.com/blog/2020/12/fastest-net-csv-parsers

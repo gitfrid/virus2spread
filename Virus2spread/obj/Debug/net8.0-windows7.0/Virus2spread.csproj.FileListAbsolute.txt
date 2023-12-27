@@ -131,3 +131,4 @@ C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\refint\Virus2spr
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.pdb
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.genruntimeconfig.cache
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\ref\Virus2spread.dll
+C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\RecordParser.dll

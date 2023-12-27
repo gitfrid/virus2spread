@@ -41,7 +41,8 @@ public  class AppSettings
 
 
     private string about = "";
-    private readonly string appVersion = Application.ProductVersion[..Application.ProductVersion.ToString().IndexOf('+')];
+    //private readonly string appVersion = Application.ProductVersion[..Application.ProductVersion.ToString().IndexOf('+')];
+    private readonly string appVersion = "1.0.1";
     private int gridMaxX = 100;
     private int gridMaxY = 100;
     private long initialPersonPopulation = 20;
@@ -73,6 +74,9 @@ public  class AppSettings
 
     private String configFilePath = string.Concat(Path.GetDirectoryName(Application.ExecutablePath),
                                     "\\", Path.GetFileNameWithoutExtension(Application.ExecutablePath), ".XML");
+
+    private String csvFilePath = string.Concat(Path.GetDirectoryName(Application.ExecutablePath),
+                                    "\\", Path.GetFileNameWithoutExtension(Application.ExecutablePath), ".CSV");
 
     private DoubleSeriesClass personMoveRate = new();
     private string personMoveRateFrom = "";
@@ -438,6 +442,7 @@ public  class AppSettings
     [CategoryAttribute("Global Settings")]
     [Editor(typeof(UIFilenameEditor), typeof(UITypeEditor))]
     [UIFilenameEditor.SaveFileAttribute] // -> default is openFile
+    [DescriptionAttribute("path to the application xml configuration file, to read and store configuration settings")]
     public string ConfigFilePath
     {
         get 
@@ -449,6 +454,22 @@ public  class AppSettings
             Setting.SetLastConfigFilePath(value);
             configFilePath = Setting.GetLastConfigFilePath(configFilePath);
         } 
+    }
+
+    [CategoryAttribute("Global Settings")]
+    [Editor(typeof(UIFilenameEditor), typeof(UITypeEditor))]
+    [UIFilenameEditor.SaveFileAttribute] // -> default is openFile
+    [DescriptionAttribute("path to csv file to write the plot data, data are then read by the plot app to plot the data diagram")]
+    public string CsvFilePath
+    {
+        get
+        {
+            return csvFilePath;
+        }
+        set
+        {
+            csvFilePath = value;
+        }
     }
 
     [Browsable(true)]
