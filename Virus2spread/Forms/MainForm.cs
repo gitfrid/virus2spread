@@ -23,10 +23,8 @@ namespace Virus2spread
         {
             base.OnShown(e);
 
-            //DoubleSeriesClass _sample = Program.Config.MoveRateFrom;
             AppSettings.Config.PersonMoveRate.PropertyChanged += SamplePropertyChangedHandler!;
             AppSettings.Config.VirusMoveRate.PropertyChanged += SamplePropertyChangedHandler!;
-
             // do somthing on change here ..
             // ConfigurationPropertyGrid.SelectedObject = ConfigurationPropertyGrid.SelectedObject = AppSettings.Config;
         }
@@ -48,10 +46,17 @@ namespace Virus2spread
         private void StartSimulation_button1_Click_1(object sender, EventArgs e)
         {
             modelSimulation.Initialize();
-            Form? fc = Application.OpenForms["GridForm"];
-            fc?.Close();
-            GridForm myGridForm = new(modelSimulation, AppSettings.Config.GridMaxX, AppSettings.Config.GridMaxY);
-            myGridForm.Show();
+
+            Form? pltForm = Application.OpenForms["PlotForm"];
+            pltForm?.Close();
+            PlotForm plotForm = new PlotForm(modelSimulation.PlotData);
+            plotForm.Show();
+
+            Form? grdForm = Application.OpenForms["GridForm"];
+            grdForm?.Close();
+            GridForm gridForm = new(modelSimulation, AppSettings.Config.GridMaxX, AppSettings.Config.GridMaxY);
+            gridForm.Show();
+
             this.Focus();
             modelSimulation.StartIteration();
         }

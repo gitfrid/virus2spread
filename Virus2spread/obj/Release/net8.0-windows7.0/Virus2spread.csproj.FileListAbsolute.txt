@@ -24,6 +24,9 @@ C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\Microsoft.Maui
 C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\Microsoft.Maui.Graphics.Skia.dll
 C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\OpenTK.dll
 C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\OpenTK.GLControl.dll
+C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\RecordParser.dll
+C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\ScottPlot.dll
+C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\ScottPlot.WinForms.dll
 C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\Serilog.dll
 C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\Serilog.Sinks.Console.dll
 C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\SharpSerializer.Core.dll
@@ -119,6 +122,7 @@ C:\Github\virus2spread\Virus2spread\bin\Release\net8.0-windows7.0\VirusSpreadLib
 C:\Github\virus2spread\Virus2spread\obj\Release\net8.0-windows7.0\Virus2spread.csproj.AssemblyReference.cache
 C:\Github\virus2spread\Virus2spread\obj\Release\net8.0-windows7.0\Virus2spread.Forms.GridForm.resources
 C:\Github\virus2spread\Virus2spread\obj\Release\net8.0-windows7.0\Virus2spread.MainForm.resources
+C:\Github\virus2spread\Virus2spread\obj\Release\net8.0-windows7.0\Virus2spread.PlotForm.resources
 C:\Github\virus2spread\Virus2spread\obj\Release\net8.0-windows7.0\Virus2spread.csproj.GenerateResource.cache
 C:\Github\virus2spread\Virus2spread\obj\Release\net8.0-windows7.0\Virus2spread.GeneratedMSBuildEditorConfig.editorconfig
 C:\Github\virus2spread\Virus2spread\obj\Release\net8.0-windows7.0\Virus2spread.AssemblyInfoInputs.cache

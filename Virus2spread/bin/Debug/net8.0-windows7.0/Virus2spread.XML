@@ -3,8 +3,8 @@
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="447" />
-        <Simple name="Y" value="700" />
+        <Simple name="X" value="0" />
+        <Simple name="Y" value="0" />
       </Properties>
     </Complex>
     <Complex name="Form_Config_WindowSize">
@@ -13,36 +13,36 @@
         <Simple name="Height" value="1010" />
       </Properties>
     </Complex>
-    <Simple name="AppVersion" value="1.0.1" />
+    <Simple name="AppVersion" value="1.0.0.0" />
     <Simple name="GridMaxX" value="800" />
-    <Simple name="GridMaxY" value="400" />
+    <Simple name="GridMaxY" value="600" />
     <Simple name="GridFormTimer" value="1" />
     <Simple name="TrackMovment" value="False" />
-    <Simple name="PopulationDensityColoring" value="True" />
-    <Simple name="InitialPersonPopulation" value="1000" />
+    <Simple name="PopulationDensityColoring" value="False" />
+    <Simple name="InitialPersonPopulation" value="5000" />
     <Simple name="PersonMoveGlobal" value="False" />
     <Simple name="PersonMoveActivityRnd" value="1" />
-    <Simple name="PersonMoveHomeActivityRnd" value="0" />
+    <Simple name="PersonMoveHomeActivityRnd" value="2" />
     <Simple name="PersonLatencyPeriod" value="2" />
     <Simple name="PersonInfectiousPeriod" value="9" />
     <Simple name="PersonReinfectionImmunityPeriod" value="155" />
     <Simple name="PersonReinfectionRate" value="11" />
-    <Simple name="InitialVirusPopulation" value="1000" />
+    <Simple name="InitialVirusPopulation" value="5000" />
     <Simple name="VirusMoveGlobal" value="False" />
     <Simple name="VirusMoveActivityRnd" value="1" />
     <Simple name="VirusMoveHomeActivityRnd" value="0" />
-    <Simple name="MaxIterations" value="1000" />
+    <Simple name="MaxIterations" value="1000000" />
     <Simple name="PersonMoveRateFrom" value="1;1;1;1;1;1;1;1;1;1" />
-    <Simple name="PersonMoveRateTo" value="2;2;2;2;2;2;2;10;10;1000" />
+    <Simple name="PersonMoveRateTo" value="2;2;2;2;2;2;2;100;500;500" />
     <Simple name="VirusMoveRateFrom" value="1;1;1;1;1;1;1;1;1;1" />
-    <Simple name="VirusMoveRateTo" value="2;2;2;2;2;2;2;10;10;1000" />
+    <Simple name="VirusMoveRateTo" value="2;2;2;2;2;2;2;100;500;500" />
     <Simple name="ConfigFilePath" value="C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.XML" />
-    <Simple name="CsvFilePath" value="C:\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.CSV" />
-    <Simple name="XmlVirusColor" value="NamedColor:FloralWhite" />
-    <Simple name="XmlPersonsHealthyOrRecoverdColor" value="NamedColor:Plum" />
+    <Simple name="CsvFilePath" value="C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.CSV" />
+    <Simple name="XmlVirusColor" value="NamedColor:WhiteSmoke" />
+    <Simple name="XmlPersonsHealthyOrRecoverdColor" value="NamedColor:Blue" />
     <Simple name="XmlPersonsInfectedColor" value="NamedColor:DeepSkyBlue" />
-    <Simple name="XmlPersonsInfectiousColor" value="NamedColor:Red" />
-    <Simple name="XmlPersonsRecoverdImmuneNotInfectiousColor" value="NamedColor:Blue" />
-    <Simple name="XmlEmptyCellColor" value="NamedColor:Black" />
+    <Simple name="XmlPersonsInfectiousColor" value="NamedColor:Violet" />
+    <Simple name="XmlPersonsRecoverdImmuneNotInfectiousColor" value="NamedColor:Plum" />
+    <Simple name="XmlEmptyCellColor" value="NamedColor:White" />
   </Properties>
 </Complex>

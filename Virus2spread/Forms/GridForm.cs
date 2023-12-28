@@ -87,10 +87,13 @@ namespace Virus2spread.Forms
 
         private void SkglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs  e)
         {
-            ICanvas canvas = new SkiaCanvas() { Canvas = e.Surface.Canvas };
-            canvas.FillColor = Colors.Navy;
-            canvas.FillRectangle(0, 0, SkglControl.Width, SkglControl.Height);
-            simulation.DrawGrid(canvas, coordinateFactX, coordinateFactY, rectangleX, rectangleY);
+            SkiaCanvas skiaCanvas = new()
+            {
+                Canvas = e.Surface.Canvas,
+                FillColor = Colors.Navy
+            };
+            ((ICanvas)skiaCanvas).FillRectangle(0, 0, SkglControl.Width, SkglControl.Height);
+            simulation.DrawGrid(skiaCanvas, coordinateFactX, coordinateFactY, rectangleX, rectangleY);
             UpdateBenchmarkMessage();
             // to create animated gif, but slows down iterations
             // var surface = e.Surface;            

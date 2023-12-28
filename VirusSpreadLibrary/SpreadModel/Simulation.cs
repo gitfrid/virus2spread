@@ -4,6 +4,8 @@ using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.Grid;
 using Microsoft.Maui.Graphics;
 using System;
+using VirusSpreadLibrary.Plott;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace VirusSpreadLibrary.SpreadModel;
@@ -15,7 +17,14 @@ public class Simulation
     private readonly PersonList personList = new ();
     private readonly VirusList virusList = new ();
     private int iteration;
-    private PlotDataCsv plotData;
+    
+    readonly private PlotData plotData = new ();
+    // public prop to access the queue
+    
+    public PlotData PlotData 
+    { 
+        get => plotData;
+    }
 
     private bool stopIteration ;
     public Simulation()
@@ -36,8 +45,7 @@ public class Simulation
         MaxY = AppSettings.Config.GridMaxY;
         grid.SetNewEmptyGrid(MaxX, MaxY);
         personList.SetInitialPopulation(AppSettings.Config.InitialPersonPopulation, grid);
-        virusList.SetInitialPopulation(AppSettings.Config.InitialVirusPopulation, grid);
-        plotData = new();
+        virusList.SetInitialPopulation(AppSettings.Config.InitialVirusPopulation, grid);        
     }
     public void StartIteration()
     {
@@ -53,20 +61,24 @@ public class Simulation
 
         Log.Logger = Logging.getinstance();        
         Log.Logger.Information("Nr: {A} iteration", iteration);
+       
         iteration++;
+        plotData.IterationNumber = iteration;
 
+        long personAgeMean = 0;
+        long personsMoveDistanceMean = 0;
+        plotData.PersonPopulation = personList.Persons.Count;
         foreach (Person person in personList.Persons)
         {
             person.Age++;
-            
+            personAgeMean += person.Age;
+
             // get health state if is infected
             if (person.PersonState.HealthStateCounter != 0)
             {
                 person.PersonState.HealthStateCounter++;
                 person.SetPersonHealthState();
-            }
-
-            
+            }           
             // move person and change health state if get infected
             if (person.DoMove())
             {
@@ -80,28 +92,25 @@ public class Simulation
                     person.MoveToNewCoordinate(grid);
                 }
                 System.Drawing.Point endPoint = person.PersMoveData.EndGridCoordinate;
-
-                plotData.IterationNumber = iteration;
-                ++plotData.PersonPopulation;
-                plotData.PersonsAge += person.Age;
-                plotData.SetPersonHealthState(person.PersonState);
-
                 int dx = endPoint.X - startPoint.X;
                 int dy = endPoint.Y - startPoint.Y;
                 double SE = Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
-                plotData.PersonsMoveDistance += Convert.ToInt64(SE);
+                personsMoveDistanceMean += Convert.ToInt64(SE);
             }
-            plotData.IterationNumber = iteration;
-            ++plotData.PersonPopulation;
-            plotData.PersonsAge += person.Age;
             plotData.SetPersonHealthState(person.PersonState);
         };
 
+
+
         // Parallel.ForEach(VirusList.Viruses, virus =>}); -> takes longer
+        long virusAgeMean = 0;
+        long virusesMoveDistanceMean = 0;
+        plotData.VirusPopulation = virusList.Viruses.Count;
         foreach (Virus virus in virusList.Viruses)
         {
             virus.Age++;
-
+            virusAgeMean += virus.Age;
+            
             if (virus.DoMove())
             {
                 System.Drawing.Point startPoint = virus.VirMoveData.StartGidCoordinate;
@@ -118,12 +127,26 @@ public class Simulation
                 int dx = endPoint.X - startPoint.X;
                 int dy = endPoint.Y - startPoint.Y;
                 double SE = Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
-                plotData.VirusesMoveDistance += Convert.ToInt64(SE);
-            }
-            ++plotData.VirusPopulation;
-            plotData.VirusesAge += virus.Age;
+                virusesMoveDistanceMean += Convert.ToInt64(SE);                
+            }            
+            
         };
-        plotData.WriteToCsv();
+        
+        if (plotData.VirusPopulation > 0) 
+        {
+            plotData.VirusesAge = (virusAgeMean / plotData.VirusPopulation);
+            plotData.VirusesMoveDistance = (virusesMoveDistanceMean / plotData.VirusPopulation);
+        }
+
+        if (plotData.PersonPopulation > 0)
+        {
+            plotData.PersonsAge = (personAgeMean / plotData.PersonPopulation);
+            plotData.PersonsMoveDistance = (personsMoveDistanceMean / plotData.PersonPopulation);
+            plotData.PersonsInfectionCounter /= plotData.PersonPopulation;
+        }
+
+        plotData.WriteToQueue();
+        plotData.ResetCounter();
     }
 
     // first initialize grid!

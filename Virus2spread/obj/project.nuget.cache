@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hiFZwxPzFzezJj7WGdW9yJy2CpLIF5RarlaC4FedaKv1Yg9l1rmsOJNj07MvyYcm2CKRzZfMkpKvRWAGqn4FCA==",
+  "dgSpecHash": "nCq8jGQXSFETf21/9d7VkPNiQquuP4aImV+c783tf9QyDqfDMvj50soXGHPJt5dwEGsrnAjfdNJzYFJgo+aqbg==",
   "success": true,
   "projectFilePath": "C:\\Github\\virus2spread\\Virus2spread\\Virus2spread.csproj",
   "expectedPackageFiles": [
@@ -40,6 +40,8 @@
     "C:\\Users\\adm\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\scottplot\\4.1.69\\scottplot.4.1.69.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\scottplot.winforms\\4.1.69\\scottplot.winforms.4.1.69.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\serilog.sinks.console\\4.1.0\\serilog.sinks.console.4.1.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\sharpserializer.core\\1.0.0\\sharpserializer.core.1.0.0.nupkg.sha512",

@@ -21,13 +21,13 @@ public class Grid
         maxX = MaxX;
         maxY = MaxY;
         Cells = new GridCell[maxX, maxY];
-        Microsoft.Maui.Graphics.Color Color = ColorList.GetCellColor(CellState.EmptyCell, 0,0);
+        //Microsoft.Maui.Graphics.Color Color = ColorList.GetCellColor(CellState.EmptyCell, 0,0);
 
         for (int y = 0; y < maxY; y++)
         {
             for (int x = 0; x < maxX; x++)
             {
-                this.Cells[x, y] = new GridCell(Color, 0,0);
+                this.Cells[x, y] = new GridCell();
             }
         }
     }

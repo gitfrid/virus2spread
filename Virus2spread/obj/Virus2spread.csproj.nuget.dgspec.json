@@ -64,6 +64,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "ScottPlot.WinForms": {
+              "target": "Package",
+              "version": "[4.1.69, )"
+            },
             "SkiaSharp": {
               "target": "Package",
               "version": "[2.88.6, )"
@@ -151,6 +155,10 @@
             "RecordParser": {
               "target": "Package",
               "version": "[2.3.0, )"
+            },
+            "ScottPlot.WinForms": {
+              "target": "Package",
+              "version": "[4.1.69, )"
             },
             "Serilog.Sinks.Console": {
               "target": "Package",

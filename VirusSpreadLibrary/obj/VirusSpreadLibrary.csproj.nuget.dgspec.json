@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[2.3.0, )"
             },
+            "ScottPlot.WinForms": {
+              "target": "Package",
+              "version": "[4.1.69, )"
+            },
             "Serilog.Sinks.Console": {
               "target": "Package",
               "version": "[4.1.0, )"

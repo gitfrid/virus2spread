@@ -10,6 +10,8 @@
         "dependencies": {
           "Microsoft.Maui.Graphics.Skia": "7.0.100",
           "Microsoft.Windows.Compatibility": "8.0.0",
+          "RecordParser": "2.3.0",
+          "ScottPlot.WinForms": "4.1.69",
           "Serilog.Sinks.Console": "4.1.0",
           "SharpSerializer.Core": "1.0.0",
           "SkiaSharp": "2.88.6",
@@ -124,6 +126,14 @@
           }
         }
       },
+      "RecordParser/2.3.0": {
+        "runtime": {
+          "lib/net8.0/RecordParser.dll": {
+            "assemblyVersion": "2.3.0.0",
+            "fileVersion": "2.3.0.0"
+          }
+        }
+      },
       "runtime.linux-arm.runtime.native.System.IO.Ports/8.0.0": {
         "runtimeTargets": {
           "runtimes/linux-arm/native/libSystem.IO.Ports.Native.so": {
@@ -209,6 +219,29 @@
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "4.6.25512.1"
+          }
+        }
+      },
+      "ScottPlot/4.1.69": {
+        "dependencies": {
+          "System.Drawing.Common": "8.0.0",
+          "System.Numerics.Vectors": "4.5.0"
+        },
+        "runtime": {
+          "lib/net6.0/ScottPlot.dll": {
+            "assemblyVersion": "4.1.69.0",
+            "fileVersion": "4.1.69.0"
+          }
+        }
+      },
+      "ScottPlot.WinForms/4.1.69": {
+        "dependencies": {
+          "ScottPlot": "4.1.69"
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/ScottPlot.WinForms.dll": {
+            "assemblyVersion": "4.1.69.0",
+            "fileVersion": "4.1.69.0"
           }
         }
       },
@@ -899,6 +932,13 @@
       "path": "opentk.glcontrol/3.1.0",
       "hashPath": "opentk.glcontrol.3.1.0.nupkg.sha512"
     },
+    "RecordParser/2.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AV4BPuN/bt87Lm7eQcstMsiD0bA2W0poxI582Si+rPx5l+GEu3FZquNWp+OkyRdBdcFmYynXAJ7gCyI/5EANbw==",
+      "path": "recordparser/2.3.0",
+      "hashPath": "recordparser.2.3.0.nupkg.sha512"
+    },
     "runtime.linux-arm.runtime.native.System.IO.Ports/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -968,6 +1008,20 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "ScottPlot/4.1.69": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eYoLeztGsYcMBmAFBm/Yx1nDhhZ6c8XLYfcDv314JVxeaUpQknk5N3KktzxwQ5zmDYjixXe6F3/mqNdFFjcRAQ==",
+      "path": "scottplot/4.1.69",
+      "hashPath": "scottplot.4.1.69.nupkg.sha512"
+    },
+    "ScottPlot.WinForms/4.1.69": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mZhiyaBzTmsCyAYZGTNEhNQI+vE8Wc63WLUFCC4XomqFeJbjJZ9PzCRafJcuLHN4R2EWUiPEvNwpwI9X7F0pSQ==",
+      "path": "scottplot.winforms/4.1.69",
+      "hashPath": "scottplot.winforms.4.1.69.nupkg.sha512"
     },
     "Serilog/2.10.0": {
       "type": "package",

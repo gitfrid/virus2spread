@@ -11,10 +11,6 @@ public class GridCell
 
     public GridCell()
     {
-        //
-    }
-    public GridCell(Microsoft.Maui.Graphics.Color ColorOfCell, int NumPersons, int NumViruses)
-    {
         // set Cell Population and Color!
         virusPopulation = new CellViruses();
         personPopulation = new CellPersons();

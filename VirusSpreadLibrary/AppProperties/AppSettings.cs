@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Drawing.Design;
+using System.Reflection;
 using System.Xml.Serialization;
 using Polenter.Serialization;
 using VirusSpreadLibrary.AppProperties.PropertyGridExt;
@@ -41,13 +42,12 @@ public  class AppSettings
 
 
     private string about = "";
-    //private readonly string appVersion = Application.ProductVersion[..Application.ProductVersion.ToString().IndexOf('+')];
-    private readonly string appVersion = "1.0.1";
+    private readonly string appVersion = $"{Assembly.GetEntryAssembly().GetName().Version}";
     private int gridMaxX = 100;
     private int gridMaxY = 100;
     private long initialPersonPopulation = 20;
     private long initialVirusPopulation = 10;
-    private long maxIterations = 1000;
+    private long maxIterations = 1000000;
     private Point form_Config_WindowLocation = new(0, 0);
     private Size form_Config_WindowSize = new(2056, 1010);
     private bool virusMoveGlobal = true;

@@ -423,6 +423,29 @@
           }
         }
       },
+      "ScottPlot/4.1.69": {
+        "dependencies": {
+          "System.Drawing.Common": "8.0.0",
+          "System.Numerics.Vectors": "4.5.0"
+        },
+        "runtime": {
+          "lib/net6.0/ScottPlot.dll": {
+            "assemblyVersion": "4.1.69.0",
+            "fileVersion": "4.1.69.0"
+          }
+        }
+      },
+      "ScottPlot.WinForms/4.1.69": {
+        "dependencies": {
+          "ScottPlot": "4.1.69"
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/ScottPlot.WinForms.dll": {
+            "assemblyVersion": "4.1.69.0",
+            "fileVersion": "4.1.69.0"
+          }
+        }
+      },
       "Serilog/2.10.0": {
         "runtime": {
           "lib/netstandard2.1/Serilog.dll": {
@@ -1521,6 +1544,20 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "ScottPlot/4.1.69": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eYoLeztGsYcMBmAFBm/Yx1nDhhZ6c8XLYfcDv314JVxeaUpQknk5N3KktzxwQ5zmDYjixXe6F3/mqNdFFjcRAQ==",
+      "path": "scottplot/4.1.69",
+      "hashPath": "scottplot.4.1.69.nupkg.sha512"
+    },
+    "ScottPlot.WinForms/4.1.69": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mZhiyaBzTmsCyAYZGTNEhNQI+vE8Wc63WLUFCC4XomqFeJbjJZ9PzCRafJcuLHN4R2EWUiPEvNwpwI9X7F0pSQ==",
+      "path": "scottplot.winforms/4.1.69",
+      "hashPath": "scottplot.winforms.4.1.69.nupkg.sha512"
     },
     "Serilog/2.10.0": {
       "type": "package",
