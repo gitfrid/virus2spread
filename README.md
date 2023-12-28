@@ -8,7 +8,11 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br> 
 <br> 
 <br> 
-This Project is still in work - a long way to go. Programming support is welcome.
+This Project is still in work - a long way to go. 
+<br>
+<br>
+![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/a2376c66-2d05-4db9-b8b9-2e16b128cf9f)
+
 <br>
 <br>
 C# : Net 8.0 WindowsForms, Nuget Packages : 
@@ -28,8 +32,11 @@ Microsoft.Windows.Compatibility
 System.Text.Encoding.CodePages
 <br> 
 WinForms.DataVisualization
-<br> 
+<br>
+Scottplot
+<br>
+
 License: open source - MIT License
 
-![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/a2376c66-2d05-4db9-b8b9-2e16b128cf9f)
+
 
