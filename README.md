@@ -31,3 +31,5 @@ WinForms.DataVisualization
 <br> 
 License: open source - MIT License
 
+![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/a2376c66-2d05-4db9-b8b9-2e16b128cf9f)
+
