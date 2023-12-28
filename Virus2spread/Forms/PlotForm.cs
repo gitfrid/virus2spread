@@ -3,7 +3,7 @@ using ScottPlot.Renderable;
 using ScottPlot.Plottable;
 using VirusSpreadLibrary.Plott;
 using VirusSpreadLibrary.AppProperties;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+//using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace Virus2spread
@@ -24,6 +24,10 @@ namespace Virus2spread
 
         private int nextDataIndex = 0;
 
+        private Point HighlightedPoint;
+
+        private readonly Crosshair crosshair;
+
         public string Title = "Virus2Spread Diagram: Y-14 parameter, X-Number of iterations";
 
         public PlotForm(PlotData PlotData)
@@ -35,6 +39,14 @@ namespace Virus2spread
             formsPlot = new() { Dock = DockStyle.Fill };
             splitContainer1.Panel2.Controls.Add(formsPlot);
 
+            //register the MouseMove event handler
+            crosshair = formsPlot.Plot.AddCrosshair(0, 0);
+            crosshair.HorizontalLine.PositionLabelFont.Size = 16;
+            crosshair.VerticalLine.PositionLabelFont.Size = 16;
+            formsPlot.MouseMove += formsPlot_MouseMove;
+            formsPlot.MouseEnter += formsPlot_MouseEnter;
+            formsPlot_MouseLeave(null, null);
+            
             Legend legend = formsPlot.Plot.Legend(enable: true, location: null);
             formsPlot.Plot.Palette = ScottPlot.Palette.Category20;
 
@@ -46,10 +58,8 @@ namespace Virus2spread
 
             // set timer intervall to enque data and refresh plot
             dataTimer.Interval = 1;
-            //dataTimer.Tick += Timer_Tick!;
             dataTimer.Start();
             renderTimer.Interval = 20;
-            //dataTimer.Tick += Timer_Tick!;
             renderTimer.Start();
 
             Closed += (sender, args) =>
@@ -63,7 +73,7 @@ namespace Virus2spread
         private void dataTimer_Tick(object sender, EventArgs e)
         {
             // dequeue doubles list from PlotQueue
-            
+
             if (nextDataIndex >= signalData[0].Length)
             {
                 dataTimer?.Stop();
@@ -172,14 +182,32 @@ namespace Virus2spread
             }
         }
 
-        //private void dataTimer_Tick(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void renderTimer_Tick(object sender, EventArgs e)
-        //{
-
-        //}
+        private void CbCorssHair_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CbCorssHair.Checked == false)
+            {
+                crosshair.IsVisible = false;
+            }
+            else 
+            {
+                crosshair.IsVisible = true;
+            }
+        }
+        private void formsPlot_MouseLeave(object sender, MouseEventArgs e)
+        {
+            crosshair.IsVisible = false;
+            formsPlot.Refresh();
+        }
+        private void formsPlot_MouseEnter(object sender, EventArgs e)
+        {
+            if (CbCorssHair.Checked) { crosshair.IsVisible = true; }
+        }
+        private void formsPlot_MouseMove(object sender, MouseEventArgs e)
+        {
+            (double coordinateX, double coordinateY) = formsPlot.GetMouseCoordinates();
+            crosshair.X = coordinateX;
+            crosshair.Y = coordinateY;
+            formsPlot.Refresh(lowQuality: true, skipIfCurrentlyRendering: true);
+        }
     }
 }

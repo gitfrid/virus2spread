@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             BtnHoldStart = new Button();
             splitContainer1 = new SplitContainer();
+            CbCorssHair = new CheckBox();
             CbAutoAxis = new CheckBox();
             ChkShowLegend = new CheckBox();
             BtnAutoScaleY = new Button();
@@ -63,6 +64,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(CbCorssHair);
             splitContainer1.Panel1.Controls.Add(CbAutoAxis);
             splitContainer1.Panel1.Controls.Add(ChkShowLegend);
             splitContainer1.Panel1.Controls.Add(BtnAutoScaleY);
@@ -80,12 +82,23 @@
             splitContainer1.SplitterWidth = 6;
             splitContainer1.TabIndex = 2;
             // 
+            // CbCorssHair
+            // 
+            CbCorssHair.AutoSize = true;
+            CbCorssHair.Location = new Point(27, 898);
+            CbCorssHair.Name = "CbCorssHair";
+            CbCorssHair.Size = new Size(139, 36);
+            CbCorssHair.TabIndex = 12;
+            CbCorssHair.Text = "corsshair";
+            CbCorssHair.UseVisualStyleBackColor = true;
+            CbCorssHair.CheckedChanged += CbCorssHair_CheckedChanged;
+            // 
             // CbAutoAxis
             // 
             CbAutoAxis.AutoSize = true;
             CbAutoAxis.Checked = true;
             CbAutoAxis.CheckState = CheckState.Checked;
-            CbAutoAxis.Location = new Point(27, 895);
+            CbAutoAxis.Location = new Point(27, 841);
             CbAutoAxis.Margin = new Padding(6, 7, 6, 7);
             CbAutoAxis.Name = "CbAutoAxis";
             CbAutoAxis.Size = new Size(222, 36);
@@ -115,47 +128,47 @@
             BtnAutoScaleY.Name = "BtnAutoScaleY";
             BtnAutoScaleY.Size = new Size(190, 46);
             BtnAutoScaleY.TabIndex = 5;
-            BtnAutoScaleY.Text = "auto scale Y";
+            BtnAutoScaleY.Text = "Y scale";
             BtnAutoScaleY.UseVisualStyleBackColor = true;
             BtnAutoScaleY.Click += BtnAutoScaleY_Click;
             // 
             // BtnAutoScaleX
             // 
-            BtnAutoScaleX.Location = new Point(37, 385);
+            BtnAutoScaleX.Location = new Point(37, 402);
             BtnAutoScaleX.Name = "BtnAutoScaleX";
             BtnAutoScaleX.Size = new Size(190, 46);
             BtnAutoScaleX.TabIndex = 4;
-            BtnAutoScaleX.Text = "auto scale X";
+            BtnAutoScaleX.Text = "X scale";
             BtnAutoScaleX.UseVisualStyleBackColor = true;
             BtnAutoScaleX.Click += BtnAutoScaleX_Click;
             // 
             // BtnManualScale
             // 
-            BtnManualScale.Location = new Point(37, 156);
+            BtnManualScale.Location = new Point(37, 254);
             BtnManualScale.Name = "BtnManualScale";
             BtnManualScale.Size = new Size(190, 46);
             BtnManualScale.TabIndex = 3;
-            BtnManualScale.Text = "manual scale";
+            BtnManualScale.Text = "manually scale";
             BtnManualScale.UseVisualStyleBackColor = true;
             BtnManualScale.Click += BtnManualScale_Click;
             // 
             // BtnAutoScaleTight
             // 
-            BtnAutoScaleTight.Location = new Point(37, 305);
+            BtnAutoScaleTight.Location = new Point(37, 186);
             BtnAutoScaleTight.Name = "BtnAutoScaleTight";
             BtnAutoScaleTight.Size = new Size(190, 46);
             BtnAutoScaleTight.TabIndex = 2;
-            BtnAutoScaleTight.Text = "auto scale tight";
+            BtnAutoScaleTight.Text = "scale tight";
             BtnAutoScaleTight.UseVisualStyleBackColor = true;
             BtnAutoScaleTight.Click += BtnAutoScaleTight_Click;
             // 
             // BtnAutoScale
             // 
-            BtnAutoScale.Location = new Point(37, 224);
+            BtnAutoScale.Location = new Point(37, 329);
             BtnAutoScale.Name = "BtnAutoScale";
             BtnAutoScale.Size = new Size(190, 46);
             BtnAutoScale.TabIndex = 1;
-            BtnAutoScale.Text = "auto scale";
+            BtnAutoScale.Text = "XY scale";
             BtnAutoScale.UseVisualStyleBackColor = true;
             BtnAutoScale.Click += BtnAutoScale_Click;
             // 
@@ -199,5 +212,6 @@
         private CheckBox CbAutoAxis;
         private System.Windows.Forms.Timer dataTimer;
         private System.Windows.Forms.Timer renderTimer;
+        private CheckBox CbCorssHair;
     }
 }
