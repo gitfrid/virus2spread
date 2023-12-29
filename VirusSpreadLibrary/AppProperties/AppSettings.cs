@@ -67,7 +67,7 @@ public  class AppSettings
     private string xmlPersonsHealthyOrRecoverdColor = "Blue";
     private Color personsInfectedColor = Color.DeepSkyBlue;
     private string xmlPersonsInfectedColor = "DeepSkyBlue";
-    private Color emptyCellColor = Color.White;
+    private Color emptyCellColor = Color.Black;
     private string xmlEmptyCellColor = "White";
     private Color personsInfectiousColor = Color.Violet;
     private string xmlPersonsInfectiousColor = "Violet";
@@ -730,6 +730,19 @@ public class LegendVisability
         for (int i = 0; i < 14; i++)
         {
             legendVisabilityStatus[i] = true;
+        }
+
+        // unchecked first five plotlines
+        // better zoom for the small plot values
+        for (int i = 0; i < 5; i++)
+        {
+            legendVisabilityStatus[i] = false;
+        }
+        //unchecked two last plotlines
+        //-> plot influences the rendering performance of the simulation BUG?
+        for (int i = 12; i < 14; i++)
+        {
+            legendVisabilityStatus[i] = false;
         }
     }
     public bool[] LegendVisabilitySatus

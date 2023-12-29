@@ -64,9 +64,9 @@ namespace Virus2spread
             }
 
             // set timer intervall to enque data and refresh plot
-            DataTimer.Interval = 1;
+            DataTimer.Interval = 10;
             DataTimer.Start();
-            RenderTimer.Interval = 20;
+            RenderTimer.Interval = 100;
             RenderTimer.Start();
             BtnHoldStart.BackColor = SystemColors.ControlLightLight;
 
@@ -104,7 +104,7 @@ namespace Virus2spread
 
             // en-queue n-max in the simulate class should be adjusted with the de-queue n-max below
             // to make shure, all values can be de-qued in time by the PlotForm
-            for (int n = 0; n < 2; n++)
+            for (int n = 0; n < 200; n++)
             {
                 bool success = plotData.PlotDataQueue.TryDequeueList(out List<long> values);
                 if (success)

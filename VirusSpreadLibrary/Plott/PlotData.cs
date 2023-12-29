@@ -21,11 +21,11 @@ namespace VirusSpreadLibrary.Plott
                 "personsHealthy", "personsRecoverd", "personsInfected", "personsReinfected", "personsInfectionCounter",
                 "personsInfectious", "personsRecoverdImmuneNotinfectious", "PersonsMoveDistance", "VirusesMoveDistance" ];
 
-        //private long iterationNumber = 0;
-        //private long personPopulation = 0;
-        //private long virusPopulation = 0;
-        //private long personsAge = 0;
-        //private long virusesAge = 0;
+        private long iterationNumber = 0;
+        private long personPopulation = 0;
+        private long virusPopulation = 0;
+        private long personsAge = 0;
+        private long virusesAge = 0;
 
         private long personsHealthy = 0;
         private long personsRecoverd = 0;
@@ -116,7 +116,7 @@ namespace VirusSpreadLibrary.Plott
 
             List<long> values = new ();
 
-            long[] instance = [0, 0, 0, 0, 0,
+            long[] instance = [IterationNumber, PersonPopulation, VirusPopulation, PersonsAge, VirusesAge,
                 personsHealthy, personsRecoverd, personsInfected, personsReinfected, personsInfectionCounter,
                 personsInfectious, personsRecoverdImmuneNotinfectious, PersonsMoveDistance, VirusesMoveDistance ];
 
