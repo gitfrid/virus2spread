@@ -113,9 +113,9 @@ public  class AppSettings
     {
         
         PersonMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
-        PersonMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,100,200,200]);
+        PersonMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,100,100,200]);
         VirusMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
-        VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,100,200,200]);
+        VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,100,100,200]);
         // in main Form you can fill it like this
         // AppSettings.Config.VirusMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
         // AppSettings.Config.VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,2,2,2]);

@@ -9,7 +9,7 @@ namespace Virus2spread
 {
     public partial class MainForm : Form
     {
-        private Simulation modelSimulation;
+        private Simulation? modelSimulation;
         public MainForm()
         {
             InitializeComponent();
@@ -62,8 +62,11 @@ namespace Virus2spread
         {
             Form? pltForm = Application.OpenForms["PlotForm"];
             pltForm?.Close();
-            PlotForm plotForm = new(modelSimulation.PlotData);
-            plotForm.Show();
+            if (modelSimulation is not null)
+            {
+                PlotForm plotForm = new(modelSimulation.PlotData);
+                plotForm.Show();
+            }                        
             this.Focus();
         }
         private void PropertyGridSelectConfig()
