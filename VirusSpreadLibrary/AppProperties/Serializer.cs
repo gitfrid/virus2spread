@@ -13,7 +13,7 @@ public class Setting
     {
         //
     }
-    private SharpSerializerXmlSettings SerializerXmlSettings()
+    private static SharpSerializerXmlSettings SerializerXmlSettings()
     {
         // for more options see: -> SharpSerializer library -> HelloWorldApp.csproj -> Form1
         // or here: -> "C:\AppPropertiesSharpSerializer\AppProperties\Doku\SharpSerializer_Settings.pdf"
@@ -27,13 +27,13 @@ public class Setting
         return settings;
     }
 
-    public void SerializeT<T>(T Obj, Stream stream)
+    public static void SerializeT<T>(T Obj, Stream stream)
     {
         var serializer = new SharpSerializer();
         serializer.Serialize(Obj, stream);
     }
 
-    public T DeserializeT<T>(Stream stream)
+    public static T DeserializeT<T>(Stream stream)
     {
         var serializer = new SharpSerializer();
         return (T)serializer.Deserialize(stream);
@@ -131,12 +131,12 @@ public class Setting
 
     // get file in %appdata%AppName\LastConfigFileLocation.XML
     // which stores the path to the last used Application Config xmlFile
-    private string LastConfigPathXmlFile()
+    private static string LastConfigPathXmlFile()
     {
         string appName = Path.GetFileNameWithoutExtension(System.AppDomain.CurrentDomain.FriendlyName);
         return new(string.Concat(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"\", appName, @"\LastConfigFileLocation.XML"));
     }
-    public void SetLastConfigFilePath(string ConfigFilePath)
+    public static void SetLastConfigFilePath(string ConfigFilePath)
     {
         GetSetLastConfigFilePath objLastConfigFilePath = new();
         string lastConfigPathXmlFile = LastConfigPathXmlFile();
@@ -151,7 +151,7 @@ public class Setting
         new SharpSerializer().Serialize(objLastConfigFilePath, lastConfigPathXmlFile);
     }
 
-    public string GetLastConfigFilePath(string DefaultConfigFilePath)
+    public static string GetLastConfigFilePath(string DefaultConfigFilePath)
     {
         string lastConfigPathXmlFile = LastConfigPathXmlFile();
         
@@ -188,7 +188,7 @@ public class Setting
         Load();
     }
 
-    private void SerializeClass(ClassSerializer ObjCase, SharpSerializer serializer, string XmlFileName = "")
+    private static void SerializeClass(ClassSerializer ObjCase, SharpSerializer serializer, string XmlFileName = "")
     {
 
         if (XmlFileName == "") 
@@ -215,13 +215,13 @@ public class Setting
         // fix assertions
         if (ObjCase.Source is not null)
         {
-            ObjCase.AreEqual(ObjCase.Source.GetType(), result.GetType());
+            ClassSerializer.AreEqual(ObjCase.Source.GetType(), result.GetType());
         }
         // custom assertions
         ObjCase.ResultReview(result);
     }
     
-    public void SerializeTheClass(ClassSerializer ObjCase) 
+    public static void SerializeTheClass(ClassSerializer ObjCase) 
     {
         SerializeClass(ObjCase, new SharpSerializer());
     }
@@ -233,7 +233,7 @@ public class Setting
         ARGBColor
     }
 
-    public string ToXmlColor(Color color)
+    public static string ToXmlColor(Color color)
     {
         if (color.IsNamedColor)
             return string.Format("{0}:{1}", ColorFormat.NamedColor, color.Name);
@@ -241,7 +241,7 @@ public class Setting
             return string.Format("{0}:{1}:{2}:{3}:{4}", ColorFormat.ARGBColor, color.A, color.R, color.G, color.B);
     }
 
-    public System.Drawing.Color FromXmlColor(string color)
+    public static System.Drawing.Color FromXmlColor(string color)
     {
         byte a, r, g, b;
 
@@ -357,12 +357,12 @@ public abstract class ClassSerializer
 
 
     // Verifies that two specified generic type data are equal by using the equality
-    public  void AreEqual(object expected, object actual)
+    public static void AreEqual(Object expected, Object actual)
     {
         AreEqual(expected, actual);
     }
 
-    public void AreEqual<T>(T expected, T actual)
+    public static void AreEqual<T>(T expected, T actual)
     {
         if (!object.Equals(expected, actual))
         {

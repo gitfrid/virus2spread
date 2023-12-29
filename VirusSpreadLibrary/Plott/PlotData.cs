@@ -116,10 +116,6 @@ namespace VirusSpreadLibrary.Plott
 
             List<long> values = new ();
 
-            //long[] instance = new long[14]{IterationNumber, PersonPopulation, VirusPopulation, PersonsAge, VirusesAge,
-            //    personsHealthy, personsRecoverd, personsInfected, personsReinfected, personsInfectionCounter, 
-            //    personsInfectious, personsRecoverdImmuneNotinfectious, PersonsMoveDistance, VirusesMoveDistance };
-
             long[] instance = [0, 0, 0, 0, 0,
                 personsHealthy, personsRecoverd, personsInfected, personsReinfected, personsInfectionCounter,
                 personsInfectious, personsRecoverdImmuneNotinfectious, PersonsMoveDistance, VirusesMoveDistance ];

@@ -38,6 +38,7 @@
             eventsListBox = new VirusSpreadLibrary.AppProperties.EventsListBox();
             StartSimulation_button1 = new Button();
             tabPage2 = new TabPage();
+            ShowChart_button = new Button();
             tabControl.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -80,6 +81,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(ShowChart_button);
             splitContainer1.Panel2.Controls.Add(SaveConfig_button3);
             splitContainer1.Panel2.Controls.Add(LoadConfig_button2);
             splitContainer1.Panel2.Controls.Add(eventsListBox);
@@ -99,7 +101,7 @@
             // 
             // SaveConfig_button3
             // 
-            SaveConfig_button3.Location = new Point(44, 190);
+            SaveConfig_button3.Location = new Point(44, 278);
             SaveConfig_button3.Name = "SaveConfig_button3";
             SaveConfig_button3.Size = new Size(162, 46);
             SaveConfig_button3.TabIndex = 6;
@@ -109,7 +111,7 @@
             // 
             // LoadConfig_button2
             // 
-            LoadConfig_button2.Location = new Point(44, 117);
+            LoadConfig_button2.Location = new Point(44, 208);
             LoadConfig_button2.Name = "LoadConfig_button2";
             LoadConfig_button2.Size = new Size(162, 46);
             LoadConfig_button2.TabIndex = 5;
@@ -148,6 +150,16 @@
             tabPage2.Text = "Rate Settings";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // ShowChart_button
+            // 
+            ShowChart_button.Location = new Point(44, 104);
+            ShowChart_button.Name = "ShowChart_button";
+            ShowChart_button.Size = new Size(162, 46);
+            ShowChart_button.TabIndex = 7;
+            ShowChart_button.Text = "Chart";
+            ShowChart_button.UseVisualStyleBackColor = true;
+            ShowChart_button.Click += ShowChart_button_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -180,5 +192,6 @@
         private VirusSpreadLibrary.AppProperties.EventsListBox eventsListBox;
         private Button LoadConfig_button2;
         private Button SaveConfig_button3;
+        private Button ShowChart_button;
     }
 }

@@ -3,8 +3,6 @@ using ScottPlot.Renderable;
 using ScottPlot.Plottable;
 using VirusSpreadLibrary.Plott;
 using VirusSpreadLibrary.AppProperties;
-//using static System.Runtime.InteropServices.JavaScript.JSType;
-
 
 namespace Virus2spread
 {
@@ -18,13 +16,11 @@ namespace Virus2spread
 
         readonly FormsPlot formsPlot;
 
-        private SignalPlot[] signalPlot = new SignalPlot[14];
+        private readonly SignalPlot[] signalPlot = new SignalPlot[14];
 
-        private double[][] signalData = new double[14][];
+        private readonly double[][] signalData = new double[14][];
 
         private int nextDataIndex = 0;
-
-        private Point HighlightedPoint;
 
         private readonly Crosshair crosshair;
 
@@ -33,6 +29,7 @@ namespace Virus2spread
         public PlotForm(PlotData PlotData)
         {
             InitializeComponent();
+
             plotData = PlotData;
 
             // Add the FormsPlot
@@ -43,10 +40,10 @@ namespace Virus2spread
             crosshair = formsPlot.Plot.AddCrosshair(0, 0);
             crosshair.HorizontalLine.PositionLabelFont.Size = 16;
             crosshair.VerticalLine.PositionLabelFont.Size = 16;
-            formsPlot.MouseMove += formsPlot_MouseMove;
-            formsPlot.MouseEnter += formsPlot_MouseEnter;
-            formsPlot_MouseLeave(null, null);
-            
+            formsPlot.MouseMove += FormsPlot_MouseMove;
+            formsPlot.MouseEnter += FormsPlot_MouseEnter;
+            FormsPlot_MouseLeave(null!, null!);
+
             Legend legend = formsPlot.Plot.Legend(enable: true, location: null);
             formsPlot.Plot.Palette = ScottPlot.Palette.Category20;
 
@@ -56,28 +53,45 @@ namespace Virus2spread
                 signalPlot[i] = formsPlot.Plot.AddSignal(signalData[i], 1, formsPlot.Plot.Palette.GetColor(i), string.Format("{0}", plotData.Legend[i].ToString()));
             }
 
+            LegendListBox.Items.AddRange(plotData.Legend);
+            LegendListBox.CheckOnClick = true;// <- change mode from double to single click
+
+            // set viability of plot lines / lgeend
+            for (int i = 0; i < LegendListBox.Items.Count; i++)
+            {
+                LegendListBox.SetItemChecked(i, AppSettings.Config.LegendVisability[i]); // -> load status from config
+                signalPlot[i].IsVisible = LegendListBox.GetItemChecked(i);
+            }
+
             // set timer intervall to enque data and refresh plot
-            dataTimer.Interval = 1;
-            dataTimer.Start();
-            renderTimer.Interval = 20;
-            renderTimer.Start();
+            DataTimer.Interval = 1;
+            DataTimer.Start();
+            RenderTimer.Interval = 20;
+            RenderTimer.Start();
+            BtnHoldStart.BackColor = SystemColors.ControlLightLight;
 
             Closed += (sender, args) =>
             {
-                dataTimer?.Stop();
-                renderTimer?.Stop();
+                DataTimer?.Stop();
+                RenderTimer?.Stop();
             };
-
         }
 
-        private void dataTimer_Tick(object sender, EventArgs e)
+        private void PlotForm_Load(object sender, EventArgs e)
+        {
+            // set window size
+            this.MinimumSize = new Size(1280, 720);
+            this.Location = AppSettings.Config.PlotForm_WindowLocation;
+            this.Size = AppSettings.Config.PlotForm_WindowSize;
+        }
+        private void DataTimer_Tick(object sender, EventArgs e)
         {
             // dequeue doubles list from PlotQueue
 
             if (nextDataIndex >= signalData[0].Length)
             {
-                dataTimer?.Stop();
-                renderTimer?.Stop();
+                DataTimer?.Stop();
+                RenderTimer?.Stop();
                 MessageBox.Show("PlotForm data array isn't long enough, set a bigger value for Max Iterations");
                 throw new OverflowException("PlotForm data array isn't long enough to accomodate new data");
                 // in this situation the solution would be:
@@ -108,10 +122,12 @@ namespace Virus2spread
                 }
             }
             //formsPlot.Refresh();
-            Text = $"DataLogger Demo ({nextDataIndex:N0} points)";
+            Text = $"virus2spread Charts ({nextDataIndex:N0} points)";
         }
 
-        private void renderTimer_Tick(object sender, EventArgs e)
+
+
+        private void RenderTimer_Tick(object sender, EventArgs e)
         {
             if (CbAutoAxis.Checked)
             {
@@ -123,15 +139,17 @@ namespace Virus2spread
         private void BtnHoldStart_Click(object sender, EventArgs e)
         {
             // sart stop plotting
-            if (dataTimer.Enabled || renderTimer.Enabled)
+            if (DataTimer.Enabled || RenderTimer.Enabled)
             {
-                dataTimer.Enabled = false;
-                renderTimer.Enabled = false;
+                BtnHoldStart.BackColor = SystemColors.Control;
+                DataTimer.Enabled = false;
+                RenderTimer.Enabled = false;
             }
             else
             {
-                dataTimer.Enabled = true;
-                renderTimer.Enabled = true;
+                BtnHoldStart.BackColor = SystemColors.ControlLightLight;
+                DataTimer.Enabled = true;
+                RenderTimer.Enabled = true;
             }
         }
 
@@ -139,7 +157,7 @@ namespace Virus2spread
         {
             CbAutoAxis.Checked = false;
             formsPlot.Plot.SetAxisLimits(0, 50, -20, 20, 0, 1);
-            formsPlot.Plot.SetAxisLimits(0, 50, -20_000, 20_000, 0, 1);
+            formsPlot.Plot.SetAxisLimits(0, 50, -20000, 20000, 0, 1);
             formsPlot.Refresh();
         }
         private void BtnAutoScale_Click(object sender, EventArgs e)
@@ -181,33 +199,61 @@ namespace Virus2spread
                 formsPlot.Plot.SetAxisLimits(xMax: oldLimits.XMax + 1000);
             }
         }
-
         private void CbCorssHair_CheckedChanged(object sender, EventArgs e)
         {
             if (CbCorssHair.Checked == false)
             {
                 crosshair.IsVisible = false;
             }
-            else 
+            else
             {
                 crosshair.IsVisible = true;
             }
         }
-        private void formsPlot_MouseLeave(object sender, MouseEventArgs e)
+        private void FormsPlot_MouseLeave(object sender, MouseEventArgs e)
         {
             crosshair.IsVisible = false;
             formsPlot.Refresh();
         }
-        private void formsPlot_MouseEnter(object sender, EventArgs e)
+        private void FormsPlot_MouseEnter(object? sender, EventArgs e)
         {
             if (CbCorssHair.Checked) { crosshair.IsVisible = true; }
         }
-        private void formsPlot_MouseMove(object sender, MouseEventArgs e)
+        private void FormsPlot_MouseMove(object? sender, MouseEventArgs e)
         {
             (double coordinateX, double coordinateY) = formsPlot.GetMouseCoordinates();
             crosshair.X = coordinateX;
             crosshair.Y = coordinateY;
-            formsPlot.Refresh(lowQuality: true, skipIfCurrentlyRendering: true);
+            formsPlot.Refresh(lowQuality: false, skipIfCurrentlyRendering: true);
+        }
+
+        private void PlotForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // save current window size 
+            AppSettings.Config.PlotForm_WindowLocation = this.Location;
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                AppSettings.Config.PlotForm_WindowSize = this.Size;
+            }
+            else
+            {
+                AppSettings.Config.PlotForm_WindowSize = this.RestoreBounds.Size;
+            }
+        }
+
+        private void LegendListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked)
+            {
+                signalPlot[e.Index].IsVisible = true;
+                AppSettings.Config.LegendVisability[e.Index] = true; // <- write viability status to config
+            }
+            else
+            {
+                signalPlot[e.Index].IsVisible = false;
+                AppSettings.Config.LegendVisability[e.Index] = false;
+            }
+            formsPlot.Refresh();
         }
     }
 }

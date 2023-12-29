@@ -38,7 +38,7 @@ namespace Virus2spread
             PropertyGridSelectConfig();
 
             // set window size
-            this.MinimumSize = new Size(1600, 900);
+            this.MinimumSize = new Size(1280, 720);
             this.Location = AppSettings.Config.Form_Config_WindowLocation;
             this.Size = AppSettings.Config.Form_Config_WindowSize;
         }
@@ -46,11 +46,6 @@ namespace Virus2spread
         private void StartSimulation_button1_Click_1(object sender, EventArgs e)
         {
             modelSimulation.Initialize();
-
-            Form? pltForm = Application.OpenForms["PlotForm"];
-            pltForm?.Close();
-            PlotForm plotForm = new PlotForm(modelSimulation.PlotData);
-            plotForm.Show();
 
             Form? grdForm = Application.OpenForms["GridForm"];
             grdForm?.Close();
@@ -60,9 +55,14 @@ namespace Virus2spread
             this.Focus();
             modelSimulation.StartIteration();
         }
-
-
-
+        private void ShowChart_button_Click(object sender, EventArgs e)
+        {
+            Form? pltForm = Application.OpenForms["PlotForm"];
+            pltForm?.Close();
+            PlotForm plotForm = new(modelSimulation.PlotData);
+            plotForm.Show();
+            this.Focus();
+        }
         private void PropertyGridSelectConfig()
         {
             ConfigurationPropertyGrid.SelectedObject = AppSettings.Config;
@@ -92,7 +92,6 @@ namespace Virus2spread
             }
             AppSettings.Config.Setting.Save();
         }
-
         private void ConfigurationPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             //modelSimulation.StopIteration();
@@ -117,5 +116,6 @@ namespace Virus2spread
             AppSettings.Config.Setting.Save(true);
             ConfigurationPropertyGrid.Refresh();
         }
+     
     }
 }

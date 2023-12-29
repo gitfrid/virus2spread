@@ -18,9 +18,9 @@ namespace VirusSpreadLibrary.AppProperties;
 // together with a property description 
 // by binding - as selected object - to the propertygrid in the MainForm
 //
-// Workaround as Visual Studio properties.settings Designer could not save a description for properties
+// This is a Workaround as Visual Studio properties.settings Designer could not save a description for properties
 // it deletes all manually inserted descriptions, when a new property is saved
-// It also can't handle complex property classes with .Net 6/7 - only with .Net FW
+// It also can't handle complex property classes with .Net 6/7, only with .Net Framwork
 //
 
 // depends on Nuget: SharpSerializer.Core 1.0.0 !!
@@ -42,7 +42,7 @@ public  class AppSettings
 
 
     private string about = "";
-    private readonly string appVersion = $"{Assembly.GetEntryAssembly().GetName().Version}";
+    private readonly string appVersion = GetAppVersion();
     private int gridMaxX = 100;
     private int gridMaxY = 100;
     private long initialPersonPopulation = 20;
@@ -50,6 +50,9 @@ public  class AppSettings
     private long maxIterations = 1000000;
     private Point form_Config_WindowLocation = new(0, 0);
     private Size form_Config_WindowSize = new(2056, 1010);
+    private Point plotForm_WindowLocation = new(0, 0);
+    private Size plotForm_WindowSize = new(1888, 1122);
+    
     private bool virusMoveGlobal = true;
     private bool personMoveGlobal = true;
     private int gridFormTimer = 1;
@@ -93,7 +96,7 @@ public  class AppSettings
     private string virusMoveRateTo = "";
     private double virusMoveActivityRnd = 1;
     private double virusMoveHomeActivityRnd = 0;
-
+    private LegendVisability legendVisability = new();
 
     private string? dummy;
 
@@ -116,6 +119,20 @@ public  class AppSettings
         // in main Form you can fill it like this
         // AppSettings.Config.VirusMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
         // AppSettings.Config.VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,2,2,2]);
+    }
+
+    // get app Version
+    private static string GetAppVersion()
+    {
+        Assembly? appAssembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+        if (appAssembly == null)
+        {
+            return "error Assembly version not found";
+        }
+        else
+        {
+            return appAssembly.GetName()?.Version?.ToString() ?? "error Assembly name not found";
+        }
     }
 
     [ExcludeFromSerialization]
@@ -152,6 +169,24 @@ public  class AppSettings
     }
     
     [CategoryAttribute("Internal Settings")]
+    [Description("Internal use - to save actual PlotForm size and position")]
+    [Browsable(false)]
+    
+    public Size PlotForm_WindowSize
+    {
+        get => plotForm_WindowSize;
+        set => plotForm_WindowSize = value;
+    }
+    [CategoryAttribute("Internal Settings")]
+    [Description("Internal use - to save actual PlotForm size and position")]
+    [Browsable(false)] //-> hide from Grid if Property showHelperSettings is false
+    public Point PlotForm_WindowLocation
+    {
+        get => plotForm_WindowLocation;
+        set => plotForm_WindowLocation = value;
+    }
+
+    [CategoryAttribute("Internal Settings")]
     [Description("Internal use - to save actual MainForm size and position")]
     [Browsable(false)]
     public Size Form_Config_WindowSize
@@ -159,6 +194,9 @@ public  class AppSettings
         get => form_Config_WindowSize;
         set => form_Config_WindowSize = value;
     }
+
+
+
 
     [CategoryAttribute("App Info"), ReadOnlyAttribute(true)]
     [Description("Dedicated to a lighthouse in stormy seas \r\nMIT License")]
@@ -495,13 +533,13 @@ public  class AppSettings
     {
         get
         {
-            xmlVirusColor = setting.ToXmlColor(virusColor);
+            xmlVirusColor = Setting.ToXmlColor(virusColor);
             return xmlVirusColor;
         }
         set
         {
             xmlVirusColor = value;
-            virusColor = setting.FromXmlColor(value);
+            virusColor = Setting.FromXmlColor(value);
         }
     }
 
@@ -528,13 +566,13 @@ public  class AppSettings
     {
         get
         {
-            xmlPersonsHealthyOrRecoverdColor = setting.ToXmlColor(personsHealthyOrRecoverdColor);
+            xmlPersonsHealthyOrRecoverdColor = Setting.ToXmlColor(personsHealthyOrRecoverdColor);
             return xmlPersonsHealthyOrRecoverdColor;
         }
         set
         {
             xmlPersonsHealthyOrRecoverdColor = value;
-            personsHealthyOrRecoverdColor = setting.FromXmlColor(value);
+            personsHealthyOrRecoverdColor = Setting.FromXmlColor(value);
         }
     }
 
@@ -561,13 +599,13 @@ public  class AppSettings
     {
         get
         {
-            xmlPersonsInfectedColor = setting.ToXmlColor(personsInfectedColor);
+            xmlPersonsInfectedColor = Setting.ToXmlColor(personsInfectedColor);
             return xmlPersonsInfectedColor;
         }
         set
         {
             xmlPersonsInfectedColor = value;
-            personsInfectedColor = setting.FromXmlColor(value);
+            personsInfectedColor = Setting.FromXmlColor(value);
         }
     }       
 
@@ -594,13 +632,13 @@ public  class AppSettings
     {
         get
         {
-            xmlPersonsInfectiousColor = setting.ToXmlColor(personsInfectiousColor);
+            xmlPersonsInfectiousColor = Setting.ToXmlColor(personsInfectiousColor);
             return xmlPersonsInfectiousColor;
         }
         set
         {
             xmlPersonsInfectiousColor = value;
-            personsInfectiousColor = setting.FromXmlColor(value);
+            personsInfectiousColor = Setting.FromXmlColor(value);
         }
     }
 
@@ -627,13 +665,13 @@ public  class AppSettings
     {
         get
         {
-            xmlPersonsRecoverdImmuneNotInfectiousColor = setting.ToXmlColor(personsRecoverdImmuneNotInfectiousColor);
+            xmlPersonsRecoverdImmuneNotInfectiousColor = Setting.ToXmlColor(personsRecoverdImmuneNotInfectiousColor);
             return xmlPersonsRecoverdImmuneNotInfectiousColor;
         }
         set
         {
             xmlPersonsRecoverdImmuneNotInfectiousColor = value;
-            personsRecoverdImmuneNotInfectiousColor = setting.FromXmlColor(value);
+            personsRecoverdImmuneNotInfectiousColor = Setting.FromXmlColor(value);
         }
     }
 
@@ -661,19 +699,57 @@ public  class AppSettings
     {
         get
         {
-            xmlEmptyCellColor = setting.ToXmlColor(emptyCellColor);
+            xmlEmptyCellColor = Setting.ToXmlColor(emptyCellColor);
             return xmlEmptyCellColor;
         }
         set
         {
             xmlEmptyCellColor = value;
-            emptyCellColor = setting.FromXmlColor(value);
+            emptyCellColor = Setting.FromXmlColor(value);
         }
     }
+    [CategoryAttribute("Plot Settings")]
+    [Description("saves the choosed visability, of the fourten data lines of PlotChart, in the config file")]
+    public LegendVisability LegendVisability
+    {
+        get => legendVisability;
+        set => legendVisability = value;
+    }
 
-} // APP Settings
+} // end APP Settings 
+
+
+// useed by PlotForm to save choosed visability
+// of the fourteen plot lines in the config
+public class LegendVisability 
+{
+    private bool[] legendVisabilityStatus = [true];
+    public LegendVisability()
+    {
+        legendVisabilityStatus = new bool[14];
+        for (int i = 0; i < 14; i++)
+        {
+            legendVisabilityStatus[i] = true;
+        }
+    }
+    public bool[] LegendVisabilitySatus
+    {
+        get => legendVisabilityStatus;
+        set => legendVisabilityStatus = value;
+    }
+    public bool this[int index] // <- indexer declaration
+    {
+        get => legendVisabilityStatus[index];
+        set => legendVisabilityStatus[index] = value;
+    }
+}
 
 #endregion  properties settings
+
+
+
+
+
 
 
 // for debug tests -> serialize and deserializes only this class 
@@ -691,7 +767,7 @@ public class GenDictionary : ClassSerializer
     {
         genDictionary.Add(5, "five");
         genDictionary.Add(10, "ten");
-        genDictionary.Add(20, "twenty");            
+        genDictionary.Add(20, "twenty");
         this.Source = genDictionary;
     }
 
@@ -715,3 +791,4 @@ public class GenDictionary : ClassSerializer
         }
     }
 }
+

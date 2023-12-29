@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             BtnHoldStart = new Button();
             splitContainer1 = new SplitContainer();
+            LegendListBox = new CheckedListBox();
             CbCorssHair = new CheckBox();
             CbAutoAxis = new CheckBox();
             ChkShowLegend = new CheckBox();
@@ -39,8 +40,8 @@
             BtnManualScale = new Button();
             BtnAutoScaleTight = new Button();
             BtnAutoScale = new Button();
-            dataTimer = new System.Windows.Forms.Timer(components);
-            renderTimer = new System.Windows.Forms.Timer(components);
+            DataTimer = new System.Windows.Forms.Timer(components);
+            RenderTimer = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
@@ -64,6 +65,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.BackColor = SystemColors.ControlLightLight;
+            splitContainer1.Panel1.Controls.Add(LegendListBox);
             splitContainer1.Panel1.Controls.Add(CbCorssHair);
             splitContainer1.Panel1.Controls.Add(CbAutoAxis);
             splitContainer1.Panel1.Controls.Add(ChkShowLegend);
@@ -77,15 +80,25 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.BackColor = SystemColors.Control;
-            splitContainer1.Size = new Size(1862, 1051);
-            splitContainer1.SplitterDistance = 271;
+            splitContainer1.Size = new Size(1929, 1031);
+            splitContainer1.SplitterDistance = 315;
             splitContainer1.SplitterWidth = 6;
             splitContainer1.TabIndex = 2;
+            // 
+            // LegendListBox
+            // 
+            LegendListBox.FormattingEnabled = true;
+            LegendListBox.HorizontalScrollbar = true;
+            LegendListBox.Location = new Point(21, 524);
+            LegendListBox.Name = "LegendListBox";
+            LegendListBox.Size = new Size(274, 292);
+            LegendListBox.TabIndex = 13;
+            LegendListBox.ItemCheck += LegendListBox_ItemCheck;
             // 
             // CbCorssHair
             // 
             CbCorssHair.AutoSize = true;
-            CbCorssHair.Location = new Point(27, 898);
+            CbCorssHair.Location = new Point(27, 915);
             CbCorssHair.Name = "CbCorssHair";
             CbCorssHair.Size = new Size(139, 36);
             CbCorssHair.TabIndex = 12;
@@ -98,7 +111,7 @@
             CbAutoAxis.AutoSize = true;
             CbAutoAxis.Checked = true;
             CbAutoAxis.CheckState = CheckState.Checked;
-            CbAutoAxis.Location = new Point(27, 841);
+            CbAutoAxis.Location = new Point(27, 858);
             CbAutoAxis.Margin = new Padding(6, 7, 6, 7);
             CbAutoAxis.Name = "CbAutoAxis";
             CbAutoAxis.Size = new Size(222, 36);
@@ -113,7 +126,7 @@
             ChkShowLegend.AutoSize = true;
             ChkShowLegend.Checked = true;
             ChkShowLegend.CheckState = CheckState.Checked;
-            ChkShowLegend.Location = new Point(27, 956);
+            ChkShowLegend.Location = new Point(27, 973);
             ChkShowLegend.Margin = new Padding(5);
             ChkShowLegend.Name = "ChkShowLegend";
             ChkShowLegend.Size = new Size(182, 36);
@@ -124,7 +137,7 @@
             // 
             // BtnAutoScaleY
             // 
-            BtnAutoScaleY.Location = new Point(37, 470);
+            BtnAutoScaleY.Location = new Point(37, 418);
             BtnAutoScaleY.Name = "BtnAutoScaleY";
             BtnAutoScaleY.Size = new Size(190, 46);
             BtnAutoScaleY.TabIndex = 5;
@@ -134,7 +147,7 @@
             // 
             // BtnAutoScaleX
             // 
-            BtnAutoScaleX.Location = new Point(37, 402);
+            BtnAutoScaleX.Location = new Point(37, 350);
             BtnAutoScaleX.Name = "BtnAutoScaleX";
             BtnAutoScaleX.Size = new Size(190, 46);
             BtnAutoScaleX.TabIndex = 4;
@@ -144,7 +157,7 @@
             // 
             // BtnManualScale
             // 
-            BtnManualScale.Location = new Point(37, 254);
+            BtnManualScale.Location = new Point(37, 202);
             BtnManualScale.Name = "BtnManualScale";
             BtnManualScale.Size = new Size(190, 46);
             BtnManualScale.TabIndex = 3;
@@ -154,7 +167,7 @@
             // 
             // BtnAutoScaleTight
             // 
-            BtnAutoScaleTight.Location = new Point(37, 186);
+            BtnAutoScaleTight.Location = new Point(37, 134);
             BtnAutoScaleTight.Name = "BtnAutoScaleTight";
             BtnAutoScaleTight.Size = new Size(190, 46);
             BtnAutoScaleTight.TabIndex = 2;
@@ -164,7 +177,7 @@
             // 
             // BtnAutoScale
             // 
-            BtnAutoScale.Location = new Point(37, 329);
+            BtnAutoScale.Location = new Point(37, 277);
             BtnAutoScale.Name = "BtnAutoScale";
             BtnAutoScale.Size = new Size(190, 46);
             BtnAutoScale.TabIndex = 1;
@@ -172,26 +185,28 @@
             BtnAutoScale.UseVisualStyleBackColor = true;
             BtnAutoScale.Click += BtnAutoScale_Click;
             // 
-            // dataTimer
+            // DataTimer
             // 
-            dataTimer.Enabled = true;
-            dataTimer.Interval = 1;
-            dataTimer.Tick += dataTimer_Tick;
+            DataTimer.Enabled = true;
+            DataTimer.Interval = 1;
+            DataTimer.Tick += DataTimer_Tick;
             // 
-            // renderTimer
+            // RenderTimer
             // 
-            renderTimer.Enabled = true;
-            renderTimer.Interval = 20;
-            renderTimer.Tick += renderTimer_Tick;
+            RenderTimer.Enabled = true;
+            RenderTimer.Interval = 20;
+            RenderTimer.Tick += RenderTimer_Tick;
             // 
             // PlotForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1862, 1051);
+            ClientSize = new Size(1929, 1031);
             Controls.Add(splitContainer1);
             Name = "PlotForm";
             Text = "PlotForm";
+            FormClosing += PlotForm_FormClosing;
+            Load += PlotForm_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
@@ -210,8 +225,9 @@
         private Button BtnAutoScaleY;
         private CheckBox ChkShowLegend;
         private CheckBox CbAutoAxis;
-        private System.Windows.Forms.Timer dataTimer;
-        private System.Windows.Forms.Timer renderTimer;
+        private System.Windows.Forms.Timer DataTimer;
+        private System.Windows.Forms.Timer RenderTimer;
         private CheckBox CbCorssHair;
+        private CheckedListBox LegendListBox;
     }
 }
