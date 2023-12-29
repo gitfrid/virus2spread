@@ -14,7 +14,8 @@ namespace Virus2spread.Forms
     {
 
         readonly Stopwatch watch = Stopwatch.StartNew();
-        private readonly Simulation simulation = new();
+
+        public  readonly Simulation simulation;
 
         private readonly int maxX;
         private readonly int maxY;
@@ -25,10 +26,11 @@ namespace Virus2spread.Forms
         private float rectangleY;
         private float indx;
 
-        public GridForm(Simulation Simulation, int MaxX, int MaxY)
+
+        public GridForm(Simulation ModelSimulation, int MaxX, int MaxY)
         {
             InitializeComponent();
-            simulation = Simulation;
+            simulation = ModelSimulation;            
             maxX = MaxX;
             maxY = MaxY;
             RecalcFormSize(SkglControl.Width, SkglControl.Height, out coordinateFactX, out coordinateFactY, out rectangleX, out rectangleY);

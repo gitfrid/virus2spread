@@ -9,123 +9,181 @@ using SkiaSharp;
 
 namespace VirusSpreadLibrary.Plott
 {
-
+    
     public class PlotData
     {
         // -> does this apply to reality?
         // not accounting virus contact duration, virus contact ammount, reinfectins in immunity period, complex movement
+            //0"IterationNumber",
+            //1"PersonPopulation",
+            //2"VirusPopulation",
+            //3"PersonsAge",
+            //4"VirusesAge",
+            //5"personsHealthy",
+            //6"personsRecoverd",
+            //7"personsInfected",
+            //8"personsReinfected",
+            //9"personsInfectionCounter",
+            //10"personsInfectious",
+            //11"personsRecoverdImmuneNotinfectious",
+            //12"PersonsMoveDistance",
+            //13"VirusesMoveDistance"
 
 
         // Initialization of Legend array
-        public string[] Legend = ["IterationNumber", "PersonPopulation", "VirusPopulation", "PersonsAge", "VirusesAge",
-                "personsHealthy", "personsRecoverd", "personsInfected", "personsReinfected", "personsInfectionCounter",
-                "personsInfectious", "personsRecoverdImmuneNotinfectious", "PersonsMoveDistance", "VirusesMoveDistance" ];
+        public readonly string[] Legend = ["IterationNumber",
+            "PersonPopulation",
+            "VirusPopulation",
+            "PersonsAge",
+            "VirusesAge",
+            "personsHealthy",
+            "personsRecoverd",
+            "personsInfected",
+            "personsReinfected",
+            "personsInfectionCounter",
+            "personsInfectious",
+            "personsRecoverdImmuneNotinfectious",
+            "PersonsMoveDistance",
+            "VirusesMoveDistance"];
 
-        private long iterationNumber = 0;
-        private long personPopulation = 0;
-        private long virusPopulation = 0;
-        private long personsAge = 0;
-        private long virusesAge = 0;
+        private readonly PlotQueue plotDataQueue;
+        
+        // store Y-values to plot ten lines
+        readonly double[] yPlotLinesValues = new double[14];
 
-        private long personsHealthy = 0;
-        private long personsRecoverd = 0;
-        private long personsInfected = 0;
-        private long personsReinfected = 0;
-        private long personsInfectionCounter = 0;
-        private long personsInfectious = 0;
-        private long personsRecoverdImmuneNotinfectious = 0;
-
-        public long IterationNumber { get; set; }
-        public long PersonPopulation { get; set; }
-        public long VirusPopulation { get; set; }
-        public long PersonsAge { get; set; }
-        public long VirusesAge { get; set; }
-        public long PersonsMoveDistance { get; set; }
-        public long VirusesMoveDistance { get; set; }
-        public long PersonsInfectionCounter
+        public double IterationNumber 
         {
-            get => personsInfectionCounter;
-            set => personsInfectionCounter = value;
+            get => yPlotLinesValues[0];
+            set => yPlotLinesValues[0] = value;
         }
 
-        // store Y-values to plot ten lines
-        readonly long[] yPlotLinesValues = new long[14];
+        public double PersonPopulation
+        {
+            get => yPlotLinesValues[1];
+            set => yPlotLinesValues[1] = value;
+        }
+        public double VirusPopulation
+        {
+            get => yPlotLinesValues[2];
+            set => yPlotLinesValues[2] = value;
+        }
+        public double PersonsAge
+        {
+            get => yPlotLinesValues[3];
+            set => yPlotLinesValues[3] = value;
+        }
+        public double VirusesAge
+        {
+            get => yPlotLinesValues[4];
+            set => yPlotLinesValues[4] = value;
+        }
+        public double PersonsHealthy
+        {
+            get => yPlotLinesValues[5];
+            set => yPlotLinesValues[5] = value;
+        }
+        public double PersonsRecoverd
+        {
+            get => yPlotLinesValues[6];
+            set => yPlotLinesValues[6] = value;
+        }
+        public double PersonsInfected
+        {
+            get => yPlotLinesValues[7];
+            set => yPlotLinesValues[7] = value;
+        }
 
-     
-        //private ConcurrentQueue<List<long>> queue1 = new ConcurrentQueue<List<long>>();
+        public double PersonsReinfected
+        {
+            get => yPlotLinesValues[8];
+            set => yPlotLinesValues[8] = value;
+        }
+        public double PersonsInfectionCounter
+        {
+            get => yPlotLinesValues[9];
+            set => yPlotLinesValues[9] = value;
+        }
 
-        // public prop to access the queue
-        public PlotQueue PlotDataQueue { get; private set; }
+        public double PersonsInfectious
+        {
+            get => yPlotLinesValues[10];
+            set => yPlotLinesValues[10] = value;
+        }
+
+        public double PersonsRecoverdImmuneNotinfectious
+        {
+            get => yPlotLinesValues[11];
+            set => yPlotLinesValues[11] = value;
+        }
+
+        public double PersonsMoveDistance
+        {
+            get => yPlotLinesValues[12];
+            set => yPlotLinesValues[12] = value;
+        }
+        public double VirusesMoveDistance
+        {
+            get => yPlotLinesValues[13];
+            set => yPlotLinesValues[13] = value;
+        }
+        
+        //private ConcurrentQueue<List<double>> queue1 = new ConcurrentQueue<List<double>>();
 
         public PlotData()
         {
-            PlotDataQueue = new PlotQueue();
+            plotDataQueue = new PlotQueue();
+
             // init array with 0
             Array.Fill(yPlotLinesValues, 0);
         }
+        //public PlotQueue PlotDataQueue { get; private set; }
 
         public void ResetCounter()
         {
-            IterationNumber = 0;
-            PersonPopulation = 0;
-            VirusPopulation = 0;
-            PersonsAge = 0;
-            VirusesAge = 0;
+            Array.Fill(yPlotLinesValues, 0);
+        }
 
-            personsHealthy = 0;
-            personsRecoverd = 0;
-            personsInfected = 0;
-            personsReinfected = 0;
-            personsInfectious = 0;
-            personsRecoverdImmuneNotinfectious = 0;
-            PersonsInfectionCounter = 0;
-
-            PersonsMoveDistance = 0;
-            VirusesMoveDistance = 0;
+        // public prop to access the queue
+        public PlotQueue PlotDataQueue 
+        {   
+            get => plotDataQueue; 
         }
 
         public void SetPersonHealthState(PersonState PersonState)
         {
-
             switch (PersonState.HealthState)
             {
                 case PersonState.PersonHealthy:
-                    personsHealthy += 1;
+                    PersonsHealthy += 1;
                     break;
                 case PersonState.PersonRecoverd:
-                    personsRecoverd += 1;
+                    PersonsRecoverd += 1;
                     break;
                 case PersonState.PersonInfected:
-                    personsInfected += 1;
+                    PersonsInfected += 1;
                     break;
                 case PersonState.PersonReinfected:
-                    personsReinfected += 1;
+                    PersonsReinfected += 1;
                     break;
                 case PersonState.PersonInfectious:
-                    personsInfectious += 1;
+                    PersonsInfectious += 1;
                     break;
                 case PersonState.PersonRecoverdImmuneNotinfectious:
-                    personsRecoverdImmuneNotinfectious += 1;
+                    PersonsRecoverdImmuneNotinfectious += 1;
                     break;
             }
-            personsInfectionCounter += PersonState.InfectionCounter;
+            PersonsInfectionCounter += PersonState.InfectionCounter;
         }
 
         public void WriteToQueue()
         {
-
-            List<long> values = new ();
-
-            long[] instance = [IterationNumber, PersonPopulation, VirusPopulation, PersonsAge, VirusesAge,
-                personsHealthy, personsRecoverd, personsInfected, personsReinfected, personsInfectionCounter,
-                personsInfectious, personsRecoverdImmuneNotinfectious, PersonsMoveDistance, VirusesMoveDistance ];
-
+            List<double> values = new();
 
             // generate list with 14 rand Y-values to plot line 1-14
             for (int i = 0; i < 14; i++)
             {
                 //yPlotLinesValues[i] = instance[i];
-                values.Add(instance[i]);
+                values.Add(yPlotLinesValues[i]);
             }
 
             // enqueue list of 14 rand Y-values into PlotQueue

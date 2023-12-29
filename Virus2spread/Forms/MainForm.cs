@@ -9,7 +9,7 @@ namespace Virus2spread
 {
     public partial class MainForm : Form
     {
-        public Simulation modelSimulation = new();
+        private Simulation modelSimulation;
         public MainForm()
         {
             InitializeComponent();
@@ -18,6 +18,7 @@ namespace Virus2spread
             //  using a custom editor extension in CollectionEditorExt.cs
             CollectionEditorExt.EditorFormClosed += new CollectionEditorExt.
             EditorFormClosedEventHandler(ConfigurationPropertyGrid_CollectionFormClosed);
+
         }
         protected override void OnShown(EventArgs e)
         {
@@ -45,13 +46,15 @@ namespace Virus2spread
 
         private void StartSimulation_button1_Click_1(object sender, EventArgs e)
         {
-            modelSimulation.Initialize();
 
+
+            Simulation simulation = new();
+            modelSimulation = simulation;
+            //modelSimulation.Initialize();
             Form? grdForm = Application.OpenForms["GridForm"];
             grdForm?.Close();
             GridForm gridForm = new(modelSimulation, AppSettings.Config.GridMaxX, AppSettings.Config.GridMaxY);
             gridForm.Show();
-
             this.Focus();
             modelSimulation.StartIteration();
         }

@@ -1,7 +1,4 @@
-﻿using VirusSpreadLibrary.Creature;
-using VirusSpreadLibrary.Enum;
-using Microsoft.Maui.Graphics;
-using VirusSpreadLibrary.SpreadModel;
+﻿
 namespace VirusSpreadLibrary.Grid;
 
 public class Grid
@@ -31,13 +28,6 @@ public class Grid
             }
         }
     }
-    
-    //public CellPopulation AddCreatureToCell(MoveData MoveToData)
-    //{
-    //    // move to new grid xy end coordinate
-    //    SetGridCellState.SetNewState(MoveToData,this);
-    //}
-
     public int ReturnMaxX()
     {
         return maxX;

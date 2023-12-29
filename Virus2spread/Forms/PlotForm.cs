@@ -3,6 +3,8 @@ using ScottPlot.Renderable;
 using ScottPlot.Plottable;
 using VirusSpreadLibrary.Plott;
 using VirusSpreadLibrary.AppProperties;
+using VirusSpreadLibrary.Creature;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Virus2spread
 {
@@ -104,9 +106,12 @@ namespace Virus2spread
 
             // en-queue n-max in the simulate class should be adjusted with the de-queue n-max below
             // to make shure, all values can be de-qued in time by the PlotForm
-            for (int n = 0; n < 200; n++)
+
+            // en-queue n-max in the simulate class should be adjusted with the de-queue n-max below
+            // to make shure, all values can be de-qued in time by the PlotForm
+            for (int n = 0; n < 2; n++)
             {
-                bool success = plotData.PlotDataQueue.TryDequeueList(out List<long> values);
+                bool success = plotData.PlotDataQueue.TryDequeueList(out List<double> values);
                 if (success)
                 {
                     for (int i = 0; i < signalData.Length; i++)
@@ -121,6 +126,7 @@ namespace Virus2spread
                     break;
                 }
             }
+           
             //formsPlot.Refresh();
             Text = $"virus2spread Charts ({nextDataIndex:N0} points)";
         }

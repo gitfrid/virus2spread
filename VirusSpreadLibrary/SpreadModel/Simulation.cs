@@ -29,9 +29,13 @@ public class Simulation
     private bool stopIteration ;
     public Simulation()
     {
+        stopIteration = true;
         MaxX = AppSettings.Config.GridMaxX;
         MaxY = AppSettings.Config.GridMaxY;
         grid = new Grid.Grid();
+        grid.SetNewEmptyGrid(MaxX, MaxY);
+        personList.SetInitialPopulation(AppSettings.Config.InitialPersonPopulation, grid);
+        virusList.SetInitialPopulation(AppSettings.Config.InitialVirusPopulation, grid);    
     }
 
     public int MaxX { get; set; }
@@ -39,14 +43,15 @@ public class Simulation
     public int Iteration { get => iteration; }
 
 
-    public void Initialize()
-    {
-        MaxX = AppSettings.Config.GridMaxX;
-        MaxY = AppSettings.Config.GridMaxY;
-        grid.SetNewEmptyGrid(MaxX, MaxY);
-        personList.SetInitialPopulation(AppSettings.Config.InitialPersonPopulation, grid);
-        virusList.SetInitialPopulation(AppSettings.Config.InitialVirusPopulation, grid);        
-    }
+    //public void Initialize()
+    //{
+    //    stopIteration = true;
+    //    MaxX = AppSettings.Config.GridMaxX;
+    //    MaxY = AppSettings.Config.GridMaxY;
+    //    grid.SetNewEmptyGrid(MaxX, MaxY);
+    //    personList.SetInitialPopulation(AppSettings.Config.InitialPersonPopulation, grid);
+    //    virusList.SetInitialPopulation(AppSettings.Config.InitialVirusPopulation, grid);        
+    //}
     public void StartIteration()
     {
         stopIteration = false;
@@ -65,13 +70,13 @@ public class Simulation
         iteration++;
         plotData.IterationNumber = iteration;
 
-        long personAgeMean = 0;
-        double personsMoveDistanceMean = 0;
+        long personAgeCum = 0;
+        double personsMoveDistanceCum = 0;
         plotData.PersonPopulation = personList.Persons.Count;
         foreach (Person person in personList.Persons)
         {
             person.Age++;
-            personAgeMean += person.Age;
+            personAgeCum += person.Age;
 
             // get health state if is infected
             if (person.PersonState.HealthStateCounter != 0)
@@ -95,7 +100,7 @@ public class Simulation
                 int dx = endPoint.X - startPoint.X;
                 int dy = endPoint.Y - startPoint.Y;
                 double SE = Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
-                personsMoveDistanceMean += SE;
+                personsMoveDistanceCum += SE;
             }
             plotData.SetPersonHealthState(person.PersonState);
         };
@@ -103,13 +108,13 @@ public class Simulation
 
 
         // Parallel.ForEach(VirusList.Viruses, virus =>}); -> takes longer
-        long virusAgeMean = 0;
-        double virusesMoveDistanceMean = 0;
+        long virusAgeCum = 0;
+        double virusesMoveDistanceCum = 0;
         plotData.VirusPopulation = virusList.Viruses.Count;
         foreach (Virus virus in virusList.Viruses)
         {
             virus.Age++;
-            virusAgeMean += virus.Age;
+            virusAgeCum += virus.Age;
             
             if (virus.DoMove())
             {
@@ -127,24 +132,22 @@ public class Simulation
                 int dx = endPoint.X - startPoint.X;
                 int dy = endPoint.Y - startPoint.Y;
                 double SE = Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
-
-                virusesMoveDistanceMean += SE;         
+                virusesMoveDistanceCum += SE;         
             }            
             
         };
-        
-        if (plotData.VirusPopulation > 0) 
-        {
-            plotData.VirusesAge = (virusAgeMean / plotData.VirusPopulation);
-            plotData.VirusesMoveDistance = (long)Math.Round((virusesMoveDistanceMean / plotData.VirusPopulation), MidpointRounding.AwayFromZero);
-        }
 
         if (plotData.PersonPopulation > 0)
         {
-            plotData.PersonsAge = (personAgeMean / plotData.PersonPopulation);
-            plotData.PersonsMoveDistance = (long)Math.Round((personsMoveDistanceMean / plotData.PersonPopulation), MidpointRounding.AwayFromZero);
-            plotData.PersonsInfectionCounter = (long)Math.Round((double)(plotData.PersonsInfectionCounter / plotData.PersonPopulation), MidpointRounding.AwayFromZero);
-            //plotData.PersonsInfectionCounter /= plotData.PersonPopulation;
+            plotData.PersonsAge = personAgeCum / plotData.PersonPopulation;
+            plotData.PersonsMoveDistance = personsMoveDistanceCum / plotData.PersonPopulation;
+            plotData.PersonsInfectionCounter /= plotData.PersonPopulation;
+        }
+
+        if (plotData.VirusPopulation > 0) 
+        {
+            plotData.VirusesAge = virusAgeCum / plotData.VirusPopulation; //<- cumulated age
+            plotData.VirusesMoveDistance = virusesMoveDistanceCum / plotData.VirusPopulation; //<- cumulated move distance
         }
 
         plotData.WriteToQueue();

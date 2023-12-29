@@ -43,34 +43,34 @@ public  class AppSettings
 
     private string about = "";
     private readonly string appVersion = GetAppVersion();
-    private int gridMaxX = 100;
-    private int gridMaxY = 100;
-    private long initialPersonPopulation = 20;
-    private long initialVirusPopulation = 10;
+    private int gridMaxX = 800;
+    private int gridMaxY = 400;
+    private long initialPersonPopulation = 5000;
+    private long initialVirusPopulation = 5000;
     private long maxIterations = 1000000;
     private Point form_Config_WindowLocation = new(0, 0);
-    private Size form_Config_WindowSize = new(2056, 1010);
+    private Size form_Config_WindowSize = new(2056, 1096);
     private Point plotForm_WindowLocation = new(0, 0);
     private Size plotForm_WindowSize = new(1888, 1122);
     
-    private bool virusMoveGlobal = true;
-    private bool personMoveGlobal = true;
+    private bool virusMoveGlobal = false;
+    private bool personMoveGlobal = false;
     private int gridFormTimer = 1;
     private bool trackMovment = false;
-    private bool populationDensityColoring = false;
+    private bool populationDensityColoring = true;
     private bool showHelperSettings = false;
 
 
     private Color virusColor = Color.WhiteSmoke;
     private string xmlVirusColor = "WhiteSmoke";
-    private Color personsHealthyOrRecoverdColor = Color.Blue;
-    private string xmlPersonsHealthyOrRecoverdColor = "Blue";
+    private Color personsHealthyOrRecoverdColor = Color.LawnGreen;
+    private string xmlPersonsHealthyOrRecoverdColor = "LawnGreen";
     private Color personsInfectedColor = Color.DeepSkyBlue;
     private string xmlPersonsInfectedColor = "DeepSkyBlue";
     private Color emptyCellColor = Color.Black;
-    private string xmlEmptyCellColor = "White";
-    private Color personsInfectiousColor = Color.Violet;
-    private string xmlPersonsInfectiousColor = "Violet";
+    private string xmlEmptyCellColor = "Black";
+    private Color personsInfectiousColor = Color.Red;
+    private string xmlPersonsInfectiousColor = "Red";
     private Color personsRecoverdImmuneNotInfectiousColor = Color.Plum;
     private string xmlPersonsRecoverdImmuneNotInfectiousColor = "Plum";
 
@@ -113,9 +113,9 @@ public  class AppSettings
     {
         
         PersonMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
-        PersonMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,2,2,2]);
+        PersonMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,100,200,200]);
         VirusMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
-        VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,2,2,2]);
+        VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,100,200,200]);
         // in main Form you can fill it like this
         // AppSettings.Config.VirusMoveRate.DoubleSeriesFrom = new DoubleSeries([1,1,1,1,1,1,1,1,1,1]);
         // AppSettings.Config.VirusMoveRate.DoubleSeriesTo = new DoubleSeries([2,2,2,2,2,2,2,2,2,2]);
