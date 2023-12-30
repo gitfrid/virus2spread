@@ -35,8 +35,9 @@ WinForms.DataVisualization
 <br>
 Scottplot
 <br>
-
+<br>
 License: open source - MIT License
-
+<br>
+Disclaimer: Use the simulation model because you are curious, not to force people to do something.
 
 
