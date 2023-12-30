@@ -3,20 +3,20 @@
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="-32000" />
-        <Simple name="Y" value="-32000" />
+        <Simple name="X" value="1071" />
+        <Simple name="Y" value="215" />
       </Properties>
     </Complex>
     <Complex name="PlotForm_WindowSize">
       <Properties>
-        <Simple name="Width" value="2626" />
-        <Simple name="Height" value="1258" />
+        <Simple name="Width" value="1888" />
+        <Simple name="Height" value="1122" />
       </Properties>
     </Complex>
     <Complex name="PlotForm_WindowLocation">
       <Properties>
-        <Simple name="X" value="569" />
-        <Simple name="Y" value="140" />
+        <Simple name="X" value="-13" />
+        <Simple name="Y" value="-13" />
       </Properties>
     </Complex>
     <Complex name="Form_Config_WindowSize">
@@ -26,10 +26,10 @@
       </Properties>
     </Complex>
     <Simple name="AppVersion" value="1.0.0.0" />
-    <Simple name="GridMaxX" value="200" />
+    <Simple name="GridMaxX" value="800" />
     <Simple name="GridMaxY" value="400" />
     <Simple name="GridFormTimer" value="1" />
-    <Simple name="TrackMovment" value="False" />
+    <Simple name="TrackMovment" value="True" />
     <Simple name="PopulationDensityColoring" value="True" />
     <Simple name="InitialPersonPopulation" value="5000" />
     <Simple name="PersonMoveGlobal" value="False" />
@@ -45,9 +45,9 @@
     <Simple name="VirusMoveHomeActivityRnd" value="0" />
     <Simple name="MaxIterations" value="1000000" />
     <Simple name="PersonMoveRateFrom" value="1;1;1;1;1;1;1;1;1;1" />
-    <Simple name="PersonMoveRateTo" value="2;2;2;2;2;2;2;100;200;200" />
+    <Simple name="PersonMoveRateTo" value="2;2;2;2;2;2;2;100;100;200" />
     <Simple name="VirusMoveRateFrom" value="1;1;1;1;1;1;1;1;1;1" />
-    <Simple name="VirusMoveRateTo" value="2;2;2;2;2;2;2;100;200;200" />
+    <Simple name="VirusMoveRateTo" value="2;2;2;2;2;2;2;100;100;200" />
     <Simple name="ConfigFilePath" value="C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.XML" />
     <Simple name="CsvFilePath" value="C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.CSV" />
     <Simple name="XmlVirusColor" value="NamedColor:WhiteSmoke" />
@@ -65,18 +65,20 @@
             <Simple value="False" />
             <Simple value="False" />
             <Simple value="False" />
-            <Simple value="False" />
             <Simple value="True" />
             <Simple value="True" />
             <Simple value="True" />
             <Simple value="True" />
             <Simple value="True" />
-            <Simple value="False" />
-            <Simple value="False" />
-            <Simple value="False" />
+            <Simple value="True" />
+            <Simple value="True" />
+            <Simple value="True" />
+            <Simple value="True" />
           </Items>
         </SingleArray>
       </Properties>
     </Complex>
+    <Simple name="PhaseChartXSelectedIndex" value="6" />
+    <Simple name="PhaseChartYSelectedIndex" value="8" />
   </Properties>
 </Complex>

@@ -9,25 +9,25 @@ using SkiaSharp;
 
 namespace VirusSpreadLibrary.Plott
 {
-    
+
     public class PlotData
     {
         // -> does this apply to reality?
         // not accounting virus contact duration, virus contact ammount, reinfectins in immunity period, complex movement
-            //0"IterationNumber",
-            //1"PersonPopulation",
-            //2"VirusPopulation",
-            //3"PersonsAge",
-            //4"VirusesAge",
-            //5"personsHealthy",
-            //6"personsRecoverd",
-            //7"personsInfected",
-            //8"personsReinfected",
-            //9"personsInfectionCounter",
-            //10"personsInfectious",
-            //11"personsRecoverdImmuneNotinfectious",
-            //12"PersonsMoveDistance",
-            //13"VirusesMoveDistance"
+        //0"IterationNumber",
+        //1"PersonPopulation",
+        //2"VirusPopulation",
+        //3"PersonsAge",
+        //4"VirusesAge",
+        //5"personsHealthy",
+        //6"personsRecoverd",
+        //7"personsInfected",
+        //8"personsReinfected",
+        //9"personsInfectionCounter",
+        //10"personsInfectious",
+        //11"personsRecoverdImmuneNotinfectious",
+        //12"PersonsMoveDistance",
+        //13"VirusesMoveDistance"
 
 
         // Initialization of Legend array
@@ -47,11 +47,15 @@ namespace VirusSpreadLibrary.Plott
             "VirusesMoveDistance"];
 
         private readonly PlotQueue plotDataQueue;
-        
+        private readonly PlotQueuePhaseChart plotPhaseChartDataQueue;
+
+        private bool stopPhaseChartQueue = true;
+
+
         // store Y-values to plot ten lines
         readonly double[] yPlotLinesValues = new double[14];
 
-        public double IterationNumber 
+        public double IterationNumber
         {
             get => yPlotLinesValues[0];
             set => yPlotLinesValues[0] = value;
@@ -126,12 +130,26 @@ namespace VirusSpreadLibrary.Plott
             get => yPlotLinesValues[13];
             set => yPlotLinesValues[13] = value;
         }
-        
+
+        public bool StopPhaseChartQueue
+        {
+            get => stopPhaseChartQueue;
+            set
+            {
+                stopPhaseChartQueue = value;
+                if (stopPhaseChartQueue == true) 
+                {
+                    PlotPhaseChartDataQueue.ClearQueue();
+                }
+            }
+        }
+
         //private ConcurrentQueue<List<double>> queue1 = new ConcurrentQueue<List<double>>();
 
         public PlotData()
         {
             plotDataQueue = new PlotQueue();
+            plotPhaseChartDataQueue = new PlotQueuePhaseChart();
 
             // init array with 0
             Array.Fill(yPlotLinesValues, 0);
@@ -144,11 +162,14 @@ namespace VirusSpreadLibrary.Plott
         }
 
         // public prop to access the queue
-        public PlotQueue PlotDataQueue 
-        {   
-            get => plotDataQueue; 
+        public PlotQueue PlotDataQueue
+        {
+            get => plotDataQueue;
         }
-
+        public PlotQueuePhaseChart PlotPhaseChartDataQueue
+        {
+            get => plotPhaseChartDataQueue;
+        }
         public void SetPersonHealthState(PersonState PersonState)
         {
             switch (PersonState.HealthState)
@@ -178,17 +199,38 @@ namespace VirusSpreadLibrary.Plott
         public void WriteToQueue()
         {
             List<double> values = new();
+            List<double> values2 = new();
 
             // generate list with 14 rand Y-values to plot line 1-14
             for (int i = 0; i < 14; i++)
             {
                 //yPlotLinesValues[i] = instance[i];
                 values.Add(yPlotLinesValues[i]);
+
+                // phaseChart xy values depending on selected index in x y phaseChart listbox
+                if (stopPhaseChartQueue == false)
+                {
+                    if (i == AppSettings.Config.PhaseChartXSelectedIndex)
+                    {
+                        values2.Add(yPlotLinesValues[i]);
+                    }
+                    if (i == AppSettings.Config.PhaseChartYSelectedIndex)
+                    {
+                        values2.Add(yPlotLinesValues[i]);
+                    }
+                }
             }
 
             // enqueue list of 14 rand Y-values into PlotQueue
             PlotDataQueue.EnqueueList(values);
-        }
 
+            // enqueue list of X and Y-values into PhasChartPlotQueue
+            if (stopPhaseChartQueue == false)
+            {
+                PlotPhaseChartDataQueue.EnqueueList(values2);
+            }
+
+        }
+        
     }
 }

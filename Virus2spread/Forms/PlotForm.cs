@@ -3,8 +3,6 @@ using ScottPlot.Renderable;
 using ScottPlot.Plottable;
 using VirusSpreadLibrary.Plott;
 using VirusSpreadLibrary.AppProperties;
-using VirusSpreadLibrary.Creature;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Virus2spread
 {
@@ -49,6 +47,7 @@ namespace Virus2spread
             Legend legend = formsPlot.Plot.Legend(enable: true, location: null);
             formsPlot.Plot.Palette = ScottPlot.Palette.Category20;
 
+            // create fourteen empty double data arrays with length of MaxIterations add it to the plot 
             for (int i = 0; i < 14; i++)
             {
                 signalData[i] = new double[AppSettings.Config.MaxIterations];

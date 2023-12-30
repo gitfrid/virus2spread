@@ -96,7 +96,12 @@ public  class AppSettings
     private string virusMoveRateTo = "";
     private double virusMoveActivityRnd = 1;
     private double virusMoveHomeActivityRnd = 0;
+
+    // plot
     private LegendVisability legendVisability = new();
+    private int phaseChartXSelectedIndex = 0;
+    private int phaseChartYSelectedIndex = 0;
+
 
     private string? dummy;
 
@@ -708,12 +713,29 @@ public  class AppSettings
             emptyCellColor = Setting.FromXmlColor(value);
         }
     }
+
     [CategoryAttribute("Plot Settings")]
     [Description("saves the choosed visability, of the fourten data lines of PlotChart, in the config file")]
     public LegendVisability LegendVisability
     {
         get => legendVisability;
         set => legendVisability = value;
+    }
+
+    [CategoryAttribute("Plot Settings")]
+    [Description("Index of the selected Listbox Item used for the X Value in the phase chart, to store the selcted entry")]
+    public int PhaseChartXSelectedIndex
+    {
+        get => phaseChartXSelectedIndex;
+        set => phaseChartXSelectedIndex = value;
+    }
+
+    [CategoryAttribute("Plot Settings")]
+    [Description("Index of the selected Listbox Item used for the Y Value in the phase chart, to store the selcted entry")]
+    public int PhaseChartYSelectedIndex
+    {
+        get => phaseChartYSelectedIndex;
+        set => phaseChartYSelectedIndex = value;
     }
 
 } // end APP Settings 

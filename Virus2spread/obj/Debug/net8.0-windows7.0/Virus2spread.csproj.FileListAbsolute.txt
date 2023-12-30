@@ -122,6 +122,7 @@ C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\VirusSpreadLibra
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.csproj.AssemblyReference.cache
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.Forms.GridForm.resources
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.MainForm.resources
+C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.Forms.PhaseChartForm.resources
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.PlotForm.resources
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.csproj.GenerateResource.cache
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.GeneratedMSBuildEditorConfig.editorconfig

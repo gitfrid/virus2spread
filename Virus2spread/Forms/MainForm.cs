@@ -66,7 +66,18 @@ namespace Virus2spread
             {
                 PlotForm plotForm = new(modelSimulation.PlotData);
                 plotForm.Show();
-            }                        
+            }
+            this.Focus();
+        }
+        private void ShowPhaseChart_button_Click(object sender, EventArgs e)
+        {
+            Form? phaChartForm = Application.OpenForms["PhaseChartForm"];
+            phaChartForm?.Close();
+            if (modelSimulation is not null)
+            {
+                PhaseChartForm phaseChartForm = new(modelSimulation.PlotData);
+                phaseChartForm.Show();
+            }
             this.Focus();
         }
         private void PropertyGridSelectConfig()
@@ -122,6 +133,7 @@ namespace Virus2spread
             AppSettings.Config.Setting.Save(true);
             ConfigurationPropertyGrid.Refresh();
         }
-     
+
+   
     }
 }

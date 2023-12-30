@@ -39,6 +39,7 @@
             eventsListBox = new VirusSpreadLibrary.AppProperties.EventsListBox();
             StartSimulation_button1 = new Button();
             tabPage2 = new TabPage();
+            ShowPhaseChart_button = new Button();
             tabControl.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -81,6 +82,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(ShowPhaseChart_button);
             splitContainer1.Panel2.Controls.Add(ShowChart_button);
             splitContainer1.Panel2.Controls.Add(SaveConfig_button3);
             splitContainer1.Panel2.Controls.Add(LoadConfig_button2);
@@ -111,9 +113,9 @@
             // 
             // SaveConfig_button3
             // 
-            SaveConfig_button3.Location = new Point(44, 278);
+            SaveConfig_button3.Location = new Point(44, 353);
             SaveConfig_button3.Name = "SaveConfig_button3";
-            SaveConfig_button3.Size = new Size(162, 46);
+            SaveConfig_button3.Size = new Size(162, 50);
             SaveConfig_button3.TabIndex = 6;
             SaveConfig_button3.Text = "Save config";
             SaveConfig_button3.UseVisualStyleBackColor = true;
@@ -121,9 +123,9 @@
             // 
             // LoadConfig_button2
             // 
-            LoadConfig_button2.Location = new Point(44, 208);
+            LoadConfig_button2.Location = new Point(44, 283);
             LoadConfig_button2.Name = "LoadConfig_button2";
-            LoadConfig_button2.Size = new Size(162, 46);
+            LoadConfig_button2.Size = new Size(162, 50);
             LoadConfig_button2.TabIndex = 5;
             LoadConfig_button2.Text = "Load config";
             LoadConfig_button2.UseVisualStyleBackColor = true;
@@ -155,10 +157,20 @@
             tabPage2.Location = new Point(8, 46);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1665, 889);
+            tabPage2.Size = new Size(1513, 720);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Rate Settings";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // ShowPhaseChart_button
+            // 
+            ShowPhaseChart_button.Location = new Point(47, 178);
+            ShowPhaseChart_button.Name = "ShowPhaseChart_button";
+            ShowPhaseChart_button.Size = new Size(150, 46);
+            ShowPhaseChart_button.TabIndex = 8;
+            ShowPhaseChart_button.Text = "PhaseChart";
+            ShowPhaseChart_button.UseVisualStyleBackColor = true;
+            ShowPhaseChart_button.Click += ShowPhaseChart_button_Click;
             // 
             // MainForm
             // 
@@ -193,5 +205,6 @@
         private Button LoadConfig_button2;
         private Button SaveConfig_button3;
         private Button ShowChart_button;
+        private Button ShowPhaseChart_button;
     }
 }
