@@ -38,6 +38,7 @@ Scottplot
 <br>
 License: open source - MIT License
 <br>
-Disclaimer: Use the simulation model because you are curious, not to force people to do something.
+Disclaimer: Just a simulation model, for use out of pure curiosity, not to force people.
+
 
 
