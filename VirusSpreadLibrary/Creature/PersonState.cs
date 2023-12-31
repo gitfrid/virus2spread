@@ -5,11 +5,11 @@ public class PersonState
 {
     private int healthStateCounter = 0;
     public const int PersonHealthy = 0;
-    public const int PersonRecoverd = 1;
+    public const int PersonHealthyRecoverd = 1;
     public const int PersonInfected = 2;
     public const int PersonReinfected = 3;
     public const int PersonInfectious = 4;
-    public const int PersonRecoverdImmuneNotinfectious = 5; // -> does this apply to reality?
+    public const int PersonRecoverdImmunePeriodNotInfectious = 5; // -> does this apply to reality?
 
     public int HealthStateCounter
     {

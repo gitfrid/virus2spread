@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             BtnHoldStart = new Button();
             splitContainer1 = new SplitContainer();
+            AllNoneCheckbox = new CheckBox();
             LegendListBox = new CheckedListBox();
             CbCorssHair = new CheckBox();
             CbAutoAxis = new CheckBox();
@@ -42,6 +43,7 @@
             BtnAutoScale = new Button();
             DataTimer = new System.Windows.Forms.Timer(components);
             RenderTimer = new System.Windows.Forms.Timer(components);
+            BtnExportCsv = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
@@ -66,6 +68,8 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.BackColor = SystemColors.ControlLightLight;
+            splitContainer1.Panel1.Controls.Add(BtnExportCsv);
+            splitContainer1.Panel1.Controls.Add(AllNoneCheckbox);
             splitContainer1.Panel1.Controls.Add(LegendListBox);
             splitContainer1.Panel1.Controls.Add(CbCorssHair);
             splitContainer1.Panel1.Controls.Add(CbAutoAxis);
@@ -80,16 +84,27 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.BackColor = SystemColors.Control;
-            splitContainer1.Size = new Size(1929, 1031);
-            splitContainer1.SplitterDistance = 315;
+            splitContainer1.Size = new Size(1964, 1118);
+            splitContainer1.SplitterDistance = 320;
             splitContainer1.SplitterWidth = 6;
             splitContainer1.TabIndex = 2;
+            // 
+            // AllNoneCheckbox
+            // 
+            AllNoneCheckbox.AutoSize = true;
+            AllNoneCheckbox.Location = new Point(37, 569);
+            AllNoneCheckbox.Name = "AllNoneCheckbox";
+            AllNoneCheckbox.Size = new Size(203, 36);
+            AllNoneCheckbox.TabIndex = 14;
+            AllNoneCheckbox.Text = "check all / non";
+            AllNoneCheckbox.UseVisualStyleBackColor = true;
+            AllNoneCheckbox.CheckedChanged += AllNoneCheckbox_CheckedChanged;
             // 
             // LegendListBox
             // 
             LegendListBox.FormattingEnabled = true;
             LegendListBox.HorizontalScrollbar = true;
-            LegendListBox.Location = new Point(21, 524);
+            LegendListBox.Location = new Point(37, 620);
             LegendListBox.Name = "LegendListBox";
             LegendListBox.Size = new Size(274, 292);
             LegendListBox.TabIndex = 13;
@@ -98,7 +113,7 @@
             // CbCorssHair
             // 
             CbCorssHair.AutoSize = true;
-            CbCorssHair.Location = new Point(27, 915);
+            CbCorssHair.Location = new Point(37, 988);
             CbCorssHair.Name = "CbCorssHair";
             CbCorssHair.Size = new Size(139, 36);
             CbCorssHair.TabIndex = 12;
@@ -111,7 +126,7 @@
             CbAutoAxis.AutoSize = true;
             CbAutoAxis.Checked = true;
             CbAutoAxis.CheckState = CheckState.Checked;
-            CbAutoAxis.Location = new Point(27, 858);
+            CbAutoAxis.Location = new Point(37, 931);
             CbAutoAxis.Margin = new Padding(6, 7, 6, 7);
             CbAutoAxis.Name = "CbAutoAxis";
             CbAutoAxis.Size = new Size(222, 36);
@@ -126,7 +141,7 @@
             ChkShowLegend.AutoSize = true;
             ChkShowLegend.Checked = true;
             ChkShowLegend.CheckState = CheckState.Checked;
-            ChkShowLegend.Location = new Point(27, 973);
+            ChkShowLegend.Location = new Point(37, 1046);
             ChkShowLegend.Margin = new Padding(5);
             ChkShowLegend.Name = "ChkShowLegend";
             ChkShowLegend.Size = new Size(182, 36);
@@ -197,11 +212,21 @@
             RenderTimer.Interval = 20;
             RenderTimer.Tick += RenderTimer_Tick;
             // 
+            // BtnExportCsv
+            // 
+            BtnExportCsv.Location = new Point(40, 488);
+            BtnExportCsv.Name = "BtnExportCsv";
+            BtnExportCsv.Size = new Size(179, 51);
+            BtnExportCsv.TabIndex = 15;
+            BtnExportCsv.Text = "export CSV";
+            BtnExportCsv.UseVisualStyleBackColor = true;
+            BtnExportCsv.Click += BtnExportCsv_Click;
+            // 
             // PlotForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1929, 1031);
+            ClientSize = new Size(1964, 1118);
             Controls.Add(splitContainer1);
             Name = "PlotForm";
             Text = "PlotForm";
@@ -229,5 +254,7 @@
         private System.Windows.Forms.Timer RenderTimer;
         private CheckBox CbCorssHair;
         private CheckedListBox LegendListBox;
+        private CheckBox AllNoneCheckbox;
+        private Button BtnExportCsv;
     }
 }

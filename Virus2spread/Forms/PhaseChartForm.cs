@@ -58,7 +58,6 @@ namespace Virus2spread.Forms
             //signalData[0] = new double[AppSettings.Config.MaxIterations];
 
         }
-
         private void XvalueListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             AppSettings.Config.PhaseChartXSelectedIndex = XvalueListBox.SelectedIndex;
@@ -129,12 +128,13 @@ namespace Virus2spread.Forms
 
         private void PhaseChartForm_Load(object sender, EventArgs e)
         {
-            //
+            RestoreWindowPosition();
         }
 
         private void PhaseChartForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             plotData.StopPhaseChartQueue = true;
+            SaveWindowsPosition();
         }
 
         private void BtnAutoScaleTight_Click(object sender, EventArgs e)
@@ -196,5 +196,47 @@ namespace Virus2spread.Forms
             crosshair.Y = coordinateY;
             formsPlot.Refresh(lowQuality: false, skipIfCurrentlyRendering: true);
         }
+
+        private static bool IsVisiblePosition(Point location, Size size)
+        {
+            Rectangle myArea = new(location, size);
+            bool intersect = false;
+            foreach (System.Windows.Forms.Screen screen in System.Windows.Forms.Screen.AllScreens)
+            {
+                intersect |= myArea.IntersectsWith(screen.WorkingArea);
+            }
+            return intersect;
+        }
+        private void RestoreWindowPosition()
+        {
+            // set window position
+            if (IsVisiblePosition(AppSettings.Config.Form_Config_WindowLocation, AppSettings.Config.Form_Config_WindowSize))
+            {
+                this.StartPosition = FormStartPosition.Manual;
+                this.Location = AppSettings.Config.PhaseChartForm_WindowLocation;
+                this.Size = AppSettings.Config.PhaseChartForm_WindowSize;
+                WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+        private void SaveWindowsPosition()
+        {
+            // write window size to app config vars
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                AppSettings.Config.PhaseChartForm_WindowSize = this.Size;
+                AppSettings.Config.PhaseChartForm_WindowLocation = this.Location;
+            }
+            else
+            {
+                AppSettings.Config.PhaseChartForm_WindowSize = this.RestoreBounds.Size;
+                AppSettings.Config.PhaseChartForm_WindowLocation = this.RestoreBounds.Location;
+            }
+        }
+
+
     }
 }

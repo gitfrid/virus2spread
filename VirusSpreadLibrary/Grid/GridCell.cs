@@ -7,7 +7,7 @@ public class GridCell
     private Microsoft.Maui.Graphics.Color? cellColor;   
     private CellViruses virusPopulation;
     private CellPersons personPopulation;
-    private int cellState = 7;
+    private int cellState = Enum.CellState.EmptyCell;
 
     public GridCell()
     {

@@ -3,8 +3,8 @@
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="1071" />
-        <Simple name="Y" value="215" />
+        <Simple name="X" value="751" />
+        <Simple name="Y" value="409" />
       </Properties>
     </Complex>
     <Complex name="PlotForm_WindowSize">
@@ -15,21 +15,21 @@
     </Complex>
     <Complex name="PlotForm_WindowLocation">
       <Properties>
-        <Simple name="X" value="-13" />
-        <Simple name="Y" value="-13" />
+        <Simple name="X" value="0" />
+        <Simple name="Y" value="0" />
       </Properties>
     </Complex>
     <Complex name="Form_Config_WindowSize">
       <Properties>
-        <Simple name="Width" value="2056" />
-        <Simple name="Height" value="1096" />
+        <Simple name="Width" value="1555" />
+        <Simple name="Height" value="845" />
       </Properties>
     </Complex>
     <Simple name="AppVersion" value="1.0.0.0" />
     <Simple name="GridMaxX" value="800" />
     <Simple name="GridMaxY" value="400" />
     <Simple name="GridFormTimer" value="1" />
-    <Simple name="TrackMovment" value="True" />
+    <Simple name="TrackMovment" value="False" />
     <Simple name="PopulationDensityColoring" value="True" />
     <Simple name="InitialPersonPopulation" value="5000" />
     <Simple name="PersonMoveGlobal" value="False" />
@@ -72,13 +72,13 @@
             <Simple value="True" />
             <Simple value="True" />
             <Simple value="True" />
-            <Simple value="True" />
-            <Simple value="True" />
+            <Simple value="False" />
+            <Simple value="False" />
           </Items>
         </SingleArray>
       </Properties>
     </Complex>
-    <Simple name="PhaseChartXSelectedIndex" value="6" />
-    <Simple name="PhaseChartYSelectedIndex" value="8" />
+    <Simple name="PhaseChartXSelectedIndex" value="0" />
+    <Simple name="PhaseChartYSelectedIndex" value="0" />
   </Properties>
 </Complex>

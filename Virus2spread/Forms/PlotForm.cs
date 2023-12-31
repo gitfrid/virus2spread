@@ -3,27 +3,21 @@ using ScottPlot.Renderable;
 using ScottPlot.Plottable;
 using VirusSpreadLibrary.Plott;
 using VirusSpreadLibrary.AppProperties;
+using CsvHelper;
+using System.Globalization;
 
 namespace Virus2spread
 {
     public partial class PlotForm : Form
     {
         private readonly PlotData plotData;
-
-        // create a timer to generate data
-        //readonly private System.Windows.Forms.Timer dataTimer = new();
-        //readonly private System.Windows.Forms.Timer renderTimer = new();
-
-        readonly FormsPlot formsPlot;
+        private readonly FormsPlot formsPlot;
 
         private readonly SignalPlot[] signalPlot = new SignalPlot[14];
-
         private readonly double[][] signalData = new double[14][];
-
         private int nextDataIndex = 0;
-
+        
         private readonly Crosshair crosshair;
-
         public string Title = "Virus2Spread Diagram: Y-14 parameter, X-Number of iterations";
 
         public PlotForm(PlotData PlotData)
@@ -57,7 +51,7 @@ namespace Virus2spread
             LegendListBox.Items.AddRange(plotData.Legend);
             LegendListBox.CheckOnClick = true;// <- change mode from double to single click
 
-            // set viability of plot lines / lgeend
+            // set viability of plot lines / legend
             for (int i = 0; i < LegendListBox.Items.Count; i++)
             {
                 LegendListBox.SetItemChecked(i, AppSettings.Config.LegendVisability[i]); // -> load status from config
@@ -80,10 +74,7 @@ namespace Virus2spread
 
         private void PlotForm_Load(object sender, EventArgs e)
         {
-            // set window size
-            this.MinimumSize = new Size(1280, 720);
-            this.Location = AppSettings.Config.PlotForm_WindowLocation;
-            this.Size = AppSettings.Config.PlotForm_WindowSize;
+            RestoreWindowPosition();
         }
         private void DataTimer_Tick(object sender, EventArgs e)
         {
@@ -103,11 +94,9 @@ namespace Virus2spread
                 //   5. continue to update the new array
             }
 
-            // en-queue n-max in the simulate class should be adjusted with the de-queue n-max below
-            // to make shure, all values can be de-qued in time by the PlotForm
-
-            // en-queue n-max in the simulate class should be adjusted with the de-queue n-max below
-            // to make shure, all values can be de-qued in time by the PlotForm
+            // en-queue in the simulate class should be adjusted with de-queue
+            // trough n value belowand the DataTimer / Refreshtimer intervall
+            // make shure, all values can be de-qued in time by the PlotForm
             for (int n = 0; n < 2; n++)
             {
                 bool success = plotData.PlotDataQueue.TryDequeueList(out List<double> values);
@@ -125,13 +114,10 @@ namespace Virus2spread
                     break;
                 }
             }
-           
+
             //formsPlot.Refresh();
             Text = $"virus2spread Charts ({nextDataIndex:N0} points)";
         }
-
-
-
         private void RenderTimer_Tick(object sender, EventArgs e)
         {
             if (CbAutoAxis.Checked)
@@ -157,7 +143,6 @@ namespace Virus2spread
                 RenderTimer.Enabled = true;
             }
         }
-
         private void BtnManualScale_Click(object sender, EventArgs e)
         {
             CbAutoAxis.Checked = false;
@@ -183,7 +168,6 @@ namespace Virus2spread
             formsPlot.Plot.AxisAutoX();
             formsPlot.Refresh();
         }
-
         private void BtnAutoScaleY_Click(object sender, EventArgs e)
         {
             formsPlot.Plot.AxisAutoY();
@@ -234,16 +218,8 @@ namespace Virus2spread
 
         private void PlotForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // save current window size 
-            AppSettings.Config.PlotForm_WindowLocation = this.Location;
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                AppSettings.Config.PlotForm_WindowSize = this.Size;
-            }
-            else
-            {
-                AppSettings.Config.PlotForm_WindowSize = this.RestoreBounds.Size;
-            }
+            SaveWindowsPosition();
+            AppSettings.Config.Setting.Save();
         }
 
         private void LegendListBox_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -259,6 +235,97 @@ namespace Virus2spread
                 AppSettings.Config.LegendVisability[e.Index] = false;
             }
             formsPlot.Refresh();
+        }
+
+        private void AllNoneCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AllNoneCheckbox.Checked == false)
+            {
+                // set viability of plot lines / legend
+                for (int i = 0; i < LegendListBox.Items.Count; i++)
+                {
+                    LegendListBox.SetItemChecked(i, false);
+                    signalPlot[i].IsVisible = false;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < LegendListBox.Items.Count; i++)
+                {
+                    LegendListBox.SetItemChecked(i, true);
+                    signalPlot[i].IsVisible = true;
+                }
+            }
+        }
+
+        private void BtnExportCsv_Click(object sender, EventArgs e)
+        {
+            using (var writer = new StreamWriter(AppSettings.Config.CsvFilePath))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                // write header in first row
+                for (int i = 0; i < plotData.Legend.Length; i++)
+                {
+                    csv.WriteField(plotData.Legend[i].ToString()); // Schreibe den Namen der Plottable
+                }
+                csv.NextRecord();
+
+                // create two dimensional array with same length as SignalPlot-Array
+                double[,] data = new double[signalPlot.Length, 2];
+
+                // create StreamWriter, to write CSV-file
+                for (int r = 0; r < signalPlot.GetLength(0); r++)
+                {
+                    // iterate over SignalPlot-Array
+                    for (int i = 0; i < signalPlot.Length; i++)
+                    {
+                        // fill Array with Y-values from SignalPlot-Array
+                        double[] ys = signalPlot[i].Ys;
+                        // write to CSV-file, seperated by comma
+                        csv.WriteField($"{ys[i]}");                     
+                    }
+                    csv.NextRecord();
+                }
+            }
+        }
+        private static bool IsVisiblePosition(Point location, Size size)
+        {
+            Rectangle myArea = new(location, size);
+            bool intersect = false;
+            foreach (System.Windows.Forms.Screen screen in System.Windows.Forms.Screen.AllScreens)
+            {
+                intersect |= myArea.IntersectsWith(screen.WorkingArea);
+            }
+            return intersect;
+        }
+        private void RestoreWindowPosition()
+        {
+            // set window position
+            if (IsVisiblePosition(AppSettings.Config.Form_Config_WindowLocation, AppSettings.Config.Form_Config_WindowSize))
+            {
+                this.StartPosition = FormStartPosition.Manual;
+                this.Location = AppSettings.Config.PlotForm_WindowLocation;
+                this.Size = AppSettings.Config.PlotForm_WindowSize;
+                WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+        private void SaveWindowsPosition()
+        {
+            // write window size to app config vars
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                AppSettings.Config.PlotForm_WindowSize = this.Size;
+                AppSettings.Config.PlotForm_WindowLocation = this.Location;
+            }
+            else
+            {
+                AppSettings.Config.PlotForm_WindowSize = this.RestoreBounds.Size;
+                AppSettings.Config.PlotForm_WindowLocation = this.RestoreBounds.Location;
+            }
         }
     }
 }

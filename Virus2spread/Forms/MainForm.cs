@@ -4,6 +4,7 @@ using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.AppProperties.PropertyGridExt;
 using VirusSpreadLibrary.SpreadModel;
 using Virus2spread.Forms;
+using ScottPlot;
 
 namespace Virus2spread
 {
@@ -37,11 +38,14 @@ namespace Virus2spread
         {
             AppSettings.Config.Setting.Load();
             PropertyGridSelectConfig();
+            RestoreWindowPosition();
+        }
+    
 
-            // set window size
-            this.MinimumSize = new Size(1280, 720);
-            this.Location = AppSettings.Config.Form_Config_WindowLocation;
-            this.Size = AppSettings.Config.Form_Config_WindowSize;
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveWindowsPosition();
+            AppSettings.Config.Setting.Save();
         }
 
         private void StartSimulation_button1_Click_1(object sender, EventArgs e)
@@ -93,22 +97,7 @@ namespace Virus2spread
                 ConfigurationPropertyGrid.BrowsableAttributes = null;
             };
             ConfigurationPropertyGrid.Refresh();
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // save current window size 
-            AppSettings.Config.Form_Config_WindowLocation = this.Location;
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                AppSettings.Config.Form_Config_WindowSize = this.Size;
-            }
-            else
-            {
-                AppSettings.Config.Form_Config_WindowSize = this.RestoreBounds.Size;
-            }
-            AppSettings.Config.Setting.Save();
-        }
+        }      
         private void ConfigurationPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             //modelSimulation.StopIteration();
@@ -133,7 +122,46 @@ namespace Virus2spread
             AppSettings.Config.Setting.Save(true);
             ConfigurationPropertyGrid.Refresh();
         }
+        private static bool IsVisiblePosition(Point location, Size size)
+        {
+            Rectangle myArea = new(location, size);
+            bool intersect = false;
+            foreach (System.Windows.Forms.Screen screen in System.Windows.Forms.Screen.AllScreens)
+            {
+                intersect |= myArea.IntersectsWith(screen.WorkingArea);
+            }
+            return intersect;
+        }
+        private void RestoreWindowPosition()
+        {
+            // set window position
+            if (IsVisiblePosition(AppSettings.Config.Form_Config_WindowLocation, AppSettings.Config.Form_Config_WindowSize))
+            {
+                this.StartPosition = FormStartPosition.Manual;
+                this.Location = AppSettings.Config.Form_Config_WindowLocation;
+                this.Size = AppSettings.Config.Form_Config_WindowSize;
+                WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+        private void SaveWindowsPosition()
+        {
+            // write window size to app config vars
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                AppSettings.Config.Form_Config_WindowSize = this.Size;
+                AppSettings.Config.Form_Config_WindowLocation = this.Location;
+            }
+            else
+            {
+                AppSettings.Config.Form_Config_WindowSize = this.RestoreBounds.Size;
+                AppSettings.Config.Form_Config_WindowLocation = this.RestoreBounds.Location;
+            }
+        }
 
-   
+
     }
 }

@@ -96,12 +96,14 @@ public class Simulation
                 {
                     person.MoveToNewCoordinate(grid);
                 }
+                // calc move distance
                 System.Drawing.Point endPoint = person.PersMoveData.EndGridCoordinate;
                 int dx = endPoint.X - startPoint.X;
                 int dy = endPoint.Y - startPoint.Y;
                 double SE = Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
                 personsMoveDistanceCum += SE;
             }
+            // set new health state for plotting
             plotData.SetPersonHealthState(person.PersonState);
         };
 
@@ -149,7 +151,7 @@ public class Simulation
             plotData.VirusesAge = virusAgeCum / plotData.VirusPopulation; //<- cumulated age
             plotData.VirusesMoveDistance = virusesMoveDistanceCum / plotData.VirusPopulation; //<- cumulated move distance
         }
-
+        // write data to queue for plotting and reset queue
         plotData.WriteToQueue();
         plotData.ResetCounter();
     }

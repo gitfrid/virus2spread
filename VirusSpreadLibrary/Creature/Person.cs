@@ -27,15 +27,30 @@ public class Person
     public bool IsDead { get; set; }
     public MoveData PersMoveData { get; set; }
     
+    //public bool DoMove()
+    //{
+    //    return (AppSettings.Config.PersonMoveActivityRnd != 0) &&
+    //            (1 == rnd.Next(1, 1+(int)(AppSettings.Config.PersonMoveActivityRnd)));
+    //}
+
     public bool DoMove()
     {
+    //    int moveActivity = AppSettings.Config.PersonMoveActivityRnd;
+    //    if (moveActivity == 0) return false;
+    //    int randomNumber = rnd.Next(moveActivity);
+    //    return randomNumber <= 1;
         return (AppSettings.Config.PersonMoveActivityRnd != 0) &&
                 (1 == rnd.Next(1, 1+(int)(AppSettings.Config.PersonMoveActivityRnd)));
     }
+
     public bool DoMoveHome()
     {
+        //int moveActivity = AppSettings.Config.PersonMoveHomeActivityRnd;
+        //if (moveActivity == 0) return false;
+        //int randomNumber = rnd.Next(moveActivity);
+        //return randomNumber <= 1;
         return (AppSettings.Config.PersonMoveHomeActivityRnd != 0) &&
-                (1 == rnd.Next(1, 1+(int)(AppSettings.Config.PersonMoveHomeActivityRnd)));
+        (1 == rnd.Next(1, 1 + (int)(AppSettings.Config.PersonMoveHomeActivityRnd)));
     }
     public void ChildBirth()
     {
@@ -62,56 +77,59 @@ public class Person
             }
             else 
             {
-                PersonState.HealthState = PersonState.PersonRecoverd;
+                PersonState.HealthState = PersonState.PersonHealthyRecoverd;
             }
             return;
         }
 
-        if (healthCounter <= AppSettings.Config.PersonLatencyPeriod && PersonState.InfectionCounter < 1)
+        if (healthCounter <= AppSettings.Config.PersonLatencyPeriod)
         {
             // LatencyPeriod - person infected
-            PersonState.HealthState = PersonState.PersonInfected;
+            if (PersonState.InfectionCounter < 1)
+            {
+                PersonState.HealthState = PersonState.PersonInfected;
+            }
+            else 
+            {
+                PersonState.HealthState = PersonState.PersonReinfected;
+            }
             ++PersonState.InfectionCounter;
         }
         
-        if (healthCounter <= AppSettings.Config.PersonLatencyPeriod && PersonState.InfectionCounter > 0 )
-        {
-            // LatencyPeriod - person reinfected
-            PersonState.HealthState = PersonState.PersonReinfected;
-            ++PersonState.InfectionCounter;
-        }
-
         if (healthCounter > AppSettings.Config.PersonLatencyPeriod 
-            && healthCounter < AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod)
+            && healthCounter <= AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod)
         {
             // InfectiousPeriod - person infectious
             PersonState.HealthState = PersonState.PersonInfectious;
         }
 
         if (healthCounter > AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod
-            && healthCounter < AppSettings.Config.PersonReinfectionImmunityPeriod + AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod)
+            && healthCounter <= AppSettings.Config.PersonReinfectionImmunityPeriod + AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod)
         {
             // ReinfectionImmunityPeriod - person recoverd and immune
-            PersonState.HealthState = PersonState.PersonRecoverdImmuneNotinfectious;
+            PersonState.HealthState = PersonState.PersonRecoverdImmunePeriodNotInfectious;
         }
 
         if (healthCounter > AppSettings.Config.PersonReinfectionImmunityPeriod + AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod)
         {
 
             // new reinfection cycle random within PersonReinfectionRate
-            int rate = 101 - (int)AppSettings.Config.PersonReinfectionRate;
-            if (rate < 0) {rate = 0;}
-            if (rate > 100) { rate = 100; }
-            if ( 1 == rnd.Next(1,rate)) 
+            
+            int random = rnd.Next(0, 101);           
+            int percentage = (int)AppSettings.Config.PersonReinfectionRate;
+            if (percentage < 0) { percentage = 0; }
+            if (percentage > 100) { percentage = 100; }
+
+            if (random < percentage)
             {
                 // person is recoverd and is reinfectable
-                PersonState.HealthState = PersonState.PersonRecoverd;
+                PersonState.HealthState = PersonState.PersonHealthyRecoverd;
                 PersonState.HealthStateCounter = 0; 
             }
             else
             {
-                // person is recoverd and is immune within PersonReinfectionRate
-                PersonState.HealthState = PersonState.PersonRecoverdImmuneNotinfectious;
+                // person is recoverd and is immune within PersonReinfectionRate and not infectious
+                PersonState.HealthState = PersonState.PersonRecoverdImmunePeriodNotInfectious;
                 // begin a new recoverd immunity period
                 PersonState.HealthStateCounter = AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod +1;
             }

@@ -5,6 +5,7 @@ C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.run
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Virus2spread.pdb
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\AnimatedGif.dll
+C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\CsvHelper.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Microsoft.Extensions.Configuration.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Microsoft.Extensions.Configuration.Abstractions.dll

@@ -177,7 +177,7 @@ namespace VirusSpreadLibrary.Plott
                 case PersonState.PersonHealthy:
                     PersonsHealthy += 1;
                     break;
-                case PersonState.PersonRecoverd:
+                case PersonState.PersonHealthyRecoverd:
                     PersonsRecoverd += 1;
                     break;
                 case PersonState.PersonInfected:
@@ -189,7 +189,7 @@ namespace VirusSpreadLibrary.Plott
                 case PersonState.PersonInfectious:
                     PersonsInfectious += 1;
                     break;
-                case PersonState.PersonRecoverdImmuneNotinfectious:
+                case PersonState.PersonRecoverdImmunePeriodNotInfectious:
                     PersonsRecoverdImmuneNotinfectious += 1;
                     break;
             }

@@ -4,8 +4,12 @@ namespace VirusSpreadLibrary.Grid
 {
     public class CellPersons
     {
+        private int numPersons;
         public List<Person> Persons { get; set; }
-        public int NumPersons { get; set; }
+        public int NumPersons 
+        {
+            get => numPersons;
+        }
         public CellPersons()
         {
             Persons = new List<Person>();
@@ -13,12 +17,16 @@ namespace VirusSpreadLibrary.Grid
         public void Add(Person AddPerson)
         {
             Persons.Add(AddPerson);
-            NumPersons++;
+            numPersons++;
         }
         public void Remove(Person RemovePerson)
         {
             Persons.Remove(RemovePerson);
-            NumPersons--;
+            //if (NumPersons  == 0) { MessageBox.Show("ist null!"); }
+            if (NumPersons > 0)
+            {
+               numPersons--;
+            }                
         }
     }
 }

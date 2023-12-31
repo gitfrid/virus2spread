@@ -22,37 +22,47 @@ public static class SetGridCellState
         
         if (numPersons > 0)
         {
+            //bool personsHealthy = false;
+            //bool personsHealthyRecoverd = false;
             bool personsInfectious = false;
             bool personsInfected = false;
-            bool personRecoverdImmuneNotinfectious = false;
+            bool personRecoverdImmuneNotInfectious = false;
 
             for (int i = 0; i < numPersons; i++)
             {
-                if (PersonState.PersonInfectious == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
-                {
-                    personsInfectious = true;
-                }
+                //if (PersonState.PersonHealthy == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
+                //{
+                //    personsHealthy = true;
+                //}
+                //if (PersonState.PersonHealthyRecoverd == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
+                //{
+                //    personsHealthyRecoverd = true;
+                //}
                 if (PersonState.PersonReinfected == Cell.PersonPopulation.Persons[i].PersonState.HealthState || PersonState.PersonInfected == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
                 {
                     personsInfected = true;
                 }
-                
-                
-                
-                if (PersonState.PersonRecoverdImmuneNotinfectious == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
+
+                if (PersonState.PersonInfectious == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
                 {
-                    personRecoverdImmuneNotinfectious = true;
+                    personsInfectious = true;
+                }
+
+                if (PersonState.PersonRecoverdImmunePeriodNotInfectious == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
+                {
+                    personRecoverdImmuneNotInfectious = true;
                 }
             }
 
+            // set sate of the grid Cell 
             Cell.CellState = CellState.PersonsHealthyOrRecoverd;
 
-            if (personRecoverdImmuneNotinfectious)
+            if (personRecoverdImmuneNotInfectious)
             {
                 Cell.CellState = CellState.PersonsRecoverdImmuneNotInfectious;
             }
 
-            if (personsInfected)
+            if (personsInfected || numViruses > 0)
             {
                 Cell.CellState = CellState.PersonsInfected;
             }
@@ -74,7 +84,7 @@ public static class SetGridCellState
         }       
     }
 
-    public static void PersonMoveState(Person MovingPerson, Grid.Grid Grid)
+    public static void PersonMoveState(Person MovingPerson, Grid.Grid Grid , bool DoMoveHome = false )
     {
 
         // add, moving virus or person to the end grid coordiante
@@ -89,7 +99,7 @@ public static class SetGridCellState
         cell = Grid.Cells[xEnd, yEnd];
 
         // exit if not moved
-        if (xStart == xEnd & yStart == yEnd)
+        if (xStart == xEnd && yStart == yEnd)
         {
             return;
         }
@@ -143,7 +153,7 @@ public static class SetGridCellState
         cell = Grid.Cells[xEnd, yEnd];
 
         // exit if not moved
-        if (xStart == xEnd & yStart == yEnd)
+        if (xStart == xEnd && yStart == yEnd)
         {
             return;
         }

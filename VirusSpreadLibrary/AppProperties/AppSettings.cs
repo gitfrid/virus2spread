@@ -52,7 +52,10 @@ public  class AppSettings
     private Size form_Config_WindowSize = new(2056, 1096);
     private Point plotForm_WindowLocation = new(0, 0);
     private Size plotForm_WindowSize = new(1888, 1122);
-    
+    private Point phaseChartForm_WindowLocation = new(0, 0);
+    private Size phaseChartForm_WindowSize = new(1888, 1122);
+
+
     private bool virusMoveGlobal = false;
     private bool personMoveGlobal = false;
     private int gridFormTimer = 1;
@@ -174,14 +177,14 @@ public  class AppSettings
     }
     
     [CategoryAttribute("Internal Settings")]
-    [Description("Internal use - to save actual PlotForm size and position")]
+    [Description("Internal use - to save actual MainForm size and position")]
     [Browsable(false)]
-    
-    public Size PlotForm_WindowSize
+    public Size Form_Config_WindowSize
     {
-        get => plotForm_WindowSize;
-        set => plotForm_WindowSize = value;
+        get => form_Config_WindowSize;
+        set => form_Config_WindowSize = value;
     }
+
     [CategoryAttribute("Internal Settings")]
     [Description("Internal use - to save actual PlotForm size and position")]
     [Browsable(false)] //-> hide from Grid if Property showHelperSettings is false
@@ -192,19 +195,38 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Internal Settings")]
-    [Description("Internal use - to save actual MainForm size and position")]
+    [Description("Internal use - to save actual PlotForm size and position")]
     [Browsable(false)]
-    public Size Form_Config_WindowSize
+
+    public Size PlotForm_WindowSize
     {
-        get => form_Config_WindowSize;
-        set => form_Config_WindowSize = value;
+        get => plotForm_WindowSize;
+        set => plotForm_WindowSize = value;
     }
 
+    [CategoryAttribute("Internal Settings")]
+    [Description("Internal use - to save actual PhaseChartForm size and position")]
+    [Browsable(false)] //-> hide from Grid if Property showHelperSettings is false
+    public Point PhaseChartForm_WindowLocation
+    {
+        get => phaseChartForm_WindowLocation;
+        set => phaseChartForm_WindowLocation = value;
+    }
 
+    [CategoryAttribute("Internal Settings")]
+    [Description("Internal use - to save actual PahseChartFomr size and position")]
+    [Browsable(false)]
 
+    public Size PhaseChartForm_WindowSize
+    {
+        get => phaseChartForm_WindowSize;
+        set => phaseChartForm_WindowSize = value;
+    }
 
     [CategoryAttribute("App Info"), ReadOnlyAttribute(true)]
-    [Description("Dedicated to a lighthouse in stormy seas \r\nMIT License")]
+    [Description("Dedicated to a lighthouse in stormy seas\r\nMIT License" +
+        "\r\nAttention! Some configuration settings such as the colors require a restart of the application" +
+        "\r\nSome settings only take effect after the simulation-chart forms are closed and reopened")]
     [ExcludeFromSerialization]  // -> XmlSerializer will not serialize the object
     public string About
     {
@@ -246,7 +268,9 @@ public  class AppSettings
 
 
     [CategoryAttribute("Grid Settings")]
-    [Description("default false: If true allows movement tracking over the whole time - all iterations, as the person or virus at the old grid coordinate are not deleted after movment")]
+    [Description("false by default: If true, the historical movement can be tracked over the entire time.\n\n" +
+        "This means that the color of the grid coordinate (representing the state) is not deleted or refreshed after a person or virus has moved." +
+        "\n\nIt is only updated again after the grid cell is re-entered.")]
     public bool TrackMovment
     {
         get => trackMovment;
@@ -270,7 +294,7 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Person Settings")]
-    [Description("allow person global moovment - true : movement within the distance limit only from the home coordinate. false: movement within the distance limit from the new current coordinate, therefore over the entire grid field possible")]
+    [Description("allow person global moovment - true : movement within the distance limit only from the home coordinate.\r\nfalse: movement within the distance limit from the new current coordinate, therefore over the entire grid field possible")]
     public bool PersonMoveGlobal
     {
         get => personMoveGlobal;
@@ -303,7 +327,8 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Person Settings")]
-    [Description("Period from infection until a person is contagious.\r\nDefault 2 days (iterations)")]
+    [Description("Period from the start of the infection during which a person is asymptomatic but not yet infectious. Only then does it become infectious" +
+        "\r\nStandard value 2 days (iterations)")]
     public int PersonLatencyPeriod
     {
         get => personLatencyPeriod;
@@ -311,7 +336,7 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Person Settings")]
-    [Description("Period during which a person is infectious.\r\nDefault 9 days (iterations)")]
+    [Description("Period during which a person is infectious, after it ther person gets immune during the PersonReinfectionImmunityPeriod \r\nDefault 9 days (iterations)")]
     public int PersonInfectiousPeriod
     {
         get => personInfectiousPeriod;
@@ -319,7 +344,11 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Person Settings")]
-    [Description("Period during which a person is immune after after the recovery. \r\nDefault  5 Month = 155 day (Iterations)")]
+    [Description("Period during which a person is immune after recoverd from a infection." +
+        "\r\nDefault  5 Month = 155 day (Iterations)" +
+        "\r\nAfter this periode a percentage defind by PersonReinfectionRate get state HealthyRecoverd witch can get reinficted" +
+        "\r\nThe rest of the Persons get health state PersonReinfectionImmunityPeriod again, and the immunity period cycle repeats itself again")]
+
     public int PersonReinfectionImmunityPeriod
     {
         get => personReinfectionImmunityPeriod;
@@ -327,7 +356,11 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Person Settings")]
-    [Description("Percentage of reinfections after the immunity phase following an illness \r\nDefault = 11 %")]
+    [Description("Percentage of reinfections after the immunity phase following an illness\r\nDefault = 11 %" +
+        "\r\n0% means that no person can be infected again and the PersonReinfectionImmunityPeriod starts again from the beginning." +
+        "\r\n100% means that any person can be infected again, they receive the HealthyRecoverd status and can potentially become infected again" +
+        "\r\nthis does not necessarily apply in reality, a change should be considered")]
+        
     public int PersonReinfectionRate
     {
         get => personReinfectionRate;
@@ -343,7 +376,8 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Virus Settings")]
-    [Description("allow virus global movement - true : movement within the distance limit only from the home coordinate. false: movement within the distance limit from the new current coordinate, therefore over the entire grid field possible")]
+    [Description("allow virus global movement - true : movement within the distance limit only from the home coordinate. " +
+        "\r\nfalse: Movement within the distance limit is possible from the new current coordinate, i.e. over the entire grid field")]
     public bool VirusMoveGlobal
     {
         get => virusMoveGlobal;
@@ -351,7 +385,8 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Virus Settings")]
-    [Description("integer 0 to X % \r\n0 = don't move, 1 = move every iteration, 2 = move random average every 2nd iteration, X = move back home random average every Xd iteration")]
+    [Description("integer 0 to X % \r\n0 = don't move, 1 = move every iteration, 2 = move random average every 2nd iteration, " +
+        "X = move back home random average every Xd iteration")]
     public double VirusMoveActivityRnd
     {
         get => virusMoveActivityRnd;
@@ -363,7 +398,8 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Virus Settings")]
-    [Description("integer 0 to X % \r\n0 = don't move back home, 1 = move back home every iteration, 2 = move back home random average every 2nd iteration, X = move back home random average every Xd iteration")]
+    [Description("integer 0 to X % \r\n0 = don't move back home, 1 = move back home every iteration, " +
+        "2 = move back home random average every 2nd iteration, X = move back home random average every Xd iteration")]
     public double VirusMoveHomeActivityRnd
     {
         get => virusMoveHomeActivityRnd;
@@ -393,10 +429,11 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Move Rate Person"), ReadOnlyAttribute(false)]
-    [DescriptionAttribute("motion profile - see below:\r\n\r\nused to simulate frequent short and rare long distance moves of people\r\nrandom chooses one range from the distance range serie\r\n"+
-                           "then get a random distance within the selected distance range\r\nget a random direction 365° \r\nreturn the NewGridCoordinate to move to" +
-                          "\r\n\r\nPersonMoveRateFrom \r\nholds a series of the upper maximum ranges a person can move \r\nif the person moves a random range from the range serie is choosen\r\n"+
-                           "this can be used to simulate tavel behavior for example rear far and frequent low distance movment of persons\r\n")]
+    [DescriptionAttribute("motion profile - see below:\r\n\r\nused to simulate frequent short and rare long distance moves of people" +
+        "\r\nrandom chooses one range from the distance range serie\r\n"+
+        "then get a random distance within the selected distance range\r\nget a random direction 365° \r\nreturn the NewGridCoordinate to move to" +
+        "\r\n\r\nPersonMoveRateFrom \r\nholds a series of the upper maximum ranges a person can move \r\nif the person moves a random range from the range serie is choosen\r\n"+
+        "this can be used to simulate tavel behavior for example rear far and frequent low distance movment of persons")]
     public string PersonMoveRateFrom
     {
         get

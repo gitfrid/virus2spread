@@ -1,3 +1,83 @@
+ // Erstelle einen CsvWriter, um die Daten zu formatieren
+    using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    {
+        // Schreibe die Spaltennamen in die erste Zeile
+        csv.WriteField("X");
+        for (int i = 0; i < plotData.Legend.Length; i++)
+        {
+            csv.WriteField(plotData.Legend[i].ToString()); // Schreibe den Namen der Plottable
+        }
+        csv.NextRecord();
+
+// Erstelle ein zweidimensionales Array mit der gleichen Länge wie dein SignalPlot-Array
+double[,] data = new double[signalPlot.Length, 2];
+
+// Erstelle einen StreamWriter, um die CSV-Dateien zu schreiben
+    // Schreibe die Spaltennamen in die erste Zeile
+    writer.WriteLine("X,Y");
+
+    // Iteriere über dein SignalPlot-Array
+    for (int i = 0; i < signalPlot.Length; i++)
+    {
+        // Fülle das Array mit den X- und Y-Werten aus deinem SignalPlot-Array
+        data[i, 0] = signalPlot[i].X; // X-Wert
+        data[i, 1] = signalPlot[i].Y; // Y-Wert
+
+        // Schreibe die X- und Y-Werte in die CSV-Datei, getrennt durch ein Komma
+        writer.WriteLine($"{data[i, 0]},{data[i, 1]}");
+    }
+}
+
+
+// Erstelle ein zweidimensionales Array mit der gleichen Länge wie dein SignalPlot-Array
+double[,] data = new double[signalPlot.Length, 2];
+
+// Erstelle einen StreamWriter, um die CSV-Dateien zu schreiben
+using (var writer = new StreamWriter("signalPlot.csv"))
+{
+    // Schreibe die Spaltennamen in die erste Zeile
+    writer.WriteLine("X,Y");
+
+    // Iteriere über dein SignalPlot-Array
+    for (int i = 0; i < signalPlot.Length; i++)
+    {
+        // Fülle das Array mit den X- und Y-Werten aus deinem SignalPlot-Array
+        data[i, 0] = signalPlot[i].X; // X-Wert
+        data[i, 1] = signalPlot[i].Y; // Y-Wert
+
+        // Schreibe die X- und Y-Werte in die CSV-Datei, getrennt durch ein Komma
+        writer.WriteLine($"{data[i, 0]},{data[i, 1]}");
+    }
+}
+
+
+
+// Create a new serializer
+var serializer = new SharpSerializer ();
+// Set the append mode to property
+serializer.AppendMode = AppendMode.Property;
+// Serialize the window state to the existing file
+serializer.Serialize (this.WindowState, "config.xml");
+
+
+
+
+// This is the save button
+XmlSerializer serializer = new XmlSerializer(typeof(FormWindowState));
+using (StreamWriter writer = new StreamWriter("windowstate.xml"))
+{
+    serializer.Serialize(writer, this.WindowState);
+}
+
+// This is the retrieve (use it in the form load event for example)
+XmlSerializer serializer = new XmlSerializer(typeof(FormWindowState));
+using (StreamReader reader = new StreamReader("windowstate.xml"))
+{
+    this.WindowState = (FormWindowState)serializer.Deserialize(reader);
+}
+
+
+
 // Erstelle eine C#-Bibliotheksklasse, die eine threadsichere Warteschlange enthält
 public class QueueManager
 {
