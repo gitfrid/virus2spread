@@ -1,4 +1,5 @@
 ﻿using VirusSpreadLibrary.Creature;
+using VirusSpreadLibrary.SpreadModel;
 
 namespace VirusSpreadLibrary.Grid
 {
@@ -19,14 +20,24 @@ namespace VirusSpreadLibrary.Grid
         {
             Viruses.Add(AddVirus);
             ++numViruses;
+
+            // just for debug
+            if (numViruses > Viruses.Count)
+                throw new CellVirusesException("CellPersons - Add Person Error");
         }
         public void Remove(Virus RemoveVirus)
         {
-            Viruses.Remove(RemoveVirus);
-            if (NumViruses > 0)
+            if (Viruses.Count != numViruses)
             {
-               --numViruses;
+                MessageBox.Show("vir count!");
             }
+            Viruses.Remove(RemoveVirus);
+               --numViruses;
+
+            // just for debug
+            if (numViruses < 0)
+                throw new CellVirusesException("CellViruses - Remove Virus Error");
         }
+
     }
 }

@@ -1,0 +1,24 @@
+// Create a new serializer
+var serializer = new SharpSerializer ();
+// Set the append mode to property
+serializer.AppendMode = AppendMode.Property;
+// Serialize the window state to the existing file
+serializer.Serialize (this.WindowState, "config.xml");
+
+
+
+
+// This is the save button
+XmlSerializer serializer = new XmlSerializer(typeof(FormWindowState));
+using (StreamWriter writer = new StreamWriter("windowstate.xml"))
+{
+    serializer.Serialize(writer, this.WindowState);
+}
+
+// This is the retrieve (use it in the form load event for example)
+XmlSerializer serializer = new XmlSerializer(typeof(FormWindowState));
+using (StreamReader reader = new StreamReader("windowstate.xml"))
+{
+    this.WindowState = (FormWindowState)serializer.Deserialize(reader);
+}
+

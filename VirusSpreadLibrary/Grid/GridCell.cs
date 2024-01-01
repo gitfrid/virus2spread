@@ -5,8 +5,8 @@ namespace VirusSpreadLibrary.Grid;
 public class GridCell
 {
     private Microsoft.Maui.Graphics.Color? cellColor;   
-    private CellViruses virusPopulation;
-    private CellPersons personPopulation;
+    private readonly CellViruses virusPopulation;
+    private readonly CellPersons personPopulation;
     private int cellState = Enum.CellState.EmptyCell;
 
     public GridCell()
@@ -24,12 +24,12 @@ public class GridCell
     public CellViruses VirusPopulation
     {
         get => virusPopulation;
-        set => virusPopulation = value;
+        //set => virusPopulation = value;
     }
     public CellPersons PersonPopulation
     {
         get => personPopulation;
-        set => personPopulation = value;
+        //set => personPopulation = value;
     }
     public int CellState
     {
@@ -44,16 +44,14 @@ public class GridCell
     {
         PersonPopulation.Add(AddPerson);
     }
-
     public void RemoveVirus(Virus RemoveVirus)
     {
         VirusPopulation.Remove(RemoveVirus);
     }
     public void RemovePerson(Person RemovePerson)
     {
-        PersonPopulation.Remove(RemovePerson);
+        personPopulation.Remove(RemovePerson);
     }
-
     public int NumViruses()
     {
         if (VirusPopulation == null)

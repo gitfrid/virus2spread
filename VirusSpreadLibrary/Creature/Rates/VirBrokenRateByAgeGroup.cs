@@ -2,8 +2,7 @@
 
 public class VirBrokenRateByAgeGroup
 {
-    public 
-        double GetBrokenhRateByAge(int Age)
+    public static double GetBrokenhRateByAge(int Age)
     {
         var AgeDeathRate = new List<(Func<int, bool> Key, double Value)>
         {

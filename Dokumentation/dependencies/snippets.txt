@@ -1,3 +1,66 @@
+public class PersonInvalidIndexException : Exception
+{
+    public PersonInvalidIndexException() 
+    { 
+    }
+    public PersonInvalidIndexException(string StringToPass) : base(
+        (String.Format("PersonMoveRateFrom and PersonMoveRateTo must have the same number of entries.\r\n" +
+        "PersonMoveRateFrom values must be smaller as the related PersonMoveRateTo value!\r\n\r\n" +
+        "PeronMoveRates will be reset to the default values!\r\n\r\n" +
+        "Please enter the desired correct values in APP-Settings: Category -> Move Rate Person\r\n{0}", StringToPass)))
+    {
+        AppSettings.Config.PersonMoveRate.DoubleSeriesFrom = new DoubleSeries([1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+        AppSettings.Config.PersonMoveRate.DoubleSeriesTo = new DoubleSeries([2, 2, 2, 2, 2, 2, 2, 2, 2, 2]);
+    }
+    public PersonInvalidIndexException(string message, Exception inner) : base(message, inner) { }
+}
+
+   else
+   {
+       throw new PersonInvalidIndexException("");
+   }
+
+
+double randomProbability; // in percent, can be a decimal between 0 and 100
+
+// randomProbability meaning:
+// 0 = never do activity
+// 25.5 = from 100 activities, do activity 25.5 times
+// 50.9 = from 100 activities, do activity 50.9 times
+// 90.95 = from 100 activities, do activity 90.95 times
+// 100 = always do activity
+
+Random random = new Random();
+double randomNumber = random.NextDouble() * 100;
+
+if (randomNumber <= randomProbability)
+{
+    // do activity...
+}
+
+
+
+
+int randomProbability; // in percent, can be an integer between 0 and 100
+
+// randomProbability meaning:
+// 0 = never do activity
+// 25 = from 100 activities, do activity 25 times
+// 50 = from 100 activities, do activity 50 times
+// 75 = from 100 activities, do activity 75 times
+// 100 = always do activity
+
+Random random = new Random();
+int randomNumber = random.Next(1, 101);
+
+if (randomNumber <= randomProbability)
+{
+    // do activity...
+}
+
+
+
+
  // Erstelle einen CsvWriter, um die Daten zu formatieren
     using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
     {

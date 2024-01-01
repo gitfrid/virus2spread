@@ -23,7 +23,7 @@ public class Setting
         //settings.IncludeCultureInTypeName = true;
         //settings.IncludePublicKeyTokenInTypeName = true;
         //settings.Culture = System.Globalization.CultureInfo.CurrentCulture;
-        // remove default ExcludeFromSerializationAttribute for performance gain
+        //remove default ExcludeFromSerializationAttribute for performance gain
         return settings;
     }
 
@@ -264,8 +264,7 @@ public class Setting
         }
         return Color.Empty;
     }
-
-    
+ 
     #endregion
 
 } //end setting
@@ -274,7 +273,7 @@ public class Setting
 #region Helper classes/structs
 
 
-//Class to write-read the ConfigFile location
+//Class to writ or read the ConfigFile location
 //from %appdata%AppName\LastConfigFileLocation.XML 
 public class GetSetLastConfigFilePath 
 {
@@ -338,7 +337,6 @@ public class GetSetLastConfigFilePath
 //    {
 //        return XmlFont.ToFont();
 //    }
-
 //}
 
 #endregion

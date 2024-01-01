@@ -9,9 +9,9 @@ using VirusSpreadLibrary.AppProperties.PropertyGridExt;
 namespace VirusSpreadLibrary.AppProperties;
 
 // This contaier class holds all the app configuration settings
-// similar like the built in visual Studio properties.settings 
+// similar to the built in visual Studio properties.settings 
 // 
-// it serialize-deserialize all properties of this contaier class 
+// it serialize and deserialize all properties of this contaier class 
 // into bin\..\AppProperties.XML using the Nuget Package: SharpSerializer.Core
 //
 // property of the objects are then shown at runtime in the property grid UI 
@@ -19,17 +19,17 @@ namespace VirusSpreadLibrary.AppProperties;
 // by binding - as selected object - to the propertygrid in the MainForm
 //
 // This is a Workaround as Visual Studio properties.settings Designer could not save a description for properties
-// it deletes all manually inserted descriptions, when a new property is saved
-// It also can't handle complex property classes with .Net 6/7, only with .Net Framwork
-//
+// it deleted all manually inserted descriptions, if a new property was saved
+// It also can't handle complex property classes with .Net 6-8
+// it can only provides this Feature with the .Net Framwork Standard 
 
 // depends on Nuget: SharpSerializer.Core 1.0.0 !!
 //
-// !! Using "SharpSerializer for the .Net Desktop Framework" !!
-// !! did not work stable with .Net 6/7 !!
+// !! Using Nuget "SharpSerializer for the .Net Desktop Framework" !!
+// !! did not work stable with .Net 6,8 !!
 //
-// Class must also have a constructor for xml de/serialize 
-// therfore unsightly workaround for color and font was required
+// Classes must have a constructor for xml deserialisation and serialisation
+// therfore unsightly workaround for the color types and fonts are required
 
 
 
@@ -92,13 +92,13 @@ public  class AppSettings
     private int personLatencyPeriod = 2;
     private int personInfectiousPeriod = 9;
     private int personReinfectionImmunityPeriod = 155;
-    private int personReinfectionRate = 11;
+    private double personReinfectionRate = 11;
 
     private DoubleSeriesClass virusMoveRate = new();
     private string virusMoveRateFrom = "";
     private string virusMoveRateTo = "";
-    private double virusMoveActivityRnd = 1;
-    private double virusMoveHomeActivityRnd = 0;
+    private int virusMoveActivityRnd = 1;
+    private int virusMoveHomeActivityRnd = 0;
 
     // plot
     private LegendVisability legendVisability = new();
@@ -356,15 +356,23 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Person Settings")]
-    [Description("Percentage of reinfections after the immunity phase following an illness\r\nDefault = 11 %" +
-        "\r\n0% means that no person can be infected again and the PersonReinfectionImmunityPeriod starts again from the beginning." +
-        "\r\n100% means that any person can be infected again, they receive the HealthyRecoverd status and can potentially become infected again" +
+    [Description("Percentage of reinfections after the immunity phase following an illness - decimal between 0 and 100\r\nDefault = 11 %" +
+        "\r\n0%=no person can be infected again and the PersonReinfectionImmunityPeriod starts again from the beginning." +
+        "\r\n100%=any person can be infected again, they receive the HealthyRecoverd status and will potentially become infected again" +
         "\r\nthis does not necessarily apply in reality, a change should be considered")]
         
-    public int PersonReinfectionRate
+    public double  PersonReinfectionRate
     {
-        get => personReinfectionRate;
-        set => personReinfectionRate = value;
+        get
+        {
+            return personReinfectionRate;
+        }
+        set 
+        {
+            personReinfectionRate = value;
+            if (personReinfectionRate < 0) { personReinfectionRate = 0; }
+            if (personReinfectionRate > 100) { personReinfectionRate = 100; }
+        }  
     }
     
     [CategoryAttribute("Virus Settings")]
@@ -387,7 +395,7 @@ public  class AppSettings
     [CategoryAttribute("Virus Settings")]
     [Description("integer 0 to X % \r\n0 = don't move, 1 = move every iteration, 2 = move random average every 2nd iteration, " +
         "X = move back home random average every Xd iteration")]
-    public double VirusMoveActivityRnd
+    public int VirusMoveActivityRnd
     {
         get => virusMoveActivityRnd;
         set
@@ -400,7 +408,7 @@ public  class AppSettings
     [CategoryAttribute("Virus Settings")]
     [Description("integer 0 to X % \r\n0 = don't move back home, 1 = move back home every iteration, " +
         "2 = move back home random average every 2nd iteration, X = move back home random average every Xd iteration")]
-    public double VirusMoveHomeActivityRnd
+    public int VirusMoveHomeActivityRnd
     {
         get => virusMoveHomeActivityRnd;
         set
@@ -862,5 +870,30 @@ public class GenDictionary : ClassSerializer
             AreEqual(s[20], r[20]);
         }
     }
+
 }
+
+// This would have ben probably a better wayto store complex Objects to the config xml
+// would probably have save a lot of workarounds for color or MovmentRates above
+
+//// Create a new serializer
+//var serializer = new SharpSerializer();
+//// Set the append mode to property
+//serializer.AppendMode = AppendMode.Property;
+//// Serialize the window state to the existing file
+//serializer.Serialize(this.WindowState, "config.xml");
+//// This is the save button
+//XmlSerializer serializer = new XmlSerializer(typeof(FormWindowState));
+//using (StreamWriter writer = new StreamWriter("windowstate.xml"))
+//{
+//    serializer.Serialize(writer, this.WindowState);
+//}
+
+//// This is the retrieve (use it in the form load event for example)
+//XmlSerializer serializer = new XmlSerializer(typeof(FormWindowState));
+//using (StreamReader reader = new StreamReader("windowstate.xml"))
+//{
+//    this.WindowState = (FormWindowState)serializer.Deserialize(reader);
+//}
+
 

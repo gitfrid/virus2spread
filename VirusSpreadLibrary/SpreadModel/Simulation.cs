@@ -3,9 +3,8 @@ using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.Grid;
 using Microsoft.Maui.Graphics;
-using System;
 using VirusSpreadLibrary.Plott;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 
 namespace VirusSpreadLibrary.SpreadModel;
@@ -42,16 +41,6 @@ public class Simulation
     public int MaxY { get; set; }
     public int Iteration { get => iteration; }
 
-
-    //public void Initialize()
-    //{
-    //    stopIteration = true;
-    //    MaxX = AppSettings.Config.GridMaxX;
-    //    MaxY = AppSettings.Config.GridMaxY;
-    //    grid.SetNewEmptyGrid(MaxX, MaxY);
-    //    personList.SetInitialPopulation(AppSettings.Config.InitialPersonPopulation, grid);
-    //    virusList.SetInitialPopulation(AppSettings.Config.InitialVirusPopulation, grid);        
-    //}
     public void StartIteration()
     {
         stopIteration = false;
@@ -64,7 +53,7 @@ public class Simulation
     {
         if (stopIteration == true) { return; }
 
-        Log.Logger = Logging.getinstance();        
+        Log.Logger = Logging.GetInstance();        
         Log.Logger.Information("Nr: {A} iteration", iteration);
        
         iteration++;
@@ -78,7 +67,7 @@ public class Simulation
             person.Age++;
             personAgeCum += person.Age;
 
-            // get health state if is infected
+            // increase health state counter if is infected
             if (person.PersonState.HealthStateCounter != 0)
             {
                 person.PersonState.HealthStateCounter++;
@@ -87,7 +76,7 @@ public class Simulation
             // move person and change health state if get infected
             if (person.DoMove())
             {
-                System.Drawing.Point startPoint = person.PersMoveData.StartGidCoordinate;
+                System.Drawing.Point startPoint = person.StartGridCoordinate;
                 if (person.DoMoveHome())
                 {
                     person.MoveToHomeCoordinate(grid);
@@ -97,7 +86,7 @@ public class Simulation
                     person.MoveToNewCoordinate(grid);
                 }
                 // calc move distance
-                System.Drawing.Point endPoint = person.PersMoveData.EndGridCoordinate;
+                System.Drawing.Point endPoint = person.EndGridCoordinate;
                 int dx = endPoint.X - startPoint.X;
                 int dy = endPoint.Y - startPoint.Y;
                 double SE = Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
@@ -120,7 +109,7 @@ public class Simulation
             
             if (virus.DoMove())
             {
-                System.Drawing.Point startPoint = virus.VirMoveData.StartGidCoordinate;
+                System.Drawing.Point startPoint = virus.StartGridCoordinate;
 
                 if (virus.DoMoveHome())
                 {
@@ -130,13 +119,12 @@ public class Simulation
                 {
                     virus.MoveToNewCoordinate(grid);
                 }
-                System.Drawing.Point endPoint = virus.VirMoveData.EndGridCoordinate;
+                System.Drawing.Point endPoint = virus.EndGridCoordinate;
                 int dx = endPoint.X - startPoint.X;
                 int dy = endPoint.Y - startPoint.Y;
                 double SE = Math.Sqrt(Math.Pow(dx, 2) + Math.Pow(dy, 2));
                 virusesMoveDistanceCum += SE;         
-            }            
-            
+            }                      
         };
 
         if (plotData.PersonPopulation > 0)

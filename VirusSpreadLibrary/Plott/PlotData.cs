@@ -1,11 +1,5 @@
 ﻿using VirusSpreadLibrary.Creature;
-using RecordParser.Builders.Writer;
 using VirusSpreadLibrary.AppProperties;
-using RecordParser.Parsers;
-using System.Globalization;
-using System.Formats.Asn1;
-using System.Collections.Concurrent;
-using SkiaSharp;
 
 namespace VirusSpreadLibrary.Plott
 {

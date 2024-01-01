@@ -26,14 +26,14 @@ public class EventsListBox : ListBox
       set { base.IntegralHeight = value; }
     }
 
-    public void AddEvent(string eventName)
+    public static void AddEvent(string eventName)
     {
-      this.AddEvent(eventName);
+      AddEvent(eventName);
     }
 
-    public void AddEvent(string eventName, IDictionary<string, object> values)
+    public static void AddEvent(string eventName, IDictionary<string, object> values)
     {
-      this.AddEvent(eventName, values);
+      AddEvent(eventName, values);
     }
 
     public void AddEvent(Control sender, string eventName)
@@ -43,9 +43,7 @@ public class EventsListBox : ListBox
 
     public void AddEvent(Control sender, string eventName, EventArgs args)
     {
-      IDictionary<string, object> values;
-
-      values = new Dictionary<string, object>();
+        Dictionary<string, object> dictionary = new();
 
       foreach (PropertyInfo pi in args.GetType().GetProperties())
       {
@@ -68,9 +66,9 @@ public class EventsListBox : ListBox
           // Not going to try and handler indexers
           value = null;
         }
-        values.Add(pi.Name, value!);
+        ((IDictionary<string, object>)dictionary).Add(pi.Name, value!);
       }
-      this.AddEvent(sender, eventName, values);
+      this.AddEvent(sender, eventName, dictionary);
     }
 
     public void AddEvent(Control sender, string eventName, IDictionary<string, object> values)

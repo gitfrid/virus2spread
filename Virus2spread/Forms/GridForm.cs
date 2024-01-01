@@ -106,7 +106,6 @@ namespace Virus2spread.Forms
         {
             RecalcFormSize(SkglControl.Width, SkglControl.Height, out coordinateFactX, out coordinateFactY, out rectangleX, out rectangleY);
         }
-
         public static Bitmap GetBitmap(SkiaSharp.SKImage skiaImage)
         {
             return skiaImage.ToBitmap();

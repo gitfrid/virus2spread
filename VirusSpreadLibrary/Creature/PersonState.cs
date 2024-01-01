@@ -4,6 +4,7 @@ namespace VirusSpreadLibrary.Creature;
 public class PersonState
 {
     private int healthStateCounter = 0;
+
     public const int PersonHealthy = 0;
     public const int PersonHealthyRecoverd = 1;
     public const int PersonInfected = 2;

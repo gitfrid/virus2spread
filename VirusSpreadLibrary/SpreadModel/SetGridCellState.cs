@@ -2,14 +2,13 @@
 using VirusSpreadLibrary.Enum;
 using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.Grid;
-using System;
+
 
 namespace VirusSpreadLibrary.SpreadModel;
 
 public static class SetGridCellState
 {
     private static GridCell cell = new();
-    private static GridCell cellStart = new();
 
     private readonly static ColorList colorList = new();
 
@@ -17,27 +16,17 @@ public static class SetGridCellState
     {
         // evaluate new state of grid cell
         int numPersons = Cell.NumPersons();
-        int numViruses = Cell.NumViruses();
-      
+        int numViruses = Cell.NumViruses();     
         
         if (numPersons > 0)
         {
-            //bool personsHealthy = false;
-            //bool personsHealthyRecoverd = false;
             bool personsInfectious = false;
             bool personsInfected = false;
             bool personRecoverdImmuneNotInfectious = false;
 
+            // get current state of the grid Cell  
             for (int i = 0; i < numPersons; i++)
             {
-                //if (PersonState.PersonHealthy == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
-                //{
-                //    personsHealthy = true;
-                //}
-                //if (PersonState.PersonHealthyRecoverd == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
-                //{
-                //    personsHealthyRecoverd = true;
-                //}
                 if (PersonState.PersonReinfected == Cell.PersonPopulation.Persons[i].PersonState.HealthState || PersonState.PersonInfected == Cell.PersonPopulation.Persons[i].PersonState.HealthState)
                 {
                     personsInfected = true;
@@ -54,25 +43,26 @@ public static class SetGridCellState
                 }
             }
 
-            // set sate of the grid Cell 
+            // set new sate of the grid Cel -> represented as Grid color in following ranking order
             Cell.CellState = CellState.PersonsHealthyOrRecoverd;
 
             if (personRecoverdImmuneNotInfectious)
             {
                 Cell.CellState = CellState.PersonsRecoverdImmuneNotInfectious;
             }
-
-            if (personsInfected || numViruses > 0)
+                        
+            if (personsInfected) // numViruses > 0<- all persons must be infected if a virus is on same cell
             {
                 Cell.CellState = CellState.PersonsInfected;
             }
  
-            if (personsInfectious || numViruses > 0)
+            if (personsInfectious)
             {
                 Cell.CellState = CellState.PersonsInfectious;
             } 
         }
 
+        // if no persons on a cell, two possible Grid colors exist
         if (numViruses < 1 && numPersons < 1)
         {
             Cell.CellState = CellState.EmptyCell;
@@ -84,35 +74,31 @@ public static class SetGridCellState
         }       
     }
 
-    public static void PersonMoveState(Person MovingPerson, Grid.Grid Grid , bool DoMoveHome = false )
+    public static bool AddPersonToNewEndGridCoordinate(Person MovingPerson, Grid.Grid Grid)
     {
-
         // add, moving virus or person to the end grid coordiante
-        int xEnd = MovingPerson.PersMoveData.EndGridCoordinate.X;
-        int yEnd = MovingPerson.PersMoveData.EndGridCoordinate.Y;
-
-        // remove virus or person from start grid coordiante
-        // after it has moved to end coordinate
-        int xStart = MovingPerson.PersMoveData.StartGidCoordinate.X;
-        int yStart = MovingPerson.PersMoveData.StartGidCoordinate.Y;
-
-        cell = Grid.Cells[xEnd, yEnd];
+        int xEnd = MovingPerson.EndGridCoordinate.X;
+        int yEnd = MovingPerson.EndGridCoordinate.Y;
 
         // exit if not moved
-        if (xStart == xEnd && yStart == yEnd)
-        {
-            return;
-        }
+        int xStart = MovingPerson.StartGridCoordinate.X;
+        int yStart = MovingPerson.StartGridCoordinate.Y;
+        if (xStart == xEnd && yStart == yEnd) { return true; }
 
+        // get the end grid cell moving to 
+        cell = Grid.Cells[xEnd, yEnd];
+
+        // add Person to the end grid Cell and increase population counter 
         cell.AddPerson(MovingPerson);
 
-        
         // set new end cell sate
         SetNewCellState(cell);
 
         // if cell contains infectious person or virus, then infect all Persons on this cell
         int numPersons = cell.NumPersons();
-        if (cell.CellState == CellState.PersonsInfectious) 
+        int numViruses = cell.NumViruses();
+
+        if (cell.CellState == CellState.PersonsInfectious || numViruses > 0)
         {
             for (int i = 0; i < numPersons; i++)
             {
@@ -123,10 +109,28 @@ public static class SetGridCellState
 
         // set new end cell color depending on cell state
         cell.CellColor = colorList.GetCellColor(cell.CellState, cell.NumPersons(), cell.NumViruses());
+        return false;
+    }
+
+    public static void PersonMoveState(Person MovingPerson, Grid.Grid Grid)
+    {
+        // add person to new end grid cell
+        bool notMoved = AddPersonToNewEndGridCoordinate(MovingPerson, Grid);
+
+        // exit if not moved
+        if (notMoved) { return; } 
+
+        // remove virus or person from start grid coordiante
+        // after it has moved to end coordinate
+        int xStart = MovingPerson.StartGridCoordinate.X;
+        int yStart = MovingPerson.StartGridCoordinate.Y;
 
         // delete person from start grid coordinate
         GridCell cellStart = Grid.Cells[xStart, yStart];
-        cellStart.RemovePerson(MovingPerson);
+
+        // remove Person from the sart grid Cell and decrease population counter 
+        // don't apply this for initialization move, as there is no person to delete then
+        cellStart.RemovePerson(MovingPerson); 
 
         // set new sart cell sate
         SetNewCellState(cellStart);
@@ -138,26 +142,23 @@ public static class SetGridCellState
         }
     }
 
-    public static void VirusMoveState(Virus MovingVirus, Grid.Grid Grid)
+    public static bool AddVirusToNewEndGridCoordinate(Virus MovingVirus, Grid.Grid Grid)
     {
-
         // add, moving virus or person to the end grid coordiante
-        int xEnd = MovingVirus.VirMoveData.EndGridCoordinate.X;
-        int yEnd = MovingVirus.VirMoveData.EndGridCoordinate.Y;
+        int xEnd = MovingVirus.EndGridCoordinate.X;
+        int yEnd = MovingVirus.EndGridCoordinate.Y;
 
         // remove virus or person from start grid coordiante
         // after it has moved to end coordinate
-        int xStart = MovingVirus.VirMoveData.StartGidCoordinate.X;
-        int yStart = MovingVirus.VirMoveData.StartGidCoordinate.Y;
+        int xStart = MovingVirus.StartGridCoordinate.X;
+        int yStart = MovingVirus.StartGridCoordinate.Y;
 
         cell = Grid.Cells[xEnd, yEnd];
 
         // exit if not moved
-        if (xStart == xEnd && yStart == yEnd)
-        {
-            return;
-        }
+        if (xStart == xEnd && yStart == yEnd) { return true; }
 
+        // add Virus to the end grid Cell and increase population counter 
         cell.AddVirus(MovingVirus);
 
         // set new end cell sate
@@ -176,9 +177,26 @@ public static class SetGridCellState
 
         // set new end cell color depending on cell state
         cell.CellColor = colorList.GetCellColor(cell.CellState, cell.NumPersons(), cell.NumViruses());
+        return false;
+    }
+
+    public static void VirusMoveState(Virus MovingVirus, Grid.Grid Grid)
+    {
+        // add person to new end grid cell
+        bool notMoved = AddVirusToNewEndGridCoordinate(MovingVirus, Grid);
+
+        // exit if not moved
+        if (notMoved) { return; }
+
+        // remove virus or person from start grid coordiante
+        // after it has moved to end coordinate
+        int xStart = MovingVirus.StartGridCoordinate.X;
+        int yStart = MovingVirus.StartGridCoordinate.Y;
 
         // delete virus from start grid coordinate
         GridCell cellStart = Grid.Cells[xStart, yStart];
+
+        // remove Virus from the start grid Cell and decrease population counter 
         cellStart.RemoveVirus(MovingVirus);
 
         // set new sart cell sate

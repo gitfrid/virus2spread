@@ -10,7 +10,6 @@
         "dependencies": {
           "Microsoft.Maui.Graphics.Skia": "7.0.100",
           "Microsoft.Windows.Compatibility": "8.0.0",
-          "RecordParser": "2.3.0",
           "ScottPlot.WinForms": "4.1.69",
           "Serilog.Sinks.Console": "4.1.0",
           "SharpSerializer.Core": "1.0.0",
@@ -123,14 +122,6 @@
           "lib/net20/OpenTK.GLControl.dll": {
             "assemblyVersion": "3.1.0.0",
             "fileVersion": "3.1.0.0"
-          }
-        }
-      },
-      "RecordParser/2.3.0": {
-        "runtime": {
-          "lib/net8.0/RecordParser.dll": {
-            "assemblyVersion": "2.3.0.0",
-            "fileVersion": "2.3.0.0"
           }
         }
       },
@@ -931,13 +922,6 @@
       "sha512": "sha512-BjDzF+MhJd2LaZYzkXmgkzzXgHAko/Iur4rGy6+DPdZA1Jcc0X6jXZ6QsUsjlLRNzgevO7uAj2h1TqX7sguaYg==",
       "path": "opentk.glcontrol/3.1.0",
       "hashPath": "opentk.glcontrol.3.1.0.nupkg.sha512"
-    },
-    "RecordParser/2.3.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-AV4BPuN/bt87Lm7eQcstMsiD0bA2W0poxI582Si+rPx5l+GEu3FZquNWp+OkyRdBdcFmYynXAJ7gCyI/5EANbw==",
-      "path": "recordparser/2.3.0",
-      "hashPath": "recordparser.2.3.0.nupkg.sha512"
     },
     "runtime.linux-arm.runtime.native.System.IO.Ports/8.0.0": {
       "type": "package",

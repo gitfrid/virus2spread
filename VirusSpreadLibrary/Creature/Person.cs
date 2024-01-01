@@ -1,8 +1,7 @@
 ﻿using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.Creature.Rates;
-using VirusSpreadLibrary.Enum;
-using VirusSpreadLibrary.Grid;
-using Point = System.Drawing.Point;
+using VirusSpreadLibrary.SpreadModel;
+
 
 namespace VirusSpreadLibrary.Creature;
 
@@ -10,55 +9,77 @@ public class Person
 {
     private readonly Random rnd = new ();
     
-    private readonly PersMoveDistanceProfile persMoveProfile = new();   
-    public Person()
-    {
-        PersMoveData = new()
-        {
-            CreatureType = Enum.CreatureType.Person
-        };
-        PersonState = new PersonState();
-    }
-
+    private readonly PersMoveDistanceProfile persMoveProfile = new(); 
+    
+    private PersonState personState;
     public int Age { get; set; } 
     public double PersonBirthRateByAge { get; set; }
     public double PersonDeathProbabilityByAge { get; set; }
-    public PersonState PersonState { get; set; }
     public bool IsDead { get; set; }
-    public MoveData PersMoveData { get; set; }
-    
-    //public bool DoMove()
-    //{
-    //    return (AppSettings.Config.PersonMoveActivityRnd != 0) &&
-    //            (1 == rnd.Next(1, 1+(int)(AppSettings.Config.PersonMoveActivityRnd)));
-    //}
 
+    // move data
+    public Enum.CreatureType CreatureType = Enum.CreatureType.Person;
+    public Point StartGridCoordinate { get; private set; }
+    public Point EndGridCoordinate { get; private set; }
+    public Point HomeGridCoordinate { get; private set; }
+
+    public PersonState PersonState
+    {
+        get => personState;
+        set => personState = value;
+    }
+
+    public Person()
+    {
+        personState = new PersonState();
+    }
     public bool DoMove()
     {
-    //    int moveActivity = AppSettings.Config.PersonMoveActivityRnd;
-    //    if (moveActivity == 0) return false;
-    //    int randomNumber = rnd.Next(moveActivity);
-    //    return randomNumber <= 1;
-        return (AppSettings.Config.PersonMoveActivityRnd != 0) &&
-                (1 == rnd.Next(1, 1+(int)(AppSettings.Config.PersonMoveActivityRnd)));
+        // move within PersonMoveActivityRnd percentage, 0=dont 100=always
+        int moveActivity = AppSettings.Config.PersonMoveActivityRnd;
+        if (moveActivity < 0) { moveActivity = 0; }
+        if (moveActivity == 0 || rnd.Next(1, moveActivity + 1) > 1) 
+            return false;
+        return true;
     }
-
     public bool DoMoveHome()
     {
-        //int moveActivity = AppSettings.Config.PersonMoveHomeActivityRnd;
-        //if (moveActivity == 0) return false;
-        //int randomNumber = rnd.Next(moveActivity);
-        //return randomNumber <= 1;
-        return (AppSettings.Config.PersonMoveHomeActivityRnd != 0) &&
-        (1 == rnd.Next(1, 1 + (int)(AppSettings.Config.PersonMoveHomeActivityRnd)));
+        // move home within PersonMoveHomeActivityRnd percentage, 0=dont 100=always
+        int moveActivity = AppSettings.Config.PersonMoveHomeActivityRnd;
+        if (moveActivity < 0) { moveActivity = 0; }
+        if (moveActivity == 0 || rnd.Next(1, moveActivity + 1) > 1) return false;
+        return true;
     }
-    public void ChildBirth()
+    public bool DoReinfect()
     {
-     //    
+        // reinfection within PersonMoveHomeActivityRnd percentage (decimal between 0-100%)
+        // 0 = never true, 50 = from 100 approximate 50 times true, 100 = always true
+        double randomProbability = AppSettings.Config.PersonReinfectionRate;
+        if (randomProbability  >= 0 && randomProbability <= 100)
+        {
+            double randomNumber = rnd.NextDouble() * 100;
+            if (randomNumber <= randomProbability)
+            {
+                return true;
+            }
+            else 
+            { 
+                return false; 
+            }
+        }
+        else
+        {
+            // wrong input from AppSettings - should not happen
+            throw new PersonReinfectionRateInputException("");  
+        }
     }
-    public void SpreadVirus()
+    public static void ChildBirth()
     {
-        //
+      //    
+    }
+    public static void SpreadVirus()
+    {
+      //
     }
     public void InfectPerson()
     {
@@ -104,23 +125,17 @@ public class Person
         }
 
         if (healthCounter > AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod
-            && healthCounter <= AppSettings.Config.PersonReinfectionImmunityPeriod + AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod)
+            && healthCounter <= AppSettings.Config.PersonReinfectionImmunityPeriod 
+            + AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod)
         {
             // ReinfectionImmunityPeriod - person recoverd and immune
             PersonState.HealthState = PersonState.PersonRecoverdImmunePeriodNotInfectious;
         }
 
-        if (healthCounter > AppSettings.Config.PersonReinfectionImmunityPeriod + AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod)
+        if (healthCounter > AppSettings.Config.PersonReinfectionImmunityPeriod 
+            + AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod)
         {
-
-            // new reinfection cycle random within PersonReinfectionRate
-            
-            int random = rnd.Next(0, 101);           
-            int percentage = (int)AppSettings.Config.PersonReinfectionRate;
-            if (percentage < 0) { percentage = 0; }
-            if (percentage > 100) { percentage = 100; }
-
-            if (random < percentage)
+            if (DoReinfect())
             {
                 // person is recoverd and is reinfectable
                 PersonState.HealthState = PersonState.PersonHealthyRecoverd;
@@ -128,13 +143,36 @@ public class Person
             }
             else
             {
-                // person is recoverd and is immune within PersonReinfectionRate and not infectious
+                // person is recoverd and is immune within PersonReinfectionRate and is not infectious
                 PersonState.HealthState = PersonState.PersonRecoverdImmunePeriodNotInfectious;
                 // begin a new recoverd immunity period
                 PersonState.HealthStateCounter = AppSettings.Config.PersonInfectiousPeriod + AppSettings.Config.PersonLatencyPeriod +1;
             }
         }
     }
+
+    public void InitializePersonMoveToGrid(Grid.Grid Grid)
+    {
+        int maxX = Grid.ReturnMaxX();
+        int maxY = Grid.ReturnMaxY();
+
+        // random initial move endcoordiante = homeCoordinate
+        EndGridCoordinate = new(rnd.Next(0,maxX ), rnd.Next(0, maxY));
+        HomeGridCoordinate = EndGridCoordinate;
+
+        do // must be differ from from end coordiante, otherwise creature does not move 
+        {
+           StartGridCoordinate = new(rnd.Next(0, maxX), rnd.Next(0, maxY));
+        } while (StartGridCoordinate == EndGridCoordinate);
+        
+        // initalize move to the home cell, add the person at (home) endcoordiante
+        // but dont remove from the start coordinate, as in the intitialize case there is no person
+        SpreadModel.SetGridCellState.AddPersonToNewEndGridCoordinate(this, Grid);
+        
+        // save as new current coordinate
+        StartGridCoordinate = EndGridCoordinate;
+    }
+
     public void MoveToNewCoordinate(Grid.Grid Grid)
     {
         // get new random endpoint to move to
@@ -142,31 +180,29 @@ public class Person
         if (AppSettings.Config.PersonMoveGlobal)
         {   
             // calculate next move from EndCoordinate of the last iteration, in the spcified range - moves over whole grid
-            PersMoveData.EndGridCoordinate = persMoveProfile.GetEndCoordinateToMove(PersMoveData.StartGidCoordinate);
+            EndGridCoordinate = persMoveProfile.GetEndCoordinateToMove(StartGridCoordinate);
         } 
         else
         {   
             // calculate next move always from the Home Coordinate in the specified range - moves only within the range
-            PersMoveData.EndGridCoordinate = persMoveProfile.GetEndCoordinateToMove(PersMoveData.HomeGridCoordinate);
+            EndGridCoordinate = persMoveProfile.GetEndCoordinateToMove(HomeGridCoordinate);
         }
 
-        // do move to endpoint
+        // do move to endpoint end cell on grid and set cell state and population counter
         SpreadModel.SetGridCellState.PersonMoveState(this,Grid);
 
-        // save current endpoint as the new startpoint
-        // to use in next iteration if VirusMoveGlobal is true
-        PersMoveData.StartGidCoordinate = PersMoveData.EndGridCoordinate;
-
+        // save as new current coordiante
+        StartGridCoordinate = EndGridCoordinate;
     }
     public void MoveToHomeCoordinate(Grid.Grid Grid)
     {
-        PersMoveData.EndGridCoordinate = PersMoveData.HomeGridCoordinate;
+        EndGridCoordinate = HomeGridCoordinate;
 
-        // do move to endpoint
+        // do move to home coordinate
         SpreadModel.SetGridCellState.PersonMoveState(this, Grid);
 
-        // save current endpoint as the new startpoint
-        PersMoveData.StartGidCoordinate = PersMoveData.EndGridCoordinate;
+        // save current endpoint as new current 
+        StartGridCoordinate = EndGridCoordinate;
     }
 
 }

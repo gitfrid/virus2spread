@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gfabcB8YCYIjY3KTCX/ED+q7mHsPs0dY4/UFBPaVCV9lDmfR5h3rY+6f5QDDz4k6FMvWC0FpHUFn+wFCsssPrg==",
+  "dgSpecHash": "MJiZzG7WWPEfZfKYkkDHDoW20LJP3sJiO1N6WmsNT7CR2pExZGoL/qWsOMJVz6QV35TB+l8ixSXN/Mbs4hOqdw==",
   "success": true,
   "projectFilePath": "C:\\Github\\virus2spread\\Virus2spread\\Virus2spread.csproj",
   "expectedPackageFiles": [
@@ -30,7 +30,6 @@
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.windows.compatibility\\8.0.0\\microsoft.windows.compatibility.8.0.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\opentk\\3.1.0\\opentk.3.1.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\opentk.glcontrol\\3.1.0\\opentk.glcontrol.3.1.0.nupkg.sha512",
-    "C:\\Users\\adm\\.nuget\\packages\\recordparser\\2.3.0\\recordparser.2.3.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-x64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",

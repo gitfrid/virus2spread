@@ -25,7 +25,6 @@ C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Microsoft.Maui.G
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Microsoft.Maui.Graphics.Skia.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\OpenTK.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\OpenTK.GLControl.dll
-C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\RecordParser.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\ScottPlot.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\ScottPlot.WinForms.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\Serilog.dll
@@ -119,7 +118,6 @@ C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\runtimes\win\lib
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\runtimes\win\lib\net8.0\System.Speech.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\VirusSpreadLibrary.dll
 C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\VirusSpreadLibrary.pdb
-C:\Github\virus2spread\Virus2spread\bin\Debug\net8.0-windows7.0\VirusSpreadLibrary.dll.config
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.csproj.AssemblyReference.cache
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.Forms.GridForm.resources
 C:\Github\virus2spread\Virus2spread\obj\Debug\net8.0-windows7.0\Virus2spread.MainForm.resources

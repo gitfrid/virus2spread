@@ -1,4 +1,6 @@
-﻿using VirusSpreadLibrary.Creature;
+﻿using Serilog;
+using VirusSpreadLibrary.Creature;
+using VirusSpreadLibrary.SpreadModel;
 
 namespace VirusSpreadLibrary.Grid
 {
@@ -13,20 +15,26 @@ namespace VirusSpreadLibrary.Grid
         public CellPersons()
         {
             Persons = new List<Person>();
+            Log.Logger = Logging.GetInstance();
         }
         public void Add(Person AddPerson)
         {
             Persons.Add(AddPerson);
             numPersons++;
+
+            // just for debug
+            if (numPersons > Persons.Count) 
+                throw new CellPersonsException("CellPersons - Add Person Error");
         }
         public void Remove(Person RemovePerson)
-        {
+        {          
             Persons.Remove(RemovePerson);
-            //if (NumPersons  == 0) { MessageBox.Show("ist null!"); }
-            if (NumPersons > 0)
-            {
-               numPersons--;
-            }                
+            numPersons--;
+
+            // just for debug
+            if (numPersons < 0) 
+                throw new CellPersonsException("CellPersons - Remove Person Error");
         }
+
     }
 }

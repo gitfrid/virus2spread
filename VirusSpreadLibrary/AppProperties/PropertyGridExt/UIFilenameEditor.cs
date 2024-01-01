@@ -71,9 +71,9 @@ public class UIFilenameEditor : System.Drawing.Design.UITypeEditor
 	}
 	
 	[AttributeUsage(AttributeTargets.Property)]
-    public class FileDialogFilterAttribute : Attribute
+    public class FileDialogFilterAttribute(string filter) : Attribute
 	{			
-		private readonly string filter;
+		private readonly string filter = filter;
 		
 		public string Filter
 		{
@@ -82,14 +82,9 @@ public class UIFilenameEditor : System.Drawing.Design.UITypeEditor
 				return this.filter;
 			}
 		}
-		
-		public FileDialogFilterAttribute(string filter)
-		{
-			this.filter = filter;
-		}
-	}
-	
-	[AttributeUsage(AttributeTargets.Property)]
+    }
+
+    [AttributeUsage(AttributeTargets.Property)]
     public class SaveFileAttribute : Attribute
 	{
 		

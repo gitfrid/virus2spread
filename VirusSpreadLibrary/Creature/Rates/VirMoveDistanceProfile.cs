@@ -1,6 +1,7 @@
 ﻿
 using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.AppProperties.PropertyGridExt;
+using VirusSpreadLibrary.SpreadModel;
 using Point = System.Drawing.Point;
 
 namespace VirusSpreadLibrary.Creature.Rates;
@@ -12,26 +13,12 @@ namespace VirusSpreadLibrary.Creature.Rates;
 // get a random direction 365° 
 // returns the EndGridCoordinate for the move.
 
-public class VirusInvalidIndexException : Exception
-{
-    public VirusInvalidIndexException()
-    {
-    }
-    public VirusInvalidIndexException(string StringToPass) : base(
-        (String.Format("VirusMoveRateFrom and VirusMoveRateTo must have the same number of entries.\r\n" +
-        "VirusMoveRateFrom values must be smaller as the related VirusMoveRateTo value!\r\n\r\n" +
-        "VirusMoveRates will be reset to the default values!\r\n\r\n" +
-        "Please enter the desired correct values in APP-Settings: Category -> Move Rate Virus\r\n{0}", StringToPass)))
-    { }
-    public VirusInvalidIndexException(string message, Exception inner) : base(message, inner) { }
-}
-
 public class VirMoveDistanceProfile
 {
-    private int maxX = 0;
-    private int maxY = 0;
+    private readonly int maxX = 0;
+    private readonly int maxY = 0;
    
-    private Random rnd = new Random();
+    private readonly Random rnd = new ();
 
     private readonly Point[] moveDistance = [];
     public double MoveActivityRnd { get; set; }

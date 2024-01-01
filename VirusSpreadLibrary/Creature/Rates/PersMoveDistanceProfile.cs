@@ -1,5 +1,6 @@
 ﻿using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.AppProperties.PropertyGridExt;
+using VirusSpreadLibrary.SpreadModel;
 using Point = System.Drawing.Point;
 
 namespace VirusSpreadLibrary.Creature.Rates;
@@ -10,25 +11,6 @@ namespace VirusSpreadLibrary.Creature.Rates;
 // Determine a random distance within the selected distance range
 // Determines a random direction of 365° 
 // returns the EndGridCoordinate for the movement
-
-
-public class PersonInvalidIndexException : Exception
-{
-    public PersonInvalidIndexException() 
-    { 
-    }
-    public PersonInvalidIndexException(string StringToPass) : base(
-        (String.Format("PersonMoveRateFrom and PersonMoveRateTo must have the same number of entries.\r\n" +
-        "PersonMoveRateFrom values must be smaller as the related PersonMoveRateTo value!\r\n\r\n" +
-        "PeronMoveRates will be reset to the default values!\r\n\r\n" +
-        "Please enter the desired correct values in APP-Settings: Category -> Move Rate Person\r\n{0}", StringToPass)))
-    {
-        AppSettings.Config.PersonMoveRate.DoubleSeriesFrom = new DoubleSeries([1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-        AppSettings.Config.PersonMoveRate.DoubleSeriesTo = new DoubleSeries([2, 2, 2, 2, 2, 2, 2, 2, 2, 2]);
-    }
-    public PersonInvalidIndexException(string message, Exception inner) : base(message, inner) { }
-}
-
 
 public class PersMoveDistanceProfile
 {
@@ -55,7 +37,8 @@ public class PersMoveDistanceProfile
                 moveDistance[i] = new Point(((int)seriesFrom.DoubleArray[i]), ((int)seriesTo.DoubleArray[i]));
                 if ((int) seriesFrom.DoubleArray[i] > (int)seriesTo.DoubleArray[i]) 
                 {
-                    throw new PersonInvalidIndexException("");
+                    throw new 
+                        ("");
                 }
             }
         }
@@ -68,7 +51,6 @@ public class PersMoveDistanceProfile
     {
            return moveDistance[Index];
     }
-
     public Point GetEndCoordinateToMove(Point StartCoordiante)
     {
         int beta = rnd.Next(0, 91); // get X Y coordinate by the random distance and a random move angel between 0-90

@@ -3,8 +3,20 @@
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="751" />
-        <Simple name="Y" value="409" />
+        <Simple name="X" value="484" />
+        <Simple name="Y" value="583" />
+      </Properties>
+    </Complex>
+    <Complex name="Form_Config_WindowSize">
+      <Properties>
+        <Simple name="Width" value="2056" />
+        <Simple name="Height" value="1096" />
+      </Properties>
+    </Complex>
+    <Complex name="PlotForm_WindowLocation">
+      <Properties>
+        <Simple name="X" value="48" />
+        <Simple name="Y" value="17" />
       </Properties>
     </Complex>
     <Complex name="PlotForm_WindowSize">
@@ -13,16 +25,16 @@
         <Simple name="Height" value="1122" />
       </Properties>
     </Complex>
-    <Complex name="PlotForm_WindowLocation">
+    <Complex name="PhaseChartForm_WindowLocation">
       <Properties>
-        <Simple name="X" value="0" />
-        <Simple name="Y" value="0" />
+        <Simple name="X" value="1990" />
+        <Simple name="Y" value="37" />
       </Properties>
     </Complex>
-    <Complex name="Form_Config_WindowSize">
+    <Complex name="PhaseChartForm_WindowSize">
       <Properties>
-        <Simple name="Width" value="1555" />
-        <Simple name="Height" value="845" />
+        <Simple name="Width" value="1440" />
+        <Simple name="Height" value="1087" />
       </Properties>
     </Complex>
     <Simple name="AppVersion" value="1.0.0.0" />
@@ -78,7 +90,7 @@
         </SingleArray>
       </Properties>
     </Complex>
-    <Simple name="PhaseChartXSelectedIndex" value="0" />
-    <Simple name="PhaseChartYSelectedIndex" value="0" />
+    <Simple name="PhaseChartXSelectedIndex" value="7" />
+    <Simple name="PhaseChartYSelectedIndex" value="8" />
   </Properties>
 </Complex>
