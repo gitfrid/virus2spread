@@ -3,8 +3,8 @@
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="484" />
-        <Simple name="Y" value="583" />
+        <Simple name="X" value="617" />
+        <Simple name="Y" value="385" />
       </Properties>
     </Complex>
     <Complex name="Form_Config_WindowSize">
