@@ -1,5 +1,6 @@
 ﻿
 using VirusSpreadLibrary.Creature;
+using VirusSpreadLibrary.Enum;
 
 namespace VirusSpreadLibrary.Grid;
 public class GridCell
@@ -7,7 +8,7 @@ public class GridCell
     private Microsoft.Maui.Graphics.Color? cellColor;   
     private readonly CellViruses virusPopulation;
     private readonly CellPersons personPopulation;
-    private int cellState = Enum.CellState.EmptyCell;
+    private CellState cellState = Enum.CellState.EmptyCell;
 
     public GridCell()
     {
@@ -31,7 +32,7 @@ public class GridCell
         get => personPopulation;
         //set => personPopulation = value;
     }
-    public int CellState
+    public CellState CellState
     {
         get => cellState;
         set => cellState = value;
