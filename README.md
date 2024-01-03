@@ -23,6 +23,7 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br>
 <br>Download the ![Virus2SpreadSetup.msi](https://github.com/gitfrid/virus2spread/blob/d736787e9ee451ff964ddb6c1980e214b5921de7/virus2spreadSetup/Release/virus2spreadSetup.msi) to install the Software.
 <br>In github folder ![virus2spreadSetup/Release/](https://github.com/gitfrid/virus2spread/blob/d736787e9ee451ff964ddb6c1980e214b5921de7/virus2spreadSetup/Release/virus2spreadSetup.msi)
+<br>Thumbprint self signd certificate:f28154fafc6a8a540a3cf9527a05c81ba7a7fd58
 <br>
 <br>Alternative, it is  sufficient if only the binary files are copied fom this github folder: 
 <br>/Virus2spread/bin/Release/net8.0-windows7.0/*.*  to any folder, and double click Virus2spread.exe to run the Simulation.
