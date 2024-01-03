@@ -8,7 +8,7 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br>
 <br> 
 <br>So what is special about this simulation?
-Most other simulations already assume the droplet theory, this one does not. 
+<br>Most other simulations already assume the droplet theory, this one does not. 
 <br> 
 <br>Further information see ![virus2spread wiki](https://github.com/gitfrid/virus2spread/wiki)
 <br> 
