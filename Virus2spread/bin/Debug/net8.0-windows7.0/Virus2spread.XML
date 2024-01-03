@@ -3,14 +3,14 @@
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="1888" />
-        <Simple name="Y" value="1007" />
+        <Simple name="X" value="1896" />
+        <Simple name="Y" value="999" />
       </Properties>
     </Complex>
     <Complex name="Form_Config_WindowSize">
       <Properties>
-        <Simple name="Width" value="1791" />
-        <Simple name="Height" value="1059" />
+        <Simple name="Width" value="1692" />
+        <Simple name="Height" value="1034" />
       </Properties>
     </Complex>
     <Complex name="PlotForm_WindowLocation">
@@ -27,14 +27,14 @@
     </Complex>
     <Complex name="PhaseChartForm_WindowLocation">
       <Properties>
-        <Simple name="X" value="1890" />
-        <Simple name="Y" value="10" />
+        <Simple name="X" value="1898" />
+        <Simple name="Y" value="109" />
       </Properties>
     </Complex>
     <Complex name="PhaseChartForm_WindowSize">
       <Properties>
-        <Simple name="Width" value="1737" />
-        <Simple name="Height" value="994" />
+        <Simple name="Width" value="1638" />
+        <Simple name="Height" value="921" />
       </Properties>
     </Complex>
     <Simple name="AppVersion" value="1.0.0.0" />
