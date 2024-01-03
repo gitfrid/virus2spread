@@ -22,7 +22,6 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br>**Prerequisite: Microsoft .Net 8 has to be installed first!** https://dotnet.microsoft.com/en-us/download
 <br>
 <br>Download the ![Virus2SpreadSetup.msi](https://github.com/gitfrid/virus2spread/blob/d736787e9ee451ff964ddb6c1980e214b5921de7/virus2spreadSetup/Release/virus2spreadSetup.msi) to install the Software.
-<br>Hash SHA256  : 72CF1E645B1ECB7B4513651F5FAE274EAFCCB1B9DF37B764393B8BDC4947BA83
 <br>In github folder ![virus2spreadSetup/Release/](https://github.com/gitfrid/virus2spread/blob/d736787e9ee451ff964ddb6c1980e214b5921de7/virus2spreadSetup/Release/virus2spreadSetup.msi)
 <br>
 <br>Alternative, it is  sufficient if only the binary files are copied fom this github folder: 
