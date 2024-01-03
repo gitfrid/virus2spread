@@ -14,8 +14,7 @@ namespace VirusSpreadLibrary.Grid
         }
         public CellPersons()
         {
-            Persons = new List<Person>();
-            Log.Logger = Logging.GetInstance();
+            Persons = new List<Person>();        
         }
         public void Add(Person AddPerson)
         {
@@ -31,9 +30,9 @@ namespace VirusSpreadLibrary.Grid
             Persons.Remove(RemovePerson);
             numPersons--;
 
-            // just for debug
-            if (numPersons < 0) 
-                throw new CellPersonsException("CellPersons - Remove Person Error");
+            //// just for debug
+            //if (numPersons < 0) 
+            //    throw new CellPersonsException("CellPersons - Remove Person Error");
         }
 
     }

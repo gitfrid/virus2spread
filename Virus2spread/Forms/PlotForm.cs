@@ -6,6 +6,7 @@ using VirusSpreadLibrary.AppProperties;
 using CsvHelper;
 using System.Globalization;
 
+
 namespace Virus2spread;
 
 public partial class PlotForm : Form
@@ -243,7 +244,12 @@ public partial class PlotForm : Form
 
     private void BtnExportCsv_Click(object sender, EventArgs e)
     {
-        using var writer = new StreamWriter(AppSettings.Config.CsvFilePath);
+        string fileName = SaveCsvToFile();
+        if (fileName == "") 
+        {
+            return;
+        }
+        using var writer = new StreamWriter(fileName);
         using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
         // write header in first row
         for (int i = 0; i < plotData.Legend.Length; i++)
@@ -268,6 +274,32 @@ public partial class PlotForm : Form
             }
             csv.NextRecord();
         }
+    }
+
+    private static string SaveCsvToFile()
+    {
+        SaveFileDialog saveFileDialog = new();
+        string fileName;
+
+        string FilePath = AppSettings.Config.CsvFilePath;
+        if (File.Exists(FilePath))
+        {
+            saveFileDialog.FileName = Path.GetFileName(FilePath);
+            saveFileDialog.InitialDirectory = Path.GetDirectoryName(FilePath);
+            saveFileDialog.DefaultExt = Path.GetExtension(saveFileDialog.FileName.ToString());
+            saveFileDialog.Filter = saveFileDialog.DefaultExt + "|*"
+                + Path.GetExtension(saveFileDialog.FileName.ToString());
+        }
+        if (DialogResult.OK == saveFileDialog.ShowDialog())
+        {
+            fileName = saveFileDialog.FileName;
+            AppSettings.Config.CsvFilePath = fileName;
+            return fileName;
+        }
+        else 
+        {
+            return "";
+        }        
     }
 
     private void PlotForm_FormClosing(object sender, FormClosingEventArgs e)

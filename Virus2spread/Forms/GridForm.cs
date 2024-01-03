@@ -1,11 +1,10 @@
 ﻿using System.Diagnostics;
-using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Graphics.Skia;
 using VirusSpreadLibrary.SpreadModel;
 using VirusSpreadLibrary.AppProperties;
 using AnimatedGif;
 using System.Text;
 using SkiaSharp.Views.Desktop;
+using SkiaSharp;
 
 
 namespace Virus2spread.Forms
@@ -60,14 +59,20 @@ namespace Virus2spread.Forms
             float cellWidthPx = WidthX / maxX;
             float cellHeightPx = HeigthY / maxY;
 
-            float borderFrac = 0.01f;
-            float xPad = borderFrac * cellWidthPx;
-            float yPad = borderFrac * cellHeightPx;
+            ////uncomment if you like to draw a grid between rectangles
+            //float borderFrac = 0.005f;
+            //float xPad = borderFrac * cellWidthPx;
+            //float yPad = borderFrac * cellHeightPx;
 
-            coordinateFactX = cellWidthPx + xPad;
-            coordinateFactY = cellHeightPx + yPad;
-            rectangleX = cellWidthPx - xPad * 2;
-            rectangleY = cellHeightPx - yPad * 2;
+            //coordinateFactX = cellWidthPx + xPad;
+            //coordinateFactY = cellHeightPx + yPad;
+            //rectangleX = cellWidthPx - xPad * 2;
+            //rectangleY = cellHeightPx - yPad * 2;
+
+            coordinateFactX = cellWidthPx;
+            coordinateFactY = cellHeightPx;
+            rectangleX = cellWidthPx;
+            rectangleY = cellHeightPx;
         }
 
         private void Timer1_Tick_1(object sender, EventArgs e)
@@ -87,19 +92,20 @@ namespace Virus2spread.Forms
             SkglControl.Invalidate();
         }
 
-        private void SkglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs  e)
+        private void SkglControl1_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
         {
-            SkiaCanvas skiaCanvas = new()
-            {
-                Canvas = e.Surface.Canvas,
-                FillColor = Colors.Navy
-            };
-            ((ICanvas)skiaCanvas).FillRectangle(0, 0, SkglControl.Width, SkglControl.Height);
-            simulation.DrawGrid(skiaCanvas, coordinateFactX, coordinateFactY, rectangleX, rectangleY);
+            // Get the surface and canvas from the event arguments
+            var surface = e.Surface;
+            var canvas = surface.Canvas;
+
+            // Clear the canvas with a navy color
+            canvas.Clear(SKColors.Black);
+
+            // Call the simulation method with the canvas
+            simulation.DrawGrid(canvas, coordinateFactX, coordinateFactY, rectangleX, rectangleY);
+
+            // Update the benchmark message
             UpdateBenchmarkMessage();
-            // to create animated gif, but slows down iterations
-            // var surface = e.Surface;            
-            // SaveGif(surface);
         }
 
         private void SkglControl1_SizeChanged(object sender, EventArgs e)

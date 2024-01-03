@@ -1,7 +1,6 @@
 ﻿
 using System.Collections.Concurrent;
-using System.Windows.Forms;
-using ScottPlot.Drawing.Colormaps;
+
 
 namespace VirusSpreadLibrary.Plott;
 

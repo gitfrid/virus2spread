@@ -1,4 +1,3 @@
-C:\Github\virus2spread\VirusSpreadLibrary\bin\Release\net8.0-windows\VirusSpreadLibrary.dll.config
 C:\Github\virus2spread\VirusSpreadLibrary\bin\Release\net8.0-windows\VirusSpreadLibrary.deps.json
 C:\Github\virus2spread\VirusSpreadLibrary\bin\Release\net8.0-windows\VirusSpreadLibrary.dll
 C:\Github\virus2spread\VirusSpreadLibrary\bin\Release\net8.0-windows\VirusSpreadLibrary.pdb

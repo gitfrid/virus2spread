@@ -1,11 +1,9 @@
-﻿using Serilog;
+﻿
 using VirusSpreadLibrary.Creature;
 using VirusSpreadLibrary.AppProperties;
 using VirusSpreadLibrary.Grid;
-using Microsoft.Maui.Graphics;
 using VirusSpreadLibrary.Plott;
-
-
+using SkiaSharp;
 
 namespace VirusSpreadLibrary.SpreadModel;
 
@@ -53,8 +51,8 @@ public class Simulation
     {
         if (stopIteration == true) { return; }
 
-        Log.Logger = Logging.GetInstance();        
-        Log.Logger.Information("Nr: {A} iteration", iteration);
+        //Log.Logger = Logging.GetInstance();        
+        //Log.Logger.Information("Nr: {A} iteration", iteration);
        
         iteration++;
         plotData.IterationNumber = iteration;
@@ -145,17 +143,20 @@ public class Simulation
     }
 
     // first initialize grid!
-    public void DrawGrid(ICanvas canvas,float coordinateFactX, float coordinateFactY, float rectangleX, float rectangleY)
+    public void DrawGrid(SKCanvas canvas, float coordinateFactX, float coordinateFactY, float rectangleX, float rectangleY)
     {
         for (int y = 0; y < MaxY; y++)
         {
             for (int x = 0; x < MaxX; x++)
             {
                 GridCell Cell = grid.Cells[x, y];
-                canvas.FillColor = Cell.CellColor;                
-                canvas.FillRectangle(x * coordinateFactX , y * coordinateFactY , rectangleX, rectangleY);   
+                SKPaint paint = new()
+                {
+                    Color = Cell.CellColor
+                };
+                canvas.DrawRect(x * coordinateFactX, y * coordinateFactY, rectangleX, rectangleY, paint);
             }
-        }                
+        }
     }
 
 }

@@ -1,39 +1,47 @@
 ﻿using VirusSpreadLibrary.Enum;
-using Microsoft.Maui.Graphics;
 using VirusSpreadLibrary.AppProperties;
-using Microsoft.Maui.Graphics.Skia;
+using SkiaSharp;
+
 
 namespace VirusSpreadLibrary.Grid;
 
 
-
 public static class CellStateExtions
 {
-    public static Microsoft.Maui.Graphics.Color ToTheColor(this CellState cellState)
+    // Create a static dictionary to store the colors
+    private static readonly Dictionary<CellState, SKColor> colorMap;
+
+    // Initialize the dictionary in a static constructor
+    static CellStateExtions()
     {
-        switch (cellState)
+        colorMap = new Dictionary<CellState, SKColor>();
+        colorMap.Add(CellState.PersonsHealthyOrRecoverd, SkiaSharp.SKColor.Parse(AppSettings.Config.PersonsHealthyOrRecoverdColor.ToArgb().ToString("X")));
+        colorMap.Add(CellState.PersonsInfected, SkiaSharp.SKColor.Parse(AppSettings.Config.PersonInfectedColor.ToArgb().ToString("X")));
+        colorMap.Add(CellState.PersonsInfectious, SkiaSharp.SKColor.Parse(AppSettings.Config.PersonInfectiousColor.ToArgb().ToString("X")));
+        colorMap.Add(CellState.PersonsRecoverdImmuneNotInfectious, SkiaSharp.SKColor.Parse(AppSettings.Config.PersonsRecoverdImmuneNotInfectiousColor.ToArgb().ToString("X")));
+        colorMap.Add(CellState.Virus, SkiaSharp.SKColor.Parse(AppSettings.Config.VirusColor.ToArgb().ToString("X")));
+        colorMap.Add(CellState.EmptyCell, SkiaSharp.SKColor.Parse(AppSettings.Config.EmptyCellColor.ToArgb().ToString("X")));
+    }
+    public static SkiaSharp.SKColor ToTheColor(this CellState cellState)
+    {
+        // Try to get the color from the dictionary
+        if (colorMap.TryGetValue(cellState, out SKColor color))
         {
-            case CellState.PersonsHealthyOrRecoverd:
-                return Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonsHealthyOrRecoverdColor.ToArgb().ToString("X"));
-            case CellState.PersonsInfected:
-                return Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonInfectedColor.ToArgb().ToString("X"));
-            case CellState.PersonsInfectious:
-                return Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonInfectiousColor.ToArgb().ToString("X"));
-            case CellState.PersonsRecoverdImmuneNotInfectious:
-                return Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.PersonsRecoverdImmuneNotInfectiousColor.ToArgb().ToString("X"));
-            case CellState.Virus:
-                return Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.VirusColor.ToArgb().ToString("X"));
-            case CellState.EmptyCell:
-                return Microsoft.Maui.Graphics.Color.FromArgb(AppSettings.Config.EmptyCellColor.ToArgb().ToString("X"));
-            default:
-                throw new ArgumentOutOfRangeException(nameof(cellState), cellState, null);
+            return color;
+        }
+        else
+        {
+            // Throw an exception if the cell state is not valid
+            throw new ArgumentOutOfRangeException(nameof(cellState), cellState, null);
         }
     }
 }
 
+
 public class ColorList
 {
-    public Microsoft.Maui.Graphics.Color GetCellColor(CellState cellState, int personPopulation, int virusPopulation)
+
+    public static SkiaSharp.SKColor GetCellColor(CellState cellState, int personPopulation, int virusPopulation)
     {
         var cellColor = cellState.ToTheColor();
 
@@ -42,40 +50,37 @@ public class ColorList
             var population = Math.Max(personPopulation, virusPopulation);
             if (population > 1)
             {
-                cellColor = Lighten(cellColor, 1 / (double)population);
+                cellColor = LightenColor(cellColor, 1 / (double)population);
             }
         }
-
         return cellColor;
     }
 
-    
-    public static Microsoft.Maui.Graphics.Color Lighten(Microsoft.Maui.Graphics.Color origColor, double percent)
+    public static SkiaSharp.SKColor LightenColor(SkiaSharp.SKColor Col, double percent)
     {
+        // Clamp the percentage between 0 and 1
+        percent = Math.Max(0, Math.Min(1, percent));
 
-        var newColor = origColor.WithLuminosity(origColor.GetLuminosity()*(float)(percent));
-        return newColor;
-        
+        // Convert the color to HSL format
+        Col.ToHsl(out float h, out float s, out float l);
+
+        // Increase the lightness by the percentage
+        l += (1 - l) * (float)percent;
+
+        // Convert the color back to SKColor format
+        return SkiaSharp.SKColor.FromHsl(h, s, l);
     }
 
-    public static System.Drawing.Color MauiToSystemDrawingColor(Microsoft.Maui.Graphics.Color Col)
+    public static System.Drawing.Color SkiaToSystemDrawingColor(SkiaSharp.SKColor Col)
     {
-        return System.Drawing.Color.FromArgb(Col.ToArgb());
-    }
-    public static Microsoft.Maui.Graphics.Color SystemDrawingColorToMaui(System.Drawing.Color Col)
-    {
-        return Microsoft.Maui.Graphics.Color.FromInt(Col.ToArgb());
-    }
+        // Get the alpha, red, green and blue components of the Skia color
+        byte a = Col.Alpha;
+        byte r = Col.Red;
+        byte g = Col.Green;
+        byte b = Col.Blue;
 
-    public static Microsoft.Maui.Graphics.Color Darken(Microsoft.Maui.Graphics.Color origColor, double percent)
-    {
-        System.Drawing.Color rgbCol = MauiToSystemDrawingColor(origColor);
-
-        // subtract the percentage of the original value from the original value
-        int r = rgbCol.R - System.Convert.ToInt32(percent * rgbCol.R);
-        int g = rgbCol.G - System.Convert.ToInt32(percent * rgbCol.G);
-        int b = rgbCol.B - System.Convert.ToInt32(percent * rgbCol.B);
-        return Microsoft.Maui.Graphics.Color.FromRgb(r, g, b);
+        // Create a System.Drawing.Color from the ARGB components
+        return System.Drawing.Color.FromArgb(a, r, g, b);
     }
 
 }

@@ -1,13 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "AVdelILdwkk8oKo3seteaPRhqrHnwi9Gvhz32HtImHCjsw491/AKi+8eLyaNQZUoAD8z0aqMXKIes1SeOgAIhA==",
+  "dgSpecHash": "dHc7tz9ciwjoeHeDsILjVmBrAnT80l7AmI60KpULwjz8jACpFqD+2PXZjTdpRehhNoMQ3qiJgtli6wwuI6b3Jw==",
   "success": true,
   "projectFilePath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.extensions.objectpool\\5.0.10\\microsoft.extensions.objectpool.5.0.10.nupkg.sha512",
-    "C:\\Users\\adm\\.nuget\\packages\\microsoft.maui.graphics\\7.0.100\\microsoft.maui.graphics.7.0.100.nupkg.sha512",
-    "C:\\Users\\adm\\.nuget\\packages\\microsoft.maui.graphics.skia\\7.0.100\\microsoft.maui.graphics.skia.7.0.100.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.win32.registry.accesscontrol\\8.0.0\\microsoft.win32.registry.accesscontrol.8.0.0.nupkg.sha512",

@@ -34,9 +34,9 @@ namespace VirusSpreadLibrary.Grid
             Viruses.Remove(RemoveVirus);
                --numViruses;
 
-            // just for debug
-            if (numViruses < 0)
-                throw new CellVirusesException("CellViruses - Remove Virus Error");
+            ////just for debug
+            //if (numViruses < 0)
+            //        throw new CellVirusesException("CellViruses - Remove Virus Error");
         }
 
     }

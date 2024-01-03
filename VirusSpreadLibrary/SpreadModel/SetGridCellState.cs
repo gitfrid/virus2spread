@@ -10,7 +10,7 @@ public static class SetGridCellState
 {
     private static GridCell cell = new();
 
-    private readonly static ColorList colorList = new();
+    //private readonly ColorList colorList;
 
     private static void SetNewCellState(GridCell Cell)
     {
@@ -108,7 +108,7 @@ public static class SetGridCellState
         }
 
         // set new end cell color depending on cell state
-        cell.CellColor = colorList.GetCellColor(cell.CellState, cell.NumPersons(), cell.NumViruses());
+        cell.CellColor = ColorList.GetCellColor(cell.CellState, cell.NumPersons(), cell.NumViruses());
         return false;
     }
 
@@ -138,7 +138,7 @@ public static class SetGridCellState
         // if TrackMovment true leave old color, else set new sart cell color          
         if (AppSettings.Config.TrackMovment == false)
         {
-            cellStart.CellColor = colorList.GetCellColor(cellStart.CellState, cellStart.NumPersons(), cellStart.NumViruses());
+            cellStart.CellColor = ColorList.GetCellColor(cellStart.CellState, cellStart.NumPersons(), cellStart.NumViruses());
         }
     }
 
@@ -176,7 +176,7 @@ public static class SetGridCellState
         }
 
         // set new end cell color depending on cell state
-        cell.CellColor = colorList.GetCellColor(cell.CellState, cell.NumPersons(), cell.NumViruses());
+        cell.CellColor = ColorList.GetCellColor(cell.CellState, cell.NumPersons(), cell.NumViruses());
         return false;
     }
 
@@ -205,7 +205,7 @@ public static class SetGridCellState
         // if TrackMovment true leave old color, else set new sart cell color          
         if (AppSettings.Config.TrackMovment == false)
         {
-            cellStart.CellColor = colorList.GetCellColor(cellStart.CellState, cellStart.NumPersons(), cellStart.NumViruses());
+            cellStart.CellColor = ColorList.GetCellColor(cellStart.CellState, cellStart.NumPersons(), cellStart.NumViruses());
         }
     }
 }

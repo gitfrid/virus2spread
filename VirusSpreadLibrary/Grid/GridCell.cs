@@ -5,7 +5,7 @@ using VirusSpreadLibrary.Enum;
 namespace VirusSpreadLibrary.Grid;
 public class GridCell
 {
-    private Microsoft.Maui.Graphics.Color? cellColor;   
+    private SkiaSharp.SKColor cellColor;   
     private readonly CellViruses virusPopulation;
     private readonly CellPersons personPopulation;
     private CellState cellState = Enum.CellState.EmptyCell;
@@ -15,9 +15,9 @@ public class GridCell
         // set Cell Population and Color!
         virusPopulation = new CellViruses();
         personPopulation = new CellPersons();
-        cellColor = new Microsoft.Maui.Graphics.Color();         
+        cellColor = new SkiaSharp.SKColor();         
     }
-    public Microsoft.Maui.Graphics.Color CellColor
+    public SkiaSharp.SKColor CellColor
     {
         get => cellColor!;
         set => cellColor = value;

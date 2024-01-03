@@ -8,16 +8,12 @@
     ".NETCoreApp,Version=v8.0": {
       "VirusSpreadLibrary/1.0.0": {
         "dependencies": {
-          "Microsoft.Maui.Graphics.Skia": "7.0.100",
           "Microsoft.Windows.Compatibility": "8.0.0",
-          "RecordParser": "2.3.0",
           "ScottPlot.WinForms": "4.1.69",
           "Serilog.Sinks.Console": "4.1.0",
           "SharpSerializer.Core": "1.0.0",
           "SkiaSharp": "2.88.6",
-          "SkiaSharp.Views.WindowsForms": "2.88.6",
-          "System.Configuration.ConfigurationManager": "8.0.0",
-          "System.Text.Encoding.CodePages": "8.0.0"
+          "SkiaSharp.Views.WindowsForms": "2.88.6"
         },
         "runtime": {
           "VirusSpreadLibrary.dll": {}
@@ -36,26 +32,6 @@
           "lib/net5.0/Microsoft.Extensions.ObjectPool.dll": {
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.0.1021.41022"
-          }
-        }
-      },
-      "Microsoft.Maui.Graphics/7.0.100": {
-        "runtime": {
-          "lib/net7.0/Microsoft.Maui.Graphics.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "7.0.97.3"
-          }
-        }
-      },
-      "Microsoft.Maui.Graphics.Skia/7.0.100": {
-        "dependencies": {
-          "Microsoft.Maui.Graphics": "7.0.100",
-          "SkiaSharp": "2.88.6"
-        },
-        "runtime": {
-          "lib/net7.0/Microsoft.Maui.Graphics.Skia.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "7.0.97.3"
           }
         }
       },
@@ -123,14 +99,6 @@
           "lib/net20/OpenTK.GLControl.dll": {
             "assemblyVersion": "3.1.0.0",
             "fileVersion": "3.1.0.0"
-          }
-        }
-      },
-      "RecordParser/2.3.0": {
-        "runtime": {
-          "lib/net8.0/RecordParser.dll": {
-            "assemblyVersion": "2.3.0.0",
-            "fileVersion": "2.3.0.0"
           }
         }
       },
@@ -869,20 +837,6 @@
       "path": "microsoft.extensions.objectpool/5.0.10",
       "hashPath": "microsoft.extensions.objectpool.5.0.10.nupkg.sha512"
     },
-    "Microsoft.Maui.Graphics/7.0.100": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-WUI/yoxxi0rbwVh1TVe3TeiX/nRhnMCcrnGR89tN/kOYLsDzvCmF+ElAYrtWYChBdHetj8/3ESv9rPvl3ghHwg==",
-      "path": "microsoft.maui.graphics/7.0.100",
-      "hashPath": "microsoft.maui.graphics.7.0.100.nupkg.sha512"
-    },
-    "Microsoft.Maui.Graphics.Skia/7.0.100": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-+wymZ865cAt0BN+puFZQVf1VA6SaB7cBbVz6HcAwMeBhi10PaD78q4Km5xocrRbfkACDh4A40+u4b5A+5edRhA==",
-      "path": "microsoft.maui.graphics.skia/7.0.100",
-      "hashPath": "microsoft.maui.graphics.skia.7.0.100.nupkg.sha512"
-    },
     "Microsoft.NETCore.Platforms/3.1.0": {
       "type": "package",
       "serviceable": true,
@@ -931,13 +885,6 @@
       "sha512": "sha512-BjDzF+MhJd2LaZYzkXmgkzzXgHAko/Iur4rGy6+DPdZA1Jcc0X6jXZ6QsUsjlLRNzgevO7uAj2h1TqX7sguaYg==",
       "path": "opentk.glcontrol/3.1.0",
       "hashPath": "opentk.glcontrol.3.1.0.nupkg.sha512"
-    },
-    "RecordParser/2.3.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-AV4BPuN/bt87Lm7eQcstMsiD0bA2W0poxI582Si+rPx5l+GEu3FZquNWp+OkyRdBdcFmYynXAJ7gCyI/5EANbw==",
-      "path": "recordparser/2.3.0",
-      "hashPath": "recordparser.2.3.0.nupkg.sha512"
     },
     "runtime.linux-arm.runtime.native.System.IO.Ports/8.0.0": {
       "type": "package",

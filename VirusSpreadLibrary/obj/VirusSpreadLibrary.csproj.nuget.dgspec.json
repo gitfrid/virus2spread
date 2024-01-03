@@ -13,8 +13,12 @@
         "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
         "outputPath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,10 +45,6 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
-            "Microsoft.Maui.Graphics.Skia": {
-              "target": "Package",
-              "version": "[7.0.100, )"
-            },
             "Microsoft.Windows.Compatibility": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -67,14 +68,6 @@
             "SkiaSharp.Views.WindowsForms": {
               "target": "Package",
               "version": "[2.88.6, )"
-            },
-            "System.Configuration.ConfigurationManager": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "System.Text.Encoding.CodePages": {
-              "target": "Package",
-              "version": "[8.0.0, )"
             }
           },
           "imports": [
