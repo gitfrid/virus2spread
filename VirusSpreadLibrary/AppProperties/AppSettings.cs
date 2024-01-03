@@ -302,7 +302,7 @@ public  class AppSettings
     }
 
     [CategoryAttribute("Person Settings")]
-    [Description("integer 0 to X % \r\n0 = don't move, 1 = move every iteration, 2 = move random average every 2nd iteration, X = move back home random average every Xd iteration")]
+    [Description("integer 0 to X % \r\n0 = don't move, 1 = move every iteration, 2 = move random average every 2nd iteration, X = move average every Xd iteration")]
     public int PersonMoveActivityRnd
     {
         get => personMoveActivityRnd;
