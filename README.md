@@ -11,15 +11,14 @@ Since the linear sientific SIR model used, seems to differ from reality.
  Reproduction is not yet implemented - a long way to go.
 <br> For maximal Iteration speed minimize the render Simulation Window to the Taskbar.
 <br>
-
 <br>
 ![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/2d9832ab-586d-4756-a8aa-b6744a886cc6)
 <br>
 <br>Installation:
 <br>Prerequisite: Microsoft .Net 8 has to be installed first! https://dotnet.microsoft.com/en-us/download
 <br>
-<br>Download the ![Virus2SpreadSetup.msi](https://github.com/gitfrid/virus2spread/blob/d736787e9ee451ff964ddb6c1980e214b5921de7/virus2spreadSetup/Release/virus2spreadSetup.msi) form the github folder virus2spreadSetup/Release/ to install the Software.
-<br>https://github.com/gitfrid/virus2spread/blob/d736787e9ee451ff964ddb6c1980e214b5921de7/virus2spreadSetup/Release/virus2spreadSetup.msi
+<br>Download the ![Virus2SpreadSetup.msi](https://github.com/gitfrid/virus2spread/blob/d736787e9ee451ff964ddb6c1980e214b5921de7/virus2spreadSetup/Release/virus2spreadSetup.msi) to install the Software.
+<br>form the github folder ![virus2spreadSetup/Release/](https://github.com/gitfrid/virus2spread/blob/d736787e9ee451ff964ddb6c1980e214b5921de7/virus2spreadSetup/Release/virus2spreadSetup.msi)
 <br>
 <br>Alternative, it is  sufficient if only the binary files are copied fom this github folder: 
 <br>../Virus2spread/bin/Release/net8.0-windows7.0\*.*  to any folder, and double click Virus2spread.exe to run the Simulation.
