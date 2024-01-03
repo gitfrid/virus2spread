@@ -11,7 +11,7 @@ Since the linear sientific SIR model used, seems to differ from reality.
 This Project is still in work - a long way to go. 
 <br>
 <br>
-![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/a2376c66-2d05-4db9-b8b9-2e16b128cf9f)
+![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/33dfbded-400c-41ce-a31a-54f4003792a6)
 
 <br>
 <br>
