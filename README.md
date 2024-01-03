@@ -8,8 +8,12 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br> 
 <br> 
 <br> 
-This Project is still in work - a long way to go. 
+ Reproduction is not yet implemented - a long way to go.
+<br> For maximal Iteration speed minimize teh Render Window to the Taskbar.
 <br>
+<br>Installation:
+<br>Prerequisite: Microsoft .Net 8 has to be installed https://dotnet.microsoft.com/en-us/download
+<br>Copy bins from: ..\Virus2spread\bin\Release\net8.0-windows7.0\*.*  to any folder, run Virus2spread.exe<br>
 <br>
 ![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/33dfbded-400c-41ce-a31a-54f4003792a6)
 
@@ -17,21 +21,11 @@ This Project is still in work - a long way to go.
 <br>
 C# : Net 8.0 WindowsForms, Nuget Packages : 
 <br> 
-System.Runtime.CompilerServices.Unsafe 6.0
-<br> 
 Serilog Console
 <br> 
-Maui Graphics Skia skglControl
-<br> 
-SixLabors.ImageSharp
+Skia skglControl
 <br> 
 SharpSerializer.Net Core
-<br> 
-Microsoft.Windows.Compatibility
-<br> 
-System.Text.Encoding.CodePages
-<br> 
-WinForms.DataVisualization
 <br>
 Scottplot
 <br>
