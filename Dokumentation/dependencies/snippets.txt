@@ -1,3 +1,5 @@
+https://blog.idera.com/database-tools/converting-powershell-to-batch
+
 public class PersonInvalidIndexException : Exception
 {
     public PersonInvalidIndexException() 
