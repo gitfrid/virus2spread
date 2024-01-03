@@ -9,7 +9,7 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br> 
 <br> 
  Reproduction is not yet implemented - a long way to go.
-<br> For maximal Iteration speed minimize teh Render Window to the Taskbar.
+<br> For maximal Iteration speed minimize the render Simulation Window to the Taskbar.
 <br>
 <br>Installation:
 <br>Prerequisite: Microsoft .Net 8 has to be installed https://dotnet.microsoft.com/en-us/download
