@@ -3,14 +3,14 @@
     <Simple name="ShowHelperSettings" value="False" />
     <Complex name="Form_Config_WindowLocation">
       <Properties>
-        <Simple name="X" value="2172" />
-        <Simple name="Y" value="531" />
+        <Simple name="X" value="1788" />
+        <Simple name="Y" value="500" />
       </Properties>
     </Complex>
     <Complex name="Form_Config_WindowSize">
       <Properties>
         <Simple name="Width" value="1692" />
-        <Simple name="Height" value="1034" />
+        <Simple name="Height" value="1028" />
       </Properties>
     </Complex>
     <Complex name="PlotForm_WindowLocation">
