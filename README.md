@@ -16,6 +16,7 @@ Since the linear sientific SIR model used, seems to differ from reality.
 ![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/2d9832ab-586d-4756-a8aa-b6744a886cc6)
 <br>
 <br>
+<br>
 **Installation:**
 <br>
 <br>**Prerequisite: Microsoft .Net 8 has to be installed first!** https://dotnet.microsoft.com/en-us/download
