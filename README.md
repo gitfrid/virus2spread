@@ -24,8 +24,8 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br>
 <br>**Prerequisite: Microsoft .Net 8 has to be installed first!** https://dotnet.microsoft.com/en-us/download
 <br>
-<br>Download the ![Virus2SpreadSetup.msi](https://github.com/gitfrid/virus2spread/blob/b2548d799e0c5133bd924547813be3281fe81bb9/virus2spreadSetup/Release/virus2spreadSetup.msi) to install the Software.
-<br>In github folder ![virus2spreadSetup/Release/](https://github.com/gitfrid/virus2spread/tree/b2548d799e0c5133bd924547813be3281fe81bb9/virus2spreadSetup/Release)
+<br>Download the ![Virus2SpreadSetup.msi](https://github.com/gitfrid/virus2spread/blob/b78864a3335124184b294c2aee788a53823fb974/virus2spreadSetup/Release/virus2spreadSetup.msi) to install the Software.
+<br>In github folder ![virus2spreadSetup/Release/](https://github.com/gitfrid/virus2spread/tree/b78864a3335124184b294c2aee788a53823fb974/virus2spreadSetup/Release)
 <br>Thumbprint self signd certificate:f28154fafc6a8a540a3cf9527a05c81ba7a7fd58
 <br>
 <br>Alternative, it is  sufficient if only the binary files are copied fom this github folder: 
