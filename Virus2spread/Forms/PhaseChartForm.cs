@@ -2,6 +2,9 @@
 using ScottPlot.Plottable;
 using VirusSpreadLibrary.Plott;
 using VirusSpreadLibrary.AppProperties;
+using CsvHelper.Configuration;
+using CsvHelper;
+using System.Globalization;
 
 namespace Virus2spread.Forms;
 
@@ -227,5 +230,74 @@ public partial class PhaseChartForm : Form
             AppSettings.Config.PhaseChartForm_WindowLocation = this.RestoreBounds.Location;
         }
     }
+    private void BtnExportCsv_Click(object sender, EventArgs e)
+    {
+        string fileName = SaveCsvToFile();
+        if (fileName == "")
+        {
+            return;
+        }
 
+        // create a list of double arrays containing the Y values of all 14 signal plots
+        List<double[]> yValues = new List<double[]>();
+        for (int i = 0; i < 2; i++)
+        {
+            yValues.Add(scatterData[i]);
+        }
+
+        // create a new CSV file and write the Y values to it
+        // CultureInfo.CurrentCulture, CultureInfo.InvariantCulture, CultureInfo("de-DE")
+        using (StreamWriter writer = new StreamWriter(fileName))
+        using (CsvWriter csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";" }))
+        {
+            // write header in first row
+            csv.WriteField(XvalueListBox.Text);
+            csv.WriteField(YvalueListBox.Text);
+            csv.NextRecord();
+
+
+            int maxR = 0;
+            if (scatterPlot.MaxRenderIndex != 0)
+            {
+                maxR = (int)scatterPlot.MaxRenderIndex!;
+            }
+
+            for (int r = 0; r < maxR; r++)
+            {
+                // fill Array with Y-values from SignalPlot-Array
+                double[] ys = yValues.Select(y => y[r]).ToArray();
+                // write to CSV-file, separated by comma
+                csv.WriteField($"{ys[0]}");
+                csv.WriteField($"{ys[1]}");
+                csv.NextRecord();
+            }
+
+        }
+    }
+
+    private static string SaveCsvToFile()
+    {
+        SaveFileDialog saveFileDialog = new();
+        string fileName;
+
+        string FilePath = AppSettings.Config.CsvFilePath;
+        if (File.Exists(FilePath))
+        {
+            saveFileDialog.FileName = Path.GetFileName(FilePath);
+            saveFileDialog.InitialDirectory = Path.GetDirectoryName(FilePath);
+            saveFileDialog.DefaultExt = Path.GetExtension(saveFileDialog.FileName.ToString());
+            saveFileDialog.Filter = saveFileDialog.DefaultExt + "|*"
+                + Path.GetExtension(saveFileDialog.FileName.ToString());
+        }
+        if (DialogResult.OK == saveFileDialog.ShowDialog())
+        {
+            fileName = saveFileDialog.FileName;
+            AppSettings.Config.CsvFilePath = fileName;
+            return fileName;
+        }
+        else
+        {
+            return "";
+        }
+    }
 }

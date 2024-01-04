@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             splitContainer1 = new SplitContainer();
+            BtnAutoScaleY = new Button();
             CbCorssHair = new CheckBox();
             BtnAutoScaleX = new Button();
             BtnAutoScale = new Button();
@@ -43,7 +44,7 @@
             XvalueListBox = new ListBox();
             DataTimer = new System.Windows.Forms.Timer(components);
             RenderTimer = new System.Windows.Forms.Timer(components);
-            BtnAutoScaleY = new Button();
+            BtnExportCsv = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
@@ -58,6 +59,7 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.BackColor = SystemColors.ControlLightLight;
+            splitContainer1.Panel1.Controls.Add(BtnExportCsv);
             splitContainer1.Panel1.Controls.Add(BtnAutoScaleY);
             splitContainer1.Panel1.Controls.Add(CbCorssHair);
             splitContainer1.Panel1.Controls.Add(BtnAutoScaleX);
@@ -74,6 +76,16 @@
             splitContainer1.SplitterDistance = 465;
             splitContainer1.TabIndex = 0;
             // 
+            // BtnAutoScaleY
+            // 
+            BtnAutoScaleY.Location = new Point(35, 437);
+            BtnAutoScaleY.Name = "BtnAutoScaleY";
+            BtnAutoScaleY.Size = new Size(190, 46);
+            BtnAutoScaleY.TabIndex = 19;
+            BtnAutoScaleY.Text = "Y scale";
+            BtnAutoScaleY.UseVisualStyleBackColor = true;
+            BtnAutoScaleY.Click += BtnAutoScaleY_Click;
+            // 
             // CbCorssHair
             // 
             CbCorssHair.AutoSize = true;
@@ -87,7 +99,7 @@
             // 
             // BtnAutoScaleX
             // 
-            BtnAutoScaleX.Location = new Point(35, 403);
+            BtnAutoScaleX.Location = new Point(35, 357);
             BtnAutoScaleX.Name = "BtnAutoScaleX";
             BtnAutoScaleX.Size = new Size(190, 46);
             BtnAutoScaleX.TabIndex = 17;
@@ -97,7 +109,7 @@
             // 
             // BtnAutoScale
             // 
-            BtnAutoScale.Location = new Point(35, 325);
+            BtnAutoScale.Location = new Point(35, 279);
             BtnAutoScale.Name = "BtnAutoScale";
             BtnAutoScale.Size = new Size(190, 46);
             BtnAutoScale.TabIndex = 16;
@@ -107,7 +119,7 @@
             // 
             // BtnManualScale
             // 
-            BtnManualScale.Location = new Point(35, 253);
+            BtnManualScale.Location = new Point(35, 207);
             BtnManualScale.Name = "BtnManualScale";
             BtnManualScale.Size = new Size(190, 46);
             BtnManualScale.TabIndex = 15;
@@ -117,7 +129,7 @@
             // 
             // BtnAutoScaleTight
             // 
-            BtnAutoScaleTight.Location = new Point(35, 178);
+            BtnAutoScaleTight.Location = new Point(35, 132);
             BtnAutoScaleTight.Name = "BtnAutoScaleTight";
             BtnAutoScaleTight.Size = new Size(190, 46);
             BtnAutoScaleTight.TabIndex = 14;
@@ -197,15 +209,15 @@
             RenderTimer.Interval = 20;
             RenderTimer.Tick += RenderTimer_Tick;
             // 
-            // BtnAutoScaleY
+            // BtnExportCsv
             // 
-            BtnAutoScaleY.Location = new Point(35, 483);
-            BtnAutoScaleY.Name = "BtnAutoScaleY";
-            BtnAutoScaleY.Size = new Size(190, 46);
-            BtnAutoScaleY.TabIndex = 19;
-            BtnAutoScaleY.Text = "Y scale";
-            BtnAutoScaleY.UseVisualStyleBackColor = true;
-            BtnAutoScaleY.Click += BtnAutoScaleY_Click;
+            BtnExportCsv.Location = new Point(35, 509);
+            BtnExportCsv.Name = "BtnExportCsv";
+            BtnExportCsv.Size = new Size(190, 51);
+            BtnExportCsv.TabIndex = 20;
+            BtnExportCsv.Text = "export CSV";
+            BtnExportCsv.UseVisualStyleBackColor = true;
+            BtnExportCsv.Click += BtnExportCsv_Click;
             // 
             // PhaseChartForm
             // 
@@ -241,5 +253,6 @@
         private Button BtnAutoScaleX;
         private CheckBox CbCorssHair;
         private Button BtnAutoScaleY;
+        private Button BtnExportCsv;
     }
 }
