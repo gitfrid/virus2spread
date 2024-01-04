@@ -5,7 +5,10 @@ Here arises an attempt to test DR Clare Craig's hypothesis about airborne virus 
 To investigate annually recurring waves from the momentum of a chaotic system, and study or play with it's dynamics.
 <br> 
 Since the linear sientific SIR model used, seems to differ from reality.
+<br>
 <br> 
+<br>So what is special about this simulation?
+<br>Most other simulations already assume the droplet theory, this one does not. 
 <br> 
 <br>Further information see ![virus2spread wiki](https://github.com/gitfrid/virus2spread/wiki)
 <br> 
