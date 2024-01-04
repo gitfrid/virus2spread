@@ -5,6 +5,7 @@ using VirusSpreadLibrary.Plott;
 using VirusSpreadLibrary.AppProperties;
 using CsvHelper;
 using System.Globalization;
+using CsvHelper.Configuration;
 
 
 namespace Virus2spread;
@@ -249,30 +250,38 @@ public partial class PlotForm : Form
         {
             return;
         }
-        using var writer = new StreamWriter(fileName);
-        using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-        // write header in first row
-        for (int i = 0; i < plotData.Legend.Length; i++)
+
+        // create a list of double arrays containing the Y values of all 14 signal plots
+        List<double[]> yValues = new List<double[]>();
+        for (int i = 0; i < 14; i++)
         {
-            csv.WriteField(plotData.Legend[i].ToString()); // Schreibe den Namen der Plottable
+            yValues.Add(signalData[i]);
         }
-        csv.NextRecord();
 
-        // create two dimensional array with same length as SignalPlot-Array
-        double[,] data = new double[signalPlot.Length, 2];
-
-        // create StreamWriter, to write CSV-file
-        for (int r = 0; r < signalPlot.GetLength(0); r++)
+        // create a new CSV file and write the Y values to it
+        // CultureInfo.CurrentCulture, CultureInfo.InvariantCulture, CultureInfo("de-DE")
+        using (StreamWriter writer = new StreamWriter(fileName))
+        using (CsvWriter csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";" }))
         {
-            // iterate over SignalPlot-Array
-            for (int i = 0; i < signalPlot.Length; i++)
+            // write header in first row
+            for (int i = 0; i < plotData.Legend.Length; i++)
             {
-                // fill Array with Y-values from SignalPlot-Array
-                double[] ys = signalPlot[i].Ys;
-                // write to CSV-file, seperated by comma
-                csv.WriteField($"{ys[i]}");
+                csv.WriteField(plotData.Legend[i].ToString()); 
             }
             csv.NextRecord();
+
+            int maxR = signalPlot[0].MaxRenderIndex;
+            for (int r = 0; r < maxR; r++)
+            {
+                for (int c = 0; c < yValues.Count; c++)
+                {
+                    // fill Array with Y-values from SignalPlot-Array
+                    double[] ys = yValues.Select(y => y[r]).ToArray();
+                    // write to CSV-file, separated by comma
+                    csv.WriteField($"{ys[c]}");
+                }
+                csv.NextRecord();
+            }
         }
     }
 
