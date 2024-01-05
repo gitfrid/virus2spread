@@ -1,0 +1,13 @@
+C:\Github\virus2spread\VirusSpreadLibrary\bin\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.deps.json
+C:\Github\virus2spread\VirusSpreadLibrary\bin\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.dll
+C:\Github\virus2spread\VirusSpreadLibrary\bin\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.pdb
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.csproj.AssemblyReference.cache
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.AssemblyInfoInputs.cache
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.AssemblyInfo.cs
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.csproj.CoreCompileInputs.cache
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.sourcelink.json
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.dll
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\refint\VirusSpreadLibrary.dll
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\VirusSpreadLibrary.pdb
+C:\Github\virus2spread\VirusSpreadLibrary\obj\Debug\net8.0-windows10.0.22621.0\ref\VirusSpreadLibrary.dll

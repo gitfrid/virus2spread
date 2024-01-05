@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dHc7tz9ciwjoeHeDsILjVmBrAnT80l7AmI60KpULwjz8jACpFqD+2PXZjTdpRehhNoMQ3qiJgtli6wwuI6b3Jw==",
+  "dgSpecHash": "CgCNbyDDPr9UXKsO1KJb8x0Dl+9lJ7sE4iWmSUIJUffUnBErzgbfWID84sj4e8RJBI3gFtSvqlJXGc9sv1d+GQ==",
   "success": true,
   "projectFilePath": "C:\\Github\\virus2spread\\VirusSpreadLibrary\\VirusSpreadLibrary.csproj",
   "expectedPackageFiles": [
@@ -72,27 +72,28 @@
     "C:\\Users\\adm\\.nuget\\packages\\system.text.encoding.codepages\\8.0.0\\system.text.encoding.codepages.8.0.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\system.threading.accesscontrol\\8.0.0\\system.threading.accesscontrol.8.0.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\system.web.services.description\\4.10.0\\system.web.services.description.4.10.0.nupkg.sha512",
-    "C:\\Users\\adm\\.nuget\\packages\\system.windows.extensions\\8.0.0\\system.windows.extensions.8.0.0.nupkg.sha512"
+    "C:\\Users\\adm\\.nuget\\packages\\system.windows.extensions\\8.0.0\\system.windows.extensions.8.0.0.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.31\\microsoft.windows.sdk.net.ref.10.0.22621.31.nupkg.sha512"
   ],
   "logs": [
     {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'OpenTK 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'OpenTK 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows10.0.22621'. This package may not be fully compatible with your project.",
       "libraryId": "OpenTK",
       "targetGraphs": [
-        "net8.0-windows7.0"
+        "net8.0-windows10.0.22621"
       ]
     },
     {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'OpenTK.GLControl 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'OpenTK.GLControl 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows10.0.22621'. This package may not be fully compatible with your project.",
       "libraryId": "OpenTK.GLControl",
       "targetGraphs": [
-        "net8.0-windows7.0"
+        "net8.0-windows10.0.22621"
       ]
     }
   ]

@@ -5,6 +5,7 @@ using VirusSpreadLibrary.AppProperties;
 using CsvHelper.Configuration;
 using CsvHelper;
 using System.Globalization;
+using System.Drawing;
 
 namespace Virus2spread.Forms;
 
@@ -22,15 +23,25 @@ public partial class PhaseChartForm : Form
 
     private readonly Crosshair crosshair;
 
+    private readonly bool listBoxChangeByCodeValueX = false;
+    private readonly bool listBoxChangeByCodeValueY = false;
+
     public PhaseChartForm(PlotData plotData)
     {
         InitializeComponent();
         this.plotData = plotData;
-        plotData.StopPhaseChartQueue = false;
+
+        listBoxChangeByCodeValueX = true;
+        listBoxChangeByCodeValueY = true;
+        XvalueListBox.SelectionMode = SelectionMode.One;
+        YvalueListBox.SelectionMode = SelectionMode.One;
         XvalueListBox.Items.AddRange(plotData.Legend);
         XvalueListBox.SelectedIndex = AppSettings.Config.PhaseChartXSelectedIndex;
         YvalueListBox.Items.AddRange(plotData.Legend);
         YvalueListBox.SelectedIndex = AppSettings.Config.PhaseChartYSelectedIndex;
+        listBoxChangeByCodeValueX = false;
+        listBoxChangeByCodeValueY = false;
+
 
         // Add the FormsPlot
         formsPlot = new() { Dock = DockStyle.Fill };
@@ -52,17 +63,30 @@ public partial class PhaseChartForm : Form
             scatterData[i] = new double[AppSettings.Config.MaxIterations];
         }
         scatterPlot = formsPlot.Plot.AddScatter(scatterData[0], scatterData[1], formsPlot.Plot.Palette.GetColor(0));
+        BtnHoldStart.BackColor = SystemColors.ControlLightLight;
     }
     private void XvalueListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
         AppSettings.Config.PhaseChartXSelectedIndex = XvalueListBox.SelectedIndex;
+        if (listBoxChangeByCodeValueX != true) 
+        {           
+            Array.Clear(scatterData[0], 0, scatterData[0].Length);
+            Array.Clear(scatterData[1], 0, scatterData[1].Length);
+            nextDataIndex = 0;
+            plotData.ClearPhaseChartQueue();            
+        }
     }
-
     private void YvalueListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
         AppSettings.Config.PhaseChartYSelectedIndex = YvalueListBox.SelectedIndex;
+        if (listBoxChangeByCodeValueY != true)
+        {
+            Array.Clear(scatterData[0], 0, scatterData[0].Length);
+            Array.Clear(scatterData[1], 0, scatterData[1].Length);
+            nextDataIndex = 0;
+            plotData.ClearPhaseChartQueue();
+        }
     }
-
     private void DataTimer_Tick(object sender, EventArgs e)
     {
         if (nextDataIndex >= scatterData[0].Length)
@@ -79,10 +103,10 @@ public partial class PhaseChartForm : Form
             bool success = plotData.PlotPhaseChartDataQueue.TryDequeueList(out List<double> values);
             if (success)
             {
+                scatterPlot.MaxRenderIndex = nextDataIndex;
                 for (int i = 0; i < scatterData.Length; i++)
                 {
-                    scatterData[i][nextDataIndex] = values[i];
-                    scatterPlot.MaxRenderIndex = nextDataIndex;
+                    scatterData[i][nextDataIndex] = values[i];                  
                 }
                 nextDataIndex += 1;
             }
@@ -127,8 +151,9 @@ public partial class PhaseChartForm : Form
 
     private void PhaseChartForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        plotData.StopPhaseChartQueue = true;
+        //plotData.StopPhaseChartQueue = true;
         SaveWindowsPosition();
+        AppSettings.Config.Setting.Save();
     }
 
     private void BtnAutoScaleTight_Click(object sender, EventArgs e)
@@ -189,8 +214,73 @@ public partial class PhaseChartForm : Form
         crosshair.X = coordinateX;
         crosshair.Y = coordinateY;
         formsPlot.Refresh(lowQuality: false, skipIfCurrentlyRendering: true);
-    }
+    }   
+    private void BtnExportCsv_Click(object sender, EventArgs e)
+    {
+        string fileName = SaveCsvToFile();
+        if (fileName == "")
+        {
+            return;
+        }
 
+        // create a list of double arrays containing the Y values of all 14 signal plots
+        List<double[]> yValues = new ();
+        for (int i = 0; i < 2; i++)
+        {
+            yValues.Add(scatterData[i]);
+        }
+
+        // create a new CSV file and write the Y values to it
+        // CultureInfo.CurrentCulture, CultureInfo.InvariantCulture, CultureInfo("de-DE")
+        using StreamWriter writer = new(fileName);
+        using CsvWriter csv = new(writer, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";" });
+        // write header in first row
+        csv.WriteField(XvalueListBox.Text);
+        csv.WriteField(YvalueListBox.Text);
+        csv.NextRecord();
+
+
+        int maxR = 0;
+        if (scatterPlot.MaxRenderIndex != 0)
+        {
+            maxR = (int)scatterPlot.MaxRenderIndex!;
+        }
+
+        for (int r = 0; r < maxR; r++)
+        {
+            // fill Array with Y-values from SignalPlot-Array
+            double[] ys = yValues.Select(y => y[r]).ToArray();
+            // write to CSV-file, separated by comma
+            csv.WriteField($"{ys[0]}");
+            csv.WriteField($"{ys[1]}");
+            csv.NextRecord();
+        }
+    }
+    private static string SaveCsvToFile()
+    {
+        SaveFileDialog saveFileDialog = new();
+        string fileName;
+
+        string FilePath = AppSettings.Config.CsvFilePath;
+        if (File.Exists(FilePath))
+        {
+            saveFileDialog.FileName = Path.GetFileName(FilePath);
+            saveFileDialog.InitialDirectory = Path.GetDirectoryName(FilePath);
+            saveFileDialog.DefaultExt = Path.GetExtension(saveFileDialog.FileName.ToString());
+            saveFileDialog.Filter = saveFileDialog.DefaultExt + "|*"
+                + Path.GetExtension(saveFileDialog.FileName.ToString());
+        }
+        if (DialogResult.OK == saveFileDialog.ShowDialog())
+        {
+            fileName = saveFileDialog.FileName;
+            AppSettings.Config.CsvFilePath = fileName;
+            return fileName;
+        }
+        else
+        {
+            return "";
+        }
+    }
     private static bool IsVisiblePosition(Point location, Size size)
     {
         Rectangle myArea = new(location, size);
@@ -228,76 +318,6 @@ public partial class PhaseChartForm : Form
         {
             AppSettings.Config.PhaseChartForm_WindowSize = this.RestoreBounds.Size;
             AppSettings.Config.PhaseChartForm_WindowLocation = this.RestoreBounds.Location;
-        }
-    }
-    private void BtnExportCsv_Click(object sender, EventArgs e)
-    {
-        string fileName = SaveCsvToFile();
-        if (fileName == "")
-        {
-            return;
-        }
-
-        // create a list of double arrays containing the Y values of all 14 signal plots
-        List<double[]> yValues = new List<double[]>();
-        for (int i = 0; i < 2; i++)
-        {
-            yValues.Add(scatterData[i]);
-        }
-
-        // create a new CSV file and write the Y values to it
-        // CultureInfo.CurrentCulture, CultureInfo.InvariantCulture, CultureInfo("de-DE")
-        using (StreamWriter writer = new StreamWriter(fileName))
-        using (CsvWriter csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";" }))
-        {
-            // write header in first row
-            csv.WriteField(XvalueListBox.Text);
-            csv.WriteField(YvalueListBox.Text);
-            csv.NextRecord();
-
-
-            int maxR = 0;
-            if (scatterPlot.MaxRenderIndex != 0)
-            {
-                maxR = (int)scatterPlot.MaxRenderIndex!;
-            }
-
-            for (int r = 0; r < maxR; r++)
-            {
-                // fill Array with Y-values from SignalPlot-Array
-                double[] ys = yValues.Select(y => y[r]).ToArray();
-                // write to CSV-file, separated by comma
-                csv.WriteField($"{ys[0]}");
-                csv.WriteField($"{ys[1]}");
-                csv.NextRecord();
-            }
-
-        }
-    }
-
-    private static string SaveCsvToFile()
-    {
-        SaveFileDialog saveFileDialog = new();
-        string fileName;
-
-        string FilePath = AppSettings.Config.CsvFilePath;
-        if (File.Exists(FilePath))
-        {
-            saveFileDialog.FileName = Path.GetFileName(FilePath);
-            saveFileDialog.InitialDirectory = Path.GetDirectoryName(FilePath);
-            saveFileDialog.DefaultExt = Path.GetExtension(saveFileDialog.FileName.ToString());
-            saveFileDialog.Filter = saveFileDialog.DefaultExt + "|*"
-                + Path.GetExtension(saveFileDialog.FileName.ToString());
-        }
-        if (DialogResult.OK == saveFileDialog.ShowDialog())
-        {
-            fileName = saveFileDialog.FileName;
-            AppSettings.Config.CsvFilePath = fileName;
-            return fileName;
-        }
-        else
-        {
-            return "";
         }
     }
 }

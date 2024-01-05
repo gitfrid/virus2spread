@@ -252,7 +252,7 @@ public partial class PlotForm : Form
         }
 
         // create a list of double arrays containing the Y values of all 14 signal plots
-        List<double[]> yValues = new List<double[]>();
+        List<double[]> yValues = new();
         for (int i = 0; i < 14; i++)
         {
             yValues.Add(signalData[i]);
@@ -260,28 +260,26 @@ public partial class PlotForm : Form
 
         // create a new CSV file and write the Y values to it
         // CultureInfo.CurrentCulture, CultureInfo.InvariantCulture, CultureInfo("de-DE")
-        using (StreamWriter writer = new StreamWriter(fileName))
-        using (CsvWriter csv = new CsvWriter(writer, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";" }))
+        using StreamWriter writer = new(fileName);
+        using CsvWriter csv = new(writer, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";" });
+        // write header in first row
+        for (int i = 0; i < plotData.Legend.Length; i++)
         {
-            // write header in first row
-            for (int i = 0; i < plotData.Legend.Length; i++)
+            csv.WriteField(plotData.Legend[i].ToString());
+        }
+        csv.NextRecord();
+
+        int maxR = signalPlot[0].MaxRenderIndex;
+        for (int r = 0; r < maxR; r++)
+        {
+            for (int c = 0; c < yValues.Count; c++)
             {
-                csv.WriteField(plotData.Legend[i].ToString()); 
+                // fill Array with Y-values from SignalPlot-Array
+                double[] ys = yValues.Select(y => y[r]).ToArray();
+                // write to CSV-file, separated by comma
+                csv.WriteField($"{ys[c]}");
             }
             csv.NextRecord();
-
-            int maxR = signalPlot[0].MaxRenderIndex;
-            for (int r = 0; r < maxR; r++)
-            {
-                for (int c = 0; c < yValues.Count; c++)
-                {
-                    // fill Array with Y-values from SignalPlot-Array
-                    double[] ys = yValues.Select(y => y[r]).ToArray();
-                    // write to CSV-file, separated by comma
-                    csv.WriteField($"{ys[c]}");
-                }
-                csv.NextRecord();
-            }
         }
     }
 

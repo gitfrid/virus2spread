@@ -62,8 +62,7 @@ public  class AppSettings
     private bool trackMovment = false;
     private bool populationDensityColoring = true;
     private bool showHelperSettings = false;
-
-
+    private bool showSimulationGridWindow = true;
     private Color virusColor = Color.WhiteSmoke;
     private string xmlVirusColor = "WhiteSmoke";
     private Color personsHealthyOrRecoverdColor = Color.LawnGreen;
@@ -558,6 +557,15 @@ public  class AppSettings
         {
             csvFilePath = value;
         }
+    }
+
+    [CategoryAttribute("Grid Settings")]
+    [Description("false: The simulation Grid window is not shown on start, the checkbox is unchecked\r\n" +
+        "true: The simulation Grid window is shown on start, the checkbox is checked")]
+    public bool ShowSimulationGridWindow
+    {
+        get => showSimulationGridWindow;
+        set => showSimulationGridWindow = value;
     }
 
     [Browsable(true)]

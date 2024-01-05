@@ -39,6 +39,8 @@ public class Simulation
     public int MaxY { get; set; }
     public int Iteration { get => iteration; }
 
+    public bool IterationRunning { get => !stopIteration; }
+
     public void StartIteration()
     {
         stopIteration = false;

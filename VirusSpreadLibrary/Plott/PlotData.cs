@@ -43,10 +43,7 @@ namespace VirusSpreadLibrary.Plott
         private readonly PlotQueue plotDataQueue;
         private readonly PlotQueuePhaseChart plotPhaseChartDataQueue;
 
-        private bool stopPhaseChartQueue = true;
-
-
-        // store Y-values to plot ten lines
+          // store Y-values to plot ten lines
         readonly double[] yPlotLinesValues = new double[14];
 
         public double IterationNumber
@@ -125,21 +122,6 @@ namespace VirusSpreadLibrary.Plott
             set => yPlotLinesValues[13] = value;
         }
 
-        public bool StopPhaseChartQueue
-        {
-            get => stopPhaseChartQueue;
-            set
-            {
-                stopPhaseChartQueue = value;
-                if (stopPhaseChartQueue == true) 
-                {
-                    PlotPhaseChartDataQueue.ClearQueue();
-                }
-            }
-        }
-
-        //private ConcurrentQueue<List<double>> queue1 = new ConcurrentQueue<List<double>>();
-
         public PlotData()
         {
             plotDataQueue = new PlotQueue();
@@ -148,11 +130,14 @@ namespace VirusSpreadLibrary.Plott
             // init array with 0
             Array.Fill(yPlotLinesValues, 0);
         }
-        //public PlotQueue PlotDataQueue { get; private set; }
 
         public void ResetCounter()
         {
             Array.Fill(yPlotLinesValues, 0);
+        }
+        public void ClearPhaseChartQueue()
+        {
+            PlotPhaseChartDataQueue.ClearQueue();
         }
 
         // public prop to access the queue
@@ -195,34 +180,21 @@ namespace VirusSpreadLibrary.Plott
             List<double> values = new();
             List<double> values2 = new();
 
-            // generate list with 14 rand Y-values to plot line 1-14
+            // plotChart generate list with 14 rand Y-values to plot line 1-14
             for (int i = 0; i < 14; i++)
             {
                 //yPlotLinesValues[i] = instance[i];
                 values.Add(yPlotLinesValues[i]);
-
-                // phaseChart xy values depending on selected index in x y phaseChart listbox
-                if (stopPhaseChartQueue == false)
-                {
-                    if (i == AppSettings.Config.PhaseChartXSelectedIndex)
-                    {
-                        values2.Add(yPlotLinesValues[i]);
-                    }
-                    if (i == AppSettings.Config.PhaseChartYSelectedIndex)
-                    {
-                        values2.Add(yPlotLinesValues[i]);
-                    }
-                }
             }
 
+            values2.Add(yPlotLinesValues[AppSettings.Config.PhaseChartXSelectedIndex]);
+            values2.Add(yPlotLinesValues[AppSettings.Config.PhaseChartYSelectedIndex]);
+         
             // enqueue list of 14 rand Y-values into PlotQueue
             PlotDataQueue.EnqueueList(values);
 
             // enqueue list of X and Y-values into PhasChartPlotQueue
-            if (stopPhaseChartQueue == false)
-            {
-                PlotPhaseChartDataQueue.EnqueueList(values2);
-            }
+            PlotPhaseChartDataQueue.EnqueueList(values2);
 
         }
         

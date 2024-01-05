@@ -18,7 +18,6 @@ public partial class MainForm : Form
         //  using a custom editor extension in CollectionEditorExt.cs
         CollectionEditorExt.EditorFormClosed += new CollectionEditorExt.
         EditorFormClosedEventHandler(ConfigurationPropertyGrid_CollectionFormClosed);
-
     }
     protected override void OnShown(EventArgs e)
     {
@@ -38,26 +37,92 @@ public partial class MainForm : Form
         AppSettings.Config.Setting.Load();
         PropertyGridSelectConfig();
         RestoreWindowPosition();
+        ShowSimulationCheckBox.Checked = AppSettings.Config.ShowSimulationGridWindow;
     }
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
     {
         SaveWindowsPosition();
         AppSettings.Config.Setting.Save();
     }
-    private void StartSimulation_button1_Click_1(object sender, EventArgs e)
+    private void Timer_Tick(object sender, EventArgs e)
     {
+        try
+        {
+            modelSimulation?.NextIteration();
+            this.Text = $"virus2spread Main Form Iteration: {modelSimulation?.Iteration}";
+        }
+        catch (Exception ex)
+        {
+            string innerMessage = "";
+            if (ex.InnerException != null)
+                innerMessage = ex.InnerException.Message;
+            MessageBox.Show(ex.Message.ToString() + "\r\n" + innerMessage);
+            this.Close();
+        };
+    }
+    private void StartHoldSimulationButton_Click(object sender, EventArgs e)
+    {
+        if (AppSettings.Config.GridFormTimer < 1)
+        {
+            Timer.Interval = 1;
+        }
+        else
+        {
+            Timer.Interval = AppSettings.Config.GridFormTimer;
+        }
 
+        bool iterationRunnig = false;
+        if (modelSimulation is not null)
+        {
+            iterationRunnig = modelSimulation.IterationRunning;
+        }
 
-        Simulation simulation = new();
-        modelSimulation = simulation;
-        //modelSimulation.Initialize();
+        // stop-hold simulation
+        if (Timer.Enabled || iterationRunnig) // <-hold
+        {
+            Timer.Enabled = false;
+            if (iterationRunnig)
+            {
+                modelSimulation?.StopIteration();
+            }
+            StartHoldSimulationButton.BackColor = SystemColors.Control;
+        }
+        else // <- start
+        {
+            this.Text = $"virus2spread Main Form";
+            modelSimulation ??= new();
+
+            if (ShowSimulationCheckBox.Checked)
+            {
+                Form? grdForm = Application.OpenForms["GridForm"];
+                grdForm?.Close();
+                GridForm gridForm = new(modelSimulation, AppSettings.Config.GridMaxX, AppSettings.Config.GridMaxY);
+                gridForm.Show();
+                this.Focus();
+                modelSimulation.StartIteration();
+            }
+            else
+            {
+                modelSimulation.StartIteration();
+                Timer.Enabled = true;
+            }
+            StartHoldSimulationButton.BackColor = SystemColors.ControlLightLight;
+        }
+    }
+
+    private void ResetSimulationButton_Click(object sender, EventArgs e)
+    {
         Form? grdForm = Application.OpenForms["GridForm"];
         grdForm?.Close();
-        GridForm gridForm = new(modelSimulation, AppSettings.Config.GridMaxX, AppSettings.Config.GridMaxY);
-        gridForm.Show();
-        this.Focus();
-        modelSimulation.StartIteration();
+        Form? plotForm = Application.OpenForms["PlotForm"];
+        plotForm?.Close();
+        Form? phasChartForm = Application.OpenForms["PhaseChartForm"];
+        phasChartForm?.Close();
+        Timer.Enabled = false;
+        StartHoldSimulationButton.BackColor = SystemColors.Control;
+        modelSimulation = null;
     }
+
     private void ShowChart_button_Click(object sender, EventArgs e)
     {
         Form? pltForm = Application.OpenForms["PlotForm"];
@@ -93,7 +158,7 @@ public partial class MainForm : Form
             ConfigurationPropertyGrid.BrowsableAttributes = null;
         };
         ConfigurationPropertyGrid.Refresh();
-    }      
+    }
     private void ConfigurationPropertyGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
     {
         //modelSimulation.StopIteration();
@@ -112,7 +177,6 @@ public partial class MainForm : Form
         AppSettings.Config.Setting.Load(true);
         PropertyGridSelectConfig();
     }
-
     private void SaveConfig_button3_Click(object sender, EventArgs e)
     {
         AppSettings.Config.Setting.Save(true);
@@ -158,4 +222,8 @@ public partial class MainForm : Form
         }
     }
 
+    private void ShowSimulationCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+       AppSettings.Config.ShowSimulationGridWindow = ShowSimulationCheckBox.Checked;
+    }
 }

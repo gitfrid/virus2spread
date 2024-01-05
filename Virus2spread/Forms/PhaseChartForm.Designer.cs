@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             splitContainer1 = new SplitContainer();
+            BtnExportCsv = new Button();
             BtnAutoScaleY = new Button();
             CbCorssHair = new CheckBox();
             BtnAutoScaleX = new Button();
@@ -44,7 +45,6 @@
             XvalueListBox = new ListBox();
             DataTimer = new System.Windows.Forms.Timer(components);
             RenderTimer = new System.Windows.Forms.Timer(components);
-            BtnExportCsv = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
@@ -72,9 +72,19 @@
             splitContainer1.Panel1.Controls.Add(YvalueListBox);
             splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(XvalueListBox);
-            splitContainer1.Size = new Size(1984, 1100);
-            splitContainer1.SplitterDistance = 465;
+            splitContainer1.Size = new Size(1376, 961);
+            splitContainer1.SplitterDistance = 322;
             splitContainer1.TabIndex = 0;
+            // 
+            // BtnExportCsv
+            // 
+            BtnExportCsv.Location = new Point(35, 509);
+            BtnExportCsv.Name = "BtnExportCsv";
+            BtnExportCsv.Size = new Size(190, 51);
+            BtnExportCsv.TabIndex = 20;
+            BtnExportCsv.Text = "export CSV";
+            BtnExportCsv.UseVisualStyleBackColor = true;
+            BtnExportCsv.Click += BtnExportCsv_Click;
             // 
             // BtnAutoScaleY
             // 
@@ -89,7 +99,7 @@
             // CbCorssHair
             // 
             CbCorssHair.AutoSize = true;
-            CbCorssHair.Location = new Point(35, 979);
+            CbCorssHair.Location = new Point(35, 897);
             CbCorssHair.Name = "CbCorssHair";
             CbCorssHair.Size = new Size(139, 36);
             CbCorssHair.TabIndex = 18;
@@ -152,7 +162,7 @@
             CbAutoAxis.AutoSize = true;
             CbAutoAxis.Checked = true;
             CbAutoAxis.CheckState = CheckState.Checked;
-            CbAutoAxis.Location = new Point(35, 919);
+            CbAutoAxis.Location = new Point(35, 841);
             CbAutoAxis.Margin = new Padding(6, 7, 6, 7);
             CbAutoAxis.Name = "CbAutoAxis";
             CbAutoAxis.Size = new Size(222, 36);
@@ -206,24 +216,14 @@
             // RenderTimer
             // 
             RenderTimer.Enabled = true;
-            RenderTimer.Interval = 20;
+            RenderTimer.Interval = 200;
             RenderTimer.Tick += RenderTimer_Tick;
-            // 
-            // BtnExportCsv
-            // 
-            BtnExportCsv.Location = new Point(35, 509);
-            BtnExportCsv.Name = "BtnExportCsv";
-            BtnExportCsv.Size = new Size(190, 51);
-            BtnExportCsv.TabIndex = 20;
-            BtnExportCsv.Text = "export CSV";
-            BtnExportCsv.UseVisualStyleBackColor = true;
-            BtnExportCsv.Click += BtnExportCsv_Click;
             // 
             // PhaseChartForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1984, 1100);
+            ClientSize = new Size(1376, 961);
             Controls.Add(splitContainer1);
             Name = "PhaseChartForm";
             Text = "PhaseChartForm";

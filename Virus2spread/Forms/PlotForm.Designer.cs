@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             BtnHoldStart = new Button();
             splitContainer1 = new SplitContainer();
+            BtnExportCsv = new Button();
             AllNoneCheckbox = new CheckBox();
             LegendListBox = new CheckedListBox();
             CbCorssHair = new CheckBox();
@@ -43,7 +44,6 @@
             BtnAutoScale = new Button();
             DataTimer = new System.Windows.Forms.Timer(components);
             RenderTimer = new System.Windows.Forms.Timer(components);
-            BtnExportCsv = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
@@ -88,6 +88,16 @@
             splitContainer1.SplitterDistance = 320;
             splitContainer1.SplitterWidth = 6;
             splitContainer1.TabIndex = 2;
+            // 
+            // BtnExportCsv
+            // 
+            BtnExportCsv.Location = new Point(40, 488);
+            BtnExportCsv.Name = "BtnExportCsv";
+            BtnExportCsv.Size = new Size(179, 51);
+            BtnExportCsv.TabIndex = 15;
+            BtnExportCsv.Text = "export CSV";
+            BtnExportCsv.UseVisualStyleBackColor = true;
+            BtnExportCsv.Click += BtnExportCsv_Click;
             // 
             // AllNoneCheckbox
             // 
@@ -211,16 +221,6 @@
             RenderTimer.Enabled = true;
             RenderTimer.Interval = 20;
             RenderTimer.Tick += RenderTimer_Tick;
-            // 
-            // BtnExportCsv
-            // 
-            BtnExportCsv.Location = new Point(40, 488);
-            BtnExportCsv.Name = "BtnExportCsv";
-            BtnExportCsv.Size = new Size(179, 51);
-            BtnExportCsv.TabIndex = 15;
-            BtnExportCsv.Text = "export CSV";
-            BtnExportCsv.UseVisualStyleBackColor = true;
-            BtnExportCsv.Click += BtnExportCsv_Click;
             // 
             // PlotForm
             // 
