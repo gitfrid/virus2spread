@@ -178,7 +178,7 @@ namespace VirusSpreadLibrary.Plott
         public void WriteToQueue()
         {
             List<double> values = new();
-            //List<double> values2 = new();
+            List<double> values2 = new();
 
             // plotChart generate list with 14 rand Y-values to plot line 1-14
             for (int i = 0; i < 14; i++)
@@ -187,14 +187,14 @@ namespace VirusSpreadLibrary.Plott
                 values.Add(yPlotLinesValues[i]);
             }
 
-            //values2.Add(yPlotLinesValues[AppSettings.Config.PhaseChartXSelectedIndex]);
-            //values2.Add(yPlotLinesValues[AppSettings.Config.PhaseChartYSelectedIndex]);
+            values2.Add(yPlotLinesValues[AppSettings.Config.PhaseChartXSelectedIndex]);
+            values2.Add(yPlotLinesValues[AppSettings.Config.PhaseChartYSelectedIndex]);
          
             // enqueue list of 14 rand Y-values into PlotQueue
             PlotDataQueue.EnqueueList(values);
 
             // enqueue list of X and Y-values into PhasChartPlotQueue
-            //PlotPhaseChartDataQueue.EnqueueList(values2);
+            PlotPhaseChartDataQueue.EnqueueList(values2);
 
         }
         

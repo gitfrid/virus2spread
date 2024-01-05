@@ -98,22 +98,22 @@ public partial class PhaseChartForm : Form
 
         // adjusted the de-queue n value below and the eimer in this form 
         // to make shure, all values can be dequed in time by the PhaseChartForm
-        //for (int n = 0; n < 2; n++)
-        //{
-        //    bool success = plotData.PlotPhaseChartDataQueue.TryDequeueList(out List<double> values);
-        //    if (success)
-        //    {
-        //        scatterPlot.MaxRenderIndex = nextDataIndex;
-        //        for (int i = 0; i < scatterData.Length; i++)
-        //        {
-        //            scatterData[i][nextDataIndex] = values[i];                  
-        //        }
-        //        nextDataIndex += 1;
-        //    }
-        //    else
-        //    {
-        //        break;
-        //    }
+        for (int n = 0; n < 2; n++)
+        {
+            bool success = plotData.PlotPhaseChartDataQueue.TryDequeueList(out List<double> values);
+            if (success)
+            {
+                scatterPlot.MaxRenderIndex = nextDataIndex;
+                for (int i = 0; i < scatterData.Length; i++)
+                {
+                    scatterData[i][nextDataIndex] = values[i];                  
+                }
+                nextDataIndex += 1;
+            }
+            else
+            {
+                break;
+            }
         }
         Text = $"virus2spread Charts ({nextDataIndex:N0} points)";
     }
