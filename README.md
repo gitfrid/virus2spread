@@ -16,7 +16,7 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br>For maximal Iteration speed minimize the render Simulation Window to the Windows Taskbar.
 <br>
 <br>
-![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/2d9832ab-586d-4756-a8aa-b6744a886cc6)
+![Virus2spread_screenshot](https://github.com/gitfrid/virus2spread/assets/148685307/44b1183b-f772-417a-aea1-ddfd1f437de1)
 <br>
 <br>
 <br>
