@@ -1,3 +1,158 @@
+
+Beispielcode, der Ihnen zeigt, wie Sie ScottPlot verwenden können, um ein Diagramm mit automatisch angepassten Achsen und verschiebbarem Bereich zu erstellen:
+
+
+
+// Importieren Sie die ScottPlot-Bibliothek
+using ScottPlot;
+
+// Erstellen Sie ein neues Plot-Objekt
+var plt = new Plot(600, 400);
+
+// Fügen Sie alle Datenpunkte als Streupunkte hinzu
+plt.AddScatter(Data[0], Data[1]);
+
+// Passen Sie die Achsen automatisch an die Daten an
+plt.AxisAuto();
+
+// Speichern Sie den aktuellen Bereich der Achsen
+double[] axisLimits = plt.GetAxisLimits();
+
+// Erstellen Sie eine Funktion, die den Bereich der Achsen verschiebt
+void UpdatePlot(double dx)
+{
+    // Verschieben Sie den Bereich der Achsen
+    plt.AxisSet(axisLimits[0] + dx, axisLimits[1] + dx, axisLimits[2], axisLimits[3]);
+
+    // Aktualisieren Sie das Diagramm
+    plt.Update();
+}
+
+// Erstellen Sie ein neues Formular
+var form = new Form();
+
+// Fügen Sie das Diagramm zum Formular hinzu
+form.Controls.Add(plt.GetBitmap());
+
+// Erstellen Sie eine Schaltfläche zum Verschieben des Bereichs der Achsen
+var button = new Button();
+button.Text = "Verschieben";
+button.Click += (s, e) => UpdatePlot(10);
+form.Controls.Add(button);
+
+// Zeigen Sie das Formular an
+form.ShowDialog();
+
+
+
+
+_________________________________
+
+
+Um nur einen bestimmten Bereich von Datenpunkten aus Ihrem Array anzuzeigen, können Sie die Funktion AddScatter von ScottPlot verwenden und die Datenpunkte auswählen, 
+die Sie anzeigen möchten. Hier ist ein Beispielcode, der Ihnen helfen kann, dies zu erreichen:
+// Importieren Sie die ScottPlot-Bibliothek
+using ScottPlot;
+
+// Erstellen Sie ein neues Plot-Objekt
+var plt = new Plot(600, 400);
+
+// Wählen Sie den Bereich der Datenpunkte aus, den Sie anzeigen möchten
+double[] xs = new double[1000];
+double[] ys = new double[1000];
+Array.Copy(Data[0], 0, xs, 0, 1000);
+Array.Copy(Data[1], 0, ys, 0, 1000);
+
+// Fügen Sie die ausgewählten Datenpunkte als Streupunkte hinzu
+plt.AddScatter(xs, ys);
+
+// Speichern Sie das Diagramm als Bild
+plt.SaveFig("scatter.png");
+
+
+___________________________________________
+
+
+uszuwählen 1.
+
+Um den Bereich der angezeigten Datenpunkte zu verschieben, können Sie die Funktionen AxisAuto, AxisZoom, AxisPan und AxisSet von ScottPlot verwenden 
+Die Funktion AxisAuto passt die Achsen automatisch an die Daten an, während die Funktion AxisZoom den Zoomfaktor der Achsen ändert. 
+Die Funktion AxisPan verschiebt den Bereich der angezeigten Datenpunkte, während die Funktion AxisSet die Achsen manuell festlegt 
+1. Hier ist ein Beispielcode, der Ihnen helfen kann, den Bereich der angezeigten Datenpunkte zu verschieben:
+
+// Importieren Sie die ScottPlot-Bibliothek
+using ScottPlot;
+
+// Erstellen Sie ein neues Plot-Objekt
+var plt = new Plot(600, 400);
+
+// Fügen Sie alle Datenpunkte als Streupunkte hinzu
+plt.AddScatter(Data[0], Data[1]);
+
+// Passen Sie die Achsen automatisch an die Daten an
+plt.AxisAuto();
+
+// Zoomen Sie auf den Bereich der ersten 1000 Datenpunkte
+plt.AxisZoom(0, 1000, -10, 10);
+
+// Verschieben Sie den Bereich der angezeigten Datenpunkte
+plt.AxisPan(100, 0);
+
+// Speichern Sie das Diagramm als Bild
+plt.SaveFig("scatter.png");
+
+
+
+___________________________________________________
+
+
+
+// Importieren Sie die ScottPlot-Bibliothek
+using ScottPlot;
+
+// Erstellen Sie ein neues Plot-Objekt
+var plt = new Plot(600, 400);
+
+// Fügen Sie die Daten als Streupunkte hinzu
+double[] xs = { 1, 2, 3, 4, 5 };
+double[] ys = { 1, 4, 9, 16, 25 };
+plt.AddScatter(xs, ys);
+
+// Fügen Sie die Daten als Error Bars hinzu
+double[] yErr = { 1, 2, 3, 4, 5 };
+plt.AddErrorBars(xs, ys, yErr);
+
+// Fügen Sie die Daten als Histogramm hinzu
+double[] data = { 1, 2, 3, 4, 5 };
+plt.AddHistogram(data);
+
+// Speichern Sie das Diagramm als Bild
+plt.SaveFig("plot.png");
+
+__________________________________
+
+
+// Importieren Sie die FftSharp-Bibliothek
+using FftSharp;
+
+// Erstellen Sie ein neues Plot-Objekt
+var plt = new Plot(600, 400);
+
+// Fügen Sie die Daten als Signal hinzu
+double[] data = { 1, 2, 3, 4, 5 };
+plt.AddSignal(data);
+
+// Berechnen Sie die FFT der Daten
+double[] fft = FftSharp.Transform.FFTmagnitude(data);
+
+// Fügen Sie die FFT als Signal hinzu
+plt.AddSignal(fft);
+
+// Speichern Sie das Diagramm als Bild
+plt.SaveFig("fourier.png");
+
+
+
     private void StartSimulation_button1_Click_1(object sender, EventArgs e)
     {
         Simulation simulation = new();
