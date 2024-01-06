@@ -13,6 +13,7 @@ Since the linear sientific SIR model used, seems to differ from reality.
 <br>Further information see ![virus2spread wiki](https://github.com/gitfrid/virus2spread/wiki)
 <br> 
  Reproduction is not yet implemented - a long way to go.
+<br> However, I hope it will be useful for others.
 <br>For maximal Iteration speed minimize the render Simulation Window to the Windows Taskbar.
 <br>
 <br>
