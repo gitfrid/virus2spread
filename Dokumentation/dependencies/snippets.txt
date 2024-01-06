@@ -1,6 +1,7 @@
 
 Beispielcode, der Ihnen zeigt, wie Sie ScottPlot verwenden können, um ein Diagramm mit automatisch angepassten Achsen und verschiebbarem Bereich zu erstellen:
 
+https://chartio.com/learn/charts/what-is-a-scatter-plot/
 
 
 // Importieren Sie die ScottPlot-Bibliothek
